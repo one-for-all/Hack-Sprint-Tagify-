@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		941A68C9047CFC613264BFB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F599D9265F4B40571F432E78 /* libPods.a */; };
 		942363621ECAC950004398A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 942363611ECAC950004398A0 /* GoogleService-Info.plist */; };
-		942363661ECAED43004398A0 /* SongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363651ECAED43004398A0 /* SongTableViewController.swift */; };
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
 		9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423636C1ECAFA39004398A0 /* SongViewController.swift */; };
@@ -27,7 +26,6 @@
 /* Begin PBXFileReference section */
 		9423633E1ECAC5C4004398A0 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		942363611ECAC950004398A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		942363651ECAED43004398A0 /* SongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
 		9423636C1ECAFA39004398A0 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -130,7 +128,6 @@
 				BB2385631B3DD5AB0079CD01 /* LoginViewController.swift */,
 				BB2385831B3DD8660079CD01 /* SongListTableViewController.swift */,
 				BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */,
-				942363651ECAED43004398A0 /* SongTableViewController.swift */,
 				9423636C1ECAFA39004398A0 /* SongViewController.swift */,
 			);
 			name = Controllers;
@@ -313,7 +310,6 @@
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 				942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */,
 				9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */,
-				942363661ECAED43004398A0 /* SongTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

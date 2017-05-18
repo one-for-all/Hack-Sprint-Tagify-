@@ -15,22 +15,35 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var searchSongTextField: UITextField!
     
+    let allSongList: [String] = [
+        "Bruno Mars - That’s What I Like",
+        "Ed Sheeran - Shape of You [Official Video]",
+        "Magic! - Rude",
+        "Bruno Mars - 24K Magic",
+        "Maroon 5 - Don't Wanna Know",
+        "Ariana Grande - Into You",
+        "The Weeknd - The Hills",
+        "Taylor Swift - Wildest Dreams",
+        "Mark Ronson - Uptown Funk ft. Bruno Mars"
+    ]
+    var searchedSongList: [String] = []
+    
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
         print("End Editing!")
         var newSongList: [String] = []
         if let searchString = sender.text {
             if searchString == "" {
-                songListTableView.songList = songList
+                searchedSongList = allSongList
             } else {
-                for song in songList {
+                for song in allSongList {
                     if song.range(of:searchString) != nil{
                         newSongList.append(song)
                     }
                 }
-                songListTableView.songList = newSongList
+                searchedSongList = newSongList
             }
         }
-        songListTableView.tableView.reloadData()
+        tableView.reloadData()
     }
 
     
@@ -40,27 +53,14 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         return true
     }
   
-  let songList: [String] = [
-    "Bruno Mars - That’s What I Like",
-    "Ed Sheeran - Shape of You [Official Video]",
-    "Magic! - Rude",
-    "Bruno Mars - 24K Magic",
-    "Maroon 5 - Don't Wanna Know",
-    "Ariana Grande - Into You",
-    "The Weeknd - The Hills",
-    "Taylor Swift - Wildest Dreams",
-    "Mark Ronson - Uptown Funk ft. Bruno Mars"
-  ]
-    var songListTableView: SongTableViewController!
   
-  
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        searchedSongList = allSongList
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,18 +72,10 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        let destination = segue.destination as! SongTableViewController
-        songListTableView = destination
-        destination.songList = self.songList
-    }
     
     @IBAction func logOffPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-
 }
 
 extension SongViewController: UITableViewDataSource, UITableViewDelegate {
@@ -91,11 +83,11 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return songList.count
+        return searchedSongList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: songCellIdentifier, for: indexPath)
-        cell.textLabel?.text = songList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: songCellIdentifier, for: indexPath) as! SongTableViewCell
+        cell.songNameLabel.text = searchedSongList[indexPath.row]
         return cell
     }
 }
