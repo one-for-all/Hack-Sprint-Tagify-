@@ -10,6 +10,9 @@ import UIKit
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
+    let songCellIdentifier = "SongCell"
+    
     @IBOutlet weak var searchSongTextField: UITextField!
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
@@ -56,6 +59,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,4 +84,18 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
 
+}
+
+extension SongViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return songList.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: songCellIdentifier, for: indexPath)
+        cell.textLabel?.text = songList[indexPath.row]
+        return cell
+    }
 }
