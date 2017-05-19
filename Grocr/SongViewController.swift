@@ -14,8 +14,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     let songCellIdentifier = "SongCell"
     
     @IBOutlet weak var searchSongTextField: UITextField!
-    
-    let allSongList: [String] = [
+
+    let allSongNames: [String] = [
         "Bruno Mars - That’s What I Like",
         "Ed Sheeran - Shape of You [Official Video]",
         "Magic! - Rude",
@@ -26,18 +26,19 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         "Taylor Swift - Wildest Dreams",
         "Mark Ronson - Uptown Funk ft. Bruno Mars"
     ]
-    var searchedSongList: [String] = []
+    var allSongList = [Song]()
+    var searchedSongList = [Song]()
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
         print("End Editing!")
-        var newSongList: [String] = []
+        var newSongList = [Song]()
         if let searchString = sender.text {
             if searchString == "" {
                 searchedSongList = allSongList
             } else {
-                for song in allSongList {
+                for song in allSongNames {
                     if song.range(of:searchString) != nil{
-                        newSongList.append(song)
+                        newSongList.append(Song(name: song))
                     }
                 }
                 searchedSongList = newSongList
@@ -60,6 +61,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        for song in allSongNames {
+            allSongList.append(Song(name: song))
+        }
         searchedSongList = allSongList
     }
 
@@ -87,7 +91,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: songCellIdentifier, for: indexPath) as! SongTableViewCell
-        cell.songNameLabel.text = searchedSongList[indexPath.row]
+        cell.songNameLabel.text = searchedSongList[indexPath.row].name
         return cell
     }
 }

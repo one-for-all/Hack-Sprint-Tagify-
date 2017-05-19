@@ -29,6 +29,7 @@ struct Song {
   let addedByUser: String
   let ref: FIRDatabaseReference?
   var completed: Bool
+  var tags = Set<String>()
   
   init(name: String, addedByUser: String, completed: Bool, key: String = "") {
     self.key = key
@@ -36,6 +37,14 @@ struct Song {
     self.addedByUser = addedByUser
     self.completed = completed
     self.ref = nil
+  }
+  
+  init(name: String) {
+    self.name = name
+    self.key = ""
+    self.addedByUser = ""
+    self.ref = nil
+    self.completed = false
   }
   
   init(snapshot: FIRDataSnapshot) {
