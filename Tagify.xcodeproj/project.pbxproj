@@ -12,6 +12,7 @@
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
 		9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423636C1ECAFA39004398A0 /* SongViewController.swift */; };
+		947312A41ECF6F0900D44414 /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 947312A31ECF6F0900D44414 /* closeButton.png */; };
 		BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385611B3DD5AB0079CD01 /* AppDelegate.swift */; };
 		BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385631B3DD5AB0079CD01 /* LoginViewController.swift */; };
 		BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2385651B3DD5AB0079CD01 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
 		9423636C1ECAFA39004398A0 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		947312A31ECF6F0900D44414 /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
 		9BA2A2DB5BA4733818152B9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A898E3AE11425E4495FAC93A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BB23855C1B3DD5AB0079CD01 /* Tagify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tagify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +72,7 @@
 		942363691ECAF4EA004398A0 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				947312A31ECF6F0900D44414 /* closeButton.png */,
 				9423636A1ECAF4EA004398A0 /* music.jpg */,
 			);
 			name = images;
@@ -239,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				947312A41ECF6F0900D44414 /* closeButton.png in Resources */,
 				9423636B1ECAF4EA004398A0 /* music.jpg in Resources */,
 				BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */,
 				942363621ECAC950004398A0 /* GoogleService-Info.plist in Resources */,

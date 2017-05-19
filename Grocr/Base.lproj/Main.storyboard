@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -285,6 +286,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k4j-SW-aWu">
                                                     <rect key="frame" x="292" y="0.0" width="43" height="56"/>
                                                     <state key="normal" title="..."/>
+                                                    <connections>
+                                                        <action selector="showTagView:" destination="gpg-0c-vNo" eventType="touchUpInside" id="vlJ-R3-B0U"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -308,25 +312,48 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zL8-lO-N2F">
+                                <rect key="frame" x="0.0" y="603" width="375" height="503"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IdH-Bm-H2H">
+                                        <rect key="frame" x="146" y="421" width="83" height="82"/>
+                                        <state key="normal" image="closeButton.png"/>
+                                        <connections>
+                                            <action selector="closeTagView:" destination="gpg-0c-vNo" eventType="touchUpInside" id="1Ew-ke-Jwz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.30918478965759277" green="0.30614766478538513" blue="0.3059518039226532" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="IdH-Bm-H2H" firstAttribute="bottom" secondItem="zL8-lO-N2F" secondAttribute="bottom" id="8eH-DL-Sgw"/>
+                                    <constraint firstItem="IdH-Bm-H2H" firstAttribute="centerX" secondItem="zL8-lO-N2F" secondAttribute="centerX" id="AFi-yJ-mK4"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.89656567573547363" green="0.51873517036437988" blue="0.34611564874649048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="top" secondItem="og0-pr-9iJ" secondAttribute="bottom" constant="10" id="0O0-MK-43Q"/>
+                            <constraint firstItem="zL8-lO-N2F" firstAttribute="trailing" secondItem="Tg3-OL-Bgc" secondAttribute="trailing" id="3MY-yt-YDC"/>
+                            <constraint firstItem="zL8-lO-N2F" firstAttribute="top" secondItem="Tg3-OL-Bgc" secondAttribute="bottomMargin" id="FcL-BB-N5r"/>
                             <constraint firstItem="og0-pr-9iJ" firstAttribute="top" secondItem="Ixg-zh-rXM" secondAttribute="bottom" constant="10" id="KrD-96-Ch5"/>
                             <constraint firstItem="Ixg-zh-rXM" firstAttribute="top" secondItem="Ctd-S5-1yH" secondAttribute="bottom" constant="20" id="VCq-zY-4wL"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Ixg-zh-rXM" secondAttribute="leading" id="cDM-cb-fg8"/>
                             <constraint firstItem="Ixg-zh-rXM" firstAttribute="centerX" secondItem="Tg3-OL-Bgc" secondAttribute="centerX" id="fup-lm-cU5"/>
                             <constraint firstItem="og0-pr-9iJ" firstAttribute="centerX" secondItem="Tg3-OL-Bgc" secondAttribute="centerX" id="hQd-PS-6sB"/>
+                            <constraint firstItem="zL8-lO-N2F" firstAttribute="height" secondItem="VUH-iz-7tk" secondAttribute="height" constant="73" id="jFz-8b-MMQ"/>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="trailing" secondItem="Tg3-OL-Bgc" secondAttribute="trailingMargin" id="jik-Nl-Dbi"/>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="leading" secondItem="Tg3-OL-Bgc" secondAttribute="leadingMargin" id="oSS-AJ-as4"/>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="bottom" secondItem="hhW-VI-yLf" secondAttribute="top" constant="-73" id="rix-Ag-6hG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ixg-zh-rXM" secondAttribute="trailing" id="xIA-FD-KMB"/>
+                            <constraint firstItem="zL8-lO-N2F" firstAttribute="leading" secondItem="Tg3-OL-Bgc" secondAttribute="leading" id="zR9-vT-RZc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lK4-L8-MEW"/>
                     <connections>
+                        <outlet property="navigationItem" destination="lK4-L8-MEW" id="t9e-HM-79j"/>
                         <outlet property="searchSongTextField" destination="Ixg-zh-rXM" id="Q2n-vZ-fRg"/>
                         <outlet property="tableView" destination="VUH-iz-7tk" id="LYW-hA-922"/>
+                        <outlet property="tagView" destination="zL8-lO-N2F" id="fRU-2n-4Iq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8zw-VO-gD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -359,6 +386,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="closeButton.png" width="83" height="82"/>
         <image name="music.jpg" width="510" height="330"/>
     </resources>
 </document>

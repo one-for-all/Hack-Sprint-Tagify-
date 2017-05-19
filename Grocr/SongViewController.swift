@@ -10,8 +10,12 @@ import UIKit
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
+    
     @IBOutlet weak var tableView: UITableView!
     let songCellIdentifier = "SongCell"
+    @IBOutlet weak var tagView: UIView!
+    
+    
     
     @IBOutlet weak var searchSongTextField: UITextField!
 
@@ -65,6 +69,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             allSongList.append(Song(name: song))
         }
         searchedSongList = allSongList
+        
+        //Hide tagView initially
+        self.tagView.frame.origin.y = self.view.frame.height
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +87,32 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func logOffPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func closeTagView(_ sender: UIButton) {
+        let origin_y = view.frame.height
+        UIView.animate(withDuration: 0.25) {
+            self.tagView.frame.origin.y = origin_y
+        }
+        if let current_color = self.view.backgroundColor {
+            self.view.backgroundColor = current_color.withAlphaComponent(1)
+            self.navigationItem.titleView?.backgroundColor = current_color.withAlphaComponent(1)
+            self.navigationController?.navigationBar.alpha = 1
+        }
+    }
+    
+    @IBAction func showTagView(_ sender: Any) {
+        let origin_y = view.frame.height-self.tagView.frame.height
+        guard let currentViewColor = view.backgroundColor else { print("Error getting current color!"); return}
+        let newAlphaValue: CGFloat = 0.8
+        let newColor = currentViewColor.withAlphaComponent(newAlphaValue)
+        UIView.animate(withDuration: 0.25) {
+            self.tagView.frame.origin.y = origin_y
+            self.view.backgroundColor = newColor
+            self.navigationController?.navigationBar.alpha = newAlphaValue
+        }
+    }
+    
+    
 }
 
 extension SongViewController: UITableViewDataSource, UITableViewDelegate {
