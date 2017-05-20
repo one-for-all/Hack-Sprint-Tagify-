@@ -22,14 +22,15 @@
 
 import Foundation
 
-struct Song {
+class Song {
   
   let key: String
   let name: String
   let addedByUser: String
   let ref: FIRDatabaseReference?
-  var completed: Bool
+  var completed: Bool = false
   var tags = Set<String>()
+  var imageSource = "music.jpg"
   
   init(name: String, addedByUser: String, completed: Bool, key: String = "") {
     self.key = key
@@ -44,7 +45,13 @@ struct Song {
     self.key = ""
     self.addedByUser = ""
     self.ref = nil
-    self.completed = false
+  }
+  init(name: String, imageSource: String) {
+    self.name = name
+    self.key = ""
+    self.addedByUser = ""
+    self.ref = nil
+    self.imageSource = imageSource
   }
   
   init(snapshot: FIRDataSnapshot) {

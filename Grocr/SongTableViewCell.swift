@@ -11,7 +11,14 @@ import UIKit
 class SongTableViewCell: UITableViewCell {
     
     @IBOutlet weak var songNameLabel: UILabel!
-
+    @IBOutlet weak var songImageView: UIImageView!
+    var song: Song = Song(name: "") {
+        didSet {
+            songNameLabel.text = song.name
+            songImageView.image = UIImage(named: song.imageSource)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
