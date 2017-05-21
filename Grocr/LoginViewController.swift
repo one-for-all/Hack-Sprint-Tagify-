@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
     FIRAuth.auth()!.signIn(withEmail: textFieldLoginEmail.text!,
                            password: textFieldLoginPassword.text!) { user, error in
                             if error == nil {
-                              print("Welcome \(user)")
+                              print("Welcome \(user!.email!)")
                             } else {
                               if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
                                 print("Sign In Error: \(errCode)")
@@ -54,35 +54,39 @@ class LoginViewController: UIViewController {
                                   message: "Register",
                                   preferredStyle: .alert)
     
-    let saveAction = UIAlertAction(title: "Save",
-                                   style: .default) { action in
-
-                                    // 1
-                                    let emailField = alert.textFields![0]
-                                    let passwordField = alert.textFields![1]
-                                    
-                                    // 2
-                                    FIRAuth.auth()!.createUser(withEmail: emailField.text!,
-                                                               password: passwordField.text!) { user, error in
-                                                                if error == nil {
-                                                                  // 3
-                                                                  FIRAuth.auth()!.signIn(withEmail: self.textFieldLoginEmail.text!,
-                                                                                         password: self.textFieldLoginPassword.text!)
-                                                                  print("Create User Successful")
-                                                                } else {
-                                                                  if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
-                                                                    switch errCode {
-                                                                    case .errorCodeInvalidEmail:
-                                                                      print("invalid email")
-                                                                    case .errorCodeEmailAlreadyInUse:
-                                                                      print("in use")
-                                                                    default:
-                                                                      print("Create User Error: \(error!)")
-                                                                    }
-                                                                  }
-                                                                }
-                                    }
-                                    
+    let saveAction = UIAlertAction(title: "Save", style: .default)
+          { action in
+            
+            // 1
+            let emailField = alert.textFields![0]
+            let passwordField = alert.textFields![1]
+            
+            // 2
+            FIRAuth.auth()!.createUser(withEmail: emailField.text!, password: passwordField.text!)
+                { user, error in
+                  if error == nil {
+                    // 3
+                    if let user = user {
+                      print("We have new user! \(user.email!)")
+                      FIRDatabase.database().reference(withPath: "users/\(user.uid)/email").setValue(emailField.text!)
+                    }
+                    FIRAuth.auth()!.signIn(withEmail: self.textFieldLoginEmail.text!,
+                                           password: self.textFieldLoginPassword.text!)
+                    print("Create User Successful")
+                  } else {
+                    if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
+                      switch errCode {
+                      case .errorCodeInvalidEmail:
+                        print("invalid email")
+                      case .errorCodeEmailAlreadyInUse:
+                        print("in use")
+                      default:
+                        print("Create User Error: \(error!)")
+                      }
+                    }
+                  }
+            }
+            
     }
     
     let cancelAction = UIAlertAction(title: "Cancel",

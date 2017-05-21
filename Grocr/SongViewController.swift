@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
+    var userRef: FIRDatabaseReference!
+    var user: User!
     
     @IBOutlet weak var tableView: UITableView!
     let songCellIdentifier = "SongCell"
@@ -18,7 +21,10 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tagViewSongLabel: UILabel!
     @IBOutlet weak var addTagTextField: UITextField!
     
-    @IBOutlet weak var tagViewTopLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagViewSlideUpConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagViewSlideDownConstraint: NSLayoutConstraint!
+    
+    
     
     
     var currentSelectedSong: Song = Song(name: "") {
@@ -50,21 +56,28 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var searchedSongList = [Song]()
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
-        print("End Editing!")
+        print("End Editing! Starting Searching")
         var newSongList = [Song]()
         if let searchString = sender.text {
             if searchString == "" {
-                searchedSongList = allSongList
+                newSongList = allSongList
+            } else if searchString[searchString.startIndex] == "#" {
+                print("Searching Hashtag!")
+                for song in allSongList {
+                    if song.tags.contains(searchString) {
+                        newSongList.append(song)
+                    }
+                }
             } else {
                 for song in allSongList {
                     if song.name.range(of:searchString) != nil{
                         newSongList.append(song)
                     }
                 }
-                searchedSongList = newSongList
             }
+            searchedSongList = newSongList
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
 
     
@@ -79,32 +92,46 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         tableView.dataSource = self
         tableView.delegate = self
         collectionView.dataSource = self
         collectionView.delegate = self
-        for song in allSongNames {
-            var newSong = Song(name: song)
-            newSong.tags = ["#Pop", "#Wedding", "#Shower", "#Mona Lisa"]
-            if song.range(of: "Bruno Mars") != nil {
-                newSong.imageSource = "BrunoMars.jpg"
-            } else if song.range(of: "Magic!") != nil {
-                newSong.imageSource = "Magic!.png"
-            } else if song.range(of: "Taylor Swift") != nil {
-                newSong.imageSource = "TaylorSwift.jpg"
-            } else if song.range(of: "Maroon 5") != nil {
-                newSong.imageSource = "Maroon5.jpg"
-            }
-            allSongList.append(newSong)
-        }
+        
+        initializeDefaultAllSongList()
         searchedSongList = allSongList
         
         //Hide tagView initially
 //        self.tagView.frame.origin.y = self.view.frame.height
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)  // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
         //set collectionViewCell to autoresize
         if let cvl = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             cvl.estimatedItemSize = CGSize(width: 78, height: 59)
+        }
+        FIRAuth.auth()?.addStateDidChangeListener {auth, user in
+            guard let user = user else { print("no user!"); return }
+            self.user = User(authData: user)
+            self.userRef = FIRDatabase.database().reference(withPath: "users/\(user.uid)")
+            self.userRef.observe(.value, with: { (snapshot) in
+                if !snapshot.hasChild("email") {
+                    self.userRef.child("email").setValue(user.email!)
+                }
+                if snapshot.hasChild("songs") {
+                    var newSongs = [Song]()
+                    for song in snapshot.childSnapshot(forPath: "songs").children.allObjects as! [FIRDataSnapshot] {
+                        let newSong = Song(snapshot: song)
+                        newSongs.append(newSong)
+                    }
+                    self.initializeAllSongList(songs: newSongs)
+                    self.searchedSongList = self.allSongList
+                } else {
+                    for song in self.allSongList {
+                        self.userRef.child("songs/\(song.key)").setValue(song.toAnyObject())
+                    }
+                }
+            })
         }
     }
 
@@ -119,11 +146,14 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     
     @IBAction func logOffPressed(_ sender: UIButton) {
+        try! FIRAuth.auth()!.signOut()
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func closeTagView(_ sender: UIButton) {
         let origin_y = view.frame.height
+        tagViewSlideDownConstraint.isActive = true
+        tagViewSlideUpConstraint.isActive = false
         guard let current_color = self.view.backgroundColor else { return }
         UIView.animate(withDuration: slideAnimationDuration) {
             self.tagView.frame.origin.y = origin_y
@@ -140,33 +170,37 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-        updateCollectionView()
+        UIView.performWithoutAnimation {
+            updateCollectionView()
+        }
         let origin_y = view.frame.height-self.tagView.frame.height
-        self.tagView.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 0).isActive = true
+        tagViewSlideDownConstraint.isActive = false
+        tagViewSlideUpConstraint.isActive = true
         guard let currentViewColor = view.backgroundColor else { print("Error getting current color!"); return}
         let newAlphaValue: CGFloat = 0.8
         let newColor = currentViewColor.withAlphaComponent(newAlphaValue)
         UIView.animate(withDuration: slideAnimationDuration) {
-//            self.view.layoutIfNeeded()
             self.tagView.frame.origin.y = origin_y
             self.view.backgroundColor = newColor
             self.navigationController?.navigationBar.alpha = newAlphaValue
         }
     }
     
-    
     @IBAction func addTagButtonPressed(_ sender: Any) {
         if let text = addTagTextField.text {
             if text != "" {
                 currentSelectedSong.tags.insert("\(text)")
+                let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
+                self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
                 updateCollectionView()
             }
         }
     }
     
-    
 }
 
+
+//Related to TableView
 extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -177,7 +211,6 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: songCellIdentifier, for: indexPath) as! SongTableViewCell
         cell.song = searchedSongList[indexPath.row]
-//        cell.songImageView.image = UIImage(named: searchedSongList[indexPath.row].imageSource)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -186,6 +219,8 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+
+//Related to CollectionView
 extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -206,6 +241,8 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
         print("current cell: \(collectionView.currentSelectedCell.tagLabel.text)")
         if let tagToRemove = collectionView.currentSelectedCell.tagLabel.text {
             self.currentSelectedSong.tags.remove(tagToRemove)
+            let strippedHashTag = tagToRemove.substring(from: tagToRemove.index(tagToRemove.startIndex, offsetBy: 1))
+            self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: NSNull()])
             updateCollectionView()
         }
     }
@@ -219,5 +256,48 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     func updateCollectionView() {
         self.collectionView.reloadSections(IndexSet(integer: 0))
+    }
+}
+
+extension SongViewController {
+    func dismissKeyboard() {
+        searchSongTextField.resignFirstResponder()
+        addTagTextField.resignFirstResponder()
+    }
+}
+
+extension SongViewController {
+    func initializeDefaultAllSongList() {
+        allSongList = []
+        for (index, song) in allSongNames.enumerated() {
+            let newSong = Song(name: song,  key:"\(index)")
+            newSong.tags = ["#Pop", "#Wedding", "#Shower", "#Mona Lisa"]
+            if song.range(of: "Bruno Mars") != nil {
+                newSong.imageSource = "BrunoMars.jpg"
+            } else if song.range(of: "Magic!") != nil {
+                newSong.imageSource = "Magic!.png"
+            } else if song.range(of: "Taylor Swift") != nil {
+                newSong.imageSource = "TaylorSwift.jpg"
+            } else if song.range(of: "Maroon 5") != nil {
+                newSong.imageSource = "Maroon5.jpg"
+            }
+            allSongList.append(newSong)
+        }
+    }
+    func initializeAllSongList(songs: [Song]) {
+        allSongList = []
+        for song in songs {
+            let songName = song.name
+            if songName.range(of: "Bruno Mars") != nil {
+                song.imageSource = "BrunoMars.jpg"
+            } else if songName.range(of: "Magic!") != nil {
+                song.imageSource = "Magic!.png"
+            } else if songName.range(of: "Taylor Swift") != nil {
+                song.imageSource = "TaylorSwift.jpg"
+            } else if songName.range(of: "Maroon 5") != nil {
+                song.imageSource = "Maroon5.jpg"
+            }
+            allSongList.append(song)
+        }
     }
 }

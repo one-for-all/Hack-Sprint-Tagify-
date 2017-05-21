@@ -46,6 +46,12 @@ class Song {
     self.addedByUser = ""
     self.ref = nil
   }
+  init(name: String, key: String) {
+    self.name = name
+    self.key = key
+    self.addedByUser = ""
+    self.ref = nil
+  }
   init(name: String, imageSource: String) {
     self.name = name
     self.key = ""
@@ -54,21 +60,42 @@ class Song {
     self.imageSource = imageSource
   }
   
+//  init(snapshot: FIRDataSnapshot) {
+//    key = snapshot.key
+//    let snapshotValue = snapshot.value as! [String: AnyObject]
+//    name = snapshotValue["name"] as! String
+//    addedByUser = snapshotValue["addedByUser"] as! String
+//    completed = snapshotValue["completed"] as! Bool
+//    ref = snapshot.ref
+//  }
   init(snapshot: FIRDataSnapshot) {
     key = snapshot.key
     let snapshotValue = snapshot.value as! [String: AnyObject]
     name = snapshotValue["name"] as! String
-    addedByUser = snapshotValue["addedByUser"] as! String
-    completed = snapshotValue["completed"] as! Bool
+    let snapshotTags = snapshotValue["tags"] as! [String: Bool]
+    for key in snapshotTags.keys {
+      tags.insert("#"+key)
+    }
     ref = snapshot.ref
+    addedByUser = ""
   }
   
   func toAnyObject() -> Any {
-    return [
-      "name": name,
-      "addedByUser": addedByUser,
-      "completed": completed
-    ]
+    var songObj: [String: Any] = [:]
+    songObj["name"] = name
+    var tagDict = [String: Bool]()
+    for tag in tags {
+      tagDict[tag.substring(from: tag.index(tag.startIndex, offsetBy: 1))] = true
+    }
+    songObj["tags"] = tagDict
+    print("this song is:")
+    print("name: \(songObj["name"]!)")
+    print("tags:")
+    let tagsD = songObj["tags"] as! [String: Bool]
+    for tag in tagsD.keys {
+      print(tag)
+    }
+    return songObj
   }
   
 }

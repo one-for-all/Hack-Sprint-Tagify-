@@ -44,8 +44,6 @@ class CollectionView: UICollectionView {
             let x = cell.frame.origin.x+cell.frame.width/2
             let y = cell.frame.origin.y
             let popMenu = UIMenuController.shared
-//            let menuRemoveItem = UIMenuItem(title: "remove", action: #selector(SongViewController.removeTag))
-//            popMenu.menuItems = [menuRemoveItem]
             popMenu.setTargetRect(CGRect(x: x, y: y, width: 10, height: 10), in: self)
             popMenu.setMenuVisible(true, animated: true)
         }
@@ -55,10 +53,14 @@ class CollectionView: UICollectionView {
     }
     
     func addTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissMenu))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissMenuAndKeyboard))
         self.addGestureRecognizer(tapGesture)
     }
-    func dismissMenu() {
+    func dismissMenuAndKeyboard() {
         UIMenuController.shared.setMenuVisible(false, animated: true)
+        if let songViewController = self.delegate as? SongViewController {
+            songViewController.dismissKeyboard()
+        }
     }
 }
+
