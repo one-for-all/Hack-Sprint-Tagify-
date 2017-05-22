@@ -1,0 +1,801 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "OnlineUsersTableViewController"
+provides-nominal:
+- "C6Tagify30OnlineUsersTableViewController"
+provides-member:
+- ["C6Tagify30OnlineUsersTableViewController", ""]
+provides-dynamic-lookup:
+- "currentUsers"
+- "signoutButtonPressed"
+- "tableView"
+- "userCell"
+- "usersRef"
+- "viewDidLoad"
+depends-top-level:
+- !private "-"
+- !private "=="
+- "AnyObject"
+- "Array"
+- "AssignmentPrecedence"
+- !private "BooleanLiteralType"
+- !private "CastingPrecedence"
+- "FIRDatabase"
+- "IndexPath"
+- "Int"
+- "OnlineUsersTableViewController"
+- "String"
+- "StringLiteralType"
+- "UITableView"
+- "UITableViewCell"
+- "UITableViewController"
+depends-member:
+- ["Ps9AnyObject", "FIRDatabase"]
+- !private ["Ps9AnyObject", "IndexPath"]
+- !private ["Ps9AnyObject", "currentUsers"]
+- ["Ps9AnyObject", "database"]
+- !private ["Ps9AnyObject", "deleteRows"]
+- !private ["Ps9AnyObject", "dequeueReusableCell"]
+- !private ["Ps9AnyObject", "dismiss"]
+- ["Ps9AnyObject", "init"]
+- !private ["Ps9AnyObject", "insertRows"]
+- !private ["Ps9AnyObject", "observe"]
+- ["Ps9AnyObject", "reference"]
+- !private ["Ps9AnyObject", "tableView"]
+- !private ["Ps9AnyObject", "text"]
+- !private ["Ps9AnyObject", "textLabel"]
+- !private ["Ps9AnyObject", "userCell"]
+- !private ["Ps9AnyObject", "usersRef"]
+- !private ["Ps9AnyObject", "value"]
+- !private ["Ps9AnyObject", "viewDidLoad"]
+- ["Ps9AnyObject", ""]
+- !private ["Sa", "append"]
+- !private ["Sa", "count"]
+- !private ["Sa", "enumerated"]
+- !private ["Sa", "remove"]
+- !private ["Sa", "subscript"]
+- !private ["Ps23BidirectionalCollection", "append"]
+- !private ["Ps23BidirectionalCollection", "count"]
+- !private ["Ps23BidirectionalCollection", "enumerated"]
+- !private ["Ps23BidirectionalCollection", "init"]
+- !private ["Ps23BidirectionalCollection", "remove"]
+- !private ["Ps23BidirectionalCollection", "row"]
+- !private ["Ps23BidirectionalCollection", "subscript"]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["PSo15CALayerDelegate", "deleteRows"]
+- !private ["PSo15CALayerDelegate", "dequeueReusableCell"]
+- !private ["PSo15CALayerDelegate", "insertRows"]
+- !private ["PSo15CALayerDelegate", "text"]
+- !private ["PSo15CALayerDelegate", "textLabel"]
+- ["Ps7CVarArg", "FIRDatabase"]
+- !private ["Ps7CVarArg", "IndexPath"]
+- !private ["Ps7CVarArg", "append"]
+- !private ["Ps7CVarArg", "count"]
+- !private ["Ps7CVarArg", "currentUsers"]
+- ["Ps7CVarArg", "database"]
+- !private ["Ps7CVarArg", "deleteRows"]
+- !private ["Ps7CVarArg", "dequeueReusableCell"]
+- !private ["Ps7CVarArg", "dismiss"]
+- !private ["Ps7CVarArg", "enumerated"]
+- ["Ps7CVarArg", "init"]
+- !private ["Ps7CVarArg", "insertRows"]
+- !private ["Ps7CVarArg", "observe"]
+- ["Ps7CVarArg", "reference"]
+- !private ["Ps7CVarArg", "remove"]
+- !private ["Ps7CVarArg", "subscript"]
+- !private ["Ps7CVarArg", "tableView"]
+- !private ["Ps7CVarArg", "text"]
+- !private ["Ps7CVarArg", "textLabel"]
+- !private ["Ps7CVarArg", "userCell"]
+- !private ["Ps7CVarArg", "usersRef"]
+- !private ["Ps7CVarArg", "value"]
+- !private ["Ps7CVarArg", "viewDidLoad"]
+- ["Ps7CVarArg", ""]
+- !private ["Ps10Collection", "append"]
+- !private ["Ps10Collection", "count"]
+- !private ["Ps10Collection", "enumerated"]
+- !private ["Ps10Collection", "init"]
+- !private ["Ps10Collection", "remove"]
+- !private ["Ps10Collection", "row"]
+- !private ["Ps10Collection", "subscript"]
+- ["Ps10Comparable", "init"]
+- !private ["Ps10Comparable", "row"]
+- ["Ps28CustomDebugStringConvertible", "FIRDatabase"]
+- !private ["Ps28CustomDebugStringConvertible", "IndexPath"]
+- !private ["Ps28CustomDebugStringConvertible", "append"]
+- !private ["Ps28CustomDebugStringConvertible", "count"]
+- !private ["Ps28CustomDebugStringConvertible", "currentUsers"]
+- ["Ps28CustomDebugStringConvertible", "database"]
+- !private ["Ps28CustomDebugStringConvertible", "deleteRows"]
+- !private ["Ps28CustomDebugStringConvertible", "dequeueReusableCell"]
+- !private ["Ps28CustomDebugStringConvertible", "dismiss"]
+- !private ["Ps28CustomDebugStringConvertible", "enumerated"]
+- ["Ps28CustomDebugStringConvertible", "init"]
+- !private ["Ps28CustomDebugStringConvertible", "insertRows"]
+- !private ["Ps28CustomDebugStringConvertible", "observe"]
+- ["Ps28CustomDebugStringConvertible", "reference"]
+- !private ["Ps28CustomDebugStringConvertible", "remove"]
+- !private ["Ps28CustomDebugStringConvertible", "row"]
+- !private ["Ps28CustomDebugStringConvertible", "subscript"]
+- !private ["Ps28CustomDebugStringConvertible", "tableView"]
+- !private ["Ps28CustomDebugStringConvertible", "text"]
+- !private ["Ps28CustomDebugStringConvertible", "textLabel"]
+- !private ["Ps28CustomDebugStringConvertible", "userCell"]
+- !private ["Ps28CustomDebugStringConvertible", "usersRef"]
+- !private ["Ps28CustomDebugStringConvertible", "value"]
+- !private ["Ps28CustomDebugStringConvertible", "viewDidLoad"]
+- ["Ps28CustomDebugStringConvertible", ""]
+- !private ["Ps29CustomPlaygroundQuickLookable", "_getBuiltinLogicValue"]
+- ["Ps29CustomPlaygroundQuickLookable", "init"]
+- !private ["Ps17CustomReflectable", "_getBuiltinLogicValue"]
+- !private ["Ps17CustomReflectable", "append"]
+- !private ["Ps17CustomReflectable", "count"]
+- !private ["Ps17CustomReflectable", "enumerated"]
+- ["Ps17CustomReflectable", "init"]
+- !private ["Ps17CustomReflectable", "remove"]
+- !private ["Ps17CustomReflectable", "row"]
+- !private ["Ps17CustomReflectable", "subscript"]
+- ["Ps23CustomStringConvertible", "FIRDatabase"]
+- !private ["Ps23CustomStringConvertible", "IndexPath"]
+- !private ["Ps23CustomStringConvertible", "_getBuiltinLogicValue"]
+- !private ["Ps23CustomStringConvertible", "append"]
+- !private ["Ps23CustomStringConvertible", "count"]
+- !private ["Ps23CustomStringConvertible", "currentUsers"]
+- ["Ps23CustomStringConvertible", "database"]
+- !private ["Ps23CustomStringConvertible", "deleteRows"]
+- !private ["Ps23CustomStringConvertible", "dequeueReusableCell"]
+- !private ["Ps23CustomStringConvertible", "dismiss"]
+- !private ["Ps23CustomStringConvertible", "enumerated"]
+- ["Ps23CustomStringConvertible", "init"]
+- !private ["Ps23CustomStringConvertible", "insertRows"]
+- !private ["Ps23CustomStringConvertible", "observe"]
+- ["Ps23CustomStringConvertible", "reference"]
+- !private ["Ps23CustomStringConvertible", "remove"]
+- !private ["Ps23CustomStringConvertible", "row"]
+- !private ["Ps23CustomStringConvertible", "subscript"]
+- !private ["Ps23CustomStringConvertible", "tableView"]
+- !private ["Ps23CustomStringConvertible", "text"]
+- !private ["Ps23CustomStringConvertible", "textLabel"]
+- !private ["Ps23CustomStringConvertible", "userCell"]
+- !private ["Ps23CustomStringConvertible", "usersRef"]
+- !private ["Ps23CustomStringConvertible", "value"]
+- !private ["Ps23CustomStringConvertible", "viewDidLoad"]
+- ["Ps23CustomStringConvertible", ""]
+- ["Ps9Equatable", "FIRDatabase"]
+- !private ["Ps9Equatable", "IndexPath"]
+- !private ["Ps9Equatable", "_getBuiltinLogicValue"]
+- !private ["Ps9Equatable", "childAdded"]
+- !private ["Ps9Equatable", "childRemoved"]
+- !private ["Ps9Equatable", "currentUsers"]
+- ["Ps9Equatable", "database"]
+- !private ["Ps9Equatable", "deleteRows"]
+- !private ["Ps9Equatable", "dequeueReusableCell"]
+- !private ["Ps9Equatable", "dismiss"]
+- !private ["Ps9Equatable", "fade"]
+- ["Ps9Equatable", "init"]
+- !private ["Ps9Equatable", "insertRows"]
+- !private ["Ps9Equatable", "observe"]
+- ["Ps9Equatable", "reference"]
+- !private ["Ps9Equatable", "row"]
+- !private ["Ps9Equatable", "tableView"]
+- !private ["Ps9Equatable", "text"]
+- !private ["Ps9Equatable", "textLabel"]
+- !private ["Ps9Equatable", "top"]
+- !private ["Ps9Equatable", "userCell"]
+- !private ["Ps9Equatable", "usersRef"]
+- !private ["Ps9Equatable", "value"]
+- !private ["Ps9Equatable", "viewDidLoad"]
+- ["Ps9Equatable", ""]
+- !private ["Ps25ExpressibleByArrayLiteral", "append"]
+- !private ["Ps25ExpressibleByArrayLiteral", "count"]
+- !private ["Ps25ExpressibleByArrayLiteral", "enumerated"]
+- !private ["Ps25ExpressibleByArrayLiteral", "init"]
+- !private ["Ps25ExpressibleByArrayLiteral", "remove"]
+- !private ["Ps25ExpressibleByArrayLiteral", "row"]
+- !private ["Ps25ExpressibleByArrayLiteral", "subscript"]
+- !private ["Ps27ExpressibleByBooleanLiteral", "_getBuiltinLogicValue"]
+- ["Ps43ExpressibleByExtendedGraphemeClusterLiteral", "init"]
+- ["Ps26ExpressibleByStringLiteral", "init"]
+- ["Ps33ExpressibleByUnicodeScalarLiteral", "init"]
+- !private ["OSC16FIRDataEventType", "childAdded"]
+- !private ["OSC16FIRDataEventType", "childRemoved"]
+- !private ["CSo15FIRDataSnapshot", "value"]
+- ["CSo11FIRDatabase", "database"]
+- ["CSo11FIRDatabase", "reference"]
+- !private ["CSo16FIRDatabaseQuery", "observe"]
+- !private ["CSo20FIRDatabaseReference", "observe"]
+- ["Ps8Hashable", "FIRDatabase"]
+- !private ["Ps8Hashable", "IndexPath"]
+- !private ["Ps8Hashable", "_getBuiltinLogicValue"]
+- !private ["Ps8Hashable", "childAdded"]
+- !private ["Ps8Hashable", "childRemoved"]
+- !private ["Ps8Hashable", "currentUsers"]
+- ["Ps8Hashable", "database"]
+- !private ["Ps8Hashable", "deleteRows"]
+- !private ["Ps8Hashable", "dequeueReusableCell"]
+- !private ["Ps8Hashable", "dismiss"]
+- !private ["Ps8Hashable", "fade"]
+- ["Ps8Hashable", "init"]
+- !private ["Ps8Hashable", "insertRows"]
+- !private ["Ps8Hashable", "observe"]
+- ["Ps8Hashable", "reference"]
+- !private ["Ps8Hashable", "row"]
+- !private ["Ps8Hashable", "tableView"]
+- !private ["Ps8Hashable", "text"]
+- !private ["Ps8Hashable", "textLabel"]
+- !private ["Ps8Hashable", "top"]
+- !private ["Ps8Hashable", "userCell"]
+- !private ["Ps8Hashable", "usersRef"]
+- !private ["Ps8Hashable", "value"]
+- !private ["Ps8Hashable", "viewDidLoad"]
+- ["Ps8Hashable", ""]
+- !private ["V10Foundation9IndexPath", "init"]
+- !private ["V10Foundation9IndexPath", "row"]
+- !private ["Ps25LosslessStringConvertible", "_getBuiltinLogicValue"]
+- ["Ps25LosslessStringConvertible", "init"]
+- ["Ps10MirrorPath", "init"]
+- !private ["Ps17MutableCollection", "append"]
+- !private ["Ps17MutableCollection", "count"]
+- !private ["Ps17MutableCollection", "enumerated"]
+- !private ["Ps17MutableCollection", "init"]
+- !private ["Ps17MutableCollection", "remove"]
+- !private ["Ps17MutableCollection", "row"]
+- !private ["Ps17MutableCollection", "subscript"]
+- ["PSo8NSCoding", "FIRDatabase"]
+- !private ["PSo8NSCoding", "IndexPath"]
+- !private ["PSo8NSCoding", "currentUsers"]
+- !private ["PSo8NSCoding", "deleteRows"]
+- !private ["PSo8NSCoding", "dequeueReusableCell"]
+- !private ["PSo8NSCoding", "dismiss"]
+- ["PSo8NSCoding", "init"]
+- !private ["PSo8NSCoding", "insertRows"]
+- !private ["PSo8NSCoding", "tableView"]
+- !private ["PSo8NSCoding", "text"]
+- !private ["PSo8NSCoding", "textLabel"]
+- !private ["PSo8NSCoding", "userCell"]
+- !private ["PSo8NSCoding", "usersRef"]
+- !private ["PSo8NSCoding", "viewDidLoad"]
+- ["PSo8NSCoding", ""]
+- ["PSo9NSCopying", "init"]
+- ["PSo26NSExtensionRequestHandling", "FIRDatabase"]
+- !private ["PSo26NSExtensionRequestHandling", "IndexPath"]
+- !private ["PSo26NSExtensionRequestHandling", "currentUsers"]
+- !private ["PSo26NSExtensionRequestHandling", "dismiss"]
+- !private ["PSo26NSExtensionRequestHandling", "init"]
+- !private ["PSo26NSExtensionRequestHandling", "tableView"]
+- !private ["PSo26NSExtensionRequestHandling", "userCell"]
+- !private ["PSo26NSExtensionRequestHandling", "usersRef"]
+- !private ["PSo26NSExtensionRequestHandling", "viewDidLoad"]
+- ["PSo26NSExtensionRequestHandling", ""]
+- ["PSo16NSMutableCopying", "init"]
+- ["CSo8NSObject", "AnyObject"]
+- ["CSo8NSObject", "FIRDatabase"]
+- ["CSo8NSObject", "IndexPath"]
+- ["CSo8NSObject", "Int"]
+- ["CSo8NSObject", "String"]
+- ["CSo8NSObject", "UITableView"]
+- ["CSo8NSObject", "UITableViewCell"]
+- ["CSo8NSObject", "currentUsers"]
+- ["CSo8NSObject", "database"]
+- !private ["CSo8NSObject", "deleteRows"]
+- !private ["CSo8NSObject", "dequeueReusableCell"]
+- !private ["CSo8NSObject", "dismiss"]
+- ["CSo8NSObject", "init"]
+- !private ["CSo8NSObject", "insertRows"]
+- !private ["CSo8NSObject", "observe"]
+- ["CSo8NSObject", "reference"]
+- ["CSo8NSObject", "signoutButtonPressed"]
+- ["CSo8NSObject", "tableView"]
+- !private ["CSo8NSObject", "text"]
+- !private ["CSo8NSObject", "textLabel"]
+- ["CSo8NSObject", "userCell"]
+- ["CSo8NSObject", "usersRef"]
+- !private ["CSo8NSObject", "value"]
+- ["CSo8NSObject", "viewDidLoad"]
+- ["PSo16NSObjectProtocol", "FIRDatabase"]
+- !private ["PSo16NSObjectProtocol", "IndexPath"]
+- !private ["PSo16NSObjectProtocol", "currentUsers"]
+- ["PSo16NSObjectProtocol", "database"]
+- !private ["PSo16NSObjectProtocol", "deleteRows"]
+- !private ["PSo16NSObjectProtocol", "dequeueReusableCell"]
+- !private ["PSo16NSObjectProtocol", "dismiss"]
+- ["PSo16NSObjectProtocol", "init"]
+- !private ["PSo16NSObjectProtocol", "insertRows"]
+- !private ["PSo16NSObjectProtocol", "observe"]
+- ["PSo16NSObjectProtocol", "reference"]
+- !private ["PSo16NSObjectProtocol", "tableView"]
+- !private ["PSo16NSObjectProtocol", "text"]
+- !private ["PSo16NSObjectProtocol", "textLabel"]
+- !private ["PSo16NSObjectProtocol", "userCell"]
+- !private ["PSo16NSObjectProtocol", "usersRef"]
+- !private ["PSo16NSObjectProtocol", "value"]
+- !private ["PSo16NSObjectProtocol", "viewDidLoad"]
+- ["PSo16NSObjectProtocol", ""]
+- ["PSo14NSSecureCoding", "init"]
+- ["CSo8NSString", "init"]
+- ["C6Tagify30OnlineUsersTableViewController", "AnyObject"]
+- ["C6Tagify30OnlineUsersTableViewController", "FIRDatabase"]
+- ["C6Tagify30OnlineUsersTableViewController", "IndexPath"]
+- ["C6Tagify30OnlineUsersTableViewController", "Int"]
+- ["C6Tagify30OnlineUsersTableViewController", "String"]
+- ["C6Tagify30OnlineUsersTableViewController", "UITableView"]
+- ["C6Tagify30OnlineUsersTableViewController", "UITableViewCell"]
+- ["C6Tagify30OnlineUsersTableViewController", "currentUsers"]
+- ["C6Tagify30OnlineUsersTableViewController", "deinit"]
+- !private ["C6Tagify30OnlineUsersTableViewController", "dismiss"]
+- ["C6Tagify30OnlineUsersTableViewController", "init"]
+- ["C6Tagify30OnlineUsersTableViewController", "signoutButtonPressed"]
+- ["C6Tagify30OnlineUsersTableViewController", "tableView"]
+- ["C6Tagify30OnlineUsersTableViewController", "userCell"]
+- ["C6Tagify30OnlineUsersTableViewController", "usersRef"]
+- ["C6Tagify30OnlineUsersTableViewController", "viewDidLoad"]
+- !private ["Ps22RandomAccessCollection", "append"]
+- !private ["Ps22RandomAccessCollection", "count"]
+- !private ["Ps22RandomAccessCollection", "enumerated"]
+- !private ["Ps22RandomAccessCollection", "init"]
+- !private ["Ps22RandomAccessCollection", "remove"]
+- !private ["Ps22RandomAccessCollection", "row"]
+- !private ["Ps22RandomAccessCollection", "subscript"]
+- !private ["Ps26RangeReplaceableCollection", "append"]
+- !private ["Ps26RangeReplaceableCollection", "count"]
+- !private ["Ps26RangeReplaceableCollection", "enumerated"]
+- !private ["Ps26RangeReplaceableCollection", "remove"]
+- !private ["Ps26RangeReplaceableCollection", "subscript"]
+- !private ["Ps16RawRepresentable", "childAdded"]
+- !private ["Ps16RawRepresentable", "childRemoved"]
+- !private ["Ps16RawRepresentable", "fade"]
+- !private ["Ps16RawRepresentable", "top"]
+- !private ["P10Foundation20ReferenceConvertible", "init"]
+- !private ["P10Foundation20ReferenceConvertible", "row"]
+- !private ["Ps8Sequence", "append"]
+- !private ["Ps8Sequence", "count"]
+- !private ["Ps8Sequence", "enumerated"]
+- !private ["Ps8Sequence", "init"]
+- !private ["Ps8Sequence", "remove"]
+- !private ["Ps8Sequence", "row"]
+- !private ["Ps8Sequence", "subscript"]
+- ["SS", "init"]
+- ["Ps16TextOutputStream", "init"]
+- ["Ps20TextOutputStreamable", "init"]
+- !private ["PSo29UIAccessibilityIdentification", "deleteRows"]
+- !private ["PSo29UIAccessibilityIdentification", "dequeueReusableCell"]
+- !private ["PSo29UIAccessibilityIdentification", "insertRows"]
+- !private ["PSo29UIAccessibilityIdentification", "text"]
+- !private ["PSo29UIAccessibilityIdentification", "textLabel"]
+- !private ["PSo12UIAppearance", "deleteRows"]
+- !private ["PSo12UIAppearance", "dequeueReusableCell"]
+- !private ["PSo12UIAppearance", "insertRows"]
+- !private ["PSo12UIAppearance", "text"]
+- !private ["PSo12UIAppearance", "textLabel"]
+- ["PSo21UIAppearanceContainer", "FIRDatabase"]
+- !private ["PSo21UIAppearanceContainer", "IndexPath"]
+- !private ["PSo21UIAppearanceContainer", "currentUsers"]
+- !private ["PSo21UIAppearanceContainer", "deleteRows"]
+- !private ["PSo21UIAppearanceContainer", "dequeueReusableCell"]
+- !private ["PSo21UIAppearanceContainer", "dismiss"]
+- !private ["PSo21UIAppearanceContainer", "init"]
+- !private ["PSo21UIAppearanceContainer", "insertRows"]
+- !private ["PSo21UIAppearanceContainer", "tableView"]
+- !private ["PSo21UIAppearanceContainer", "text"]
+- !private ["PSo21UIAppearanceContainer", "textLabel"]
+- !private ["PSo21UIAppearanceContainer", "userCell"]
+- !private ["PSo21UIAppearanceContainer", "usersRef"]
+- !private ["PSo21UIAppearanceContainer", "viewDidLoad"]
+- ["PSo21UIAppearanceContainer", ""]
+- ["PSo18UIContentContainer", "FIRDatabase"]
+- !private ["PSo18UIContentContainer", "IndexPath"]
+- !private ["PSo18UIContentContainer", "currentUsers"]
+- !private ["PSo18UIContentContainer", "dismiss"]
+- !private ["PSo18UIContentContainer", "init"]
+- !private ["PSo18UIContentContainer", "tableView"]
+- !private ["PSo18UIContentContainer", "userCell"]
+- !private ["PSo18UIContentContainer", "usersRef"]
+- !private ["PSo18UIContentContainer", "viewDidLoad"]
+- ["PSo18UIContentContainer", ""]
+- !private ["PSo30UIContentSizeCategoryAdjusting", "text"]
+- !private ["PSo17UICoordinateSpace", "deleteRows"]
+- !private ["PSo17UICoordinateSpace", "dequeueReusableCell"]
+- !private ["PSo17UICoordinateSpace", "insertRows"]
+- !private ["PSo17UICoordinateSpace", "text"]
+- !private ["PSo17UICoordinateSpace", "textLabel"]
+- !private ["PSo13UIDynamicItem", "deleteRows"]
+- !private ["PSo13UIDynamicItem", "dequeueReusableCell"]
+- !private ["PSo13UIDynamicItem", "insertRows"]
+- !private ["PSo13UIDynamicItem", "text"]
+- !private ["PSo13UIDynamicItem", "textLabel"]
+- ["PSo18UIFocusEnvironment", "FIRDatabase"]
+- !private ["PSo18UIFocusEnvironment", "IndexPath"]
+- !private ["PSo18UIFocusEnvironment", "currentUsers"]
+- !private ["PSo18UIFocusEnvironment", "deleteRows"]
+- !private ["PSo18UIFocusEnvironment", "dequeueReusableCell"]
+- !private ["PSo18UIFocusEnvironment", "dismiss"]
+- !private ["PSo18UIFocusEnvironment", "init"]
+- !private ["PSo18UIFocusEnvironment", "insertRows"]
+- !private ["PSo18UIFocusEnvironment", "tableView"]
+- !private ["PSo18UIFocusEnvironment", "text"]
+- !private ["PSo18UIFocusEnvironment", "textLabel"]
+- !private ["PSo18UIFocusEnvironment", "userCell"]
+- !private ["PSo18UIFocusEnvironment", "usersRef"]
+- !private ["PSo18UIFocusEnvironment", "viewDidLoad"]
+- ["PSo18UIFocusEnvironment", ""]
+- !private ["PSo11UIFocusItem", "deleteRows"]
+- !private ["PSo11UIFocusItem", "dequeueReusableCell"]
+- !private ["PSo11UIFocusItem", "insertRows"]
+- !private ["PSo11UIFocusItem", "text"]
+- !private ["PSo11UIFocusItem", "textLabel"]
+- !private ["PSo27UIGestureRecognizerDelegate", "textLabel"]
+- !private ["CSo7UILabel", "text"]
+- ["CSo11UIResponder", "AnyObject"]
+- ["CSo11UIResponder", "FIRDatabase"]
+- ["CSo11UIResponder", "IndexPath"]
+- ["CSo11UIResponder", "Int"]
+- ["CSo11UIResponder", "String"]
+- ["CSo11UIResponder", "UITableView"]
+- ["CSo11UIResponder", "UITableViewCell"]
+- ["CSo11UIResponder", "currentUsers"]
+- !private ["CSo11UIResponder", "deleteRows"]
+- !private ["CSo11UIResponder", "dequeueReusableCell"]
+- !private ["CSo11UIResponder", "dismiss"]
+- ["CSo11UIResponder", "init"]
+- !private ["CSo11UIResponder", "insertRows"]
+- ["CSo11UIResponder", "signoutButtonPressed"]
+- ["CSo11UIResponder", "tableView"]
+- !private ["CSo11UIResponder", "text"]
+- !private ["CSo11UIResponder", "textLabel"]
+- ["CSo11UIResponder", "userCell"]
+- ["CSo11UIResponder", "usersRef"]
+- ["CSo11UIResponder", "viewDidLoad"]
+- ["PSo30UIResponderStandardEditActions", "FIRDatabase"]
+- !private ["PSo30UIResponderStandardEditActions", "IndexPath"]
+- !private ["PSo30UIResponderStandardEditActions", "currentUsers"]
+- !private ["PSo30UIResponderStandardEditActions", "deleteRows"]
+- !private ["PSo30UIResponderStandardEditActions", "dequeueReusableCell"]
+- !private ["PSo30UIResponderStandardEditActions", "dismiss"]
+- !private ["PSo30UIResponderStandardEditActions", "init"]
+- !private ["PSo30UIResponderStandardEditActions", "insertRows"]
+- !private ["PSo30UIResponderStandardEditActions", "tableView"]
+- !private ["PSo30UIResponderStandardEditActions", "text"]
+- !private ["PSo30UIResponderStandardEditActions", "textLabel"]
+- !private ["PSo30UIResponderStandardEditActions", "userCell"]
+- !private ["PSo30UIResponderStandardEditActions", "usersRef"]
+- !private ["PSo30UIResponderStandardEditActions", "viewDidLoad"]
+- ["PSo30UIResponderStandardEditActions", ""]
+- !private ["CSo12UIScrollView", "deleteRows"]
+- !private ["CSo12UIScrollView", "dequeueReusableCell"]
+- !private ["CSo12UIScrollView", "insertRows"]
+- ["PSo20UIScrollViewDelegate", "FIRDatabase"]
+- !private ["PSo20UIScrollViewDelegate", "IndexPath"]
+- !private ["PSo20UIScrollViewDelegate", "currentUsers"]
+- !private ["PSo20UIScrollViewDelegate", "dismiss"]
+- !private ["PSo20UIScrollViewDelegate", "init"]
+- !private ["PSo20UIScrollViewDelegate", "tableView"]
+- !private ["PSo20UIScrollViewDelegate", "userCell"]
+- !private ["PSo20UIScrollViewDelegate", "usersRef"]
+- !private ["PSo20UIScrollViewDelegate", "viewDidLoad"]
+- ["PSo20UIScrollViewDelegate", ""]
+- ["PSo16UIStateRestoring", "FIRDatabase"]
+- !private ["PSo16UIStateRestoring", "IndexPath"]
+- !private ["PSo16UIStateRestoring", "currentUsers"]
+- !private ["PSo16UIStateRestoring", "dismiss"]
+- !private ["PSo16UIStateRestoring", "init"]
+- !private ["PSo16UIStateRestoring", "tableView"]
+- !private ["PSo16UIStateRestoring", "userCell"]
+- !private ["PSo16UIStateRestoring", "usersRef"]
+- !private ["PSo16UIStateRestoring", "viewDidLoad"]
+- ["PSo16UIStateRestoring", ""]
+- !private ["CSo11UITableView", "deleteRows"]
+- !private ["CSo11UITableView", "dequeueReusableCell"]
+- !private ["CSo11UITableView", "insertRows"]
+- !private ["CSo15UITableViewCell", "textLabel"]
+- ["CSo21UITableViewController", "AnyObject"]
+- ["CSo21UITableViewController", "FIRDatabase"]
+- ["CSo21UITableViewController", "IndexPath"]
+- ["CSo21UITableViewController", "Int"]
+- ["CSo21UITableViewController", "String"]
+- ["CSo21UITableViewController", "UITableView"]
+- ["CSo21UITableViewController", "UITableViewCell"]
+- ["CSo21UITableViewController", "currentUsers"]
+- !private ["CSo21UITableViewController", "dismiss"]
+- ["CSo21UITableViewController", "init"]
+- ["CSo21UITableViewController", "signoutButtonPressed"]
+- ["CSo21UITableViewController", "tableView"]
+- ["CSo21UITableViewController", "userCell"]
+- ["CSo21UITableViewController", "usersRef"]
+- ["CSo21UITableViewController", "viewDidLoad"]
+- ["CSo21UITableViewController", ""]
+- ["PSo21UITableViewDataSource", "FIRDatabase"]
+- !private ["PSo21UITableViewDataSource", "IndexPath"]
+- !private ["PSo21UITableViewDataSource", "currentUsers"]
+- !private ["PSo21UITableViewDataSource", "dismiss"]
+- !private ["PSo21UITableViewDataSource", "init"]
+- !private ["PSo21UITableViewDataSource", "tableView"]
+- !private ["PSo21UITableViewDataSource", "userCell"]
+- !private ["PSo21UITableViewDataSource", "usersRef"]
+- !private ["PSo21UITableViewDataSource", "viewDidLoad"]
+- ["PSo21UITableViewDataSource", ""]
+- ["PSo19UITableViewDelegate", "FIRDatabase"]
+- !private ["PSo19UITableViewDelegate", "IndexPath"]
+- !private ["PSo19UITableViewDelegate", "currentUsers"]
+- !private ["PSo19UITableViewDelegate", "dismiss"]
+- !private ["PSo19UITableViewDelegate", "init"]
+- !private ["PSo19UITableViewDelegate", "tableView"]
+- !private ["PSo19UITableViewDelegate", "userCell"]
+- !private ["PSo19UITableViewDelegate", "usersRef"]
+- !private ["PSo19UITableViewDelegate", "viewDidLoad"]
+- ["PSo19UITableViewDelegate", ""]
+- !private ["OSC23UITableViewRowAnimation", "fade"]
+- !private ["OSC23UITableViewRowAnimation", "top"]
+- ["PSo18UITraitEnvironment", "FIRDatabase"]
+- !private ["PSo18UITraitEnvironment", "IndexPath"]
+- !private ["PSo18UITraitEnvironment", "currentUsers"]
+- !private ["PSo18UITraitEnvironment", "deleteRows"]
+- !private ["PSo18UITraitEnvironment", "dequeueReusableCell"]
+- !private ["PSo18UITraitEnvironment", "dismiss"]
+- !private ["PSo18UITraitEnvironment", "init"]
+- !private ["PSo18UITraitEnvironment", "insertRows"]
+- !private ["PSo18UITraitEnvironment", "tableView"]
+- !private ["PSo18UITraitEnvironment", "text"]
+- !private ["PSo18UITraitEnvironment", "textLabel"]
+- !private ["PSo18UITraitEnvironment", "userCell"]
+- !private ["PSo18UITraitEnvironment", "usersRef"]
+- !private ["PSo18UITraitEnvironment", "viewDidLoad"]
+- ["PSo18UITraitEnvironment", ""]
+- !private ["CSo6UIView", "deleteRows"]
+- !private ["CSo6UIView", "dequeueReusableCell"]
+- !private ["CSo6UIView", "insertRows"]
+- !private ["CSo6UIView", "text"]
+- !private ["CSo6UIView", "textLabel"]
+- ["CSo16UIViewController", "AnyObject"]
+- ["CSo16UIViewController", "FIRDatabase"]
+- ["CSo16UIViewController", "IndexPath"]
+- ["CSo16UIViewController", "Int"]
+- ["CSo16UIViewController", "String"]
+- ["CSo16UIViewController", "UITableView"]
+- ["CSo16UIViewController", "UITableViewCell"]
+- ["CSo16UIViewController", "currentUsers"]
+- !private ["CSo16UIViewController", "dismiss"]
+- ["CSo16UIViewController", "init"]
+- ["CSo16UIViewController", "signoutButtonPressed"]
+- ["CSo16UIViewController", "tableView"]
+- ["CSo16UIViewController", "userCell"]
+- ["CSo16UIViewController", "usersRef"]
+- ["CSo16UIViewController", "viewDidLoad"]
+- !private ["Ps14_ArrayProtocol", "append"]
+- !private ["Ps14_ArrayProtocol", "count"]
+- !private ["Ps14_ArrayProtocol", "enumerated"]
+- !private ["Ps14_ArrayProtocol", "remove"]
+- !private ["Ps14_ArrayProtocol", "subscript"]
+- !private ["Ps23_BidirectionalIndexable", "append"]
+- !private ["Ps23_BidirectionalIndexable", "count"]
+- !private ["Ps23_BidirectionalIndexable", "enumerated"]
+- !private ["Ps23_BidirectionalIndexable", "init"]
+- !private ["Ps23_BidirectionalIndexable", "remove"]
+- !private ["Ps23_BidirectionalIndexable", "row"]
+- !private ["Ps23_BidirectionalIndexable", "subscript"]
+- !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "deleteRows"]
+- !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "dequeueReusableCell"]
+- !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "insertRows"]
+- !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "text"]
+- !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "textLabel"]
+- !private ["Ps24_DestructorSafeContainer", "append"]
+- !private ["Ps24_DestructorSafeContainer", "count"]
+- !private ["Ps24_DestructorSafeContainer", "enumerated"]
+- !private ["Ps24_DestructorSafeContainer", "remove"]
+- !private ["Ps24_DestructorSafeContainer", "subscript"]
+- !private ["Ps35_ExpressibleByBuiltinBooleanLiteral", "_getBuiltinLogicValue"]
+- ["Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral", "init"]
+- ["Ps34_ExpressibleByBuiltinStringLiteral", "init"]
+- ["Ps39_ExpressibleByBuiltinUTF16StringLiteral", "init"]
+- ["Ps41_ExpressibleByBuiltinUnicodeScalarLiteral", "init"]
+- ["Ps33_ExpressibleByStringInterpolation", "init"]
+- ["Ps35_HasCustomAnyHashableRepresentation", "init"]
+- ["Ps9_Hashable", "FIRDatabase"]
+- !private ["Ps9_Hashable", "IndexPath"]
+- !private ["Ps9_Hashable", "_getBuiltinLogicValue"]
+- !private ["Ps9_Hashable", "childAdded"]
+- !private ["Ps9_Hashable", "childRemoved"]
+- !private ["Ps9_Hashable", "currentUsers"]
+- ["Ps9_Hashable", "database"]
+- !private ["Ps9_Hashable", "deleteRows"]
+- !private ["Ps9_Hashable", "dequeueReusableCell"]
+- !private ["Ps9_Hashable", "dismiss"]
+- !private ["Ps9_Hashable", "fade"]
+- ["Ps9_Hashable", "init"]
+- !private ["Ps9_Hashable", "insertRows"]
+- !private ["Ps9_Hashable", "observe"]
+- ["Ps9_Hashable", "reference"]
+- !private ["Ps9_Hashable", "row"]
+- !private ["Ps9_Hashable", "tableView"]
+- !private ["Ps9_Hashable", "text"]
+- !private ["Ps9_Hashable", "textLabel"]
+- !private ["Ps9_Hashable", "top"]
+- !private ["Ps9_Hashable", "userCell"]
+- !private ["Ps9_Hashable", "usersRef"]
+- !private ["Ps9_Hashable", "value"]
+- !private ["Ps9_Hashable", "viewDidLoad"]
+- ["Ps9_Hashable", ""]
+- !private ["Ps10_Indexable", "append"]
+- !private ["Ps10_Indexable", "count"]
+- !private ["Ps10_Indexable", "enumerated"]
+- !private ["Ps10_Indexable", "init"]
+- !private ["Ps10_Indexable", "remove"]
+- !private ["Ps10_Indexable", "row"]
+- !private ["Ps10_Indexable", "subscript"]
+- !private ["Ps14_IndexableBase", "append"]
+- !private ["Ps14_IndexableBase", "count"]
+- !private ["Ps14_IndexableBase", "enumerated"]
+- !private ["Ps14_IndexableBase", "init"]
+- !private ["Ps14_IndexableBase", "remove"]
+- !private ["Ps14_IndexableBase", "row"]
+- !private ["Ps14_IndexableBase", "subscript"]
+- !private ["Ps17_MutableIndexable", "append"]
+- !private ["Ps17_MutableIndexable", "count"]
+- !private ["Ps17_MutableIndexable", "enumerated"]
+- !private ["Ps17_MutableIndexable", "init"]
+- !private ["Ps17_MutableIndexable", "remove"]
+- !private ["Ps17_MutableIndexable", "row"]
+- !private ["Ps17_MutableIndexable", "subscript"]
+- !private ["Ps21_ObjectiveCBridgeable", "_getBuiltinLogicValue"]
+- !private ["Ps21_ObjectiveCBridgeable", "append"]
+- !private ["Ps21_ObjectiveCBridgeable", "count"]
+- !private ["Ps21_ObjectiveCBridgeable", "enumerated"]
+- ["Ps21_ObjectiveCBridgeable", "init"]
+- !private ["Ps21_ObjectiveCBridgeable", "remove"]
+- !private ["Ps21_ObjectiveCBridgeable", "row"]
+- !private ["Ps21_ObjectiveCBridgeable", "subscript"]
+- !private ["Ps22_RandomAccessIndexable", "append"]
+- !private ["Ps22_RandomAccessIndexable", "count"]
+- !private ["Ps22_RandomAccessIndexable", "enumerated"]
+- !private ["Ps22_RandomAccessIndexable", "init"]
+- !private ["Ps22_RandomAccessIndexable", "remove"]
+- !private ["Ps22_RandomAccessIndexable", "row"]
+- !private ["Ps22_RandomAccessIndexable", "subscript"]
+- !private ["Ps26_RangeReplaceableIndexable", "append"]
+- !private ["Ps26_RangeReplaceableIndexable", "count"]
+- !private ["Ps26_RangeReplaceableIndexable", "enumerated"]
+- !private ["Ps26_RangeReplaceableIndexable", "remove"]
+- !private ["Ps26_RangeReplaceableIndexable", "subscript"]
+depends-nominal:
+- "Ps9AnyObject"
+- !private "Sa"
+- !private "Ps23BidirectionalCollection"
+- !private "Sb"
+- !private "PSo15CALayerDelegate"
+- "Ps7CVarArg"
+- !private "Ps10Collection"
+- "Ps10Comparable"
+- "Ps28CustomDebugStringConvertible"
+- "Ps29CustomPlaygroundQuickLookable"
+- "Ps17CustomReflectable"
+- "Ps23CustomStringConvertible"
+- "Ps9Equatable"
+- !private "Ps25ExpressibleByArrayLiteral"
+- !private "Ps27ExpressibleByBooleanLiteral"
+- "Ps43ExpressibleByExtendedGraphemeClusterLiteral"
+- "Ps26ExpressibleByStringLiteral"
+- "Ps33ExpressibleByUnicodeScalarLiteral"
+- !private "OSC16FIRDataEventType"
+- !private "CSo15FIRDataSnapshot"
+- "CSo11FIRDatabase"
+- !private "CSo16FIRDatabaseQuery"
+- !private "CSo20FIRDatabaseReference"
+- "Ps8Hashable"
+- !private "V10Foundation9IndexPath"
+- "Ps25LosslessStringConvertible"
+- "Ps10MirrorPath"
+- !private "Ps17MutableCollection"
+- "PSo8NSCoding"
+- "PSo9NSCopying"
+- "PSo26NSExtensionRequestHandling"
+- "PSo16NSMutableCopying"
+- "CSo8NSObject"
+- "PSo16NSObjectProtocol"
+- "PSo14NSSecureCoding"
+- "CSo8NSString"
+- "C6Tagify30OnlineUsersTableViewController"
+- !private "Ps22RandomAccessCollection"
+- !private "Ps26RangeReplaceableCollection"
+- !private "Ps16RawRepresentable"
+- !private "P10Foundation20ReferenceConvertible"
+- !private "Ps8Sequence"
+- "SS"
+- "Ps16TextOutputStream"
+- "Ps20TextOutputStreamable"
+- !private "PSo29UIAccessibilityIdentification"
+- !private "PSo12UIAppearance"
+- "PSo21UIAppearanceContainer"
+- "PSo18UIContentContainer"
+- !private "PSo30UIContentSizeCategoryAdjusting"
+- !private "PSo17UICoordinateSpace"
+- !private "PSo13UIDynamicItem"
+- "PSo18UIFocusEnvironment"
+- !private "PSo11UIFocusItem"
+- !private "PSo27UIGestureRecognizerDelegate"
+- !private "CSo7UILabel"
+- "CSo11UIResponder"
+- "PSo30UIResponderStandardEditActions"
+- !private "CSo12UIScrollView"
+- "PSo20UIScrollViewDelegate"
+- "PSo16UIStateRestoring"
+- !private "CSo11UITableView"
+- !private "CSo15UITableViewCell"
+- "CSo21UITableViewController"
+- "PSo21UITableViewDataSource"
+- "PSo19UITableViewDelegate"
+- !private "OSC23UITableViewRowAnimation"
+- "PSo18UITraitEnvironment"
+- !private "CSo6UIView"
+- "CSo16UIViewController"
+- !private "Ps14_ArrayProtocol"
+- !private "Ps23_BidirectionalIndexable"
+- !private "Ps37_DefaultCustomPlaygroundQuickLookable"
+- !private "Ps24_DestructorSafeContainer"
+- !private "Ps35_ExpressibleByBuiltinBooleanLiteral"
+- "Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral"
+- "Ps34_ExpressibleByBuiltinStringLiteral"
+- "Ps39_ExpressibleByBuiltinUTF16StringLiteral"
+- "Ps41_ExpressibleByBuiltinUnicodeScalarLiteral"
+- "Ps33_ExpressibleByStringInterpolation"
+- "Ps35_HasCustomAnyHashableRepresentation"
+- "Ps9_Hashable"
+- !private "Ps10_Indexable"
+- !private "Ps14_IndexableBase"
+- !private "Ps17_MutableIndexable"
+- "Ps21_ObjectiveCBridgeable"
+- !private "Ps22_RandomAccessIndexable"
+- !private "Ps26_RangeReplaceableIndexable"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreText.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseInstanceID/FirebaseInstanceID/FIRInstanceID.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseInstanceID/FirebaseInstanceID/FirebaseInstanceID.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRMutableData.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDatabaseReference.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDataEventType.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDatabase.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FirebaseDatabase.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/Firebase/Firebase.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Firebase/Headers/Firebase.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRAnalytics+AppDelegate.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRServerValue.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRAuth.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FirebaseAuth.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRAuthCredential.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRConfiguration.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRAnalyticsConfiguration.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRUserInfo.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRApp.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/Grocr-Bridging-Header.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRGitHubAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIREmailPasswordAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRGoogleAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRFacebookAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRTwitterAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRUser.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRAnalytics.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FirebaseAnalytics.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRParameterNames.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIREventNames.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRUserPropertyNames.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIROptions.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRAuthErrors.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRTransactionResult.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDataSnapshot.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDatabaseQuery.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Firebase/Headers/module.modulemap"
+interface-hash: "6dfcde84cfa71879c6aea4720f3edbbb"

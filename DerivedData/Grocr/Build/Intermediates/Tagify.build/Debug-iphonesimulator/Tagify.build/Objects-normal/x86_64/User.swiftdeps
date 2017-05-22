@@ -1,0 +1,109 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "User"
+provides-nominal:
+- "V6Tagify4User"
+provides-member:
+- ["V6Tagify4User", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "AssignmentPrecedence"
+- "FIRUser"
+- "String"
+- "User"
+depends-member:
+- !private ["Ps9AnyObject", "email"]
+- !private ["Ps9AnyObject", "uid"]
+- !private ["Ps7CVarArg", "email"]
+- !private ["Ps7CVarArg", "uid"]
+- !private ["Ps28CustomDebugStringConvertible", "email"]
+- !private ["Ps28CustomDebugStringConvertible", "uid"]
+- !private ["Ps23CustomStringConvertible", "email"]
+- !private ["Ps23CustomStringConvertible", "uid"]
+- !private ["Ps9Equatable", "email"]
+- !private ["Ps9Equatable", "uid"]
+- !private ["CSo7FIRUser", "email"]
+- !private ["CSo7FIRUser", "uid"]
+- !private ["PSo11FIRUserInfo", "email"]
+- !private ["PSo11FIRUserInfo", "uid"]
+- !private ["Ps8Hashable", "email"]
+- !private ["Ps8Hashable", "uid"]
+- !private ["CSo8NSObject", "email"]
+- !private ["CSo8NSObject", "uid"]
+- !private ["PSo16NSObjectProtocol", "email"]
+- !private ["PSo16NSObjectProtocol", "uid"]
+- ["V6Tagify4User", "FIRUser"]
+- ["V6Tagify4User", "String"]
+- ["V6Tagify4User", "email"]
+- ["V6Tagify4User", "init"]
+- ["V6Tagify4User", "uid"]
+- !private ["Ps9_Hashable", "email"]
+- !private ["Ps9_Hashable", "uid"]
+depends-nominal:
+- !private "Ps9AnyObject"
+- !private "Ps7CVarArg"
+- !private "Ps28CustomDebugStringConvertible"
+- !private "Ps23CustomStringConvertible"
+- !private "Ps9Equatable"
+- !private "CSo7FIRUser"
+- !private "PSo11FIRUserInfo"
+- !private "Ps8Hashable"
+- !private "CSo8NSObject"
+- !private "PSo16NSObjectProtocol"
+- "V6Tagify4User"
+- !private "Ps9_Hashable"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreText.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseInstanceID/FirebaseInstanceID/FIRInstanceID.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseInstanceID/FirebaseInstanceID/FirebaseInstanceID.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRMutableData.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDatabaseReference.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDataEventType.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDatabase.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FirebaseDatabase.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/Firebase/Firebase.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Firebase/Headers/Firebase.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRAnalytics+AppDelegate.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRServerValue.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRAuth.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FirebaseAuth.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRAuthCredential.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRConfiguration.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRAnalyticsConfiguration.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRUserInfo.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRApp.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/Grocr-Bridging-Header.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRGitHubAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIREmailPasswordAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRGoogleAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRFacebookAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRTwitterAuthProvider.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRUser.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRAnalytics.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FirebaseAnalytics.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRParameterNames.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIREventNames.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIRUserPropertyNames.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAnalytics/FirebaseAnalytics/FIROptions.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseAuth/FirebaseAuth/FIRAuthErrors.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRTransactionResult.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDataSnapshot.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Headers/Public/FirebaseDatabase/FirebaseDatabase/FIRDatabaseQuery.h"
+- "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Pods/Firebase/Headers/module.modulemap"
+interface-hash: "744dbd0a241dbd48f0a23e23cb656912"
