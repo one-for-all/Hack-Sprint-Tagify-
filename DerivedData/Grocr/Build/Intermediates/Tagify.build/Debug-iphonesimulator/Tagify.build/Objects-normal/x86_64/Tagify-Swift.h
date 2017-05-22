@@ -260,7 +260,6 @@ SWIFT_CLASS("_TtC6Tagify17SongTableViewCell")
 SWIFT_CLASS("_TtC6Tagify18SongViewController")
 @interface SongViewController : UIViewController <UITextFieldDelegate>
 @property (nonatomic, strong) FIRDatabaseReference * _Null_unspecified userRef;
-@property (nonatomic, strong) FIRDatabaseReference * _Null_unspecified tagRef;
 @property (nonatomic, weak) IBOutlet UITableView * _Null_unspecified tableView;
 @property (nonatomic, readonly, copy) NSString * _Nonnull songCellIdentifier;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified tagView;

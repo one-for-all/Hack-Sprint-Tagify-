@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1E51ED260AD00FF76E4 /* setting1.png */; };
 		941A68C9047CFC613264BFB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F599D9265F4B40571F432E78 /* libPods.a */; };
 		942363621ECAC950004398A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 942363611ECAC950004398A0 /* GoogleService-Info.plist */; };
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6967E1E51ED260AD00FF76E4 /* setting1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting1.png; sourceTree = "<group>"; };
 		9423633E1ECAC5C4004398A0 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		942363611ECAC950004398A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -84,6 +86,7 @@
 		942363691ECAF4EA004398A0 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6967E1E51ED260AD00FF76E4 /* setting1.png */,
 				94BFA2541ED02BA3005AE02F /* BrunoMars.jpg */,
 				94BFA2551ED02BA3005AE02F /* Magic!.png */,
 				94BFA2561ED02BA3005AE02F /* Maroon5.jpg */,
@@ -223,7 +226,7 @@
 				TargetAttributes = {
 					BB23855B1B3DD5AB0079CD01 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 77569F29Z2;
+						DevelopmentTeam = 2V4EDPU2L5;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -263,6 +266,7 @@
 				947312A41ECF6F0900D44414 /* closeButton.png in Resources */,
 				9423636B1ECAF4EA004398A0 /* music.jpg in Resources */,
 				BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */,
+				6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */,
 				942363621ECAC950004398A0 /* GoogleService-Info.plist in Resources */,
 				94BFA25B1ED02BA3005AE02F /* TaylorSwift.jpg in Resources */,
 				BB23856C1B3DD5AB0079CD01 /* LaunchScreen.xib in Resources */,
@@ -454,7 +458,7 @@
 				CODE_SIGN_ENTITLEMENTS = Grocr/Grocr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 77569F29Z2;
+				DEVELOPMENT_TEAM = 2V4EDPU2L5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Grocr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -479,7 +483,7 @@
 				CODE_SIGN_ENTITLEMENTS = Grocr/Grocr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 77569F29Z2;
+				DEVELOPMENT_TEAM = 2V4EDPU2L5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Grocr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
