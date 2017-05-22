@@ -104,6 +104,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = true
+        tableView.isUserInteractionEnabled = true
+//        self.tableView.allowsSelectionDuringEditing = YES;
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -114,6 +117,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
 //        self.tagView.frame.origin.y = self.view.frame.height
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.delegate = self
         view.addGestureRecognizer(tap)  // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
         //set collectionViewCell to autoresize
         if let cvl = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -228,9 +232,11 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
+            playSong(song: cell.song)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
 
 
@@ -276,7 +282,14 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-extension SongViewController {
+extension SongViewController: UIGestureRecognizerDelegate { //Related to Tap Gesture
+    // UIGestureRecognizerDelegate method
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isDescendant(of: self.tableView) == true {
+            return false
+        }
+        return true
+    }
     func dismissKeyboard() {
         searchSongTextField.resignFirstResponder()
         addTagTextField.resignFirstResponder()
@@ -316,5 +329,11 @@ extension SongViewController {
             }
             allSongList.append(song)
         }
+    }
+}
+
+extension SongViewController { //Related to Music
+    func playSong(song: Song) {
+        print("Play \(song.name)")
     }
 }
