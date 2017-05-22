@@ -268,7 +268,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x9P-W1-qHf" id="yHq-7a-Pty">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="56.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="D1r-k6-XHX">
@@ -313,10 +313,10 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zL8-lO-N2F">
-                                <rect key="frame" x="0.0" y="603" width="375" height="526"/>
+                                <rect key="frame" x="0.0" y="603" width="375" height="533"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IdH-Bm-H2H">
-                                        <rect key="frame" x="146.5" y="394" width="83" height="82"/>
+                                        <rect key="frame" x="146.5" y="401" width="83" height="82"/>
                                         <state key="normal" image="closeButton.png"/>
                                         <connections>
                                             <action selector="closeTagView:" destination="gpg-0c-vNo" eventType="touchUpInside" id="1Ew-ke-Jwz"/>
@@ -359,7 +359,7 @@
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i5D-vG-diC" customClass="CollectionView" customModule="Tagify" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="124.5" width="359" height="259.5"/>
+                                        <rect key="frame" x="8" y="124.5" width="359" height="266.5"/>
                                         <color key="backgroundColor" red="0.30918478965759277" green="0.30614766478538513" blue="0.3059518039226532" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ENJ-v8-751">
                                             <size key="itemSize" width="66" height="50"/>
@@ -431,7 +431,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="Ixg-zh-rXM" secondAttribute="leading" id="cDM-cb-fg8"/>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="top" secondItem="Ixg-zh-rXM" secondAttribute="bottom" constant="20" id="dZw-aV-zdb"/>
                             <constraint firstItem="Ixg-zh-rXM" firstAttribute="centerX" secondItem="Tg3-OL-Bgc" secondAttribute="centerX" id="fup-lm-cU5"/>
-                            <constraint firstItem="zL8-lO-N2F" firstAttribute="height" secondItem="VUH-iz-7tk" secondAttribute="height" constant="73" id="jFz-8b-MMQ"/>
+                            <constraint firstItem="zL8-lO-N2F" firstAttribute="height" secondItem="VUH-iz-7tk" secondAttribute="height" constant="80" id="jFz-8b-MMQ"/>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="trailing" secondItem="Tg3-OL-Bgc" secondAttribute="trailingMargin" id="jik-Nl-Dbi"/>
                             <constraint firstItem="zL8-lO-N2F" firstAttribute="top" secondItem="VUH-iz-7tk" secondAttribute="top" id="kNr-1m-ocO"/>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="leading" secondItem="Tg3-OL-Bgc" secondAttribute="leadingMargin" id="oSS-AJ-as4"/>

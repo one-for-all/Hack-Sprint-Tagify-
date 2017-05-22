@@ -26,9 +26,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tagViewSlideUpConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagViewSlideDownConstraint: NSLayoutConstraint!
     
-    
-    
-    
     var currentSelectedSong: Song = Song(name: "") {
         didSet {
             tagViewSongLabel.text = currentSelectedSong.name
@@ -178,6 +175,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func showTagView(_ sender: Any) {
+        dismissKeyboard()
         if let button = sender as? UIButton {
             if let superView = button.superview {
                 if let cell = superView.superview as? SongTableViewCell {
@@ -232,6 +230,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismissKeyboard()
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             playSong(song: cell.song)
         }
