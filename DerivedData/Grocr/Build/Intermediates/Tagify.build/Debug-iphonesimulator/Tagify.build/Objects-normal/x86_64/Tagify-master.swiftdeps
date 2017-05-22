@@ -1,6 +1,6 @@
 version: "Apple Swift version 3.1 (swiftlang-802.0.53 clang-802.0.42)"
 options: "b1b1bae6e4810bacab2bde541e437276"
-build_time: [548739642, 879491000]
+build_time: [548730764, 90346000]
 inputs:
   "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/LoginViewController.swift": [548718550, 0]
   "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/SongListTableViewController.swift": [548718550, 0]
@@ -11,4 +11,4 @@ inputs:
   "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/CollectionView.swift": [548718550, 0]
   "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/AppDelegate.swift": [548718550, 0]
   "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/SongTableViewCell.swift": [548718550, 0]
-  "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/SongViewController.swift": [548739352, 0]
+  "/Users/dingxingyuan/Desktop/Hack-Sprint-Tagify-/Grocr/SongViewController.swift": [548730763, 0]
