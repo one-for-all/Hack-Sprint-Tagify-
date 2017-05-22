@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>2V4EDPU2L5.JN.Tagify</string>
+	<string>77569F29Z2.JN.Tagify</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>2V4EDPU2L5.JN.Tagify</string>
+		<string>77569F29Z2.JN.Tagify</string>
 	</array>
 </dict>
 </plist>

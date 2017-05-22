@@ -38,19 +38,19 @@
 		</data>
 		<key>Base.lproj/Main.storyboardc/UINavigationController-OO3-Em-sDU.nib</key>
 		<data>
-		X6Ip8mDrlknVB1/JB5Z7iDFR11E=
+		KLW7KxAAQYJKIpCEKMcRGWUcftg=
 		</data>
 		<key>Base.lproj/Main.storyboardc/UIViewController-vXZ-lx-hvc.nib</key>
 		<data>
-		T5v6lbXa0c98boAQoPfZa3y0n1Y=
+		uxRmhYA1chDcFJCp4pr710okIyI=
 		</data>
 		<key>Base.lproj/Main.storyboardc/gpg-0c-vNo-view-Tg3-OL-Bgc.nib</key>
 		<data>
-		/KGuUL3jXrUkSW1m8J6fMP/DSa4=
+		0/G4xHbILv1M1ZQF6jNqaE0ns+g=
 		</data>
 		<key>Base.lproj/Main.storyboardc/vXZ-lx-hvc-view-kh9-bI-dsS.nib</key>
 		<data>
-		O434B84RYfXPq8uDrr+RE1eKtGE=
+		QRPByPC0tEIPS6F4297RafUNXO8=
 		</data>
 		<key>BrunoMars.jpg</key>
 		<data>
@@ -102,7 +102,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		PzD2TQXR3n+3W7m5uPgJffgqYSQ=
+		c6NYPxc5NT5KljYleAvQ2gBWXFY=
 		</data>
 		<key>Magic!.png</key>
 		<data>
@@ -131,10 +131,6 @@
 		<key>music.jpg</key>
 		<data>
 		3lI6OAwJt6kYvsjzupPdYPYuTyY=
-		</data>
-		<key>setting1.png</key>
-		<data>
-		lSTxb8g83BdDxGtS5xczc+4E8+M=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -231,44 +227,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			X6Ip8mDrlknVB1/JB5Z7iDFR11E=
+			KLW7KxAAQYJKIpCEKMcRGWUcftg=
 			</data>
 			<key>hash2</key>
 			<data>
-			e3K6V5RyqtwkBtC14a+Y8ky5J02FKYUmcU+HVnNnshg=
+			IdNObr+q5xDaW9ZtimRPGcChEzTwJecX3KuuHlNOu9k=
 			</data>
 		</dict>
 		<key>Base.lproj/Main.storyboardc/UIViewController-vXZ-lx-hvc.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			T5v6lbXa0c98boAQoPfZa3y0n1Y=
+			uxRmhYA1chDcFJCp4pr710okIyI=
 			</data>
 			<key>hash2</key>
 			<data>
-			AAwQI1etJWA6LqF96xq1FpbNge49NtRGnRNemlziZbg=
+			BQOU838dEisMI6lFY6gvZFEDwwBhFab3ORnW8pV0lHM=
 			</data>
 		</dict>
 		<key>Base.lproj/Main.storyboardc/gpg-0c-vNo-view-Tg3-OL-Bgc.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/KGuUL3jXrUkSW1m8J6fMP/DSa4=
+			0/G4xHbILv1M1ZQF6jNqaE0ns+g=
 			</data>
 			<key>hash2</key>
 			<data>
-			oTEhyWGlzI7rVD3+1FUajuOVRjMVz3/bLbZkjMmjr2Y=
+			pK/EHPVLmh9N4Tg/wgQ7T5Lg8VPqbcg4ixFc/pgK6lE=
 			</data>
 		</dict>
 		<key>Base.lproj/Main.storyboardc/vXZ-lx-hvc-view-kh9-bI-dsS.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			O434B84RYfXPq8uDrr+RE1eKtGE=
+			QRPByPC0tEIPS6F4297RafUNXO8=
 			</data>
 			<key>hash2</key>
 			<data>
-			LXPCcbjCYEu3omfOpKh8R//OtIZuQ0D+Q60+Ct/4u6s=
+			proKndl5nRczSISqth9eLzUCBTiYAX5Sw9YgzMlElxQ=
 			</data>
 		</dict>
 		<key>BrunoMars.jpg</key>
@@ -467,17 +463,6 @@
 			<key>hash2</key>
 			<data>
 			JF5CVRWtgVtzP7RiM/vLD/zvYCCxtx7+BugI1lJKLLE=
-			</data>
-		</dict>
-		<key>setting1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			lSTxb8g83BdDxGtS5xczc+4E8+M=
-			</data>
-			<key>hash2</key>
-			<data>
-			ZZoH+YZgPm/z5zK4+/sOgqeaO1l0dwWjV5qduVce37Q=
 			</data>
 		</dict>
 	</dict>
