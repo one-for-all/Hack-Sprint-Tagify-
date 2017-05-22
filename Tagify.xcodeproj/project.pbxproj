@@ -226,10 +226,7 @@
 				TargetAttributes = {
 					BB23855B1B3DD5AB0079CD01 = {
 						CreatedOnToolsVersion = 6.3.1;
-<<<<<<< HEAD
-=======
 						DevelopmentTeam = 3HX3B97Y7D;
->>>>>>> c0013d38cfa6057285ae2638235b54762a8c4984
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -461,11 +458,7 @@
 				CODE_SIGN_ENTITLEMENTS = Grocr/Grocr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = "";
-=======
 				DEVELOPMENT_TEAM = 3HX3B97Y7D;
->>>>>>> c0013d38cfa6057285ae2638235b54762a8c4984
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Grocr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -490,11 +483,7 @@
 				CODE_SIGN_ENTITLEMENTS = Grocr/Grocr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = "";
-=======
 				DEVELOPMENT_TEAM = 3HX3B97Y7D;
->>>>>>> c0013d38cfa6057285ae2638235b54762a8c4984
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Grocr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

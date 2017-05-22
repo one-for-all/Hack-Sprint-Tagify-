@@ -8,12 +8,10 @@
 
 import UIKit
 import Firebase
-import Foundation
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
     var userRef: FIRDatabaseReference!
-    var tagRef: FIRDatabaseReference!
     var user: User!
     
     @IBOutlet weak var tableView: UITableView!
@@ -44,7 +42,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchSongTextField: UITextField!
 
     let allSongNames: [String] = [
-        "Bruno Mars - That's What I Like",
+        "Bruno Mars - That’s What I Like",
         "Ed Sheeran - Shape of You [Official Video]",
         "Magic! - Rude",
         "Bruno Mars - 24K Magic",
@@ -65,21 +63,14 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                 newSongList = allSongList
             } else if searchString[searchString.startIndex] == "#" {
                 print("Searching Hashtag!")
-                let searchStringArr = searchString.components(separatedBy: "#").dropFirst()
                 for song in allSongList {
-                    var flag = true
-                    for tag in searchStringArr {
-                        if !(song.tags.contains("#\(tag)")) {
-                            flag = false
-                        }
-                    }
-                    if (flag) {
+                    if song.tags.contains(searchString) {
                         newSongList.append(song)
                     }
                 }
             } else {
                 for song in allSongList {
-                    if song.name.lowercased().range(of:searchString.lowercased()) != nil{
+                    if song.name.range(of:searchString) != nil{
                         newSongList.append(song)
                     }
                 }
@@ -123,7 +114,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             guard let user = user else { print("no user!"); return }
             self.user = User(authData: user)
             self.userRef = FIRDatabase.database().reference(withPath: "users/\(user.uid)")
-            self.tagRef = FIRDatabase.database().reference(withPath: "tags")
             self.userRef.observe(.value, with: { (snapshot) in
                 if !snapshot.hasChild("email") {
                     self.userRef.child("email").setValue(user.email!)
@@ -141,7 +131,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                         self.userRef.child("songs/\(song.key)").setValue(song.toAnyObject())
                     }
                 }
-                self.tableView.reloadData()
             })
         }
     }
@@ -203,9 +192,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                 currentSelectedSong.tags.insert("\(text)")
                 let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
                 self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
-                
-                let songName = currentSelectedSong.name
-                self.tagRef.child("\(strippedHashTag)").updateChildValues([songName: true])
                 updateCollectionView()
             }
         }
@@ -257,9 +243,6 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.currentSelectedSong.tags.remove(tagToRemove)
             let strippedHashTag = tagToRemove.substring(from: tagToRemove.index(tagToRemove.startIndex, offsetBy: 1))
             self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: NSNull()])
-            
-            let songName = currentSelectedSong.name
-            self.tagRef.child("\(strippedHashTag)").updateChildValues([songName: NSNull()])
             updateCollectionView()
         }
     }
