@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import Foundation
+import StoreKit
+import MediaPlayer
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
@@ -232,7 +234,10 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismissKeyboard()
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
-            playSong(song: cell.song)
+            appleMusicCheckIfDeviceCanPlayback()
+            appleMusicRequestPermission()
+            //playSong(song: cell.song)
+            appleMusicPlayTrackId(ids: [cell.song.name])
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -335,7 +340,88 @@ extension SongViewController {
 }
 
 extension SongViewController { //Related to Music
-    func playSong(song: Song) {
-        print("Play \(song.name)")
+
+    // Check if the device is capable of playback
+    func appleMusicCheckIfDeviceCanPlayback() -> Bool {
+        let serviceController = SKCloudServiceController()
+        var canPlayback = false
+        serviceController.requestCapabilities(completionHandler: { (capability: SKCloudServiceCapability, error: Error?) in
+            
+            switch capability {
+        
+            case SKCloudServiceCapability.musicCatalogPlayback:
+                print("The user has an Apple Music subscription and can playback music!")
+                canPlayback = true
+                return
+                
+            case SKCloudServiceCapability.addToCloudMusicLibrary:
+                
+                print("The user has an Apple Music subscription, can playback music AND can add to the Cloud Music Library")
+                canPlayback = true
+                return
+                
+            default:
+                print("The user doesn't have an Apple Music subscription available. Now would be a good time to prompt them to buy one?")
+                canPlayback = false
+                return
+                
+            }
+            
+        })
+        return canPlayback
+    }
+    
+    
+    // Request permission from the user to access the Apple Music library
+    func appleMusicRequestPermission() -> Bool {
+        var havePermission = false
+        switch SKCloudServiceController.authorizationStatus() {
+        case .authorized:
+            print("The user's already authorized - we don't need to do anything more here, so we'll exit early.")
+            return true
+            
+        case .denied:
+            print("The user has selected 'Don't Allow' in the past - so we're going to show them a different dialog to push them through to their Settings page and change their mind, and exit the function early.")
+            // Show an alert to guide users into the Settings
+            return false
+            
+        case .notDetermined:
+            print("The user hasn't decided yet - so we'll break out of the switch and ask them.")
+            break
+            
+        case .restricted:
+            print("User may be restricted; for example, if the device is in Education mode, it limits external Apple Music usage. This is similar behaviour to Denied.")
+            return false
+        }
+        
+        SKCloudServiceController.requestAuthorization { (status:SKCloudServiceAuthorizationStatus) in
+            
+            switch status {
+                
+            case .authorized:
+                print("All good - the user tapped 'OK', so you're clear to move forward and start playing.")
+                havePermission = true
+                
+            case .denied:
+                print("The user tapped 'Don't allow'. Read on about that below...")
+                
+            case .notDetermined:
+                print("The user hasn't decided or it's not clear whether they've confirmed or denied.")
+                
+            default: break
+                
+            }
+            
+        }
+        return havePermission
+    }
+    
+    // Choose Player type & Play
+    func appleMusicPlayTrackId(ids:[String]) {
+        let applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
+        applicationMusicPlayer.setQueueWithStoreIDs(ids)
+        applicationMusicPlayer.play()
+        print("Play \(ids)")
+        //print("Play \(song.name)")
     }
 }
