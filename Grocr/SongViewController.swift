@@ -236,7 +236,8 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             appleMusicCheckIfDeviceCanPlayback()
             appleMusicRequestPermission()
-            //playSong(song: cell.song)
+            appleMusicFetchStorefrontRegion()
+                    //playSong(song: cell.song)
             appleMusicPlayTrackId(ids: [cell.song.name])
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -416,12 +417,39 @@ extension SongViewController { //Related to Music
         return havePermission
     }
     
+    // Fetch the user's storefront ID
+    func appleMusicFetchStorefrontRegion() {
+        
+        let serviceController = SKCloudServiceController()
+        serviceController.requestStorefrontIdentifier(completionHandler: { (storefrontId:String?, err:Error?) in
+            
+            guard err == nil else {
+                print("An error occured when getting storefront ID.")
+                return
+            }
+            
+            guard let storefrontId = storefrontId, storefrontId.characters.count >= 6 else {
+                print("Invalid storefrontID.")
+                return
+            }
+            
+            let indexRange = storefrontId.index(storefrontId.startIndex, offsetBy:0)..<storefrontId.index(storefrontId.startIndex, offsetBy:5)
+            let trimmedId = storefrontId.substring(with: indexRange)
+            
+            print("Success! The user's storefront ID is: \(trimmedId)")
+            
+        })
+        
+    }
+    
     // Choose Player type & Play
     func appleMusicPlayTrackId(ids:[String]) {
         let applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
-        applicationMusicPlayer.setQueueWithStoreIDs(ids)
+        //applicationMusicPlayer.setQueueWithStoreIDs(ids)
+        applicationMusicPlayer.setQueueWithStoreIDs(["966997496"])
         applicationMusicPlayer.play()
         print("Play \(ids)")
         //print("Play \(song.name)")
     }
+    
 }
