@@ -20,6 +20,7 @@
 		94BFA2591ED02BA3005AE02F /* Magic!.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BFA2551ED02BA3005AE02F /* Magic!.png */; };
 		94BFA25A1ED02BA3005AE02F /* Maroon5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94BFA2561ED02BA3005AE02F /* Maroon5.jpg */; };
 		94BFA25B1ED02BA3005AE02F /* TaylorSwift.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94BFA2571ED02BA3005AE02F /* TaylorSwift.jpg */; };
+		A672EE441ED3E12900BDB50F /* SongDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A672EE431ED3E12900BDB50F /* SongDetailsView.xib */; };
 		BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385611B3DD5AB0079CD01 /* AppDelegate.swift */; };
 		BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385631B3DD5AB0079CD01 /* LoginViewController.swift */; };
 		BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2385651B3DD5AB0079CD01 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		94BFA2561ED02BA3005AE02F /* Maroon5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Maroon5.jpg; sourceTree = "<group>"; };
 		94BFA2571ED02BA3005AE02F /* TaylorSwift.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TaylorSwift.jpg; sourceTree = "<group>"; };
 		9BA2A2DB5BA4733818152B9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A672EE431ED3E12900BDB50F /* SongDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongDetailsView.xib; sourceTree = "<group>"; };
 		A898E3AE11425E4495FAC93A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BB23855C1B3DD5AB0079CD01 /* Tagify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tagify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2385601B3DD5AB0079CD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				BB2385651B3DD5AB0079CD01 /* Main.storyboard */,
+				A672EE431ED3E12900BDB50F /* SongDetailsView.xib */,
 				947312A91ECFEE3300D44414 /* CollectionViewCell.swift */,
 				BB23856A1B3DD5AB0079CD01 /* LaunchScreen.xib */,
 				942363671ECAF330004398A0 /* SongTableViewCell.swift */,
@@ -267,6 +270,7 @@
 				9423636B1ECAF4EA004398A0 /* music.jpg in Resources */,
 				BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */,
 				6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */,
+				A672EE441ED3E12900BDB50F /* SongDetailsView.xib in Resources */,
 				942363621ECAC950004398A0 /* GoogleService-Info.plist in Resources */,
 				94BFA25B1ED02BA3005AE02F /* TaylorSwift.jpg in Resources */,
 				BB23856C1B3DD5AB0079CD01 /* LaunchScreen.xib in Resources */,

@@ -12,10 +12,17 @@ class SongTableViewCell: UITableViewCell {
     
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var songImageView: UIImageView!
+    @IBOutlet weak var songTagsLabel: UILabel!
+    
     var song: Song = Song(name: "") {
         didSet {
             songNameLabel.text = song.name
             songImageView.image = UIImage(named: song.imageSource)
+            var text: String = "";
+            for tag in song.tags {
+                text += " \(tag)"
+            }
+            songTagsLabel.text = text
         }
     }
     

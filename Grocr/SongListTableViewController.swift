@@ -131,6 +131,10 @@ class SongListTableViewController: UITableViewController {
     }
   }
   
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 100;
+  }
+  
 //  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 //    if editingStyle == .delete {
 //      items.remove(at: indexPath.row)
