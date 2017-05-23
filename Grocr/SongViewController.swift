@@ -228,6 +228,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: songCellIdentifier, for: indexPath) as! SongTableViewCell
+        cell.songImageView.layer.cornerRadius = cell.songImageView.frame.size.width/2
         cell.song = searchedSongList[indexPath.row]
         return cell
     }
