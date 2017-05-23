@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>1014235430348-e38tuk1tno9krrhm6epia07saa7m8ppb.apps.googleusercontent.com</string>
+	<string>220055700223-u04o2oqp0l2f6gl1q44qkmcebfllo5qo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1014235430348-e38tuk1tno9krrhm6epia07saa7m8ppb</string>
+	<string>com.googleusercontent.apps.220055700223-u04o2oqp0l2f6gl1q44qkmcebfllo5qo</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCScBA3V2rvnfuRBzzC5xgAdhmFVEcNf38</string>
+	<string>AIzaSyAwMjeZ2c5WLbiurHp2SzQIJl8DbNi5cKs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1014235430348</string>
+	<string>220055700223</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>JN.Tagify</string>
+	<string>Sapiens.Tagify</string>
 	<key>PROJECT_ID</key>
-	<string>tagify-144d0</string>
+	<string>sapienstagify</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tagify-144d0.appspot.com</string>
+	<string>sapienstagify.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1014235430348:ios:a6e1bfc7704887c4</string>
+	<string>1:220055700223:ios:c3601c8abdd0426a</string>
 	<key>DATABASE_URL</key>
-	<string>https://tagify-144d0.firebaseio.com</string>
+	<string>https://sapienstagify.firebaseio.com</string>
 </dict>
 </plist>
