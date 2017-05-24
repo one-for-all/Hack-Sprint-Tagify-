@@ -104,6 +104,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
         
+        searchSongTextField.returnKeyType = .search
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = true
@@ -163,11 +164,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     
-    @IBAction func logOffPressed(_ sender: UIButton) {
-        try! FIRAuth.auth()!.signOut()
-        dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func closeTagView(_ sender: UIButton) {
         let origin_y = view.frame.height
         tagViewSlideDownConstraint.isActive = true
@@ -208,13 +204,20 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func addTagButtonPressed(_ sender: Any) {
         if let text = addTagTextField.text {
             if text != "" {
-                currentSelectedSong.tags.insert("\(text)")
-                let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
-                self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
-                
-                let songName = currentSelectedSong.name
-                self.tagRef.child("\(strippedHashTag)").updateChildValues([songName: true])
-                updateCollectionView()
+                if isValid(tag: text) {
+                    currentSelectedSong.tags.insert("\(text)")
+                    let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
+                    self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
+                    
+                    let songName = currentSelectedSong.name
+                    self.tagRef.child("\(strippedHashTag)").updateChildValues([songName: true])
+                    updateCollectionView()
+                } else {
+                    print("invalid tag")
+                    let alert = UIAlertController(title: "Invalid Tag", message: "A tag should ...", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+                }
             }
         }
     }
@@ -235,6 +238,10 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func backwardButtonPressed(_ sender: Any) {
         playPrevious()
+    }
+    
+    @IBAction func backToSongViewController(segue: UIStoryboardSegue) {
+        
     }
 }
 
@@ -312,6 +319,9 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     func updateCollectionView() {
         self.collectionView.reloadSections(IndexSet(integer: 0))
+    }
+    func isValid(tag: String) -> Bool {
+        return true
     }
 }
 

@@ -13,6 +13,7 @@
 		6967E2121ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2111ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png */; };
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
+		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
 		941A68C9047CFC613264BFB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F599D9265F4B40571F432E78 /* libPods.a */; };
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
@@ -43,6 +44,7 @@
 		6967E2111ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backward 2.27.52 AM 2.27.53 AM.png"; sourceTree = "<group>"; };
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
+		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423633E1ECAC5C4004398A0 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				BB2385831B3DD8660079CD01 /* SongListTableViewController.swift */,
 				BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */,
 				9423636C1ECAFA39004398A0 /* SongViewController.swift */,
+				940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			files = (
 				BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */,
 				BB2385841B3DD8660079CD01 /* SongListTableViewController.swift in Sources */,
+				940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */,
 				947312AA1ECFEE3300D44414 /* CollectionViewCell.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* Song.swift in Sources */,
 				BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */,

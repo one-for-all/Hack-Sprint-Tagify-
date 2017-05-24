@@ -236,7 +236,7 @@
             </objects>
             <point key="canvasLocation" x="1865" y="399"/>
         </scene>
-        <!--Song View Controller-->
+        <!--Tagify-->
         <scene sceneID="GyF-mt-OzG">
             <objects>
                 <viewController id="gpg-0c-vNo" customClass="SongViewController" customModule="Tagify" customModuleProvider="target" sceneMemberID="viewController">
@@ -524,7 +524,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="lK4-L8-MEW">
+                    <navigationItem key="navigationItem" title="Tagify" id="lK4-L8-MEW">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Thj-VH-Xts">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="og0-pr-9iJ">
                                 <rect key="frame" x="328" y="7" width="31" height="30"/>
@@ -535,7 +535,7 @@
                                 <size key="titleShadowOffset" width="22" height="0.0"/>
                                 <state key="normal" image="setting1.png"/>
                                 <connections>
-                                    <action selector="logOffPressed:" destination="gpg-0c-vNo" eventType="touchUpInside" id="5vi-oZ-N40"/>
+                                    <segue destination="bcU-6l-Lbf" kind="show" id="xnl-Kr-gED"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -557,6 +557,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8zw-VO-gD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1696.8" y="1178.8605697151424"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="yeS-re-8WA">
+            <objects>
+                <viewController id="bcU-6l-Lbf" customClass="SettingsViewController" customModule="Tagify" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qoe-U2-9Eo"/>
+                        <viewControllerLayoutGuide type="bottom" id="ekG-WU-CDn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oi8-sp-8P1">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2H-RG-dit">
+                                <rect key="frame" x="161" y="286" width="52" height="30"/>
+                                <state key="normal" title="Log Off"/>
+                                <connections>
+                                    <action selector="logOffPressed:" destination="bcU-6l-Lbf" eventType="touchUpInside" id="XEm-NM-LfP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="c2H-RG-dit" firstAttribute="centerX" secondItem="Oi8-sp-8P1" secondAttribute="centerX" id="Z4L-YJ-LKc"/>
+                            <constraint firstItem="c2H-RG-dit" firstAttribute="centerY" secondItem="Oi8-sp-8P1" secondAttribute="centerY" id="mgo-xd-o9E"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="3uh-Cn-M4f">
+                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="JGJ-av-mPm">
+                            <connections>
+                                <segue destination="f1D-Ri-VvR" kind="unwind" unwindAction="backToSongViewControllerWithSegue:" id="qqI-3Y-6ZH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a2C-e0-nrh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="f1D-Ri-VvR" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2566" y="1179"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Ek-Z0-CEa">
