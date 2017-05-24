@@ -301,8 +301,11 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if collectionView.isFirstResponder {
-            if action == #selector(self.removeTag) {
+            switch  action {
+            case #selector(self.removeTag), #selector(self.searchSongs):
                 return true
+            default:
+                return false
             }
         }
         return false
@@ -323,6 +326,9 @@ extension SongViewController: UIGestureRecognizerDelegate { //Related to Tap Ges
     func dismissKeyboard() {
         searchSongTextField.resignFirstResponder()
         addTagTextField.resignFirstResponder()
+    }
+    func searchSongs() {
+        print("search songs with tag \(collectionView.currentSelectedCell.tagLabel.text)")
     }
 }
 
