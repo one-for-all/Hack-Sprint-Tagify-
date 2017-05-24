@@ -279,7 +279,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89U-aw-fwk">
                                         <rect key="frame" x="74" y="25" width="38" height="36"/>
-                                        <state key="normal" image="backward.png"/>
+                                        <state key="normal" image="backward 2.27.52 AM 2.27.53 AM.png"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HbX-We-Fbl">
                                         <rect key="frame" x="261" y="25" width="38" height="36"/>
@@ -575,7 +575,7 @@
     </scenes>
     <resources>
         <image name="Cross Buttomwith shadow.png" width="88" height="88"/>
-        <image name="backward.png" width="38" height="36"/>
+        <image name="backward 2.27.52 AM 2.27.53 AM.png" width="38" height="36"/>
         <image name="forward.png" width="38" height="36"/>
         <image name="music.jpg" width="510" height="330"/>
         <image name="playButton 2.02.12 AM.png" width="52" height="52"/>
