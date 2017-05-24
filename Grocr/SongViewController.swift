@@ -105,6 +105,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         tableView.delegate = self
         tableView.allowsSelection = true
         tableView.isUserInteractionEnabled = true
+        tagViewSongImageView.layer.cornerRadius = tagViewSongImageView.frame.width/2
 //        self.tableView.allowsSelectionDuringEditing = YES;
         collectionView.dataSource = self
         collectionView.delegate = self

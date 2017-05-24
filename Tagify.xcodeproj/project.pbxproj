@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1E51ED260AD00FF76E4 /* setting1.png */; };
+		6967E1E81ED530F900FF76E4 /* Cross Buttom.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1E71ED530F900FF76E4 /* Cross Buttom.png */; };
+		6967E1EA1ED531E900FF76E4 /* Cross Buttomwith shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1E91ED531E900FF76E4 /* Cross Buttomwith shadow.png */; };
+		6967E1EC1ED5542E00FF76E4 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1EB1ED5542E00FF76E4 /* playButton.png */; };
+		6967E1EE1ED5543200FF76E4 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1ED1ED5543200FF76E4 /* backward.png */; };
+		6967E1F01ED5543800FF76E4 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1EF1ED5543800FF76E4 /* forward.png */; };
+		6967E1F21ED55A3400FF76E4 /* Stop Buttom.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1F11ED55A3400FF76E4 /* Stop Buttom.png */; };
 		941A68C9047CFC613264BFB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F599D9265F4B40571F432E78 /* libPods.a */; };
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
@@ -34,6 +40,12 @@
 
 /* Begin PBXFileReference section */
 		6967E1E51ED260AD00FF76E4 /* setting1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting1.png; sourceTree = "<group>"; };
+		6967E1E71ED530F900FF76E4 /* Cross Buttom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Cross Buttom.png"; path = "../../../Tagify/Cross Buttom.png"; sourceTree = "<group>"; };
+		6967E1E91ED531E900FF76E4 /* Cross Buttomwith shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Cross Buttomwith shadow.png"; path = "../../../Tagify/Cross Buttomwith shadow.png"; sourceTree = "<group>"; };
+		6967E1EB1ED5542E00FF76E4 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playButton.png; path = ../../../Tagify/playButton.png; sourceTree = "<group>"; };
+		6967E1ED1ED5543200FF76E4 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backward.png; path = ../../../Tagify/backward.png; sourceTree = "<group>"; };
+		6967E1EF1ED5543800FF76E4 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forward.png; path = ../../../Tagify/forward.png; sourceTree = "<group>"; };
+		6967E1F11ED55A3400FF76E4 /* Stop Buttom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stop Buttom.png"; path = "../../../Tagify/Stop Buttom.png"; sourceTree = "<group>"; };
 		9423633E1ECAC5C4004398A0 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
@@ -88,10 +100,16 @@
 		942363691ECAF4EA004398A0 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6967E1EB1ED5542E00FF76E4 /* playButton.png */,
+				6967E1ED1ED5543200FF76E4 /* backward.png */,
+				6967E1EF1ED5543800FF76E4 /* forward.png */,
+				6967E1F11ED55A3400FF76E4 /* Stop Buttom.png */,
 				6967E1E51ED260AD00FF76E4 /* setting1.png */,
 				94BFA2541ED02BA3005AE02F /* BrunoMars.jpg */,
 				94BFA2551ED02BA3005AE02F /* Magic!.png */,
+				6967E1E91ED531E900FF76E4 /* Cross Buttomwith shadow.png */,
 				94BFA2561ED02BA3005AE02F /* Maroon5.jpg */,
+				6967E1E71ED530F900FF76E4 /* Cross Buttom.png */,
 				94BFA2571ED02BA3005AE02F /* TaylorSwift.jpg */,
 				947312A31ECF6F0900D44414 /* closeButton.png */,
 				9423636A1ECAF4EA004398A0 /* music.jpg */,
@@ -270,13 +288,19 @@
 				9423636B1ECAF4EA004398A0 /* music.jpg in Resources */,
 				BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */,
 				6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */,
+				6967E1F01ED5543800FF76E4 /* forward.png in Resources */,
 				A672EE441ED3E12900BDB50F /* SongDetailsView.xib in Resources */,
+				6967E1E81ED530F900FF76E4 /* Cross Buttom.png in Resources */,
+				6967E1F21ED55A3400FF76E4 /* Stop Buttom.png in Resources */,
 				94619C7E1ED402010080FB56 /* GoogleService-Info.plist in Resources */,
+				6967E1EA1ED531E900FF76E4 /* Cross Buttomwith shadow.png in Resources */,
 				94BFA25B1ED02BA3005AE02F /* TaylorSwift.jpg in Resources */,
 				BB23856C1B3DD5AB0079CD01 /* LaunchScreen.xib in Resources */,
 				BB2385691B3DD5AB0079CD01 /* Images.xcassets in Resources */,
 				94BFA25A1ED02BA3005AE02F /* Maroon5.jpg in Resources */,
 				94BFA2581ED02BA3005AE02F /* BrunoMars.jpg in Resources */,
+				6967E1EC1ED5542E00FF76E4 /* playButton.png in Resources */,
+				6967E1EE1ED5543200FF76E4 /* backward.png in Resources */,
 				94BFA2591ED02BA3005AE02F /* Magic!.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
