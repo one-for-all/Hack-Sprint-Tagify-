@@ -287,7 +287,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gru-LO-ILg">
                                         <rect key="frame" x="161" y="20" width="50" height="50"/>
-                                        <state key="normal" image="playButton.png"/>
+                                        <state key="normal" image="playButton 2.02.12 AM.png"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -553,7 +553,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OO3-Em-sDU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="M8w-Wp-a2U">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="M8w-Wp-a2U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -578,7 +578,7 @@
         <image name="backward.png" width="38" height="36"/>
         <image name="forward.png" width="38" height="36"/>
         <image name="music.jpg" width="510" height="330"/>
-        <image name="playButton.png" width="52" height="52"/>
+        <image name="playButton 2.02.12 AM.png" width="52" height="52"/>
         <image name="setting1.png" width="200" height="200"/>
     </resources>
 </document>
