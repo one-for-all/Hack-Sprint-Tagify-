@@ -28,6 +28,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tagViewSlideUpConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagViewSlideDownConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var playButton: UIButton!
+    
     var currentSelectedSong: Song = Song(name: "") {
         didSet {
             tagViewSongLabel.text = currentSelectedSong.name
@@ -41,6 +43,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     let slideAnimationDuration = 0.25
     
     @IBOutlet weak var searchSongTextField: UITextField!
+    var isPlaying = false
 
     let allSongNames: [String] = [
         "Bruno Mars - That's What I Like",
@@ -216,6 +219,23 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func playButtonPressed(_ sender: Any) {
+        if isPlaying {
+            pausePlay()
+            isPlaying = false
+            playButton.setImage(UIImage(named: "playButton.png"), for: .normal)
+        } else {
+            continuePlay()
+            isPlaying = true
+            playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
+        }
+    }
+    @IBAction func forwardButtonPressed(_ sender: Any) {
+        playNext()
+    }
+    @IBAction func backwardButtonPressed(_ sender: Any) {
+        playPrevious()
+    }
 }
 
 
@@ -453,5 +473,17 @@ extension SongViewController { //Related to Music
         print("Play \(ids)")
         //print("Play \(song.name)")
     }
+    func pausePlay() {
+        print("Music paused")
+    }
     
+    func continuePlay() {
+        print("Music continued")
+    }
+    func playNext() {
+        print("Play next song")
+    }
+    func playPrevious() {
+        print("Play previous song")
+    }
 }

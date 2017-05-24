@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1E51ED260AD00FF76E4 /* setting1.png */; };
-		6967E2081ED583BB00FF76E4 /* playButton 2.02.12 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2071ED583BB00FF76E4 /* playButton 2.02.12 AM.png */; };
-		6967E20C1ED58A0500FF76E4 /* Stop Buttom.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E20B1ED58A0500FF76E4 /* Stop Buttom.png */; };
 		6967E20E1ED58A5900FF76E4 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E20D1ED58A5900FF76E4 /* forward.png */; };
 		6967E2101ED58B5200FF76E4 /* Cross Buttomwith shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */; };
 		6967E2121ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2111ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png */; };
+		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
+		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		941A68C9047CFC613264BFB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F599D9265F4B40571F432E78 /* libPods.a */; };
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
@@ -38,11 +38,11 @@
 
 /* Begin PBXFileReference section */
 		6967E1E51ED260AD00FF76E4 /* setting1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting1.png; sourceTree = "<group>"; };
-		6967E2071ED583BB00FF76E4 /* playButton 2.02.12 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playButton 2.02.12 AM.png"; sourceTree = "<group>"; };
-		6967E20B1ED58A0500FF76E4 /* Stop Buttom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stop Buttom.png"; sourceTree = "<group>"; };
 		6967E20D1ED58A5900FF76E4 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cross Buttomwith shadow.png"; sourceTree = "<group>"; };
 		6967E2111ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backward 2.27.52 AM 2.27.53 AM.png"; sourceTree = "<group>"; };
+		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
+		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		9423633E1ECAC5C4004398A0 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
@@ -96,8 +96,8 @@
 		942363691ECAF4EA004398A0 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				6967E2071ED583BB00FF76E4 /* playButton 2.02.12 AM.png */,
-				6967E20B1ED58A0500FF76E4 /* Stop Buttom.png */,
+				940E0B891ED6235600B8C4E0 /* stopButton.png */,
+				940E0B851ED6207700B8C4E0 /* playButton.png */,
 				6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */,
 				6967E20D1ED58A5900FF76E4 /* forward.png */,
 				6967E2111ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png */,
@@ -281,14 +281,14 @@
 				6967E2101ED58B5200FF76E4 /* Cross Buttomwith shadow.png in Resources */,
 				6967E2121ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png in Resources */,
 				9423636B1ECAF4EA004398A0 /* music.jpg in Resources */,
+				940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */,
+				940E0B861ED6207700B8C4E0 /* playButton.png in Resources */,
 				BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */,
 				6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */,
 				6967E20E1ED58A5900FF76E4 /* forward.png in Resources */,
 				A672EE441ED3E12900BDB50F /* SongDetailsView.xib in Resources */,
 				94619C7E1ED402010080FB56 /* GoogleService-Info.plist in Resources */,
-				6967E20C1ED58A0500FF76E4 /* Stop Buttom.png in Resources */,
 				94BFA25B1ED02BA3005AE02F /* TaylorSwift.jpg in Resources */,
-				6967E2081ED583BB00FF76E4 /* playButton 2.02.12 AM.png in Resources */,
 				BB23856C1B3DD5AB0079CD01 /* LaunchScreen.xib in Resources */,
 				BB2385691B3DD5AB0079CD01 /* Images.xcassets in Resources */,
 				94BFA25A1ED02BA3005AE02F /* Maroon5.jpg in Resources */,
