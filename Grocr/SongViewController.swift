@@ -214,7 +214,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                     updateCollectionView()
                 } else {
                     print("invalid tag")
-                    let alert = UIAlertController(title: "Invalid Tag", message: "A tag should ...", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Invalid Tag", message: "A tag should not end with space", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true)
                 }
@@ -321,6 +321,9 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
         self.collectionView.reloadSections(IndexSet(integer: 0))
     }
     func isValid(tag: String) -> Bool {
+        if tag[tag.index(before: tag.endIndex)] == " " {
+            return false
+        }
         return true
     }
 }
