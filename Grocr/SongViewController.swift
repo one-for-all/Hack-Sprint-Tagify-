@@ -11,6 +11,7 @@ import Firebase
 import Foundation
 import StoreKit
 import MediaPlayer
+import Alamofire
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
@@ -235,11 +236,15 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismissKeyboard()
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
+            authorizeAppleMusic()
+            searchBarSearchButtonClicked(song: cell.song)
+            /*
             appleMusicCheckIfDeviceCanPlayback()
             appleMusicRequestPermission()
             appleMusicFetchStorefrontRegion()
                     //playSong(song: cell.song)
-            appleMusicPlayTrackId(ids: [cell.song.name])
+            appleMusicPlayTrackId(song: cell.song)
+            */
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -418,10 +423,39 @@ extension SongViewController { //Related to Music
         return havePermission
     }
     
+    
+    
+    ////////////////////
+    
+    func authorizeAppleMusic() {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //Ask user for for Apple Music access
+        SKCloudServiceController.requestAuthorization { (status) in
+            if status == .authorized {
+                let controller = SKCloudServiceController()
+                //Check if user is a Apple Music member
+                controller.requestCapabilities(completionHandler: ({ (capabilities, error) in
+                    if error != nil {
+                        DispatchQueue.main.async(execute: {
+                            //self.showAlert("Capabilites error", error: "You must be an Apple Music member to use this application")
+                            print("You must be an Apple Music member to use this application")
+                        })
+                    }
+                }))
+            } else {
+                DispatchQueue.main.async(execute: {
+                    //self.showAlert("Denied", error: "User has denied access to Apple Music library")
+                    print("User has denied access to Apple Music library")
+                })
+            }
+        }
+    }
+    
     // Fetch the user's storefront ID
-    func appleMusicFetchStorefrontRegion() {
+    func appleMusicFetchStorefrontRegion() -> String {
         
         let serviceController = SKCloudServiceController()
+        var userStorefrontId = ""
         serviceController.requestStorefrontIdentifier(completionHandler: { (storefrontId:String?, err:Error?) in
             
             guard err == nil else {
@@ -438,19 +472,84 @@ extension SongViewController { //Related to Music
             let trimmedId = storefrontId.substring(with: indexRange)
             
             print("Success! The user's storefront ID is: \(trimmedId)")
-            
+            userStorefrontId = trimmedId
+            return
         })
-        
+        return userStorefrontId
     }
     
     // Choose Player type & Play
-    func appleMusicPlayTrackId(ids:[String]) {
+    func appleMusicPlayTrackId(trackId: String) {
+        
         let applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
         //applicationMusicPlayer.setQueueWithStoreIDs(ids)
-        applicationMusicPlayer.setQueueWithStoreIDs(["966997496"])
+        applicationMusicPlayer.setQueueWithStoreIDs([trackId])
+        applicationMusicPlayer.prepareToPlay()
         applicationMusicPlayer.play()
-        print("Play \(ids)")
         //print("Play \(song.name)")
     }
     
+    //Search iTunes and display results in table view
+    func searchItunes(searchTerm: String, storefrontId: String) {
+        Alamofire.request("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(storefrontId)")
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let responseData = response.result.value as? NSDictionary {
+                        if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
+                            //self.tableData = songResults
+                            //self.tableView!.reloadData()
+                            let track = songResults[0]["trackId"] as! String
+                            self.appleMusicPlayTrackId(trackId: track)
+                        }
+                    }
+                case .failure(let error):
+                    //self.showAlert("Error", error: error.description)
+                    print("Failed to search itunes.")
+                }
+        }
+    }
+    
+    func searchBarSearchButtonClicked(song: Song) {
+        //Search iTunes with user input
+        let search = song.name.replacingOccurrences(of: " ", with: "+")
+        let region = appleMusicFetchStorefrontRegion()
+        searchItunes(searchTerm: search, storefrontId: region)
+        //song.resignFirstResponder()
+    }
+    
+    /*
+    //Display iTunes search results
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
+        if let rowData: NSDictionary = self.tableData[indexPath.row] as? NSDictionary,
+            urlString = rowData["artworkUrl60"] as? String,
+            imgURL = NSURL(string: urlString),
+            imgData = NSData(contentsOfURL: imgURL) {
+            cell.imageView?.image = UIImage(data: imgData)
+            cell.textLabel?.text = rowData["trackName"] as? String
+            cell.detailTextLabel?.text = rowData["artistName"] as? String
+        }
+        return cell
+    }
+    //Add song to playback queue if user selects a cell
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow
+        if let rowData: NSDictionary = self.tableData[indexPath!.row] as? NSDictionary, urlString = rowData["artworkUrl60"] as? String,
+            imgURL = NSURL(string: urlString),
+            imgData = NSData(contentsOfURL: imgURL) {
+            queue.append(SongData(artWork: UIImage(data: imgData), trackName: rowData["trackName"] as? String, artistName: rowData["artistName"] as? String, trackId: String (rowData["trackId"]!)))
+            //Show alert telling the user the song was added to the playback queue
+            let addedTrackAlert = UIAlertController(title: nil, message: "Added track!", preferredStyle: .Alert)
+            self.presentViewController(addedTrackAlert, animated: true, completion: nil)
+            let delay = 0.5 * Double(NSEC_PER_SEC)
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                addedTrackAlert.dismissViewControllerAnimated(true, completion: nil)
+            })
+            tableView.deselectRowAtIndexPath(indexPath!, animated: true)
+        }
+    }
+    */
 }
