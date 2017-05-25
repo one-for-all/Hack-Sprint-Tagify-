@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
   
   // MARK: Constants
   let loginToList = "LoginToList"
+  let loginToSongView = "LoginToSongView"
   
   // MARK: Outlets
   @IBOutlet weak var textFieldLoginEmail: UITextField!
@@ -131,7 +132,7 @@ extension LoginViewController {
       // 2
       if user != nil {
         // 3
-        self.performSegue(withIdentifier: self.loginToList, sender: nil)
+        self.performSegue(withIdentifier: self.loginToSongView, sender: nil)
       }
     }
     

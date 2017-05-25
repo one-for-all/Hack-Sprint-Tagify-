@@ -14,7 +14,7 @@
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
-		941A68C9047CFC613264BFB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F599D9265F4B40571F432E78 /* libPods.a */; };
+		940E0BCC1ED692A300B8C4E0 /* ScopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */; };
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
 		9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423636C1ECAFA39004398A0 /* SongViewController.swift */; };
@@ -32,9 +32,7 @@
 		BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2385651B3DD5AB0079CD01 /* Main.storyboard */; };
 		BB2385691B3DD5AB0079CD01 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB2385681B3DD5AB0079CD01 /* Images.xcassets */; };
 		BB23856C1B3DD5AB0079CD01 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB23856A1B3DD5AB0079CD01 /* LaunchScreen.xib */; };
-		BB2385841B3DD8660079CD01 /* SongListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385831B3DD8660079CD01 /* SongListTableViewController.swift */; };
 		BB23858A1B3DD9640079CD01 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385891B3DD9640079CD01 /* Song.swift */; };
-		BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */; };
 		BB7DA5111B42C8100018B530 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7DA5101B42C8100018B530 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +45,7 @@
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeViewController.swift; sourceTree = "<group>"; };
 		9423633E1ECAC5C4004398A0 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
@@ -67,10 +66,8 @@
 		BB2385661B3DD5AB0079CD01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BB2385681B3DD5AB0079CD01 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BB23856B1B3DD5AB0079CD01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		BB2385831B3DD8660079CD01 /* SongListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListTableViewController.swift; sourceTree = "<group>"; };
 		BB2385851B3DD8820079CD01 /* Grocr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Grocr-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB2385891B3DD9640079CD01 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
-		BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineUsersTableViewController.swift; sourceTree = "<group>"; };
 		BB7DA5101B42C8100018B530 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D061AA2B96CEABC8E42E7A7E /* Pods-Tagify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tagify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tagify/Pods-Tagify.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,10 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				BB2385631B3DD5AB0079CD01 /* LoginViewController.swift */,
-				BB2385831B3DD8660079CD01 /* SongListTableViewController.swift */,
-				BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */,
 				9423636C1ECAFA39004398A0 /* SongViewController.swift */,
 				940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */,
+				940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -357,14 +353,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */,
-				BB2385841B3DD8660079CD01 /* SongListTableViewController.swift in Sources */,
 				940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */,
 				947312AA1ECFEE3300D44414 /* CollectionViewCell.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* Song.swift in Sources */,
-				BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,
 				94BFA2531ED01E2E005AE02F /* CollectionView.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
+				940E0BCC1ED692A300B8C4E0 /* ScopeViewController.swift in Sources */,
 				942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */,
 				9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */,
 			);
