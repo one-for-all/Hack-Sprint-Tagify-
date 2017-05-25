@@ -8,12 +8,15 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var iconImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        iconImageView.layer.cornerRadius = iconImageView.frame.height/2
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.iconImageTapped(_:)))
+        iconImageView.addGestureRecognizer(tapRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,7 +28,24 @@ class SettingsViewController: UIViewController {
         try! FIRAuth.auth()!.signOut()
         dismiss(animated: true, completion: nil)
     }
-
+    
+    func iconImageTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        print("iconImage is tapped")
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            iconImageView.image = image
+            self.dismiss(animated: true, completion: nil);
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
