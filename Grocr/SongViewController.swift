@@ -29,6 +29,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tagViewSlideUpConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagViewSlideDownConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var playButton: UIButton!
+    
     var currentSelectedSong: Song = Song(name: "") {
         didSet {
             tagViewSongLabel.text = currentSelectedSong.name
@@ -42,6 +44,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     let slideAnimationDuration = 0.25
     
     @IBOutlet weak var searchSongTextField: UITextField!
+    var isPlaying = false
 
     let allSongNames: [String] = [
         "Bruno Mars - That's What I Like",
@@ -61,30 +64,31 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         print("End Editing! Starting Searching")
         var newSongList = [Song]()
         if let searchString = sender.text {
-            if searchString == "" {
-                newSongList = allSongList
-            } else if searchString[searchString.startIndex] == "#" {
-                print("Searching Hashtag!")
-                let searchStringArr = searchString.components(separatedBy: "#").dropFirst()
-                for song in allSongList {
-                    var flag = true
-                    for tag in searchStringArr {
-                        if !(song.tags.contains("#\(tag)")) {
-                            flag = false
-                        }
-                    }
-                    if (flag) {
-                        newSongList.append(song)
-                    }
-                }
-            } else {
-                for song in allSongList {
-                    if song.name.lowercased().range(of:searchString.lowercased()) != nil{
-                        newSongList.append(song)
-                    }
-                }
-            }
-            searchedSongList = newSongList
+            searchedSongList = songList(withSearchString: searchString)
+//            if searchString == "" {
+//                newSongList = allSongList
+//            } else if searchString[searchString.startIndex] == "#" {
+//                print("Searching Hashtag!")
+//                let searchStringArr = searchString.components(separatedBy: "#").dropFirst()
+//                for song in allSongList {
+//                    var flag = true
+//                    for tag in searchStringArr {
+//                        if !(song.tags.contains("#\(tag)")) {
+//                            flag = false
+//                        }
+//                    }
+//                    if (flag) {
+//                        newSongList.append(song)
+//                    }
+//                }
+//            } else {
+//                for song in allSongList {
+//                    if song.name.lowercased().range(of:searchString.lowercased()) != nil{
+//                        newSongList.append(song)
+//                    }
+//                }
+//            }
+//            searchedSongList = newSongList
             tableView.reloadData()
         }
     }
@@ -102,10 +106,12 @@ class SongViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
         
+        searchSongTextField.returnKeyType = .search
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = true
         tableView.isUserInteractionEnabled = true
+        tagViewSongImageView.layer.cornerRadius = tagViewSongImageView.frame.width/2
 //        self.tableView.allowsSelectionDuringEditing = YES;
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -160,22 +166,22 @@ class SongViewController: UIViewController, UITextFieldDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     
-    @IBAction func logOffPressed(_ sender: UIButton) {
-        try! FIRAuth.auth()!.signOut()
-        dismiss(animated: true, completion: nil)
+    
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        closeTagView()
     }
     
-    @IBAction func closeTagView(_ sender: UIButton) {
-        let origin_y = view.frame.height
-        tagViewSlideDownConstraint.isActive = true
-        tagViewSlideUpConstraint.isActive = false
-        guard let current_color = self.view.backgroundColor else { return }
-        UIView.animate(withDuration: slideAnimationDuration) {
-            self.tagView.frame.origin.y = origin_y
-            self.view.backgroundColor = current_color.withAlphaComponent(1)
-            self.navigationController?.navigationBar.alpha = 1
-        }
-    }
+//    @IBAction func closeTagView(_ sender: UIButton) {
+//        let origin_y = view.frame.height
+//        tagViewSlideDownConstraint.isActive = true
+//        tagViewSlideUpConstraint.isActive = false
+//        guard let current_color = self.view.backgroundColor else { return }
+//        UIView.animate(withDuration: slideAnimationDuration) {
+//            self.tagView.frame.origin.y = origin_y
+//            self.view.backgroundColor = current_color.withAlphaComponent(1)
+//            self.navigationController?.navigationBar.alpha = 1
+//        }
+//    }
     
     @IBAction func showTagView(_ sender: Any) {
         dismissKeyboard()
@@ -205,17 +211,45 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func addTagButtonPressed(_ sender: Any) {
         if let text = addTagTextField.text {
             if text != "" {
-                currentSelectedSong.tags.insert("\(text)")
-                let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
-                self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
-                
-                let songName = currentSelectedSong.name
-                self.tagRef.child("\(strippedHashTag)").updateChildValues([songName: true])
-                updateCollectionView()
+                if isValid(tag: text) {
+                    currentSelectedSong.tags.insert("\(text)")
+                    let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
+                    self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
+                    
+                    let songName = currentSelectedSong.name
+                    self.tagRef.child("\(strippedHashTag)").updateChildValues([songName: true])
+                    updateCollectionView()
+                } else {
+                    print("invalid tag")
+                    let alert = UIAlertController(title: "Invalid Tag", message: "A tag should not end with space", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+                }
             }
         }
     }
     
+    @IBAction func playButtonPressed(_ sender: Any) {
+        if isPlaying {
+            pausePlay()
+            isPlaying = false
+            playButton.setImage(UIImage(named: "playButton.png"), for: .normal)
+        } else {
+            continuePlay()
+            isPlaying = true
+            playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
+        }
+    }
+    @IBAction func forwardButtonPressed(_ sender: Any) {
+        playNext()
+    }
+    @IBAction func backwardButtonPressed(_ sender: Any) {
+        playPrevious()
+    }
+    
+    @IBAction func backToSongViewController(segue: UIStoryboardSegue) {
+        
+    }
 }
 
 
@@ -285,14 +319,34 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if collectionView.isFirstResponder {
-            if action == #selector(self.removeTag) {
+            switch  action {
+            case #selector(self.removeTag), #selector(self.searchSongs):
                 return true
+            default:
+                return false
             }
         }
         return false
     }
     func updateCollectionView() {
         self.collectionView.reloadSections(IndexSet(integer: 0))
+    }
+    func isValid(tag: String) -> Bool {
+        if tag[tag.index(before: tag.endIndex)] == " " {
+            return false
+        }
+        return true
+    }
+    func closeTagView() {
+        let origin_y = view.frame.height
+        tagViewSlideDownConstraint.isActive = true
+        tagViewSlideUpConstraint.isActive = false
+        guard let current_color = self.view.backgroundColor else { return }
+        UIView.animate(withDuration: slideAnimationDuration) {
+            self.tagView.frame.origin.y = origin_y
+            self.view.backgroundColor = current_color.withAlphaComponent(1)
+            self.navigationController?.navigationBar.alpha = 1
+        }
     }
 }
 
@@ -308,9 +362,47 @@ extension SongViewController: UIGestureRecognizerDelegate { //Related to Tap Ges
         searchSongTextField.resignFirstResponder()
         addTagTextField.resignFirstResponder()
     }
+    func searchSongs() {
+        let searchString = collectionView.currentSelectedCell.tagLabel.text!
+        searchedSongList = songList(withSearchString: searchString)
+        tableView.reloadData()
+        searchSongTextField.text = searchString
+        closeTagView()
+        print("search songs with tag \(collectionView.currentSelectedCell.tagLabel.text!)")
+    }
 }
 
-extension SongViewController {
+extension SongViewController { // related to search
+    func songList(withSearchString searchString: String) -> [Song] {
+        var searchedSongList = [Song]()
+        if searchString == "" {
+            searchedSongList = allSongList
+        } else if searchString[searchString.startIndex] == "#" {
+            print("Searching Hashtag!")
+            let searchStringArr = searchString.components(separatedBy: "#").dropFirst()
+            for song in allSongList {
+                var flag = true
+                for tag in searchStringArr {
+                    if !(song.tags.contains("#\(tag)")) {
+                        flag = false
+                    }
+                }
+                if (flag) {
+                    searchedSongList.append(song)
+                }
+            }
+        } else {
+            for song in allSongList {
+                if song.name.lowercased().range(of:searchString.lowercased()) != nil{
+                    searchedSongList.append(song)
+                }
+            }
+        }
+        return searchedSongList
+    }
+}
+
+extension SongViewController { // two methods for initializing song lists depending on whether new user
     func initializeDefaultAllSongList() {
         allSongList = []
         for (index, song) in allSongNames.enumerated() {
@@ -488,7 +580,9 @@ extension SongViewController { //Related to Music
         applicationMusicPlayer.play()
         //print("Play \(song.name)")
     }
-    
+    func pausePlay() {
+        print("Music paused")
+    }
     //Search iTunes and display results in table view
     func searchItunes(searchTerm: String, storefrontId: String) {
         Alamofire.request("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(storefrontId)")
@@ -552,4 +646,13 @@ extension SongViewController { //Related to Music
         }
     }
     */
+    func continuePlay() {
+        print("Music continued")
+    }
+    func playNext() {
+        print("Play next song")
+    }
+    func playPrevious() {
+        print("Play previous song")
+    }
 }
