@@ -22,11 +22,12 @@
 
 import Foundation
 
-struct User {
+class TagifyUser {
   let uid: String
   let email: String
+  var username: String = ""
   
-  init(authData: FIRUser) {
+  init(authData: User) {
     uid = authData.uid
     email = authData.email!
   }

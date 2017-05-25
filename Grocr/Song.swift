@@ -27,7 +27,7 @@ class Song {
   let key: String
   let name: String
   let addedByUser: String
-  let ref: FIRDatabaseReference?
+  let ref: DatabaseReference?
   var completed: Bool = false
   var tags = Set<String>()
   var imageSource = "music.jpg"
@@ -60,15 +60,7 @@ class Song {
     self.imageSource = imageSource
   }
   
-//  init(snapshot: FIRDataSnapshot) {
-//    key = snapshot.key
-//    let snapshotValue = snapshot.value as! [String: AnyObject]
-//    name = snapshotValue["name"] as! String
-//    addedByUser = snapshotValue["addedByUser"] as! String
-//    completed = snapshotValue["completed"] as! Bool
-//    ref = snapshot.ref
-//  }
-  init(snapshot: FIRDataSnapshot) {
+  init(snapshot: DataSnapshot) {
     key = snapshot.key
     let snapshotValue = snapshot.value as! [String: AnyObject]
     name = snapshotValue["name"] as! String

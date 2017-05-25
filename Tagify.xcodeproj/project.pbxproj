@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DE9DE092ED753BA72C90331 /* Pods_Tagify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101DAECA0A3059269EC28C2A /* Pods_Tagify.framework */; };
 		6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1E51ED260AD00FF76E4 /* setting1.png */; };
 		6967E20E1ED58A5900FF76E4 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E20D1ED58A5900FF76E4 /* forward.png */; };
 		6967E2101ED58B5200FF76E4 /* Cross Buttomwith shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */; };
@@ -26,7 +27,6 @@
 		94BFA2591ED02BA3005AE02F /* Magic!.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BFA2551ED02BA3005AE02F /* Magic!.png */; };
 		94BFA25A1ED02BA3005AE02F /* Maroon5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94BFA2561ED02BA3005AE02F /* Maroon5.jpg */; };
 		94BFA25B1ED02BA3005AE02F /* TaylorSwift.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94BFA2571ED02BA3005AE02F /* TaylorSwift.jpg */; };
-		9DCF7583ADEA6FBBDA011A6A /* Pods_Tagify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E3B59E876AEC434C7A4CAA /* Pods_Tagify.framework */; };
 		A672EE441ED3E12900BDB50F /* SongDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A672EE431ED3E12900BDB50F /* SongDetailsView.xib */; };
 		BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385611B3DD5AB0079CD01 /* AppDelegate.swift */; };
 		BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385631B3DD5AB0079CD01 /* LoginViewController.swift */; };
@@ -38,7 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		501A2FA320E4DC6E1FADA94F /* Pods-Tagify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tagify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tagify/Pods-Tagify.release.xcconfig"; sourceTree = "<group>"; };
+		101DAECA0A3059269EC28C2A /* Pods_Tagify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tagify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6967E1E51ED260AD00FF76E4 /* setting1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting1.png; sourceTree = "<group>"; };
 		6967E20D1ED58A5900FF76E4 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cross Buttomwith shadow.png"; sourceTree = "<group>"; };
@@ -59,7 +59,8 @@
 		94BFA2551ED02BA3005AE02F /* Magic!.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Magic!.png"; sourceTree = "<group>"; };
 		94BFA2561ED02BA3005AE02F /* Maroon5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Maroon5.jpg; sourceTree = "<group>"; };
 		94BFA2571ED02BA3005AE02F /* TaylorSwift.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TaylorSwift.jpg; sourceTree = "<group>"; };
-		97E3B59E876AEC434C7A4CAA /* Pods_Tagify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tagify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A17A3E5365091ACDDDFE9B42 /* Pods-Tagify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tagify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tagify/Pods-Tagify.release.xcconfig"; sourceTree = "<group>"; };
+		A4245BA568700908519FE50A /* Pods-Tagify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tagify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tagify/Pods-Tagify.debug.xcconfig"; sourceTree = "<group>"; };
 		A672EE431ED3E12900BDB50F /* SongDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongDetailsView.xib; sourceTree = "<group>"; };
 		BB23855C1B3DD5AB0079CD01 /* Tagify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tagify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2385601B3DD5AB0079CD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		BB2385851B3DD8820079CD01 /* Grocr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Grocr-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB2385891B3DD9640079CD01 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		BB7DA5101B42C8100018B530 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D061AA2B96CEABC8E42E7A7E /* Pods-Tagify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tagify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tagify/Pods-Tagify.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +79,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DCF7583ADEA6FBBDA011A6A /* Pods_Tagify.framework in Frameworks */,
+				1DE9DE092ED753BA72C90331 /* Pods_Tagify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		068872DD9DADCDDC0C8866D1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A4245BA568700908519FE50A /* Pods-Tagify.debug.xcconfig */,
+				A17A3E5365091ACDDDFE9B42 /* Pods-Tagify.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6C26B98B6E90834A9F664347 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				101DAECA0A3059269EC28C2A /* Pods_Tagify.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		942363691ECAF4EA004398A0 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,14 +123,6 @@
 			path = Grocr/images;
 			sourceTree = "<group>";
 		};
-		AB2D1C21F83F93ED12A9EC58 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				97E3B59E876AEC434C7A4CAA /* Pods_Tagify.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		BB2385531B3DD5AB0079CD01 = {
 			isa = PBXGroup;
 			children = (
@@ -121,8 +130,8 @@
 				942363691ECAF4EA004398A0 /* images */,
 				BB23855E1B3DD5AB0079CD01 /* Tagify */,
 				BB23855D1B3DD5AB0079CD01 /* Products */,
-				C5BE90E3DC1BDD568DE04E9E /* Pods */,
-				AB2D1C21F83F93ED12A9EC58 /* Frameworks */,
+				068872DD9DADCDDC0C8866D1 /* Pods */,
+				6C26B98B6E90834A9F664347 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -201,15 +210,6 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
-		C5BE90E3DC1BDD568DE04E9E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D061AA2B96CEABC8E42E7A7E /* Pods-Tagify.debug.xcconfig */,
-				501A2FA320E4DC6E1FADA94F /* Pods-Tagify.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -217,12 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB23857B1B3DD5AB0079CD01 /* Build configuration list for PBXNativeTarget "Tagify" */;
 			buildPhases = (
-				7BE9AAA8714698E3EC6E1C21 /* [CP] Check Pods Manifest.lock */,
+				1BBEB1165ABEDE0C321658BE /* [CP] Check Pods Manifest.lock */,
 				BB2385581B3DD5AB0079CD01 /* Sources */,
 				BB2385591B3DD5AB0079CD01 /* Frameworks */,
 				BB23855A1B3DD5AB0079CD01 /* Resources */,
-				6F6C6EDA486B778CCC3C34C3 /* [CP] Embed Pods Frameworks */,
-				A0AC90B07014CC28D8074DF1 /* [CP] Copy Pods Resources */,
+				A097888FCCEA097FF85E5ABE /* [CP] Embed Pods Frameworks */,
+				1E9FC11E85F904E1A21095F8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -304,22 +304,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6F6C6EDA486B778CCC3C34C3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tagify/Pods-Tagify-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7BE9AAA8714698E3EC6E1C21 /* [CP] Check Pods Manifest.lock */ = {
+		1BBEB1165ABEDE0C321658BE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -334,7 +319,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A0AC90B07014CC28D8074DF1 /* [CP] Copy Pods Resources */ = {
+		1E9FC11E85F904E1A21095F8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -347,6 +332,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tagify/Pods-Tagify-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A097888FCCEA097FF85E5ABE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tagify/Pods-Tagify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -475,7 +475,7 @@
 		};
 		BB23857C1B3DD5AB0079CD01 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D061AA2B96CEABC8E42E7A7E /* Pods-Tagify.debug.xcconfig */;
+			baseConfigurationReference = A4245BA568700908519FE50A /* Pods-Tagify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -500,7 +500,7 @@
 		};
 		BB23857D1B3DD5AB0079CD01 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 501A2FA320E4DC6E1FADA94F /* Pods-Tagify.release.xcconfig */;
+			baseConfigurationReference = A17A3E5365091ACDDDFE9B42 /* Pods-Tagify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

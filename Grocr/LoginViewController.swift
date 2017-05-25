@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
   // MARK: Constants
   let loginToList = "LoginToList"
   let loginToSongView = "LoginToSongView"
+  let userProfilesRef: DatabaseReference = Database.database().reference(withPath: "userProfiles")
   
   // MARK: Outlets
   @IBOutlet weak var textFieldLoginEmail: UITextField!
@@ -34,12 +35,12 @@ class LoginViewController: UIViewController {
   
   // MARK: Actions
   @IBAction func loginDidTouch(_ sender: AnyObject) {
-    FIRAuth.auth()!.signIn(withEmail: textFieldLoginEmail.text!,
+    Auth.auth().signIn(withEmail: textFieldLoginEmail.text!,
                            password: textFieldLoginPassword.text!) { user, error in
                             if error == nil {
                               print("Welcome \(user!.email!)")
                             } else {
-                              if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
+                              if let errCode = AuthErrorCode(rawValue: error!._code) {
                                 print("Sign In Error: \(errCode)")
                               }
                             }
@@ -63,23 +64,24 @@ class LoginViewController: UIViewController {
             let passwordField = alert.textFields![1]
             
             // 2
-            FIRAuth.auth()!.createUser(withEmail: emailField.text!, password: passwordField.text!)
+            Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!)
                 { user, error in
                   if error == nil {
                     // 3
                     if let user = user {
                       print("We have new user! \(user.email!)")
-                      FIRDatabase.database().reference(withPath: "users/\(user.uid)/email").setValue(emailField.text!)
+                      self.userProfilesRef.child("\(user.uid)/email").setValue(emailField.text!)
+                      self.userProfilesRef.child("\(user.uid)/username").setValue(emailField.text!)
                     }
-                    FIRAuth.auth()!.signIn(withEmail: self.textFieldLoginEmail.text!,
+                    Auth.auth().signIn(withEmail: self.textFieldLoginEmail.text!,
                                            password: self.textFieldLoginPassword.text!)
                     print("Create User Successful")
                   } else {
-                    if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
+                    if let errCode = AuthErrorCode(rawValue: error!._code) {
                       switch errCode {
-                      case .errorCodeInvalidEmail:
+                      case .invalidEmail:
                         print("invalid email")
-                      case .errorCodeEmailAlreadyInUse:
+                      case .emailAlreadyInUse:
                         print("in use")
                       default:
                         print("Create User Error: \(error!)")
@@ -128,7 +130,7 @@ extension LoginViewController {
     super.viewDidLoad()
     
     // 1
-    FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
+    Auth.auth().addStateDidChangeListener() { auth, user in
       // 2
       if user != nil {
         // 3

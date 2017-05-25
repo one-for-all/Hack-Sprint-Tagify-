@@ -15,9 +15,10 @@ import Alamofire
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
-    var userRef: FIRDatabaseReference!
-    var tagRef: FIRDatabaseReference!
-    var user: User!
+    var userRef: DatabaseReference!
+    var tagRef: DatabaseReference!
+    let userProfilesRef: DatabaseReference! = Database.database().reference(withPath: "userProfiles")
+    var user: TagifyUser!
     
     @IBOutlet weak var tableView: UITableView!
     let songCellIdentifier = "SongCell"
@@ -65,30 +66,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         var newSongList = [Song]()
         if let searchString = sender.text {
             searchedSongList = songList(withSearchString: searchString)
-//            if searchString == "" {
-//                newSongList = allSongList
-//            } else if searchString[searchString.startIndex] == "#" {
-//                print("Searching Hashtag!")
-//                let searchStringArr = searchString.components(separatedBy: "#").dropFirst()
-//                for song in allSongList {
-//                    var flag = true
-//                    for tag in searchStringArr {
-//                        if !(song.tags.contains("#\(tag)")) {
-//                            flag = false
-//                        }
-//                    }
-//                    if (flag) {
-//                        newSongList.append(song)
-//                    }
-//                }
-//            } else {
-//                for song in allSongList {
-//                    if song.name.lowercased().range(of:searchString.lowercased()) != nil{
-//                        newSongList.append(song)
-//                    }
-//                }
-//            }
-//            searchedSongList = newSongList
             tableView.reloadData()
         }
     }
@@ -129,18 +106,26 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         if let cvl = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             cvl.estimatedItemSize = CGSize(width: 78, height: 59)
         }
-        FIRAuth.auth()?.addStateDidChangeListener {auth, user in
+        Auth.auth().addStateDidChangeListener {auth, user in
             guard let user = user else { print("no user!"); return }
-            self.user = User(authData: user)
-            self.userRef = FIRDatabase.database().reference(withPath: "users/\(user.uid)")
-            self.tagRef = FIRDatabase.database().reference(withPath: "tags")
+            self.user = TagifyUser(authData: user)
+            self.userRef = Database.database().reference(withPath: "users/\(user.uid)")
+            self.tagRef = Database.database().reference(withPath: "tags")
+            self.userProfilesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if !snapshot.hasChild("email") {
+                    self.userProfilesRef.child("email").setValue(user.email!)
+                }
+                if !snapshot.hasChild("username") {
+                    self.userProfilesRef.child("username").setValue(user.email!)
+                }
+            })
             self.userRef.observe(.value, with: { (snapshot) in
                 if !snapshot.hasChild("email") {
                     self.userRef.child("email").setValue(user.email!)
                 }
                 if snapshot.hasChild("songs") {
                     var newSongs = [Song]()
-                    for song in snapshot.childSnapshot(forPath: "songs").children.allObjects as! [FIRDataSnapshot] {
+                    for song in snapshot.childSnapshot(forPath: "songs").children.allObjects as! [DataSnapshot] {
                         let newSong = Song(snapshot: song)
                         newSongs.append(newSong)
                     }
@@ -153,6 +138,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                 }
                 self.tableView.reloadData()
             })
+            
         }
     }
 
