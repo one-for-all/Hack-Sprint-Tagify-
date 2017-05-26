@@ -203,6 +203,7 @@
                                     <constraint firstAttribute="bottom" secondItem="gru-LO-ILg" secondAttribute="bottom" constant="10" id="Yde-71-UaL"/>
                                     <constraint firstItem="gru-LO-ILg" firstAttribute="leading" secondItem="89U-aw-fwk" secondAttribute="trailing" constant="50" id="ZaN-hU-WBe"/>
                                     <constraint firstItem="HbX-We-Fbl" firstAttribute="leading" secondItem="gru-LO-ILg" secondAttribute="trailing" constant="50" id="fQx-mP-RBL"/>
+                                    <constraint firstAttribute="height" constant="80" id="fwz-Zw-aap"/>
                                     <constraint firstItem="gru-LO-ILg" firstAttribute="top" secondItem="A2Q-gh-CLO" secondAttribute="top" constant="20" id="nVo-Hk-V7p"/>
                                 </constraints>
                             </view>
@@ -279,15 +280,8 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zL8-lO-N2F">
-                                <rect key="frame" x="0.0" y="667" width="375" height="489"/>
+                                <rect key="frame" x="0.0" y="667" width="375" height="518"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IdH-Bm-H2H">
-                                        <rect key="frame" x="144" y="361" width="88" height="88"/>
-                                        <state key="normal" image="Cross Buttomwith shadow.png"/>
-                                        <connections>
-                                            <action selector="closeButtonPressed:" destination="gpg-0c-vNo" eventType="touchUpInside" id="tBS-JG-xze"/>
-                                        </connections>
-                                    </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="iMZ-2X-QIN">
                                         <rect key="frame" x="15" y="15" width="57" height="57"/>
                                         <constraints>
@@ -326,7 +320,7 @@
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i5D-vG-diC" customClass="CollectionView" customModule="Tagify" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="132" width="359" height="219"/>
+                                        <rect key="frame" x="8" y="132" width="359" height="386"/>
                                         <color key="backgroundColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ENJ-v8-751">
                                             <size key="itemSize" width="121" height="47"/>
@@ -370,17 +364,24 @@
                                             <outlet property="delegate" destination="gpg-0c-vNo" id="u1N-4I-aiD"/>
                                         </connections>
                                     </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IdH-Bm-H2H">
+                                        <rect key="frame" x="144" y="410" width="88" height="88"/>
+                                        <state key="normal" image="Cross Buttomwith shadow.png"/>
+                                        <connections>
+                                            <action selector="closeButtonPressed:" destination="gpg-0c-vNo" eventType="touchUpInside" id="tBS-JG-xze"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="5H2-xV-zuI" firstAttribute="trailing" secondItem="zL8-lO-N2F" secondAttribute="trailing" id="2Ot-cI-YVR"/>
                                     <constraint firstItem="Kfa-i4-XTu" firstAttribute="top" secondItem="iMZ-2X-QIN" secondAttribute="bottom" constant="20" id="6JD-df-AaK"/>
                                     <constraint firstItem="Kfa-i4-XTu" firstAttribute="trailing" secondItem="hkq-pU-pAv" secondAttribute="leading" constant="-10" id="79n-Uc-Avd"/>
-                                    <constraint firstItem="IdH-Bm-H2H" firstAttribute="bottom" secondItem="zL8-lO-N2F" secondAttribute="bottom" constant="-40" id="8eH-DL-Sgw"/>
                                     <constraint firstItem="IdH-Bm-H2H" firstAttribute="centerX" secondItem="zL8-lO-N2F" secondAttribute="centerX" id="AFi-yJ-mK4"/>
                                     <constraint firstItem="hkq-pU-pAv" firstAttribute="top" secondItem="iMZ-2X-QIN" secondAttribute="bottom" constant="18" id="B5k-ki-dqL"/>
                                     <constraint firstItem="iMZ-2X-QIN" firstAttribute="width" secondItem="zL8-lO-N2F" secondAttribute="width" multiplier="0.15" id="CZi-0x-gRi"/>
                                     <constraint firstItem="i5D-vG-diC" firstAttribute="leading" secondItem="zL8-lO-N2F" secondAttribute="leading" constant="8" id="EpF-km-yJP"/>
+                                    <constraint firstItem="i5D-vG-diC" firstAttribute="bottom" secondItem="zL8-lO-N2F" secondAttribute="bottom" id="N77-Nr-IU3"/>
                                     <constraint firstItem="5H2-xV-zuI" firstAttribute="top" secondItem="iMZ-2X-QIN" secondAttribute="top" id="PIM-q5-c6g"/>
                                     <constraint firstItem="5H2-xV-zuI" firstAttribute="bottom" secondItem="iMZ-2X-QIN" secondAttribute="bottom" id="U7p-hv-vrq"/>
                                     <constraint firstItem="i5D-vG-diC" firstAttribute="top" secondItem="Kfa-i4-XTu" secondAttribute="bottom" constant="10" id="UEc-xx-iKd"/>
@@ -388,9 +389,9 @@
                                     <constraint firstItem="Kfa-i4-XTu" firstAttribute="leading" secondItem="zL8-lO-N2F" secondAttribute="leading" constant="36" id="YeU-sM-TgI"/>
                                     <constraint firstItem="i5D-vG-diC" firstAttribute="trailing" secondItem="zL8-lO-N2F" secondAttribute="trailing" constant="-8" id="ZHn-rq-q71"/>
                                     <constraint firstItem="hkq-pU-pAv" firstAttribute="trailing" secondItem="zL8-lO-N2F" secondAttribute="trailing" constant="-20" id="a5z-U8-pCc"/>
-                                    <constraint firstItem="i5D-vG-diC" firstAttribute="bottom" secondItem="IdH-Bm-H2H" secondAttribute="top" constant="-10" id="cvu-0F-1Yc"/>
                                     <constraint firstItem="iMZ-2X-QIN" firstAttribute="leading" secondItem="zL8-lO-N2F" secondAttribute="leading" constant="15" id="dqm-7Z-K1H"/>
                                     <constraint firstItem="5H2-xV-zuI" firstAttribute="leading" secondItem="iMZ-2X-QIN" secondAttribute="trailing" constant="15" id="vFJ-mT-iHv"/>
+                                    <constraint firstItem="IdH-Bm-H2H" firstAttribute="bottom" secondItem="zL8-lO-N2F" secondAttribute="bottom" constant="-20" id="zUv-Ac-J0x"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -409,8 +410,7 @@
                             <constraint firstItem="9ag-Qr-jG0" firstAttribute="width" secondItem="Tg3-OL-Bgc" secondAttribute="width" id="TcY-4u-d7A"/>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="leading" secondItem="Tg3-OL-Bgc" secondAttribute="leading" id="Wa1-L4-LE4"/>
                             <constraint firstItem="VUH-iz-7tk" firstAttribute="top" secondItem="9ag-Qr-jG0" secondAttribute="bottom" id="Xjl-96-F3a"/>
-                            <constraint firstItem="hhW-VI-yLf" firstAttribute="top" secondItem="VUH-iz-7tk" secondAttribute="bottom" constant="80" id="ahZ-kN-d6w"/>
-                            <constraint firstAttribute="bottom" secondItem="zL8-lO-N2F" secondAttribute="bottom" constant="-489" id="vwP-JH-tmo"/>
+                            <constraint firstItem="zL8-lO-N2F" firstAttribute="height" secondItem="VUH-iz-7tk" secondAttribute="height" constant="80" id="xR0-gt-CsW"/>
                             <constraint firstItem="zL8-lO-N2F" firstAttribute="leading" secondItem="Tg3-OL-Bgc" secondAttribute="leading" id="zR9-vT-RZc"/>
                         </constraints>
                         <variation key="default">
@@ -654,7 +654,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a2C-e0-nrh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1941.5" y="1275.5"/>
+            <point key="canvasLocation" x="1942" y="1285"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EYx-gA-03h">
