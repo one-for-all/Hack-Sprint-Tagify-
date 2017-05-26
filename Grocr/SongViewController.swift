@@ -18,7 +18,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var userRef: DatabaseReference!
     var tagRef: DatabaseReference!
     let userProfilesRef: DatabaseReference! = Database.database().reference(withPath: "userProfiles")
-    var user: TagifyUser!
+    var currentUser: TagifyUser!
     
     @IBOutlet weak var tableView: UITableView!
     let songCellIdentifier = "SongCell"
@@ -89,7 +89,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         tableView.allowsSelection = true
         tableView.isUserInteractionEnabled = true
         tagViewSongImageView.layer.cornerRadius = tagViewSongImageView.frame.width/2
-//        self.tableView.allowsSelectionDuringEditing = YES;
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -108,15 +107,18 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         }
         Auth.auth().addStateDidChangeListener {auth, user in
             guard let user = user else { print("no user!"); return }
-            self.user = TagifyUser(authData: user)
+            self.currentUser = TagifyUser(authData: user)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.currentUser = self.currentUser
             self.userRef = Database.database().reference(withPath: "users/\(user.uid)")
             self.tagRef = Database.database().reference(withPath: "tags")
-            self.userProfilesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let currentUserProfileRef = self.userProfilesRef.child("\(user.uid)")
+            currentUserProfileRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if !snapshot.hasChild("email") {
-                    self.userProfilesRef.child("email").setValue(user.email!)
+                    currentUserProfileRef.child("email").setValue(user.email!)
                 }
                 if !snapshot.hasChild("username") {
-                    self.userProfilesRef.child("username").setValue(user.email!)
+                    currentUserProfileRef.child("username").setValue(user.email!)
                 }
             })
             self.userRef.observe(.value, with: { (snapshot) in

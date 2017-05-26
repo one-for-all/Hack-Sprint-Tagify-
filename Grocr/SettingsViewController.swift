@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     let userProfilesRef: DatabaseReference! = Database.database().reference(withPath: "userProfiles")
     let storage = Storage.storage()
     let storageRef: StorageReference! = Storage.storage().reference()
+    var currentUser: TagifyUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,9 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         iconImageView.addGestureRecognizer(tapRecognizer)
         
         // Download User Profile image
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.currentUser = appDelegate.currentUser
+        print("current user is \(self.currentUser.email)!")
         let userIconPath = "\(Auth.auth().currentUser!.uid)/userIcon.jpg"
         let reference = storageRef.child(userIconPath)
         reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
@@ -36,6 +40,13 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.iconImageView.image = UIImage(data: data!)
             }
         }
+        searchUserWith(username: "bibek@gmail.com", foundUser: { (searchedUser) in
+            if let user = searchedUser {
+                print("searched user is : \(user.email)")
+                self.unfollow(user: user)
+            }
+        })
+        setUsername(username: "凯米乐")
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,9 +101,36 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
 }
 
 extension SettingsViewController {
-    func searchUserWith(username: String) -> [User] {
-        var searchedUsers = [User]()
-        return searchedUsers
+    func searchUserWith(username: String, foundUser: @escaping (_ : TagifyUser?) -> Void) {
+        self.userProfilesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            var searchedUser: TagifyUser?
+            for user in snapshot.children.allObjects as! [DataSnapshot] {
+                print(user)
+                let userKey = user.key
+                print(userKey)
+                guard let userName = user.childSnapshot(forPath: "username").value as? String else { continue }
+                print("user name is \(userName)")
+                guard let userEmail = user.childSnapshot(forPath: "email").value as? String else { continue }
+                print("user email is \(userEmail)")
+                print("searching for \(username)")
+                if userName == username {
+                    print("got user")
+                    searchedUser = TagifyUser(uid: userKey, email: userEmail)
+                }
+            }
+            foundUser(searchedUser)
+        })
+    }
+    func follow(user: TagifyUser) {
+        self.currentUser.follow(user: user, ref: userProfilesRef)
+        user.followedBy(user: self.currentUser, ref: userProfilesRef)
+    }
+    func unfollow(user: TagifyUser) {
+        self.currentUser.unfollow(user: user, ref: userProfilesRef)
+        user.unfollowedBy(user: self.currentUser, ref: userProfilesRef)
+    }
+    func setUsername(username: String) {
+        self.currentUser.setUsername(username: username, ref: userProfilesRef)
     }
 }
 

@@ -27,6 +27,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  var currentUser = TagifyUser(uid: "", email: "")
   
   override init() {
     FirebaseApp.configure()
@@ -35,8 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]? = [:]) -> Bool {
     UIApplication.shared.statusBarStyle = .lightContent
-//    FIRApp.configure()
-//    FIRDatabase.database().persistenceEnabled = true
     return true
   }
 

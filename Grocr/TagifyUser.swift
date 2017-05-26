@@ -25,16 +25,48 @@ import Foundation
 class TagifyUser {
   let uid: String
   let email: String
-  var username: String = ""
+  var username: String
+  var following = Set<TagifyUser>()
+  var followedBy = Set<TagifyUser>()
   
   init(authData: User) {
     uid = authData.uid
     email = authData.email!
+    self.username = self.email
   }
   
   init(uid: String, email: String) {
     self.uid = uid
     self.email = email
+    self.username = email
   }
-  
+  func follow(user: TagifyUser, ref: DatabaseReference) {
+    self.following.insert(user)
+    ref.child("\(self.uid)/following").setValue([user.uid: true])
+  }
+  func unfollow(user: TagifyUser, ref: DatabaseReference) {
+    self.following.remove(user)
+    ref.child("\(self.uid)/following").setValue([user.uid: NSNull()])
+  }
+  func setUsername(username: String, ref: DatabaseReference) {
+    self.username = username
+    ref.child("\(self.uid)/username").setValue(username)
+  }
+  func followedBy(user: TagifyUser, ref: DatabaseReference) {
+    self.followedBy.insert(user)
+    ref.child("\(self.uid)/followedBy").setValue([user.uid: true])
+  }
+  func unfollowedBy(user: TagifyUser, ref: DatabaseReference) {
+    self.followedBy.remove(user)
+    ref.child("\(self.uid)/followedBy").setValue([user.uid: NSNull()])
+  }
+}
+
+extension TagifyUser: Hashable {
+  var hashValue: Int {
+    return uid.hashValue
+  }
+  static func == (lhs: TagifyUser, rhs: TagifyUser) -> Bool {
+    return lhs.uid == rhs.uid
+  }
 }
