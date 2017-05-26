@@ -43,7 +43,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         searchUserWith(username: "bibek@gmail.com", foundUser: { (searchedUser) in
             if let user = searchedUser {
                 print("searched user is : \(user.email)")
-                self.unfollow(user: user)
+                self.follow(user: user)
             }
         })
         setUsername(username: "凯米乐")
@@ -100,7 +100,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     */
 }
 
-extension SettingsViewController {
+extension SettingsViewController { // search user and follow
     func searchUserWith(username: String, foundUser: @escaping (_ : TagifyUser?) -> Void) {
         self.userProfilesRef.observeSingleEvent(of: .value, with: { (snapshot) in
             var searchedUser: TagifyUser?

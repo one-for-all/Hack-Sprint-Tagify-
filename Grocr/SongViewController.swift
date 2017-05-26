@@ -15,17 +15,21 @@ import Alamofire
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
-    var userRef: DatabaseReference!
-    var tagRef: DatabaseReference!
+    var currentUserRef: DatabaseReference!
+    var currentUserTagRef: DatabaseReference!
     let userProfilesRef: DatabaseReference! = Database.database().reference(withPath: "userProfiles")
     var currentUser: TagifyUser!
     
+    @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     let songCellIdentifier = "SongCell"
     @IBOutlet weak var tagView: UIView!
     @IBOutlet weak var tagViewSongImageView: UIImageView!
     @IBOutlet weak var tagViewSongLabel: UILabel!
     @IBOutlet weak var addTagTextField: UITextField!
+    @IBOutlet weak var collectionView: CollectionView!
+    let tagCellReuseIdentifier = "TagReuseCell"
+    let slideAnimationDuration = 0.25
     
     @IBOutlet weak var tagViewSlideUpConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagViewSlideDownConstraint: NSLayoutConstraint!
@@ -38,15 +42,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             tagViewSongImageView.image = UIImage(named: currentSelectedSong.imageSource)
         }
     }
-    
-    @IBOutlet weak var collectionView: CollectionView!
-    let tagCellReuseIdentifier = "TagReuseCell"
-    
-    let slideAnimationDuration = 0.25
-    
-    @IBOutlet weak var searchSongTextField: UITextField!
     var isPlaying = false
-
     let allSongNames: [String] = [
         "Bruno Mars - That's What I Like",
         "Ed Sheeran - Shape of You [Official Video]",
@@ -110,37 +106,12 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             self.currentUser = TagifyUser(authData: user)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.currentUser = self.currentUser
-            self.userRef = Database.database().reference(withPath: "users/\(user.uid)")
-            self.tagRef = Database.database().reference(withPath: "tags")
-            let currentUserProfileRef = self.userProfilesRef.child("\(user.uid)")
-            currentUserProfileRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                if !snapshot.hasChild("email") {
-                    currentUserProfileRef.child("email").setValue(user.email!)
-                }
-                if !snapshot.hasChild("username") {
-                    currentUserProfileRef.child("username").setValue(user.email!)
-                }
-            })
-            self.userRef.observe(.value, with: { (snapshot) in
-                if !snapshot.hasChild("email") {
-                    self.userRef.child("email").setValue(user.email!)
-                }
-                if snapshot.hasChild("songs") {
-                    var newSongs = [Song]()
-                    for song in snapshot.childSnapshot(forPath: "songs").children.allObjects as! [DataSnapshot] {
-                        let newSong = Song(snapshot: song)
-                        newSongs.append(newSong)
-                    }
-                    self.initializeAllSongList(songs: newSongs)
-                    self.searchedSongList = self.allSongList
-                } else {
-                    for song in self.allSongList {
-                        self.userRef.child("songs/\(song.key)").setValue(song.toAnyObject())
-                    }
-                }
-                self.tableView.reloadData()
-            })
-            
+            self.currentUserRef = Database.database().reference(withPath: "users/\(user.uid)")
+            self.currentUserTagRef = Database.database().reference(withPath: "tags")
+            self.initializeUserProfile(user: user)
+            self.initializeCurrentUserSongList()
+            self.initializeFollowingForCurrentUser()
+            self.initializeFollowedByForCurrentUser()
         }
     }
 
@@ -158,18 +129,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func closeButtonPressed(_ sender: Any) {
         closeTagView()
     }
-    
-//    @IBAction func closeTagView(_ sender: UIButton) {
-//        let origin_y = view.frame.height
-//        tagViewSlideDownConstraint.isActive = true
-//        tagViewSlideUpConstraint.isActive = false
-//        guard let current_color = self.view.backgroundColor else { return }
-//        UIView.animate(withDuration: slideAnimationDuration) {
-//            self.tagView.frame.origin.y = origin_y
-//            self.view.backgroundColor = current_color.withAlphaComponent(1)
-//            self.navigationController?.navigationBar.alpha = 1
-//        }
-//    }
     
     @IBAction func showTagView(_ sender: Any) {
         dismissKeyboard()
@@ -202,10 +161,10 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                 if isValid(tag: text) {
                     currentSelectedSong.tags.insert("\(text)")
                     let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
-                    self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
+                    self.currentUserRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
                     
                     let songName = currentSelectedSong.name
-                    self.tagRef.child("\(strippedHashTag)").updateChildValues([songName: true])
+                    self.currentUserTagRef.child("\(strippedHashTag)").updateChildValues([songName: true])
                     updateCollectionView()
                 } else {
                     print("invalid tag")
@@ -235,9 +194,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         playPrevious()
     }
     
-    @IBAction func backToSongViewController(segue: UIStoryboardSegue) {
-        
-    }
 }
 
 
@@ -291,10 +247,10 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if let tagToRemove = collectionView.currentSelectedCell.tagLabel.text {
             self.currentSelectedSong.tags.remove(tagToRemove)
             let strippedHashTag = tagToRemove.substring(from: tagToRemove.index(tagToRemove.startIndex, offsetBy: 1))
-            self.userRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: NSNull()])
+            self.currentUserRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: NSNull()])
             
             let songName = currentSelectedSong.name
-            self.tagRef.child("\(strippedHashTag)").updateChildValues([songName: NSNull()])
+            self.currentUserTagRef.child("\(strippedHashTag)").updateChildValues([songName: NSNull()])
             updateCollectionView()
         }
     }
@@ -416,6 +372,66 @@ extension SongViewController { // two methods for initializing song lists depend
             }
             allSongList.append(song)
         }
+    }
+}
+
+extension SongViewController { // initialize current user info with data fram database & fill in missing data in database
+    func initializeFollowingForCurrentUser() {
+        let currentUserFollowingRef = self.userProfilesRef.child("\(self.currentUser.uid)/following")
+        currentUserFollowingRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                for uid in snapshot.value as! [String: Bool] {
+                    print("following : \(uid.key)")
+                    self.currentUser.following.insert(TagifyUser(uid: uid.key))
+                }
+            }
+        })
+    }
+    func initializeFollowedByForCurrentUser() {
+        let currentUserFollowedRef = self.userProfilesRef.child("\(self.currentUser.uid)/followedBy")
+        currentUserFollowedRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            print("current uid is : \(self.currentUser.uid)")
+            if snapshot.exists() {
+                for uid in snapshot.value as! [String: Bool] {
+                    print("followed by : \(uid.key)")
+                    self.currentUser.followedBy.insert(TagifyUser(uid: uid.key))
+                }
+            }
+        })
+    }
+    func initializeUserProfile(user: User) {
+        let currentUserProfileRef = self.userProfilesRef.child("\(self.currentUser.uid)")
+        currentUserProfileRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.hasChild("email") {
+                currentUserProfileRef.child("email").setValue(user.email!)
+            }
+            if !snapshot.hasChild("username") {
+                currentUserProfileRef.child("username").setValue(user.email!)
+            } else {
+                self.currentUser.username = snapshot.childSnapshot(forPath: "username").value as! String
+            }
+        })
+    }
+    func initializeCurrentUserSongList() {
+        self.currentUserRef.observe(.value, with: { (snapshot) in
+            if !snapshot.hasChild("email") {
+                self.currentUserRef.child("email").setValue(self.currentUser.email)
+            }
+            if snapshot.hasChild("songs") {
+                var newSongs = [Song]()
+                for song in snapshot.childSnapshot(forPath: "songs").children.allObjects as! [DataSnapshot] {
+                    let newSong = Song(snapshot: song)
+                    newSongs.append(newSong)
+                }
+                self.initializeAllSongList(songs: newSongs)
+                self.searchedSongList = self.allSongList
+            } else {
+                for song in self.allSongList {
+                    self.currentUserRef.child("songs/\(song.key)").setValue(song.toAnyObject())
+                }
+            }
+            self.tableView.reloadData()
+        })
     }
 }
 

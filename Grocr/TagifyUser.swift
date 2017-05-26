@@ -35,6 +35,12 @@ class TagifyUser {
     self.username = self.email
   }
   
+  init(uid: String) {
+    self.uid = uid
+    self.email = ""
+    self.username = ""
+  }
+  
   init(uid: String, email: String) {
     self.uid = uid
     self.email = email
@@ -54,6 +60,7 @@ class TagifyUser {
   }
   func followedBy(user: TagifyUser, ref: DatabaseReference) {
     self.followedBy.insert(user)
+    print("\(self.email) is followed by \(user.email)")
     ref.child("\(self.uid)/followedBy").setValue([user.uid: true])
   }
   func unfollowedBy(user: TagifyUser, ref: DatabaseReference) {
