@@ -18,6 +18,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     let storage = Storage.storage()
     let storageRef: StorageReference! = Storage.storage().reference()
     var currentUser: TagifyUser!
+    var settingsTableViewController: SettingsTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,15 +90,16 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        settingsTableViewController = segue.destination as! SettingsTableViewController
+        settingsTableViewController.parentController = self
     }
-    */
 }
 
 extension SettingsViewController { // search user and follow

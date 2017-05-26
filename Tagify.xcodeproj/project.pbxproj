@@ -22,8 +22,12 @@
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
 		9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423636C1ECAFA39004398A0 /* SongViewController.swift */; };
+		944A701C1ED813280073EE0C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701B1ED813280073EE0C /* SettingsTableViewController.swift */; };
+		944A701E1ED819EB0073EE0C /* UnwindSegueToRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */; };
+		944A70201ED81D570073EE0C /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701F1ED81D570073EE0C /* UsernameViewController.swift */; };
 		94619C7E1ED402010080FB56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94619C7D1ED402010080FB56 /* GoogleService-Info.plist */; };
 		947312AA1ECFEE3300D44414 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947312A91ECFEE3300D44414 /* CollectionViewCell.swift */; };
+		9495E1131ED80FD5001A4F68 /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */; };
 		94BFA2531ED01E2E005AE02F /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFA2521ED01E2E005AE02F /* CollectionView.swift */; };
 		94BFA2581ED02BA3005AE02F /* BrunoMars.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94BFA2541ED02BA3005AE02F /* BrunoMars.jpg */; };
 		94BFA2591ED02BA3005AE02F /* Magic!.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BFA2551ED02BA3005AE02F /* Magic!.png */; };
@@ -56,8 +60,12 @@
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
 		9423636C1ECAFA39004398A0 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		944A701B1ED813280073EE0C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegueToRight.swift; sourceTree = "<group>"; tabWidth = 4; };
+		944A701F1ED81D570073EE0C /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		94619C7D1ED402010080FB56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Grocr/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		947312A91ECFEE3300D44414 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; tabWidth = 4; };
 		94BFA2521ED01E2E005AE02F /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		94BFA2541ED02BA3005AE02F /* BrunoMars.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BrunoMars.jpg; sourceTree = "<group>"; };
 		94BFA2551ED02BA3005AE02F /* Magic!.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Magic!.png"; sourceTree = "<group>"; };
@@ -182,6 +190,8 @@
 				9423636C1ECAFA39004398A0 /* SongViewController.swift */,
 				940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */,
 				940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */,
+				944A701B1ED813280073EE0C /* SettingsTableViewController.swift */,
+				944A701F1ED81D570073EE0C /* UsernameViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -195,6 +205,8 @@
 				BB23856A1B3DD5AB0079CD01 /* LaunchScreen.xib */,
 				942363671ECAF330004398A0 /* SongTableViewCell.swift */,
 				94BFA2521ED01E2E005AE02F /* CollectionView.swift */,
+				9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */,
+				944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -364,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944A70201ED81D570073EE0C /* UsernameViewController.swift in Sources */,
 				BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */,
 				940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */,
 				947312AA1ECFEE3300D44414 /* CollectionViewCell.swift in Sources */,
@@ -372,7 +385,10 @@
 				94BFA2531ED01E2E005AE02F /* CollectionView.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 				940E0BCC1ED692A300B8C4E0 /* ScopeViewController.swift in Sources */,
+				944A701E1ED819EB0073EE0C /* UnwindSegueToRight.swift in Sources */,
+				944A701C1ED813280073EE0C /* SettingsTableViewController.swift in Sources */,
 				942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */,
+				9495E1131ED80FD5001A4F68 /* SegueFromRight.swift in Sources */,
 				9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
