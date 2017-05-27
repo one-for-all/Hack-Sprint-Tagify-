@@ -510,11 +510,12 @@ extension SongViewController { // initialize current user info with data fram da
         let userIconPath = "\(Auth.auth().currentUser!.uid)/userIcon.jpg"
         let reference = storageRef.child(userIconPath)
         reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if let error = error {
                 print(error.localizedDescription)
+                appDelegate.userIcon = UIImage(named: "music.jpg")!
             } else {
                 print("got image")
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.userIcon = UIImage(data: data!)!
             }
         }
