@@ -18,6 +18,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var currentUserRef: DatabaseReference!
     var currentUserTagRef: DatabaseReference!
     let userProfilesRef: DatabaseReference! = Database.database().reference(withPath: "userProfiles")
+    let storage = Storage.storage()
+    let storageRef: StorageReference! = Storage.storage().reference()
     var currentUser: TagifyUser!
     
     @IBOutlet weak var searchSongTextField: UITextField!
@@ -56,6 +58,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     ]
     var allSongList = [Song]()
     var searchedSongList = [Song]()
+    var followingUserTagSongDict = [String: [String: Set<Song>]]()
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
         print("End Editing! Starting Searching")
@@ -112,6 +115,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             self.initializeCurrentUserSongList()
             self.initializeFollowingForCurrentUser()
             self.initializeFollowedByForCurrentUser()
+            self.initializeUserIcon()
         }
     }
 
@@ -337,6 +341,34 @@ extension SongViewController { // related to search
         }
         return searchedSongList
     }
+    func getSongs(forTag tag: String, forUser user: TagifyUser) {
+        if self.followingUserTagSongDict[user.uid] == nil {
+            self.followingUserTagSongDict[user.uid] = [String: Set<Song>]()
+        }
+        if self.followingUserTagSongDict[user.uid]![tag] == nil {
+            self.followingUserTagSongDict[user.uid]![tag] = Set<Song>()
+        }
+        
+        Database.database().reference(withPath: "userTags").child("\(user.uid)/\(tag)").observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            for songObj in snapshot.value as! [String: Bool] {
+                let songKey = songObj.key
+                Database.database().reference(withPath: "userSongs").child("\(user.uid)/\(songKey)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let song = Song(name: "", key: songKey)
+                    if let name = snapshot.childSnapshot(forPath: "name").value as? String {
+                        song.name = name
+                    }
+                    if let songWriter = snapshot.childSnapshot(forPath: "songWriter").value as? String {
+                        song.songWriter = songWriter
+                    }
+                    if let imageSource = snapshot.childSnapshot(forPath: "imageSource").value as? String {
+                        song.imageSource = imageSource
+                    }
+                    self.followingUserTagSongDict[user.uid]?[tag]?.insert(song)
+                })
+            }
+        })
+    }
 }
 
 extension SongViewController { // two methods for initializing song lists depending on whether new user
@@ -432,6 +464,25 @@ extension SongViewController { // initialize current user info with data fram da
             }
             self.tableView.reloadData()
         })
+    }
+    func initializeUserIcon() {
+        let userIconPath = "\(Auth.auth().currentUser!.uid)/userIcon.jpg"
+        let reference = storageRef.child(userIconPath)
+        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("got image")
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.userIcon = UIImage(data: data!)!
+            }
+        }
+    }
+    
+    // To Do: To be implemented
+    func getTagsForUser(_ user: TagifyUser) ->[String: String] {
+        var tagToSong = [String: String]()
+        return tagToSong
     }
 }
 
