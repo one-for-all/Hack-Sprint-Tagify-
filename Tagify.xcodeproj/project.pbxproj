@@ -15,6 +15,7 @@
 		6967E2141ED7A4D900FF76E4 /* Next Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2131ED7A4D900FF76E4 /* Next Button.png */; };
 		6967E2161ED7D2CB00FF76E4 /* Previous Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2151ED7D2CB00FF76E4 /* Previous Button.png */; };
 		6967E21B1ED8D8C000FF76E4 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */; };
+		6967E21D1EDA338F00FF76E4 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E21C1EDA338F00FF76E4 /* add.png */; };
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
@@ -53,6 +54,7 @@
 		6967E2131ED7A4D900FF76E4 /* Next Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Next Button.png"; sourceTree = "<group>"; };
 		6967E2151ED7D2CB00FF76E4 /* Previous Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Previous Button.png"; sourceTree = "<group>"; };
 		6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6967E21C1EDA338F00FF76E4 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -130,6 +132,7 @@
 				94BFA2541ED02BA3005AE02F /* BrunoMars.jpg */,
 				94BFA2551ED02BA3005AE02F /* Magic!.png */,
 				6967E2151ED7D2CB00FF76E4 /* Previous Button.png */,
+				6967E21C1EDA338F00FF76E4 /* add.png */,
 				6967E2131ED7A4D900FF76E4 /* Next Button.png */,
 				94BFA2561ED02BA3005AE02F /* Maroon5.jpg */,
 				94BFA2571ED02BA3005AE02F /* TaylorSwift.jpg */,
@@ -308,6 +311,7 @@
 				940E0BCE1ED696E200B8C4E0 /* userDefaultIcon.png in Resources */,
 				6967E2101ED58B5200FF76E4 /* Cross Buttomwith shadow.png in Resources */,
 				6967E2121ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png in Resources */,
+				6967E21D1EDA338F00FF76E4 /* add.png in Resources */,
 				9423636B1ECAF4EA004398A0 /* music.jpg in Resources */,
 				6967E2161ED7D2CB00FF76E4 /* Previous Button.png in Resources */,
 				940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */,
