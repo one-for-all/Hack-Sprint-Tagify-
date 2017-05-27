@@ -62,13 +62,15 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
         print("End Editing! Starting Searching")
-        var newSongList = [Song]()
         if let searchString = sender.text {
-            searchedSongList = songList(withSearchString: searchString)
+            if searchString != "" && searchString[searchString.startIndex] == "#" {
+                searchedSongList = searchedSongs(fromSongSet: Set(allSongList), withHashTagString: searchString)
+            } else {
+                searchedSongList = songList(withSearchString: searchString)
+            }
             tableView.reloadData()
         }
     }
-
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         print("Pressed Return!")
@@ -162,7 +164,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func addTagButtonPressed(_ sender: Any) {
         if let text = addTagTextField.text {
             if text != "" {
-                if isValid(tag: text) {
+                let (valid, errorMessage) = isValid(tag: text)
+                if valid {
                     currentSelectedSong.tags.insert("\(text)")
                     let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
                     self.currentUserRef.child("songs/\(currentSelectedSong.key)/tags").updateChildValues([strippedHashTag: true])
@@ -172,7 +175,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                     updateCollectionView()
                 } else {
                     print("invalid tag")
-                    let alert = UIAlertController(title: "Invalid Tag", message: "A tag should not end with space", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Invalid Tag", message: errorMessage, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true)
                 }
@@ -272,11 +275,13 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func updateCollectionView() {
         self.collectionView.reloadSections(IndexSet(integer: 0))
     }
-    func isValid(tag: String) -> Bool {
-        if tag[tag.index(before: tag.endIndex)] == " " {
-            return false
-        }
-        return true
+    func isValid(tag: String) -> (Bool, String) {
+        guard tag != "" else { return (false, "Tag should not be empty") }
+        guard tag.characters.first == "#" else { return (false, "Tag should start with #") }
+        guard tag[tag.index(before: tag.endIndex)] != " " else { return (false, "Tag should not end with space") }
+        guard !tag.substring(from: tag.index(tag.startIndex, offsetBy: 1)).contains("#") else { return (false, "Tag should not contain # besides the first one") }
+        guard !tag.contains("&") else { return (false, "Tag should not contain &") }
+        return (true, "")
     }
     func closeTagView() {
         let origin_y = view.frame.height
@@ -341,7 +346,26 @@ extension SongViewController { // related to search
         }
         return searchedSongList
     }
-    func getSongs(forTag tag: String, forUser user: TagifyUser) {
+    func searchedSongs(fromSongSet songSet: Set<Song>, withHashTagString hashTagString: String) -> [Song] {
+        if hashTagString == "" {
+            return allSongList
+        }
+        var result = [Song]()
+        let union = hashTagString.components(separatedBy: "&")
+        for hashTagSubstring in union {
+            var intersection = hashTagSubstring.components(separatedBy: "#")
+            intersection.remove(at: 0)
+            // append # in front and remove trailing spaces
+            intersection = intersection.map {"#\($0)".replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)}
+            for song in songSet {
+                if song.tags.union(intersection).count == song.tags.count {
+                    result.append(song)
+                }
+            }
+        }
+        return result
+    }
+    func getSongs(forTag tag: String, forUser user: TagifyUser) { // fill in followingUserTagSongDict
         if self.followingUserTagSongDict[user.uid] == nil {
             self.followingUserTagSongDict[user.uid] = [String: Set<Song>]()
         }
@@ -415,6 +439,9 @@ extension SongViewController { // initialize current user info with data fram da
                 for uid in snapshot.value as! [String: Bool] {
                     print("following : \(uid.key)")
                     self.currentUser.following.insert(TagifyUser(uid: uid.key))
+                    if self.followingUserTagSongDict[uid.key] == nil {
+                        self.followingUserTagSongDict[uid.key] = [String: Set<Song>]()
+                    }
                 }
             }
         })
