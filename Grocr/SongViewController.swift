@@ -24,6 +24,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var player: AVPlayer!
     var didCheckAndSuggestAppleMusicSignUp = false
     var didAskForMediaLibraryAccess = false
+    var storefrontId = "143441"  // Default region is USA
     
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -50,7 +51,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var isPlaying = false
     let allSongNames: [String] = [
         "Bruno Mars - That's What I Like",
-        "Ed Sheeran - Shape of You [Official Video]",
+        "Ed Sheeran - Shape of You",
         "Magic! - Rude",
         "Bruno Mars - 24K Magic",
         "Maroon 5 - Don't Wanna Know",
@@ -238,7 +239,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             requestAppleMusicAuthorization()
-//            searchBarSearchButtonClicked(song: cell.song)
+            searchBarSearchButtonClicked(song: cell.song)
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -550,6 +551,7 @@ extension SongViewController { //Related to Music
     func requestAppleMusicAuthorization() {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //Ask user for for Apple Music access
+        storefrontId = appleMusicFetchStorefrontRegion()
         let authorizationStatus = SKCloudServiceController.authorizationStatus()
         switch authorizationStatus {
         case .notDetermined:
@@ -641,45 +643,34 @@ extension SongViewController { //Related to Music
         self.present(alertController, animated: true, completion: nil)
     }
 //**********************************************************************//
-    
     // Fetch the user's storefront ID
     func appleMusicFetchStorefrontRegion() -> String {
-        
         let serviceController = SKCloudServiceController()
         var userStorefrontId = ""
         serviceController.requestStorefrontIdentifier(completionHandler: { (storefrontId:String?, err:Error?) in
-            
             guard err == nil else {
                 print("An error occured when getting storefront ID.")
                 return
             }
-            
             guard let storefrontId = storefrontId, storefrontId.characters.count >= 6 else {
                 print("Invalid storefrontID.")
                 return
             }
-            
             let indexRange = storefrontId.index(storefrontId.startIndex, offsetBy:0)..<storefrontId.index(storefrontId.startIndex, offsetBy:5)
             let trimmedId = storefrontId.substring(with: indexRange)
-            
             print("Success! The user's storefront ID is: \(trimmedId)")
             userStorefrontId = trimmedId
             return
         })
         return userStorefrontId
     }
-    
     // Choose Player type & Play
     func appleMusicPlayTrackId(trackId: String) {
-        
         let applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
-        //applicationMusicPlayer.setQueueWithStoreIDs(ids)
         applicationMusicPlayer.setQueueWithStoreIDs([trackId])
         applicationMusicPlayer.prepareToPlay()
         applicationMusicPlayer.play()
-        //print("Play \(song.name)")
     }
-    
     func activateBackGroundPlay() {
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
@@ -708,22 +699,22 @@ extension SongViewController { //Related to Music
         print("Music paused")
     }
     //Search iTunes and display results in table view
-    func searchItunes(searchTerm: String, storefrontId: String) {
-        Alamofire.request("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(storefrontId)")
+    func searchItunes(searchTerm: String) {
+        Alamofire.request("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
             .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success:
                     if let responseData = response.result.value as? NSDictionary {
-                        if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
-                            //self.tableData = songResults
-                            //self.tableView!.reloadData()
-                            print("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(storefrontId)")
-                            print(responseData)
-                            print(songResults)
-                            let trackNum = songResults[0]["trackId"] as! NSNumber
-                            let track = "\(trackNum)"
-                            self.appleMusicPlayTrackId(trackId: track)
+                        if let resultCount = responseData.value(forKey: "resultCount") as? Int {
+                            if resultCount == 0 {
+                                print("No result found.")
+                            } else if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
+                                print("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
+                                let trackNum = songResults[0]["trackId"] as! NSNumber
+                                let track = "\(trackNum)"
+                                self.appleMusicPlayTrackId(trackId: track)
+                            }
                         }
                     }
                 case .failure(let error):
@@ -732,18 +723,13 @@ extension SongViewController { //Related to Music
                 }
         }
     }
-    
     func removeSpecialChars(str: String) -> String {
         let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
         return String(str.characters.filter{chars.contains($0)})
     }
-    
     func searchBarSearchButtonClicked(song: Song) {
-        //Search iTunes with user input
         let search = removeSpecialChars(str: song.name).replacingOccurrences(of: " ", with: "+")
-        let region = appleMusicFetchStorefrontRegion()
-        searchItunes(searchTerm: search, storefrontId: region)
-        //song.resignFirstResponder()
+        searchItunes(searchTerm: search)
     }
     
     /*
