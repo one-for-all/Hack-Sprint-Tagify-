@@ -21,6 +21,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     let storage = Storage.storage()
     let storageRef: StorageReference! = Storage.storage().reference()
     var currentUser: TagifyUser!
+    var player: AVPlayer!
     
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -61,7 +62,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
-        print("End Editing! Starting Searching")
+        print("End Editing! Start Searching")
         if let searchString = sender.text {
             if searchString != "" && searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(allSongList), withHashTagString: searchString)
@@ -119,6 +120,18 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             self.initializeFollowedByForCurrentUser()
             self.initializeUserIcon()
         }
+        
+        //try playing music from preview url
+        activateBackGroundPlay()
+        let alert = UIAlertController(title: "可爱女人", message: "Do you want to listen to a music sample", preferredStyle: .actionSheet)
+        let confirmAction = UIAlertAction(title: "YES", style: .default, handler: { (action:UIAlertAction!) in
+            let urlstring = "http://audio.itunes.apple.com/apple-assets-us-std-000001/AudioPreview30/v4/70/f1/3d/70f13d0d-884b-fdd8-0d59-5182ce191930/mzaf_7077884697226858641.plus.aac.p.m4a"
+            self.playSampleMusic(withURLString: urlstring)
+        })
+        let cancelAction = UIAlertAction(title: "NO", style: .cancel, handler: nil)
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -220,11 +233,12 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismissKeyboard()
-        if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
-            authorizeAppleMusic()
-            searchBarSearchButtonClicked(song: cell.song)
-        }
         tableView.deselectRow(at: indexPath, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
+            requestAppleMusicAuthorization()
+            checkAndSuggestAppleMusicSignUp()
+//            searchBarSearchButtonClicked(song: cell.song)
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100;
@@ -515,26 +529,103 @@ extension SongViewController { // initialize current user info with data fram da
 
 extension SongViewController { //Related to Music
     
-    func authorizeAppleMusic() {
+    func requestMPMediaLibraryAccessAgain() {
+        let authorizationStatus = MPMediaLibrary.authorizationStatus()
+        switch authorizationStatus {
+        case .denied:
+            print("media library access denied, we are going to request it again")
+            let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+            let titleString = "\"\(appName)\" Would Like to Access Apple Music And Your Media Library"
+            let alertController = UIAlertController(title: titleString, message: "...to play full songs", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                let url = URL(string: UIApplicationOpenSettingsURLString)
+                UIApplication.shared.open(url!)
+            })
+            let cancelAction = UIAlertAction(title: "Don't Allow", style: .default, handler: nil)
+            alertController.addAction(cancelAction)
+            alertController.addAction(confirmAction)
+            alertController.preferredAction = confirmAction
+            self.present(alertController, animated: true, completion: nil)
+        case .authorized:
+            print("good, we have access to media library")
+        case .restricted:
+            print("no media library access, restricted device, education mode?")
+        case .notDetermined:
+            print("media library access not determined yet. I should not see this string")
+        }
+    }
+    
+    func checkAndSuggestAppleMusicSignUp() {
+        let controller = SKCloudServiceController()
+        controller.requestCapabilities(completionHandler: ({ (capabilities, error) in
+            if let error = error {
+                print("Error requesting Apple Music Capability: \(error.localizedDescription)")
+                DispatchQueue.main.async(execute: {
+                    //self.showAlert("Capabilites error", error: "You must be an Apple Music member to use this application")
+                    print("You must be an Apple Music member to use this application")
+                })
+            }
+            switch capabilities {
+            case SKCloudServiceCapability.addToCloudMusicLibrary:
+                print("has addToCloudMusicLibrary capability")
+            case SKCloudServiceCapability.musicCatalogPlayback:
+                print("has addToCloudMusicLibrary capability")
+            default:
+                print("fall to default")
+                self.presentAppleMusicSignUpAlert()
+            }
+        }))
+    }
+    
+    func presentAppleMusicSignUpAlert() { // helper function to present Apple Music Sign Up alert
+        let alertController = UIAlertController(title: "Would You Like to Sign Up For Apple Music", message: "...to play full songs", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Sign Up", style: .default, handler: { (action) in
+            if let url = URL(string: "https://www.apple.com/apple-music/membership/") {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        })
+        let cancelAction = UIAlertAction(title: "Maybe Later", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        alertController.preferredAction = confirmAction
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    func requestAppleMusicAuthorization() {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //Ask user for for Apple Music access
         SKCloudServiceController.requestAuthorization { (status) in
-            if status == .authorized {
+            switch status {
+            case .authorized:
                 let controller = SKCloudServiceController()
-                //Check if user is a Apple Music member
                 controller.requestCapabilities(completionHandler: ({ (capabilities, error) in
-                    if error != nil {
+                    if let error = error {
+                        print("Error requesting Apple Music Capability: \(error.localizedDescription)")
                         DispatchQueue.main.async(execute: {
                             //self.showAlert("Capabilites error", error: "You must be an Apple Music member to use this application")
                             print("You must be an Apple Music member to use this application")
                         })
                     }
+                    switch capabilities {
+                    case SKCloudServiceCapability.addToCloudMusicLibrary:
+                        print("has addToCloudMusicLibrary capability")
+                    case SKCloudServiceCapability.musicCatalogPlayback:
+                        print("has addToCloudMusicLibrary capability")
+                    default:
+                        print("fall to default")
+                        self.presentAppleMusicSignUpAlert()
+                    }
                 }))
-            } else {
-                DispatchQueue.main.async(execute: {
-                    //self.showAlert("Denied", error: "User has denied access to Apple Music library")
-                    print("User has denied access to Apple Music library")
-                })
+            case .denied:
+                print("User has denied access to Apple Music library")
+            case .restricted:
+                print("user's device has restricted access, maybe education mode")
+            case .notDetermined:
+                print("Apple Music Access not determined, should not see this message")
             }
         }
     }
@@ -575,6 +666,31 @@ extension SongViewController { //Related to Music
         applicationMusicPlayer.prepareToPlay()
         applicationMusicPlayer.play()
         //print("Play \(song.name)")
+    }
+    
+    func activateBackGroundPlay() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
+            print("AVAudioSession Category Playback OK")
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("AVAudioSession is Active")
+            } catch {
+                print(error)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    func playSampleMusic(withURLString urlString: String) {
+        if let url = URL(string: urlString) {
+            let playerItem = AVPlayerItem(url: url)
+            self.player = AVPlayer(playerItem:playerItem)
+            self.player!.volume = 1.0
+            self.player!.play()
+        } else {
+            print("invalid url string for sample music")
+        }
     }
     func pausePlay() {
         print("Music paused")
