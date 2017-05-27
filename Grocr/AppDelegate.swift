@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
   var currentUser = TagifyUser(uid: "", email: "")
+  var userIcon = UIImage()
   
   override init() {
     FirebaseApp.configure()

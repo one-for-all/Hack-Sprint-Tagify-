@@ -31,16 +31,17 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.currentUser = appDelegate.currentUser
         print("current user is \(self.currentUser.email)!")
-        let userIconPath = "\(Auth.auth().currentUser!.uid)/userIcon.jpg"
-        let reference = storageRef.child(userIconPath)
-        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("got image")
-                self.iconImageView.image = UIImage(data: data!)
-            }
-        }
+//        let userIconPath = "\(Auth.auth().currentUser!.uid)/userIcon.jpg"
+//        let reference = storageRef.child(userIconPath)
+//        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else {
+//                print("got image")
+//                self.iconImageView.image = UIImage(data: data!)
+//            }
+//        }
+        self.iconImageView.image = appDelegate.userIcon
         searchUserWith(username: "bibek@gmail.com", foundUser: { (searchedUser) in
             if let user = searchedUser {
                 print("searched user is : \(user.email)")

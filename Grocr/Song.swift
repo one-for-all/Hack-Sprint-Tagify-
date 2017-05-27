@@ -25,38 +25,26 @@ import Foundation
 class Song {
   
   let key: String
-  let name: String
-  let addedByUser: String
-  let ref: DatabaseReference?
-  var completed: Bool = false
+  var name: String = ""
+  var songWriter: String = ""
   var tags = Set<String>()
   var imageSource = "music.jpg"
   
-  init(name: String, addedByUser: String, completed: Bool, key: String = "") {
+  init(key: String) {
     self.key = key
-    self.name = name
-    self.addedByUser = addedByUser
-    self.completed = completed
-    self.ref = nil
   }
   
   init(name: String) {
     self.name = name
     self.key = ""
-    self.addedByUser = ""
-    self.ref = nil
   }
   init(name: String, key: String) {
     self.name = name
     self.key = key
-    self.addedByUser = ""
-    self.ref = nil
   }
   init(name: String, imageSource: String) {
     self.name = name
     self.key = ""
-    self.addedByUser = ""
-    self.ref = nil
     self.imageSource = imageSource
   }
   
@@ -68,8 +56,6 @@ class Song {
     for key in snapshotTags.keys {
       tags.insert("#"+key)
     }
-    ref = snapshot.ref
-    addedByUser = ""
   }
   
   func toAnyObject() -> Any {
@@ -89,6 +75,12 @@ class Song {
     }
     return songObj
   }
-  
 }
-
+extension Song: Hashable {
+  var hashValue: Int {
+    return key.hashValue
+  }
+  static func == (lhs: Song, rhs: Song) -> Bool {
+    return lhs.key == rhs.key
+  }
+}

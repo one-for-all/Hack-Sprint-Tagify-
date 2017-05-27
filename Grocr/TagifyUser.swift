@@ -67,6 +67,15 @@ class TagifyUser {
     self.followedBy.remove(user)
     ref.child("\(self.uid)/followedBy").setValue([user.uid: NSNull()])
   }
+  // To Do: Add song tags for user
+  func add(tag: String, forSong song: Song) {
+    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)").setValue([song.key: true])
+    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.key)").setValue([tag: true])
+  }
+  func remove(tag: String, forSong song: Song) {
+    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)").setValue([song.key: NSNull()])
+    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.key)").setValue([tag: NSNull()])
+  }
 }
 
 extension TagifyUser: Hashable {
