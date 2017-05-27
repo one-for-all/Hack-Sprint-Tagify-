@@ -26,46 +26,72 @@ class TagifyUser {
   let uid: String
   let email: String
   var username: String
-  var following = Set<TagifyUser>()
-  var followedBy = Set<TagifyUser>()
+  var following = Set<String>()
+  var followedBy = Set<String>()
+//  var following = Set<TagifyUser>()
+//  var followedBy = Set<TagifyUser>()
   
   init(authData: User) {
     uid = authData.uid
     email = authData.email!
     self.username = self.email
+    self.setUpdates()
   }
-  
   init(uid: String) {
-    self.uid = uid
     self.email = ""
     self.username = ""
-  }
-  
-  init(uid: String, email: String) {
     self.uid = uid
-    self.email = email
-    self.username = email
+    self.setUpdates()
   }
-  func follow(user: TagifyUser, ref: DatabaseReference) {
-    self.following.insert(user)
-    ref.child("\(self.uid)/following").setValue([user.uid: true])
+  func setUpdates() {
+    guard self.uid != "" else { return }
+    let ref = Database.database().reference().child("userProfiles/\(self.uid)")
+    let usernameRef = ref.child("username")
+    usernameRef.observe(.value, with: { snapshot in
+      if snapshot.exists() {
+        self.username = snapshot.value as! String
+      }
+    })
+    let followingRef = ref.child("following")
+    followingRef.observe(.value, with: { snapshot in
+      self.following = Set<String>()
+      if snapshot.exists() {
+        for uid in snapshot.value as! [String: Bool] {
+          print("following : \(uid.key)")
+          self.following.insert(uid.key)
+        }
+      }
+    })
+    let followedByRef = ref.child("followedBy")
+    followedByRef.observe( .value, with: { snapshot in
+      self.followedBy = Set<String>()
+      if snapshot.exists() {
+        for uid in snapshot.value as! [String: Bool] {
+          print("followed by : \(uid.key)")
+          self.followedBy.insert(uid.key)
+        }
+      }
+    })
   }
-  func unfollow(user: TagifyUser, ref: DatabaseReference) {
-    self.following.remove(user)
-    ref.child("\(self.uid)/following").setValue([user.uid: NSNull()])
+  func follow(uid: String, ref: DatabaseReference) {
+    self.following.insert(uid)
+    ref.child("\(self.uid)/following").setValue([uid: true])
+  }
+  func unfollow(uid: String, ref: DatabaseReference) {
+    self.following.remove(uid)
+    ref.child("\(self.uid)/following").setValue([uid: NSNull()])
   }
   func setUsername(username: String, ref: DatabaseReference) {
     self.username = username
     ref.child("\(self.uid)/username").setValue(username)
   }
-  func followedBy(user: TagifyUser, ref: DatabaseReference) {
-    self.followedBy.insert(user)
-    print("\(self.email) is followed by \(user.email)")
-    ref.child("\(self.uid)/followedBy").setValue([user.uid: true])
+  func followedBy(uid: String, ref: DatabaseReference) {
+    self.followedBy.insert(uid)
+    ref.child("\(self.uid)/followedBy").setValue([uid: true])
   }
-  func unfollowedBy(user: TagifyUser, ref: DatabaseReference) {
-    self.followedBy.remove(user)
-    ref.child("\(self.uid)/followedBy").setValue([user.uid: NSNull()])
+  func unfollowedBy(uid: String, ref: DatabaseReference) {
+    self.followedBy.remove(uid)
+    ref.child("\(self.uid)/followedBy").setValue([uid: NSNull()])
   }
   // To Do: Add song tags for user
   func add(tag: String, forSong song: Song) {

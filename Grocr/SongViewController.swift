@@ -119,21 +119,21 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             self.initializeUserProfile(user: user)
             self.initializeCurrentUserSongList()
             self.initializeFollowingForCurrentUser()
-            self.initializeFollowedByForCurrentUser()
             self.initializeUserIcon()
         }
         
         //try playing music from preview url
         activateBackGroundPlay()
-        let alert = UIAlertController(title: "可爱女人", message: "Do you want to listen to a music sample", preferredStyle: .actionSheet)
-        let confirmAction = UIAlertAction(title: "YES", style: .default, handler: { (action:UIAlertAction!) in
-            let urlstring = "http://audio.itunes.apple.com/apple-assets-us-std-000001/AudioPreview30/v4/70/f1/3d/70f13d0d-884b-fdd8-0d59-5182ce191930/mzaf_7077884697226858641.plus.aac.p.m4a"
-            self.playSampleMusic(withURLString: urlstring)
-        })
-        let cancelAction = UIAlertAction(title: "NO", style: .cancel, handler: nil)
-        alert.addAction(confirmAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "可爱女人", message: "Do you want to listen to a music sample", preferredStyle: .actionSheet)
+//        let confirmAction = UIAlertAction(title: "YES", style: .default, handler: { (action:UIAlertAction!) in
+//            let urlstring = "http://audio.itunes.apple.com/apple-assets-us-std-000001/AudioPreview30/v4/70/f1/3d/70f13d0d-884b-fdd8-0d59-5182ce191930/mzaf_7077884697226858641.plus.aac.p.m4a"
+//            self.playSampleMusic(withURLString: urlstring)
+//        })
+//        let cancelAction = UIAlertAction(title: "NO", style: .cancel, handler: nil)
+//        alert.addAction(confirmAction)
+//        alert.addAction(cancelAction)
+//        present(alert, animated: true, completion: nil)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -452,23 +452,9 @@ extension SongViewController { // initialize current user info with data fram da
         currentUserFollowingRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.exists() {
                 for uid in snapshot.value as! [String: Bool] {
-                    print("following : \(uid.key)")
-                    self.currentUser.following.insert(TagifyUser(uid: uid.key))
                     if self.followingUserTagSongDict[uid.key] == nil {
                         self.followingUserTagSongDict[uid.key] = [String: Set<Song>]()
                     }
-                }
-            }
-        })
-    }
-    func initializeFollowedByForCurrentUser() {
-        let currentUserFollowedRef = self.userProfilesRef.child("\(self.currentUser.uid)/followedBy")
-        currentUserFollowedRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            print("current uid is : \(self.currentUser.uid)")
-            if snapshot.exists() {
-                for uid in snapshot.value as! [String: Bool] {
-                    print("followed by : \(uid.key)")
-                    self.currentUser.followedBy.insert(TagifyUser(uid: uid.key))
                 }
             }
         })
@@ -580,7 +566,7 @@ extension SongViewController { //Related to Music
             case .denied:
                 print("User has denied access to Apple Music library")
             case .restricted:
-                print("user's device has restricted access, maybe education mode")
+                print("User's device has restricted access, maybe education mode")
             case .notDetermined:
                 print("Apple Music Access not determined, should not see this message")
             }

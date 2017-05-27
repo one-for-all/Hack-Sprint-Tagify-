@@ -118,19 +118,19 @@ extension SettingsViewController { // search user and follow
                 print("searching for \(username)")
                 if userName == username {
                     print("got user")
-                    searchedUser = TagifyUser(uid: userKey, email: userEmail)
+                    searchedUser = TagifyUser(uid: userKey)
                 }
             }
             foundUser(searchedUser)
         })
     }
     func follow(user: TagifyUser) {
-        self.currentUser.follow(user: user, ref: userProfilesRef)
-        user.followedBy(user: self.currentUser, ref: userProfilesRef)
+        self.currentUser.follow(uid: user.uid, ref: userProfilesRef)
+        user.followedBy(uid: self.currentUser.uid, ref: userProfilesRef)
     }
     func unfollow(user: TagifyUser) {
-        self.currentUser.unfollow(user: user, ref: userProfilesRef)
-        user.unfollowedBy(user: self.currentUser, ref: userProfilesRef)
+        self.currentUser.unfollow(uid: user.uid, ref: userProfilesRef)
+        user.unfollowedBy(uid: self.currentUser.uid, ref: userProfilesRef)
     }
     func setUsername(username: String) {
         self.currentUser.setUsername(username: username, ref: userProfilesRef)
