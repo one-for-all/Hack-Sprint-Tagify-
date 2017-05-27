@@ -25,6 +25,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var didCheckAndSuggestAppleMusicSignUp = false
     var didAskForMediaLibraryAccess = false
     var storefrontId = "143441"  // Default region is USA
+    var applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -652,10 +653,11 @@ extension SongViewController { //Related to Music
     }
     // Choose Player type & Play
     func appleMusicPlayTrackId(trackId: String) {
-        let applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
         applicationMusicPlayer.setQueueWithStoreIDs([trackId])
         applicationMusicPlayer.prepareToPlay()
         applicationMusicPlayer.play()
+        isPlaying = true
+        playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     func activateBackGroundPlay() {
         do {
@@ -681,8 +683,22 @@ extension SongViewController { //Related to Music
             print("invalid url string for sample music")
         }
     }
+    //Control playback
     func pausePlay() {
+        applicationMusicPlayer.pause()
         print("Music paused")
+    }
+    func continuePlay() {
+        applicationMusicPlayer.play()
+        print("Music continued")
+    }
+    func playNext() {
+        applicationMusicPlayer.skipToNextItem()
+        print("Play next song")
+    }
+    func playPrevious() {
+        applicationMusicPlayer.skipToPreviousItem()
+        print("Play previous song")
     }
     //Search iTunes and display results in table view
     func searchItunes(searchTerm: String) {
@@ -751,13 +767,5 @@ extension SongViewController { //Related to Music
      }
      }
      */
-    func continuePlay() {
-        print("Music continued")
-    }
-    func playNext() {
-        print("Play next song")
-    }
-    func playPrevious() {
-        print("Play previous song")
-    }
+
 }
