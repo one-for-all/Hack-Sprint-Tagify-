@@ -13,11 +13,14 @@ class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var songImageView: UIImageView!
     @IBOutlet weak var songTagsLabel: UILabel!
+    @IBOutlet weak var songArtistLabel: UILabel!
     
-    var song: Song = Song(name: "") {
+    
+    var song: Song = Song(trackId: "") {
         didSet {
             songNameLabel.text = song.name
             var text: String = "";
+            songArtistLabel.text = song.artist
             for tag in song.tags {
                 text += " \(tag)"
             }

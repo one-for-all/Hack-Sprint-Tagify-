@@ -24,31 +24,20 @@ import Foundation
 
 class Song {
   
-  var key = ""
   var name: String = ""
-  var songWriter: String = ""
+  var artist: String = ""
   var tags = Set<String>()
   var imageSource = "music.jpg"
   var trackId = ""
   var previewURL = ""
-
-  init(name: String) {
-    self.name = name
-  }
-  init(name: String, key: String) {
-    self.name = name
-    self.key = key
-  }
-  init(name: String, trackId: String) {
+  
+  init(trackId: String) { // for initializing empty song
     self.trackId = trackId
   }
-  init(name: String, imageSource: String) {
+
+  init(name: String, artist: String, trackId: String, imageSource: String, previewURL: String) {
     self.name = name
-    self.imageSource = imageSource
-  }
-  init(name: String, songWriter: String, trackId: String, imageSource: String, previewURL: String) {
-    self.name = name
-    self.songWriter = songWriter
+    self.artist = artist
     self.trackId = trackId
     self.imageSource = imageSource
     self.previewURL = previewURL
@@ -57,8 +46,11 @@ class Song {
   init(snapshot: DataSnapshot) {
     trackId = snapshot.key
     let snapshotValue = snapshot.value as! [String: AnyObject]
-    name = snapshotValue["name"] as! String
-    let snapshotTags = snapshotValue["tags"] as! [String: Bool]
+    name = snapshotValue["name"] as? String ?? ""
+    artist = snapshotValue["artist"] as? String ?? ""
+    imageSource = snapshotValue["imageSource"] as? String ?? ""
+    previewURL = snapshotValue["previewURL"] as? String ?? ""
+    let snapshotTags = snapshotValue["tags"] as? [String: Bool] ?? [String: Bool]()
     for key in snapshotTags.keys {
       tags.insert("#"+key)
     }
@@ -67,18 +59,14 @@ class Song {
   func toAnyObject() -> Any {
     var songObj: [String: Any] = [:]
     songObj["name"] = name
+    songObj["artist"] = artist
+    songObj["imageSource"] = imageSource
+    songObj["previewURL"] = previewURL
     var tagDict = [String: Bool]()
     for tag in tags {
       tagDict[tag.substring(from: tag.index(tag.startIndex, offsetBy: 1))] = true
     }
     songObj["tags"] = tagDict
-    print("this song is:")
-    print("name: \(songObj["name"]!)")
-    print("tags:")
-    let tagsD = songObj["tags"] as! [String: Bool]
-    for tag in tagsD.keys {
-      print(tag)
-    }
     return songObj
   }
 }
