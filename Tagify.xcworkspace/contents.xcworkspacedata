@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Grocr/FollowingViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:Tagify.xcodeproj">
    </FileRef>
    <FileRef
