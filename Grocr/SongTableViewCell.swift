@@ -22,7 +22,16 @@ class SongTableViewCell: UITableViewCell {
                 text += " \(tag)"
             }
             songTagsLabel.text = text
-            if song.imageSource.contains("http") {
+//            let firstFourLetters = song.imageSource.index(song.imageSource.startIndex, offsetBy:4)
+//            if song.imageSource.substring(to: firstFourLetters) == "http" {
+//                let url = URL(string: song.imageSource)
+//                let data = try? Data(contentsOf: url!)
+//                songImageView.image = UIImage(data: data!)
+//            } else {
+//                songImageView.image = UIImage(named: song.imageSource)
+//            }
+            let firstFourLetters = song.imageSource.index(song.imageSource.startIndex, offsetBy:4)
+            if song.imageSource.substring(to: firstFourLetters) == "http" {
                 let url = URL(string: song.imageSource)
                 DispatchQueue.global().async {
                     let data = try? Data(contentsOf: url!)
@@ -33,6 +42,7 @@ class SongTableViewCell: UITableViewCell {
             } else {
                 songImageView.image = UIImage(named: song.imageSource)
             }
+
         }
     }
     

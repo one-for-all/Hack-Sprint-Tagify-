@@ -50,17 +50,26 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var currentSelectedSong: Song = Song(name: "") {
         didSet {
             tagViewSongLabel.text = currentSelectedSong.name
-            if currentSelectedSong.imageSource.contains("http") {
+            let firstFourLetters = currentSelectedSong.imageSource.index(currentSelectedSong.imageSource.startIndex, offsetBy:4)
+            if currentSelectedSong.imageSource.substring(to: firstFourLetters) == "http" {
                 let url = URL(string: currentSelectedSong.imageSource)
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async {
-                        self.tagViewSongImageView.image = UIImage(data: data!)
-                    }
-                }
+                let data = try? Data(contentsOf: url!)
+                tagViewSongImageView.image = UIImage(data: data!)
             } else {
                 tagViewSongImageView.image = UIImage(named: currentSelectedSong.imageSource)
             }
+//            let firstFourLetters = currentSelectedSong.imageSource.index(currentSelectedSong.imageSource.startIndex, offsetBy:4)
+//            if currentSelectedSong.imageSource.substring(to: firstFourLetters) == "http" {
+//                let url = URL(string: currentSelectedSong.imageSource)
+//                DispatchQueue.global().async {
+//                    let data = try? Data(contentsOf: url!)
+//                    DispatchQueue.main.async {
+//                        self.tagViewSongImageView.image = UIImage(data: data!)
+//                    }
+//                }
+//            } else {
+//                tagViewSongImageView.image = UIImage(named: currentSelectedSong.imageSource)
+//            }
         }
     }
     var isPlaying = false
@@ -91,9 +100,11 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
-        print("End Editing! Start Searching")
         if let searchString = sender.text {
-            if searchString != "" && searchString[searchString.startIndex] == "#" {
+            print(searchString)
+            if searchString == "" {
+                searchedSongList = allSongList
+            } else if searchString != "" && searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(allSongList), withHashTagString: searchString)
                 tableView.reloadData()
             } else {
@@ -102,7 +113,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                     self.tableView.reloadData()
                 }
             }
+            print(self.searchedSongList)
         }
+        print("End Editing! Start Searching")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
@@ -292,7 +305,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             if self.appleMusicCapable {
-                searchBarSearchButtonClicked(song: cell.song)
+                songClicked(song: cell.song)
             } else {
                 playSampleMusic(withURLString: cell.song.previewURL)
             }
@@ -839,7 +852,7 @@ extension SongViewController { //Related to Music
                 }
         }
     }
-    func searchBarSearchButtonClicked(song: Song) {
+    func songClicked(song: Song) {
         appleMusicPlayTrackId(trackId: song.trackId)
         print("Playing: \(song.name)")
         print("TrackId: \(song.trackId)")
@@ -847,6 +860,7 @@ extension SongViewController { //Related to Music
     
     /*
      //Add song to playback queue if user selects a cell
+     
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
      let indexPath = tableView.indexPathForSelectedRow
      if let rowData: NSDictionary = self.tableData[indexPath!.row] as? NSDictionary, urlString = rowData["artworkUrl60"] as? String,
