@@ -27,7 +27,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-  var currentUser = TagifyUser(uid: "")
+  var currentUser: TagifyUser!
   var userIcon = UIImage()
   
   override init() {
@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]? = [:]) -> Bool {
     UIApplication.shared.statusBarStyle = .lightContent
+    self.currentUser = TagifyUser(uid: "")
     return true
   }
 
