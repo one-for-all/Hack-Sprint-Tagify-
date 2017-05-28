@@ -28,6 +28,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     var itunesSongList = [Song]()
     
+    
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     let songCellIdentifier = "SongCell"

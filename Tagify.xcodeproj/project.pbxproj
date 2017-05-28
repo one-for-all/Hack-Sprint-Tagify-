@@ -16,6 +16,7 @@
 		6967E2161ED7D2CB00FF76E4 /* Previous Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2151ED7D2CB00FF76E4 /* Previous Button.png */; };
 		6967E21B1ED8D8C000FF76E4 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */; };
 		6967E21D1EDA338F00FF76E4 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E21C1EDA338F00FF76E4 /* add.png */; };
+		6967E21F1EDA3F4600FF76E4 /* ThemeColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */; };
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
@@ -24,6 +25,7 @@
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
 		9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423636C1ECAFA39004398A0 /* SongViewController.swift */; };
+		9429EDCE1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */; };
 		944A701C1ED813280073EE0C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701B1ED813280073EE0C /* SettingsTableViewController.swift */; };
 		944A701E1ED819EB0073EE0C /* UnwindSegueToRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */; };
 		944A70201ED81D570073EE0C /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701F1ED81D570073EE0C /* UsernameViewController.swift */; };
@@ -55,6 +57,7 @@
 		6967E2151ED7D2CB00FF76E4 /* Previous Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Previous Button.png"; sourceTree = "<group>"; };
 		6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6967E21C1EDA338F00FF76E4 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ThemeColorViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -64,6 +67,7 @@
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
 		9423636C1ECAFA39004398A0 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewCell.swift; sourceTree = "<group>"; };
 		944A701B1ED813280073EE0C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegueToRight.swift; sourceTree = "<group>"; tabWidth = 4; };
 		944A701F1ED81D570073EE0C /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -198,6 +202,7 @@
 				944A701B1ED813280073EE0C /* SettingsTableViewController.swift */,
 				944A701F1ED81D570073EE0C /* UsernameViewController.swift */,
 				6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */,
+				6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				94BFA2521ED01E2E005AE02F /* CollectionView.swift */,
 				9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */,
 				944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */,
+				9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -396,7 +402,9 @@
 				94BFA2531ED01E2E005AE02F /* CollectionView.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 				940E0BCC1ED692A300B8C4E0 /* ScopeViewController.swift in Sources */,
+				6967E21F1EDA3F4600FF76E4 /* ThemeColorViewController.swift in Sources */,
 				944A701E1ED819EB0073EE0C /* UnwindSegueToRight.swift in Sources */,
+				9429EDCE1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift in Sources */,
 				944A701C1ED813280073EE0C /* SettingsTableViewController.swift in Sources */,
 				942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */,
 				9495E1131ED80FD5001A4F68 /* SegueFromRight.swift in Sources */,
