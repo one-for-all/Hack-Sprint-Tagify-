@@ -17,6 +17,8 @@
 		6967E21B1ED8D8C000FF76E4 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */; };
 		6967E21D1EDA338F00FF76E4 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E21C1EDA338F00FF76E4 /* add.png */; };
 		6967E21F1EDA3F4600FF76E4 /* ThemeColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */; };
+		6967E2211EDA80F900FF76E4 /* Orange_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2201EDA80F900FF76E4 /* Orange_add.png */; };
+		6967E2231EDA810400FF76E4 /* Line 3Orange_remove.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2221EDA810400FF76E4 /* Line 3Orange_remove.png */; };
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
@@ -57,6 +59,8 @@
 		6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6967E21C1EDA338F00FF76E4 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ThemeColorViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6967E2201EDA80F900FF76E4 /* Orange_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Orange_add.png; sourceTree = "<group>"; };
+		6967E2221EDA810400FF76E4 /* Line 3Orange_remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Line 3Orange_remove.png"; sourceTree = "<group>"; };
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -129,8 +133,10 @@
 				940E0B851ED6207700B8C4E0 /* playButton.png */,
 				6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */,
 				6967E20D1ED58A5900FF76E4 /* forward.png */,
+				6967E2201EDA80F900FF76E4 /* Orange_add.png */,
 				6967E2111ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png */,
 				6967E1E51ED260AD00FF76E4 /* setting1.png */,
+				6967E2221EDA810400FF76E4 /* Line 3Orange_remove.png */,
 				94BFA2541ED02BA3005AE02F /* BrunoMars.jpg */,
 				94BFA2551ED02BA3005AE02F /* Magic!.png */,
 				6967E2151ED7D2CB00FF76E4 /* Previous Button.png */,
@@ -196,10 +202,10 @@
 				BB2385631B3DD5AB0079CD01 /* LoginViewController.swift */,
 				9423636C1ECAFA39004398A0 /* SongViewController.swift */,
 				940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */,
-				940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */,
 				944A701B1ED813280073EE0C /* SettingsTableViewController.swift */,
 				944A701F1ED81D570073EE0C /* UsernameViewController.swift */,
 				6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */,
+				940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */,
 				6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */,
 			);
 			name = Controllers;
@@ -311,10 +317,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6967E2231EDA810400FF76E4 /* Line 3Orange_remove.png in Resources */,
 				940E0BCE1ED696E200B8C4E0 /* userDefaultIcon.png in Resources */,
 				6967E2101ED58B5200FF76E4 /* Cross Buttomwith shadow.png in Resources */,
 				6967E2121ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png in Resources */,
 				6967E21D1EDA338F00FF76E4 /* add.png in Resources */,
+				6967E2211EDA80F900FF76E4 /* Orange_add.png in Resources */,
 				9423636B1ECAF4EA004398A0 /* music.jpg in Resources */,
 				6967E2161ED7D2CB00FF76E4 /* Previous Button.png in Resources */,
 				940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */,
