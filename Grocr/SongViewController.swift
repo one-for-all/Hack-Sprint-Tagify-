@@ -258,6 +258,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             //requestAppleMusicAuthorization()
             searchBarSearchButtonClicked(song: cell.song)
+            print(cell.song.trackId)
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -455,7 +456,8 @@ extension SongViewController { // two methods for initializing song lists depend
     }
     func initializeAllSongList(songs: [Song]) {
         allSongList = []
-        for song in songs {
+        for (index, song) in songs.enumerated() {
+            song.trackId = allSongTrackIds[index]
             let songName = song.name
             if songName.range(of: "Bruno Mars") != nil {
                 song.imageSource = "BrunoMars.jpg"
