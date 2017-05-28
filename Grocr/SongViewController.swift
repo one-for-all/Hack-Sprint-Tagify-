@@ -26,6 +26,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var didAskForMediaLibraryAccess = false
     var storefrontId = "143441"  // Default region is USA
     var applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
+    var itunesSongList = [Song]()
     
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -71,7 +72,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             if searchString != "" && searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(allSongList), withHashTagString: searchString)
             } else {
-                searchedSongList = songList(withSearchString: searchString)
+                searchItunes(searchTerm: searchString) { list in
+                    self.searchedSongList = list
+                }
             }
             tableView.reloadData()
         }
@@ -123,6 +126,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             self.initializeFollowingForCurrentUser()
             self.initializeUserIcon()
         }
+        
+        requestAppleMusicAuthorization()
         
         //try playing music from preview url
         activateBackGroundPlay()
@@ -239,7 +244,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         dismissKeyboard()
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
-            requestAppleMusicAuthorization()
+            //requestAppleMusicAuthorization()
             searchBarSearchButtonClicked(song: cell.song)
         }
     }
@@ -338,9 +343,12 @@ extension SongViewController: UIGestureRecognizerDelegate { //Related to Tap Ges
 extension SongViewController { // related to search
     func songList(withSearchString searchString: String) -> [Song] {
         var searchedSongList = [Song]()
+        //Existing songs
         if searchString == "" {
             searchedSongList = allSongList
-        } else if searchString[searchString.startIndex] == "#" {
+        }
+        //Hashtag search
+        else if searchString[searchString.startIndex] == "#" {
             print("Searching Hashtag!")
             let searchStringArr = searchString.components(separatedBy: "#").dropFirst()
             for song in allSongList {
@@ -354,7 +362,9 @@ extension SongViewController { // related to search
                     searchedSongList.append(song)
                 }
             }
-        } else {
+        }
+        //Itunes search
+        else {
             for song in allSongList {
                 if song.name.lowercased().range(of:searchString.lowercased()) != nil{
                     searchedSongList.append(song)
@@ -701,6 +711,11 @@ extension SongViewController { //Related to Music
         print("Play previous song")
     }
     //Search iTunes and display results in table view
+    func removeSpecialChars(str: String) -> String {
+        let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
+        return String(str.characters.filter{chars.contains($0)})
+    }
+    /*
     func searchItunes(searchTerm: String) {
         Alamofire.request("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
             .validate()
@@ -708,6 +723,7 @@ extension SongViewController { //Related to Music
                 switch response.result {
                 case .success:
                     if let responseData = response.result.value as? NSDictionary {
+                        print(responseData)
                         if let resultCount = responseData.value(forKey: "resultCount") as? Int {
                             if resultCount == 0 {
                                 print("No result found.")
@@ -725,29 +741,47 @@ extension SongViewController { //Related to Music
                 }
         }
     }
-    func removeSpecialChars(str: String) -> String {
-        let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
-        return String(str.characters.filter{chars.contains($0)})
+    */
+    func searchItunes(searchTerm: String, callback: @escaping ([Song]) ->() ) {
+        var songList = [Song]()
+        let search = removeSpecialChars(str: searchTerm).replacingOccurrences(of: " ", with: "+")
+        Alamofire.request("https://itunes.apple.com/search?term=\(search)&entity=song&limit=15")
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let responseData = response.result.value as? NSDictionary {
+                        if let resultCount = responseData.value(forKey: "resultCount") as? Int {
+                            if resultCount == 0 {
+                                print("No result found.")
+                            } else if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
+                                //print("https://itunes.apple.com/search?term=\(search)&entity=song&limit=15&s=143441")
+                                //print(songResults)
+                                for result in songResults {
+                                    let singer = result["artistName"] as! String
+                                    let songName = result["trackName"] as! String
+                                    let trackNum = result["trackId"] as! NSNumber
+                                    let track = "\(trackNum)"
+                                    let imageUrl = result["artworkUrl100"] as! String
+                                    print(imageUrl)
+                                    let song = Song(name: "\(singer) - \(songName)", songWriter: singer, trackId: track, imageSource: imageUrl)
+                                    songList.append(song)
+                                }
+                                callback(songList)
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    //self.showAlert("Error", error: error.description)
+                    print("Failed to search itunes.")
+                }
+        }
     }
     func searchBarSearchButtonClicked(song: Song) {
-        let search = removeSpecialChars(str: song.name).replacingOccurrences(of: " ", with: "+")
-        searchItunes(searchTerm: search)
+        appleMusicPlayTrackId(trackId: song.trackId)
     }
     
     /*
-     //Display iTunes search results
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
-     if let rowData: NSDictionary = self.tableData[indexPath.row] as? NSDictionary,
-     urlString = rowData["artworkUrl60"] as? String,
-     imgURL = NSURL(string: urlString),
-     imgData = NSData(contentsOfURL: imgURL) {
-     cell.imageView?.image = UIImage(data: imgData)
-     cell.textLabel?.text = rowData["trackName"] as? String
-     cell.detailTextLabel?.text = rowData["artistName"] as? String
-     }
-     return cell
-     }
      //Add song to playback queue if user selects a cell
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
      let indexPath = tableView.indexPathForSelectedRow
