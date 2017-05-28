@@ -29,6 +29,7 @@ class Song {
   var songWriter: String = ""
   var tags = Set<String>()
   var imageSource = "music.jpg"
+  var trackId = ""
   
   init(key: String) {
     self.key = key
@@ -45,6 +46,13 @@ class Song {
   init(name: String, imageSource: String) {
     self.name = name
     self.key = ""
+    self.imageSource = imageSource
+  }
+  init(name: String, songWriter: String, trackId: String, imageSource: String) {
+    self.name = name
+    self.key = ""
+    self.songWriter = songWriter
+    self.trackId = trackId
     self.imageSource = imageSource
   }
   
@@ -74,6 +82,10 @@ class Song {
       print(tag)
     }
     return songObj
+  }
+  
+  func printImageUrl() {
+    print(self.imageSource)
   }
 }
 extension Song: Hashable {
