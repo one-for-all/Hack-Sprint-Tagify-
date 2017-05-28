@@ -17,12 +17,22 @@ class SongTableViewCell: UITableViewCell {
     var song: Song = Song(name: "") {
         didSet {
             songNameLabel.text = song.name
-            songImageView.image = UIImage(named: song.imageSource)
             var text: String = "";
             for tag in song.tags {
                 text += " \(tag)"
             }
             songTagsLabel.text = text
+            if song.imageSource.contains("http") {
+                let url = URL(string: song.imageSource)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async {
+                        self.songImageView.image = UIImage(data: data!)
+                    }
+                }
+            } else {
+                songImageView.image = UIImage(named: song.imageSource)
+            }
         }
     }
     

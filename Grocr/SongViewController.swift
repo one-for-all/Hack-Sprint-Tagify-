@@ -25,6 +25,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var didCheckAndSuggestAppleMusicSignUp = false
     var didAskForMediaLibraryAccess = false
     var storefrontId = "143441"  // Default region is USA
+    var authorizationStatus = false
+    var appleMusicCapable = false
     var applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     var itunesSongList = [Song]()
     
@@ -48,7 +50,17 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var currentSelectedSong: Song = Song(name: "") {
         didSet {
             tagViewSongLabel.text = currentSelectedSong.name
-            tagViewSongImageView.image = UIImage(named: currentSelectedSong.imageSource)
+            if currentSelectedSong.imageSource.contains("http") {
+                let url = URL(string: currentSelectedSong.imageSource)
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async {
+                        self.tagViewSongImageView.image = UIImage(data: data!)
+                    }
+                }
+            } else {
+                tagViewSongImageView.image = UIImage(named: currentSelectedSong.imageSource)
+            }
         }
     }
     var isPlaying = false
@@ -63,6 +75,17 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         "Taylor Swift - Wildest Dreams",
         "Mark Ronson - Uptown Funk ft. Bruno Mars"
     ]
+    let allSongTrackIds: [String] = [
+        "1161504043",
+        "1193701392",
+        "881629103",
+        "1161504024",
+        "1163339802",
+        "1101917079",
+        "1017804205",
+        "907242710",
+        "1011384691"
+    ]
     var allSongList = [Song]()
     var searchedSongList = [Song]()
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
@@ -72,12 +95,13 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         if let searchString = sender.text {
             if searchString != "" && searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(allSongList), withHashTagString: searchString)
+                tableView.reloadData()
             } else {
                 searchItunes(searchTerm: searchString) { list in
                     self.searchedSongList = list
+                    self.tableView.reloadData()
                 }
             }
-            tableView.reloadData()
         }
     }
     
@@ -127,7 +151,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             self.initializeFollowingForCurrentUser()
             self.initializeUserIcon()
         }
-        
+        appleMusicFetchStorefrontRegion()
         requestAppleMusicAuthorization()
         
         //try playing music from preview url
@@ -141,7 +165,24 @@ class SongViewController: UIViewController, UITextFieldDelegate {
 //        alert.addAction(confirmAction)
 //        alert.addAction(cancelAction)
 //        present(alert, animated: true, completion: nil)
-
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if authorizationStatus == true && !self.didCheckAndSuggestAppleMusicSignUp {
+            self.checkAndSuggestAppleMusicSignUp()
+            self.didCheckAndSuggestAppleMusicSignUp = true
+        }
+        let controller = SKCloudServiceController()
+        controller.requestCapabilities(completionHandler: ({ (capabilities, error) in
+            if let error = error {
+                print("Error requesting Apple Music Capability: \(error.localizedDescription)")
+            } else {
+                switch capabilities {
+                case SKCloudServiceCapability.addToCloudMusicLibrary: self.appleMusicCapable = true
+                case SKCloudServiceCapability.musicCatalogPlayback: self.appleMusicCapable = true
+                default: self.appleMusicCapable = false
+                }
+            }
+        }))
     }
 
     override func didReceiveMemoryWarning() {
@@ -223,7 +264,12 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func backwardButtonPressed(_ sender: Any) {
         playPrevious()
     }
-    
+    @IBAction func shuffleButtonPressed(_ sender: Any) {
+        shuffle()
+    }
+    @IBAction func loopButtonPressed(_ sender: Any) {
+        loop()
+    }
 }
 
 
@@ -245,8 +291,11 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         dismissKeyboard()
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
-            //requestAppleMusicAuthorization()
-            searchBarSearchButtonClicked(song: cell.song)
+            if self.appleMusicCapable {
+                searchBarSearchButtonClicked(song: cell.song)
+            } else {
+                playSampleMusic(withURLString: cell.song.previewURL)
+            }
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -427,7 +476,8 @@ extension SongViewController { // two methods for initializing song lists depend
     func initializeDefaultAllSongList() {
         allSongList = []
         for (index, song) in allSongNames.enumerated() {
-            let newSong = Song(name: song,  key:"\(index)")
+            let newSong = Song(name: song, key: "\(index)")
+            newSong.trackId = allSongTrackIds[index]
             newSong.tags = ["#Pop", "#Wedding", "#Shower", "#Mona Lisa"]
             if song.range(of: "Bruno Mars") != nil {
                 newSong.imageSource = "BrunoMars.jpg"
@@ -443,7 +493,8 @@ extension SongViewController { // two methods for initializing song lists depend
     }
     func initializeAllSongList(songs: [Song]) {
         allSongList = []
-        for song in songs {
+        for (index, song) in songs.enumerated() {
+            song.trackId = allSongTrackIds[index]
             let songName = song.name
             if songName.range(of: "Bruno Mars") != nil {
                 song.imageSource = "BrunoMars.jpg"
@@ -549,23 +600,25 @@ extension SongViewController { //Related to Music
     func requestAppleMusicAuthorization() {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //Ask user for for Apple Music access
-        storefrontId = appleMusicFetchStorefrontRegion()
         let authorizationStatus = SKCloudServiceController.authorizationStatus()
         switch authorizationStatus {
         case .notDetermined:
             AppleMusicAuthorizationForTheFirstTime()
         case .authorized:
+            self.authorizationStatus = true
             if !self.didCheckAndSuggestAppleMusicSignUp {
                 self.checkAndSuggestAppleMusicSignUp()
                 self.didCheckAndSuggestAppleMusicSignUp = true
             }
         case .denied:
+            self.authorizationStatus = false
             if !self.didAskForMediaLibraryAccess {
                 presentMediaLibraryAccessAlert()
                 self.didAskForMediaLibraryAccess = true
             }
             print("User has denied access to Apple Music library")
         case .restricted:
+            self.authorizationStatus = false
             print("user's device has restricted access, maybe education mode")
         }
     }
@@ -573,15 +626,19 @@ extension SongViewController { //Related to Music
         SKCloudServiceController.requestAuthorization { (status) in
             switch status {
             case .authorized:
+                self.authorizationStatus = true
                 if !self.didCheckAndSuggestAppleMusicSignUp {
                     self.checkAndSuggestAppleMusicSignUp()
                     self.didCheckAndSuggestAppleMusicSignUp = true
                 }
             case .denied:
+                self.authorizationStatus = false
                 print("User has denied access to Apple Music library")
             case .restricted:
+                self.authorizationStatus = false
                 print("User's device has restricted access, maybe education mode")
             case .notDetermined:
+                self.authorizationStatus = false
                 print("Apple Music Access not determined, should not see this message")
             }
         }
@@ -598,10 +655,13 @@ extension SongViewController { //Related to Music
             } else {
                 switch capabilities {
                 case SKCloudServiceCapability.addToCloudMusicLibrary:
+                    self.appleMusicCapable = true
                     print("has addToCloudMusicLibrary capability")
                 case SKCloudServiceCapability.musicCatalogPlayback:
+                    self.appleMusicCapable = true
                     print("has addToCloudMusicLibrary capability")
                 default:
+                    self.appleMusicCapable = false
                     print("No Apple Music Memebership, we will suggest signing up")
                     self.presentAppleMusicSignUpAlert()
                 }
@@ -642,9 +702,8 @@ extension SongViewController { //Related to Music
     }
 //**********************************************************************//
     // Fetch the user's storefront ID
-    func appleMusicFetchStorefrontRegion() -> String {
+    func appleMusicFetchStorefrontRegion() {
         let serviceController = SKCloudServiceController()
-        var userStorefrontId = ""
         serviceController.requestStorefrontIdentifier(completionHandler: { (storefrontId:String?, err:Error?) in
             guard err == nil else {
                 print("An error occured when getting storefront ID.")
@@ -657,10 +716,9 @@ extension SongViewController { //Related to Music
             let indexRange = storefrontId.index(storefrontId.startIndex, offsetBy:0)..<storefrontId.index(storefrontId.startIndex, offsetBy:5)
             let trimmedId = storefrontId.substring(with: indexRange)
             print("Success! The user's storefront ID is: \(trimmedId)")
-            userStorefrontId = trimmedId
+            self.storefrontId = trimmedId
             return
         })
-        return userStorefrontId
     }
     // Choose Player type & Play
     func appleMusicPlayTrackId(trackId: String) {
@@ -711,42 +769,44 @@ extension SongViewController { //Related to Music
         applicationMusicPlayer.skipToPreviousItem()
         print("Play previous song")
     }
-    //Search iTunes and display results in table view
-    func removeSpecialChars(str: String) -> String {
-        let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
-        return String(str.characters.filter{chars.contains($0)})
-    }
-    /*
-    func searchItunes(searchTerm: String) {
-        Alamofire.request("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success:
-                    if let responseData = response.result.value as? NSDictionary {
-                        print(responseData)
-                        if let resultCount = responseData.value(forKey: "resultCount") as? Int {
-                            if resultCount == 0 {
-                                print("No result found.")
-                            } else if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
-                                print("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
-                                let trackNum = songResults[0]["trackId"] as! NSNumber
-                                let track = "\(trackNum)"
-                                self.appleMusicPlayTrackId(trackId: track)
-                            }
-                        }
-                    }
-                case .failure(let error):
-                    //self.showAlert("Error", error: error.description)
-                    print("Failed to search itunes.")
-                }
+    func shuffle() {
+        let shuffleMode = applicationMusicPlayer.shuffleMode
+        switch shuffleMode {
+        case .off:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.songs
+        case .songs:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.off
+        case .albums:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.off
+        default:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.songs
         }
     }
-    */
+    func loop() {
+        let repeatMode = applicationMusicPlayer.repeatMode
+        switch repeatMode {
+        case .none:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.all
+        case .all:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.one
+        case .one:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.none
+        default:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.all
+        }
+    }
+    //Search iTunes and display results in table view
+    func removeSpecialChars(str: String) -> String {
+//        let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
+//        return String(str.characters.filter{chars.contains($0)})
+        var allowedCharacters = NSCharacterSet.urlQueryAllowed //.mutableCopy() as NSMutableCharacterSet
+        allowedCharacters.remove(charactersIn: "+/=")
+        return str.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
+    }
     func searchItunes(searchTerm: String, callback: @escaping ([Song]) ->() ) {
         var songList = [Song]()
         let search = removeSpecialChars(str: searchTerm).replacingOccurrences(of: " ", with: "+")
-        Alamofire.request("https://itunes.apple.com/search?term=\(search)&entity=song&limit=15")
+        Alamofire.request("https://itunes.apple.com/search?term=\(search)&entity=song&limit=25&s=\(self.storefrontId)")
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -764,12 +824,13 @@ extension SongViewController { //Related to Music
                                     let trackNum = result["trackId"] as! NSNumber
                                     let track = "\(trackNum)"
                                     let imageUrl = result["artworkUrl100"] as! String
+                                    let previewURL = result["previewUrl"] as? String ?? ""
                                     print(imageUrl)
-                                    let song = Song(name: "\(singer) - \(songName)", songWriter: singer, trackId: track, imageSource: imageUrl)
+                                    let song = Song(name: "\(singer) - \(songName)", songWriter: singer, trackId: track, imageSource: imageUrl, previewURL: previewURL)
                                     songList.append(song)
                                 }
-                                callback(songList)
                             }
+                            callback(songList)
                         }
                     }
                 case .failure(let error):
@@ -780,6 +841,8 @@ extension SongViewController { //Related to Music
     }
     func searchBarSearchButtonClicked(song: Song) {
         appleMusicPlayTrackId(trackId: song.trackId)
+        print("Playing: \(song.name)")
+        print("TrackId: \(song.trackId)")
     }
     
     /*
