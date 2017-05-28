@@ -29,7 +29,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var appleMusicCapable = false
     var applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     var itunesSongList = [Song]()
-    
+    var nowPlaying = -1
     
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -104,6 +104,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             print(searchString)
             if searchString == "" {
                 searchedSongList = allSongList
+                tableView.reloadData()
             } else if searchString != "" && searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(allSongList), withHashTagString: searchString)
                 tableView.reloadData()
@@ -305,7 +306,8 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             if self.appleMusicCapable {
-                songClicked(song: cell.song)
+                songClicked(song: cell.song, index: indexPath.row)
+                nowPlaying = indexPath.row
             } else {
                 playSampleMusic(withURLString: cell.song.previewURL)
             }
@@ -775,12 +777,34 @@ extension SongViewController { //Related to Music
         print("Music continued")
     }
     func playNext() {
-        applicationMusicPlayer.skipToNextItem()
-        print("Play next song")
+        //applicationMusicPlayer.skipToNextItem()
+        if nowPlaying < searchedSongList.count-1 {
+            nowPlaying += 1
+        } else {
+            nowPlaying = 0
+        }
+        let nextSong = searchedSongList[nowPlaying]
+        let nextTrack = nextSong.trackId
+        applicationMusicPlayer.setQueueWithStoreIDs([nextTrack])
+        applicationMusicPlayer.prepareToPlay()
+        applicationMusicPlayer.play()
+        print("Playing: \(nextSong.name)")
+        print("TrackId: \(nextTrack)")
     }
     func playPrevious() {
-        applicationMusicPlayer.skipToPreviousItem()
-        print("Play previous song")
+        //applicationMusicPlayer.skipToPreviousItem()
+        if nowPlaying > 1 {
+            nowPlaying -= 1
+        } else {
+            nowPlaying = searchedSongList.count-1
+        }
+        let prevSong = searchedSongList[nowPlaying]
+        let prevTrack = prevSong.trackId
+        applicationMusicPlayer.setQueueWithStoreIDs([prevTrack])
+        applicationMusicPlayer.prepareToPlay()
+        applicationMusicPlayer.play()
+        print("Playing: \(prevSong.name)")
+        print("TrackId: \(prevTrack)")
     }
     func shuffle() {
         let shuffleMode = applicationMusicPlayer.shuffleMode
@@ -829,8 +853,6 @@ extension SongViewController { //Related to Music
                             if resultCount == 0 {
                                 print("No result found.")
                             } else if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
-                                //print("https://itunes.apple.com/search?term=\(search)&entity=song&limit=15&s=143441")
-                                //print(songResults)
                                 for result in songResults {
                                     let singer = result["artistName"] as! String
                                     let songName = result["trackName"] as! String
@@ -838,7 +860,6 @@ extension SongViewController { //Related to Music
                                     let track = "\(trackNum)"
                                     let imageUrl = result["artworkUrl100"] as! String
                                     let previewURL = result["previewUrl"] as? String ?? ""
-                                    print(imageUrl)
                                     let song = Song(name: "\(singer) - \(songName)", songWriter: singer, trackId: track, imageSource: imageUrl, previewURL: previewURL)
                                     songList.append(song)
                                 }
@@ -852,10 +873,17 @@ extension SongViewController { //Related to Music
                 }
         }
     }
-    func songClicked(song: Song) {
+    func songClicked(song: Song, index: Int) {
         appleMusicPlayTrackId(trackId: song.trackId)
         print("Playing: \(song.name)")
         print("TrackId: \(song.trackId)")
+        /*
+        for i in index+1..<searchedSongList.count {
+            let nextSong = searchedSongList[i]
+            let nextSongTrackId = nextSong.trackId
+            applicationMusicPlayer.setQueueWithStoreIDs([nextSongTrackId])
+        }
+        */
     }
     
     /*

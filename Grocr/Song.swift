@@ -81,10 +81,6 @@ class Song {
     }
     return songObj
   }
-  
-  func printImageUrl() {
-    print(self.imageSource)
-  }
 }
 extension Song: Hashable {
   var hashValue: Int {
