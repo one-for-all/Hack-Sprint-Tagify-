@@ -63,6 +63,17 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         "Taylor Swift - Wildest Dreams",
         "Mark Ronson - Uptown Funk ft. Bruno Mars"
     ]
+    let allSongTrackIds: [String] = [
+        "1161504043",
+        "1193701392",
+        "881629103",
+        "1161504024",
+        "1163339802",
+        "1101917079",
+        "1017804205",
+        "1049605376",
+        "1011384691"
+    ]
     var allSongList = [Song]()
     var searchedSongList = [Song]()
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
@@ -247,6 +258,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             //requestAppleMusicAuthorization()
             searchBarSearchButtonClicked(song: cell.song)
+            print(cell.song.trackId)
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -427,7 +439,8 @@ extension SongViewController { // two methods for initializing song lists depend
     func initializeDefaultAllSongList() {
         allSongList = []
         for (index, song) in allSongNames.enumerated() {
-            let newSong = Song(name: song,  key:"\(index)")
+            let newSong = Song(name: song, key: "\(index)")
+            newSong.trackId = allSongTrackIds[index]
             newSong.tags = ["#Pop", "#Wedding", "#Shower", "#Mona Lisa"]
             if song.range(of: "Bruno Mars") != nil {
                 newSong.imageSource = "BrunoMars.jpg"
@@ -443,7 +456,8 @@ extension SongViewController { // two methods for initializing song lists depend
     }
     func initializeAllSongList(songs: [Song]) {
         allSongList = []
-        for song in songs {
+        for (index, song) in songs.enumerated() {
+            song.trackId = allSongTrackIds[index]
             let songName = song.name
             if songName.range(of: "Bruno Mars") != nil {
                 song.imageSource = "BrunoMars.jpg"
@@ -716,33 +730,6 @@ extension SongViewController { //Related to Music
         let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
         return String(str.characters.filter{chars.contains($0)})
     }
-    /*
-    func searchItunes(searchTerm: String) {
-        Alamofire.request("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success:
-                    if let responseData = response.result.value as? NSDictionary {
-                        print(responseData)
-                        if let resultCount = responseData.value(forKey: "resultCount") as? Int {
-                            if resultCount == 0 {
-                                print("No result found.")
-                            } else if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
-                                print("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
-                                let trackNum = songResults[0]["trackId"] as! NSNumber
-                                let track = "\(trackNum)"
-                                self.appleMusicPlayTrackId(trackId: track)
-                            }
-                        }
-                    }
-                case .failure(let error):
-                    //self.showAlert("Error", error: error.description)
-                    print("Failed to search itunes.")
-                }
-        }
-    }
-    */
     func searchItunes(searchTerm: String, callback: @escaping ([Song]) ->() ) {
         var songList = [Song]()
         let search = removeSpecialChars(str: searchTerm).replacingOccurrences(of: " ", with: "+")
@@ -780,6 +767,8 @@ extension SongViewController { //Related to Music
     }
     func searchBarSearchButtonClicked(song: Song) {
         appleMusicPlayTrackId(trackId: song.trackId)
+        print("Playing: \(song.name)")
+        print("trackId: \(song.trackId)")
     }
     
     /*

@@ -24,40 +24,36 @@ import Foundation
 
 class Song {
   
-  let key: String
+  var key = ""
   var name: String = ""
   var songWriter: String = ""
   var tags = Set<String>()
   var imageSource = "music.jpg"
   var trackId = ""
-  
-  init(key: String) {
-    self.key = key
-  }
-  
+
   init(name: String) {
     self.name = name
-    self.key = ""
   }
   init(name: String, key: String) {
     self.name = name
     self.key = key
   }
+  init(name: String, trackId: String) {
+    self.trackId = trackId
+  }
   init(name: String, imageSource: String) {
     self.name = name
-    self.key = ""
     self.imageSource = imageSource
   }
   init(name: String, songWriter: String, trackId: String, imageSource: String) {
     self.name = name
-    self.key = ""
     self.songWriter = songWriter
     self.trackId = trackId
     self.imageSource = imageSource
   }
   
   init(snapshot: DataSnapshot) {
-    key = snapshot.key
+    trackId = snapshot.key
     let snapshotValue = snapshot.value as! [String: AnyObject]
     name = snapshotValue["name"] as! String
     let snapshotTags = snapshotValue["tags"] as! [String: Bool]
@@ -90,9 +86,9 @@ class Song {
 }
 extension Song: Hashable {
   var hashValue: Int {
-    return key.hashValue
+    return trackId.hashValue
   }
   static func == (lhs: Song, rhs: Song) -> Bool {
-    return lhs.key == rhs.key
+    return lhs.trackId == rhs.trackId
   }
 }
