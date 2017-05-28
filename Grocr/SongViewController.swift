@@ -80,8 +80,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
-        print("End Editing! Start Searching")
         if let searchString = sender.text {
+            print(searchString)
             if searchString == "" {
                 searchedSongList = allSongList
             } else if searchString != "" && searchString[searchString.startIndex] == "#" {
@@ -91,8 +91,10 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                     self.searchedSongList = list
                 }
             }
+            print(self.searchedSongList)
             tableView.reloadData()
         }
+        print("End Editing! Start Searching")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
@@ -265,7 +267,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             //requestAppleMusicAuthorization()
-            searchBarSearchButtonClicked(song: cell.song)
+            songClicked(song: cell.song)
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -784,7 +786,7 @@ extension SongViewController { //Related to Music
                                     let trackNum = result["trackId"] as! NSNumber
                                     let track = "\(trackNum)"
                                     let imageUrl = result["artworkUrl100"] as! String
-                                    print(imageUrl)
+                                    //print(imageUrl)
                                     let song = Song(name: "\(singer) - \(songName)", songWriter: singer, trackId: track, imageSource: imageUrl)
                                     songList.append(song)
                                 }
@@ -798,7 +800,7 @@ extension SongViewController { //Related to Music
                 }
         }
     }
-    func searchBarSearchButtonClicked(song: Song) {
+    func songClicked(song: Song) {
         appleMusicPlayTrackId(trackId: song.trackId)
         print("Playing: \(song.name)")
         print("TrackId: \(song.trackId)")

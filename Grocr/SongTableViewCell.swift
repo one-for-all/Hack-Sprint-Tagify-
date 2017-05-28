@@ -17,7 +17,14 @@ class SongTableViewCell: UITableViewCell {
     var song: Song = Song(name: "") {
         didSet {
             songNameLabel.text = song.name
-            songImageView.image = UIImage(named: song.imageSource)
+            let firstFourLetters = song.imageSource.index(song.imageSource.startIndex, offsetBy:4)
+            if song.imageSource.substring(to: firstFourLetters) == "http" {
+                let url = NSURL(string: song.imageSource)
+                let data = NSData(contentsOf: url as! URL)
+                songImageView.image = UIImage(data: data as! Data)
+            } else {
+                songImageView.image = UIImage(named: song.imageSource)
+            }
             var text: String = "";
             for tag in song.tags {
                 text += " \(tag)"
