@@ -37,6 +37,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tagView: UIView!
     @IBOutlet weak var tagViewSongImageView: UIImageView!
     @IBOutlet weak var tagViewSongLabel: UILabel!
+    @IBOutlet weak var tagViewArtistLabel: UILabel!
+    
+    
     @IBOutlet weak var addTagTextField: UITextField!
     @IBOutlet weak var collectionView: CollectionView!
     let tagCellReuseIdentifier = "TagReuseCell"
@@ -50,6 +53,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var currentSelectedSong: Song = Song(trackId: "") {
         didSet {
             tagViewSongLabel.text = currentSelectedSong.name
+            tagViewArtistLabel.text = currentSelectedSong.artist
             let firstFourLetters = currentSelectedSong.imageSource.index(currentSelectedSong.imageSource.startIndex, offsetBy:4)
             if currentSelectedSong.imageSource.substring(to: firstFourLetters) == "http" {
                 let url = URL(string: currentSelectedSong.imageSource)
@@ -91,6 +95,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         if let searchString = sender.text {
             if searchString == "" {
                 searchedSongList = userAllSongList
+                tableView.reloadData()
             } else if searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(userAllSongList), withHashTagString: searchString)
                 tableView.reloadData()
@@ -449,8 +454,8 @@ extension SongViewController { // related to search
                     if let name = snapshot.childSnapshot(forPath: "name").value as? String {
                         song.name = name
                     }
-                    if let songWriter = snapshot.childSnapshot(forPath: "songWriter").value as? String {
-                        song.songWriter = songWriter
+                    if let artist = snapshot.childSnapshot(forPath: "artist").value as? String {
+                        song.artist = artist
                     }
                     if let imageSource = snapshot.childSnapshot(forPath: "imageSource").value as? String {
                         song.imageSource = imageSource
@@ -467,7 +472,9 @@ extension SongViewController { // two methods for initializing song lists depend
         userAllSongList = []
         for (index, song) in allSongNames.enumerated() {
             let newSong = Song(trackId: allSongTrackIds[index])
-            newSong.name = song
+            let artist_songname = song.components(separatedBy: " - ")
+            newSong.name = artist_songname[1]
+            newSong.artist = artist_songname[0]
             newSong.tags = ["#Pop", "#Wedding", "#Shower", "#Mona Lisa"]
             if song.range(of: "Bruno Mars") != nil {
                 newSong.imageSource = "BrunoMars.jpg"
@@ -479,23 +486,6 @@ extension SongViewController { // two methods for initializing song lists depend
                 newSong.imageSource = "Maroon5.jpg"
             }
             userAllSongList.append(newSong)
-        }
-    }
-    func initializeAllSongList(songs: [Song]) {
-        userAllSongList = []
-        for (index, song) in songs.enumerated() {
-            song.trackId = allSongTrackIds[index]
-            let songName = song.name
-            if songName.range(of: "Bruno Mars") != nil {
-                song.imageSource = "BrunoMars.jpg"
-            } else if songName.range(of: "Magic!") != nil {
-                song.imageSource = "Magic!.png"
-            } else if songName.range(of: "Taylor Swift") != nil {
-                song.imageSource = "TaylorSwift.jpg"
-            } else if songName.range(of: "Maroon 5") != nil {
-                song.imageSource = "Maroon5.jpg"
-            }
-            userAllSongList.append(song)
         }
     }
 }
@@ -533,13 +523,13 @@ extension SongViewController { // initialize current user info with data fram da
             }
             print(snapshot)
             if snapshot.hasChild("songs") {
-                var newSongs = [Song]()
+                var storedSongs = [Song]()
                 for song in snapshot.childSnapshot(forPath: "songs").children.allObjects {
                     let song = song as! DataSnapshot
                     let newSong = Song(snapshot: song)
-                    newSongs.append(newSong)
+                    storedSongs.append(newSong)
                 }
-                self.initializeAllSongList(songs: newSongs)
+                self.userAllSongList = storedSongs
                 self.searchedSongList = self.userAllSongList
             } else {
                 for song in self.userAllSongList {
@@ -746,22 +736,31 @@ extension SongViewController { //Related to Music
     }
     //Control playback
     func pausePlay() {
-        applicationMusicPlayer.pause()
+        if self.appleMusicCapable {
+            applicationMusicPlayer.pause()
+        } else {
+            self.player.pause()
+        }
         print("Music paused")
     }
     func continuePlay() {
-        applicationMusicPlayer.play()
+        if self.appleMusicCapable {
+            applicationMusicPlayer.play()
+        } else {
+            self.player.play()
+        }
         print("Music continued")
     }
     func playNext() {
-        applicationMusicPlayer.skipToNextItem()
+        if self.appleMusicCapable { applicationMusicPlayer.skipToNextItem() }
         print("Play next song")
     }
     func playPrevious() {
-        applicationMusicPlayer.skipToPreviousItem()
+        if self.appleMusicCapable { applicationMusicPlayer.skipToPreviousItem() }
         print("Play previous song")
     }
     func shuffle() {
+        print("shuffle")
         let shuffleMode = applicationMusicPlayer.shuffleMode
         switch shuffleMode {
         case .off:
@@ -775,6 +774,7 @@ extension SongViewController { //Related to Music
         }
     }
     func loop() {
+        print("loop")
         let repeatMode = applicationMusicPlayer.repeatMode
         switch repeatMode {
         case .none:
@@ -818,7 +818,7 @@ extension SongViewController { //Related to Music
                                     let imageUrl = result["artworkUrl100"] as! String
                                     let previewURL = result["previewUrl"] as? String ?? ""
                                     print(imageUrl)
-                                    let song = Song(name: "\(singer) - \(songName)", songWriter: singer, trackId: track, imageSource: imageUrl, previewURL: previewURL)
+                                    let song = Song(name: "\(songName)", artist: singer, trackId: track, imageSource: imageUrl, previewURL: previewURL)
                                     songList.append(song)
                                 }
                             }
