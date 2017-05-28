@@ -84,13 +84,15 @@ class TagifyUser {
       self.updateFollowers(followerSnapshot: snapshot)
     })
   }
-  func follow(uid: String, ref: DatabaseReference) {
+  func follow(uid: String) {
     self.following.insert(uid)
-    ref.child("\(self.uid)/following").setValue([uid: true])
+    let ref = Database.database().reference().child("userProfiles")
+    ref.child("\(self.uid)/following/\(uid)").setValue(true)
   }
   func unfollow(uid: String, ref: DatabaseReference) {
     self.following.remove(uid)
-    ref.child("\(self.uid)/following").setValue([uid: NSNull()])
+    print("unfollowing: \(uid)")
+    ref.child("\(self.uid)/following/\(uid)").setValue(NSNull())
   }
   func setUsername(username: String, ref: DatabaseReference) {
     self.username = username
@@ -98,20 +100,20 @@ class TagifyUser {
   }
   func followedBy(uid: String, ref: DatabaseReference) {
     self.followedBy.insert(uid)
-    ref.child("\(self.uid)/followedBy").setValue([uid: true])
+    ref.child("\(self.uid)/followedBy/\(uid)").setValue(true)
   }
   func unfollowedBy(uid: String, ref: DatabaseReference) {
     self.followedBy.remove(uid)
-    ref.child("\(self.uid)/followedBy").setValue([uid: NSNull()])
+    ref.child("\(self.uid)/followedBy/\(uid)").setValue(NSNull())
   }
   // To Do: Add song tags for user
   func add(tag: String, forSong song: Song) {
-    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)").setValue([song.key: true])
-    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.key)").setValue([tag: true])
+    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.key)").setValue(true)
+    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.key)/\(tag)").setValue(true)
   }
   func remove(tag: String, forSong song: Song) {
-    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)").setValue([song.key: NSNull()])
-    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.key)").setValue([tag: NSNull()])
+    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.key)").setValue(NSNull())
+    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.key)/\(tag)").setValue(NSNull())
   }
 }
 

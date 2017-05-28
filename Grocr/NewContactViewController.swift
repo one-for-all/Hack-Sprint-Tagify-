@@ -22,6 +22,7 @@ class NewContactViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     var searchedUser = [TagifyUserMinimal]()
+    var currentUser: TagifyUser!
     
     let storageRef: StorageReference! = Storage.storage().reference()
 
@@ -29,6 +30,8 @@ class NewContactViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         searchTextField.returnKeyType = .search
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.currentUser = appDelegate.currentUser
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,17 +52,18 @@ class NewContactViewController: UIViewController, UITextFieldDelegate {
             self.searchedUser = [TagifyUserMinimal]()
             for childSnapshot in snapshot.children {
                 let childSnapshot = childSnapshot as! DataSnapshot
-                let user = TagifyUserMinimal(uid: childSnapshot.key)
                 let usernameSnapshot = childSnapshot.childSnapshot(forPath: "username")
                 if usernameSnapshot.exists() {
                     let username = usernameSnapshot.value as! String
-                    if username.contains(searchedUsername) {
-                        user.username = username
-                        let index = self.searchedUser.count
-                        self.searchedUser.append(user)
+                    let followedByCurrentUserSnap = childSnapshot.childSnapshot(forPath: "followedBy/\(self.currentUser.uid)")
+                    if username.contains(searchedUsername) && !followedByCurrentUserSnap.exists() {
                         let userIconPath = "\(childSnapshot.key)/userIcon.jpg"
                         let reference = self.storageRef.child(userIconPath)
                         reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                            let user = TagifyUserMinimal(uid: childSnapshot.key)
+                            user.username = username
+                            let index = self.searchedUser.count
+                            self.searchedUser.append(user)
                             if let error = error {
                                 print(error.localizedDescription)
                                 self.searchedUser[index].userIcon = UIImage(named: "music.jpg")!
@@ -75,6 +79,15 @@ class NewContactViewController: UIViewController, UITextFieldDelegate {
             }
         })
     }
+    
+    @IBAction func plusButtonTapped(_ sender: UIButton) {
+        print(sender.tag)
+        let cell = tableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! NewContactTableViewCell
+        self.currentUser.follow(uid: cell.user.uid)
+        print("cell number \(sender.tag) pressed, username: \(cell.usernameLabel.text)")
+        sender.isHidden = true
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -96,8 +109,10 @@ extension NewContactViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewContactCell", for: indexPath) as! NewContactTableViewCell
+        cell.user = searchedUser[indexPath.row]
         cell.usernameLabel.text = searchedUser[indexPath.row].username
         cell.userIconImageView.image = searchedUser[indexPath.row].userIcon
+        cell.plusButton.tag = indexPath.row
         return cell
     }
 }

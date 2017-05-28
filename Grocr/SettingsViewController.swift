@@ -48,7 +48,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.follow(user: user)
             }
         })
-        setUsername(username: "凯米乐")
+        setUsername(username: currentUser.email)
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,7 +125,7 @@ extension SettingsViewController { // search user and follow
         })
     }
     func follow(user: TagifyUser) {
-        self.currentUser.follow(uid: user.uid, ref: userProfilesRef)
+        self.currentUser.follow(uid: user.uid)
         user.followedBy(uid: self.currentUser.uid, ref: userProfilesRef)
     }
     func unfollow(user: TagifyUser) {

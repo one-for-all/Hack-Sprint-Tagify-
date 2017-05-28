@@ -12,10 +12,13 @@ class NewContactTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userIconImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
-
+    @IBOutlet weak var plusButton: UIButton!
+    var user: TagifyUserMinimal = TagifyUserMinimal(uid: "")
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
