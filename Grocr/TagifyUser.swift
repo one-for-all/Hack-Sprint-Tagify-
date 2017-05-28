@@ -41,7 +41,7 @@ class TagifyUser {
     self.email = ""
     self.username = ""
     self.uid = uid
-    self.updateAll()
+    //self.updateAll()
   }
   func updateFollowing(followingSnapshot: DataSnapshot) {
     guard self.uid != "" else { return }
