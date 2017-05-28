@@ -49,6 +49,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         didSet {
             tagViewSongLabel.text = currentSelectedSong.name
             tagViewSongImageView.image = UIImage(named: currentSelectedSong.imageSource)
+            print(currentSelectedSong.imageSource)
         }
     }
     var isPlaying = false
@@ -81,7 +82,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
         print("End Editing! Start Searching")
         if let searchString = sender.text {
-            if searchString != "" && searchString[searchString.startIndex] == "#" {
+            if searchString == "" {
+                searchedSongList = allSongList
+            } else if searchString != "" && searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(allSongList), withHashTagString: searchString)
             } else {
                 searchItunes(searchTerm: searchString) { list in
@@ -803,6 +806,7 @@ extension SongViewController { //Related to Music
     
     /*
      //Add song to playback queue if user selects a cell
+     
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
      let indexPath = tableView.indexPathForSelectedRow
      if let rowData: NSDictionary = self.tableData[indexPath!.row] as? NSDictionary, urlString = rowData["artworkUrl60"] as? String,
