@@ -28,10 +28,13 @@
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
 		9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423636C1ECAFA39004398A0 /* SongViewController.swift */; };
 		9429EDCE1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */; };
+		9429EDD01EDA928300FEFF49 /* ScopeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9429EDCF1EDA928300FEFF49 /* ScopeTableViewCell.swift */; };
 		944A701C1ED813280073EE0C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701B1ED813280073EE0C /* SettingsTableViewController.swift */; };
 		944A701E1ED819EB0073EE0C /* UnwindSegueToRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */; };
 		944A70201ED81D570073EE0C /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701F1ED81D570073EE0C /* UsernameViewController.swift */; };
 		94619C7E1ED402010080FB56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94619C7D1ED402010080FB56 /* GoogleService-Info.plist */; };
+		9470A5AC1EDA9CEE005CCDAF /* NewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470A5AB1EDA9CEE005CCDAF /* NewContactViewController.swift */; };
+		9470A5AE1EDAAC2A005CCDAF /* NewContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470A5AD1EDAAC2A005CCDAF /* NewContactTableViewCell.swift */; };
 		947312AA1ECFEE3300D44414 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947312A91ECFEE3300D44414 /* CollectionViewCell.swift */; };
 		9495E1131ED80FD5001A4F68 /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */; };
 		94BFA2531ED01E2E005AE02F /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFA2521ED01E2E005AE02F /* CollectionView.swift */; };
@@ -65,17 +68,20 @@
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
-		940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeViewController.swift; sourceTree = "<group>"; };
+		940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ScopeViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		940E0BCD1ED696E200B8C4E0 /* userDefaultIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userDefaultIcon.png; sourceTree = "<group>"; };
 		9423633E1ECAC5C4004398A0 /* Grocr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grocr.entitlements; sourceTree = "<group>"; };
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
 		9423636C1ECAFA39004398A0 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewCell.swift; sourceTree = "<group>"; };
+		9429EDCF1EDA928300FEFF49 /* ScopeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeTableViewCell.swift; sourceTree = "<group>"; };
 		944A701B1ED813280073EE0C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegueToRight.swift; sourceTree = "<group>"; tabWidth = 4; };
 		944A701F1ED81D570073EE0C /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		94619C7D1ED402010080FB56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Grocr/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9470A5AB1EDA9CEE005CCDAF /* NewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		9470A5AD1EDAAC2A005CCDAF /* NewContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = NewContactTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		947312A91ECFEE3300D44414 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; tabWidth = 4; };
 		94BFA2521ED01E2E005AE02F /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -209,6 +215,7 @@
 				6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */,
 				940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */,
 				6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */,
+				9470A5AB1EDA9CEE005CCDAF /* NewContactViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -225,6 +232,8 @@
 				9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */,
 				944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */,
 				9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */,
+				9429EDCF1EDA928300FEFF49 /* ScopeTableViewCell.swift */,
+				9470A5AD1EDAAC2A005CCDAF /* NewContactTableViewCell.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -401,6 +410,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				944A70201ED81D570073EE0C /* UsernameViewController.swift in Sources */,
+				9470A5AE1EDAAC2A005CCDAF /* NewContactTableViewCell.swift in Sources */,
+				9470A5AC1EDA9CEE005CCDAF /* NewContactViewController.swift in Sources */,
 				6967E21B1ED8D8C000FF76E4 /* FollowingViewController.swift in Sources */,
 				BB2385641B3DD5AB0079CD01 /* LoginViewController.swift in Sources */,
 				940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */,
@@ -416,6 +427,7 @@
 				944A701C1ED813280073EE0C /* SettingsTableViewController.swift in Sources */,
 				942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */,
 				9495E1131ED80FD5001A4F68 /* SegueFromRight.swift in Sources */,
+				9429EDD01EDA928300FEFF49 /* ScopeTableViewCell.swift in Sources */,
 				9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
