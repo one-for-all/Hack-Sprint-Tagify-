@@ -71,7 +71,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         "1163339802",
         "1101917079",
         "1017804205",
-        "1049605376",
+        "907242710",
         "1011384691"
     ]
     var allSongList = [Song]()
@@ -234,7 +234,12 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func backwardButtonPressed(_ sender: Any) {
         playPrevious()
     }
-    
+    @IBAction func shuffleButtonPressed(_ sender: Any) {
+        shuffle()
+    }
+    @IBAction func loopButtonPressed(_ sender: Any) {
+        loop()
+    }
 }
 
 
@@ -258,7 +263,6 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             //requestAppleMusicAuthorization()
             searchBarSearchButtonClicked(song: cell.song)
-            print(cell.song.trackId)
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -725,6 +729,32 @@ extension SongViewController { //Related to Music
         applicationMusicPlayer.skipToPreviousItem()
         print("Play previous song")
     }
+    func shuffle() {
+        let shuffleMode = applicationMusicPlayer.shuffleMode
+        switch shuffleMode {
+        case .off:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.songs
+        case .songs:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.off
+        case .albums:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.off
+        default:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.songs
+        }
+    }
+    func loop() {
+        let repeatMode = applicationMusicPlayer.repeatMode
+        switch repeatMode {
+        case .none:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.all
+        case .all:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.one
+        case .one:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.none
+        default:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.all
+        }
+    }
     //Search iTunes and display results in table view
     func removeSpecialChars(str: String) -> String {
         let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
@@ -755,8 +785,8 @@ extension SongViewController { //Related to Music
                                     let song = Song(name: "\(singer) - \(songName)", songWriter: singer, trackId: track, imageSource: imageUrl)
                                     songList.append(song)
                                 }
-                                callback(songList)
                             }
+                            callback(songList)
                         }
                     }
                 case .failure(let error):
@@ -768,7 +798,7 @@ extension SongViewController { //Related to Music
     func searchBarSearchButtonClicked(song: Song) {
         appleMusicPlayTrackId(trackId: song.trackId)
         print("Playing: \(song.name)")
-        print("trackId: \(song.trackId)")
+        print("TrackId: \(song.trackId)")
     }
     
     /*
