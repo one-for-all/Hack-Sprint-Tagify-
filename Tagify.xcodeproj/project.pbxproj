@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1DE9DE092ED753BA72C90331 /* Pods_Tagify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101DAECA0A3059269EC28C2A /* Pods_Tagify.framework */; };
+		3B4B216A1EDA9062000F0409 /* FollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4B21691EDA9062000F0409 /* FollowerViewController.swift */; };
+		3B4B216C1EDA964D000F0409 /* FollowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4B216B1EDA964D000F0409 /* FollowerTableViewCell.swift */; };
 		6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E1E51ED260AD00FF76E4 /* setting1.png */; };
 		6967E20E1ED58A5900FF76E4 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E20D1ED58A5900FF76E4 /* forward.png */; };
 		6967E2101ED58B5200FF76E4 /* Cross Buttomwith shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */; };
@@ -54,6 +56,8 @@
 
 /* Begin PBXFileReference section */
 		101DAECA0A3059269EC28C2A /* Pods_Tagify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tagify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4B21691EDA9062000F0409 /* FollowerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerViewController.swift; sourceTree = "<group>"; };
+		3B4B216B1EDA964D000F0409 /* FollowerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerTableViewCell.swift; sourceTree = "<group>"; };
 		6967E1E51ED260AD00FF76E4 /* setting1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting1.png; sourceTree = "<group>"; };
 		6967E20D1ED58A5900FF76E4 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cross Buttomwith shadow.png"; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 				6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */,
 				940E0BCB1ED692A300B8C4E0 /* ScopeViewController.swift */,
 				6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */,
+				3B4B21691EDA9062000F0409 /* FollowerViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */,
 				944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */,
 				9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */,
+				3B4B216B1EDA964D000F0409 /* FollowerTableViewCell.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -422,6 +428,8 @@
 				94BFA2531ED01E2E005AE02F /* CollectionView.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 				940E0BCC1ED692A300B8C4E0 /* ScopeViewController.swift in Sources */,
+				3B4B216C1EDA964D000F0409 /* FollowerTableViewCell.swift in Sources */,
+				3B4B216A1EDA9062000F0409 /* FollowerViewController.swift in Sources */,
 				6967E21F1EDA3F4600FF76E4 /* ThemeColorViewController.swift in Sources */,
 				944A701E1ED819EB0073EE0C /* UnwindSegueToRight.swift in Sources */,
 				9429EDCE1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift in Sources */,
