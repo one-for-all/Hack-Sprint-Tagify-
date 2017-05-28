@@ -24,6 +24,10 @@
 		6967E2251EDA928400FF76E4 /* new_forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2241EDA928400FF76E4 /* new_forward.png */; };
 		6967E2291EDA98F100FF76E4 /* shuffle_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2281EDA98F100FF76E4 /* shuffle_2.png */; };
 		6967E22B1EDA9BA500FF76E4 /* order play.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E22A1EDA9BA500FF76E4 /* order play.png */; };
+		6967E22D1EDB655D00FF76E4 /* wall1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6967E22C1EDB655D00FF76E4 /* wall1.jpg */; };
+		6967E22F1EDB680000FF76E4 /* wall1_90%.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E22E1EDB680000FF76E4 /* wall1_90%.png */; };
+		6967E2311EDB688100FF76E4 /* wall1_80%.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2301EDB688100FF76E4 /* wall1_80%.png */; };
+		6967E2331EDB68F100FF76E4 /* wall1_70%.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2321EDB68F100FF76E4 /* wall1_70%.png */; };
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
@@ -75,6 +79,10 @@
 		6967E2241EDA928400FF76E4 /* new_forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_forward.png; sourceTree = "<group>"; };
 		6967E2281EDA98F100FF76E4 /* shuffle_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffle_2.png; sourceTree = "<group>"; };
 		6967E22A1EDA9BA500FF76E4 /* order play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order play.png"; sourceTree = "<group>"; };
+		6967E22C1EDB655D00FF76E4 /* wall1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall1.jpg; sourceTree = "<group>"; };
+		6967E22E1EDB680000FF76E4 /* wall1_90%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wall1_90%.png"; sourceTree = "<group>"; };
+		6967E2301EDB688100FF76E4 /* wall1_80%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wall1_80%.png"; sourceTree = "<group>"; };
+		6967E2321EDB68F100FF76E4 /* wall1_70%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wall1_70%.png"; sourceTree = "<group>"; };
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -159,6 +167,10 @@
 				6967E2221EDA810400FF76E4 /* Line 3Orange_remove.png */,
 				94BFA2541ED02BA3005AE02F /* BrunoMars.jpg */,
 				6967E22A1EDA9BA500FF76E4 /* order play.png */,
+				6967E2301EDB688100FF76E4 /* wall1_80%.png */,
+				6967E22C1EDB655D00FF76E4 /* wall1.jpg */,
+				6967E22E1EDB680000FF76E4 /* wall1_90%.png */,
+				6967E2321EDB68F100FF76E4 /* wall1_70%.png */,
 				94BFA2551ED02BA3005AE02F /* Magic!.png */,
 				6967E2151ED7D2CB00FF76E4 /* Previous Button.png */,
 				6967E21C1EDA338F00FF76E4 /* add.png */,
@@ -347,6 +359,7 @@
 				6967E2231EDA810400FF76E4 /* Line 3Orange_remove.png in Resources */,
 				940E0BCE1ED696E200B8C4E0 /* userDefaultIcon.png in Resources */,
 				6967E2101ED58B5200FF76E4 /* Cross Buttomwith shadow.png in Resources */,
+				6967E22D1EDB655D00FF76E4 /* wall1.jpg in Resources */,
 				6967E2121ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png in Resources */,
 				6967E21D1EDA338F00FF76E4 /* add.png in Resources */,
 				6967E2211EDA80F900FF76E4 /* Orange_add.png in Resources */,
@@ -358,11 +371,14 @@
 				BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */,
 				6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */,
 				6967E20E1ED58A5900FF76E4 /* forward.png in Resources */,
+				6967E22F1EDB680000FF76E4 /* wall1_90%.png in Resources */,
 				6967E2291EDA98F100FF76E4 /* shuffle_2.png in Resources */,
 				A672EE441ED3E12900BDB50F /* SongDetailsView.xib in Resources */,
+				6967E2331EDB68F100FF76E4 /* wall1_70%.png in Resources */,
 				94619C7E1ED402010080FB56 /* GoogleService-Info.plist in Resources */,
 				94BFA25B1ED02BA3005AE02F /* TaylorSwift.jpg in Resources */,
 				BB23856C1B3DD5AB0079CD01 /* LaunchScreen.xib in Resources */,
+				6967E2311EDB688100FF76E4 /* wall1_80%.png in Resources */,
 				6967E2141ED7A4D900FF76E4 /* Next Button.png in Resources */,
 				6967E22B1EDA9BA500FF76E4 /* order play.png in Resources */,
 				BB2385691B3DD5AB0079CD01 /* Images.xcassets in Resources */,
