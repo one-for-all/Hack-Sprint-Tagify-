@@ -24,28 +24,17 @@ import Foundation
 
 class Song {
   
-  var key = ""
   var name: String = ""
   var songWriter: String = ""
   var tags = Set<String>()
   var imageSource = "music.jpg"
   var trackId = ""
   var previewURL = ""
-
-  init(name: String) {
-    self.name = name
-  }
-  init(name: String, key: String) {
-    self.name = name
-    self.key = key
-  }
-  init(name: String, trackId: String) {
+  
+  init(trackId: String) { // for initializing empty song
     self.trackId = trackId
   }
-  init(name: String, imageSource: String) {
-    self.name = name
-    self.imageSource = imageSource
-  }
+
   init(name: String, songWriter: String, trackId: String, imageSource: String, previewURL: String) {
     self.name = name
     self.songWriter = songWriter

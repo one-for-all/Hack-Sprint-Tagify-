@@ -14,7 +14,7 @@ class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var songImageView: UIImageView!
     @IBOutlet weak var songTagsLabel: UILabel!
     
-    var song: Song = Song(name: "") {
+    var song: Song = Song(trackId: "") {
         didSet {
             songNameLabel.text = song.name
             var text: String = "";

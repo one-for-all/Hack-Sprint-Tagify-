@@ -108,12 +108,12 @@ class TagifyUser {
   }
   // To Do: Add song tags for user
   func add(tag: String, forSong song: Song) {
-    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.key)").setValue(true)
-    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.key)/\(tag)").setValue(true)
+    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.trackId)").setValue(song.name)
+    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.trackId)/\(tag)").setValue(song.name)
   }
   func remove(tag: String, forSong song: Song) {
-    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.key)").setValue(NSNull())
-    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.key)/\(tag)").setValue(NSNull())
+    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.trackId)").setValue(NSNull())
+    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.trackId)/\(tag)").setValue(NSNull())
   }
 }
 
