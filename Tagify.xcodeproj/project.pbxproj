@@ -28,6 +28,7 @@
 		6967E22F1EDB680000FF76E4 /* wall1_90%.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E22E1EDB680000FF76E4 /* wall1_90%.png */; };
 		6967E2311EDB688100FF76E4 /* wall1_80%.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2301EDB688100FF76E4 /* wall1_80%.png */; };
 		6967E2331EDB68F100FF76E4 /* wall1_70%.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2321EDB68F100FF76E4 /* wall1_70%.png */; };
+		6967E2351EDB6EE100FF76E4 /* wall3_80%.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2341EDB6EE100FF76E4 /* wall3_80%.png */; };
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
@@ -83,6 +84,7 @@
 		6967E22E1EDB680000FF76E4 /* wall1_90%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wall1_90%.png"; sourceTree = "<group>"; };
 		6967E2301EDB688100FF76E4 /* wall1_80%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wall1_80%.png"; sourceTree = "<group>"; };
 		6967E2321EDB68F100FF76E4 /* wall1_70%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wall1_70%.png"; sourceTree = "<group>"; };
+		6967E2341EDB6EE100FF76E4 /* wall3_80%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wall3_80%.png"; sourceTree = "<group>"; };
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -173,6 +175,7 @@
 				6967E2321EDB68F100FF76E4 /* wall1_70%.png */,
 				94BFA2551ED02BA3005AE02F /* Magic!.png */,
 				6967E2151ED7D2CB00FF76E4 /* Previous Button.png */,
+				6967E2341EDB6EE100FF76E4 /* wall3_80%.png */,
 				6967E21C1EDA338F00FF76E4 /* add.png */,
 				6967E2131ED7A4D900FF76E4 /* Next Button.png */,
 				94BFA2561ED02BA3005AE02F /* Maroon5.jpg */,
@@ -373,6 +376,7 @@
 				6967E20E1ED58A5900FF76E4 /* forward.png in Resources */,
 				6967E22F1EDB680000FF76E4 /* wall1_90%.png in Resources */,
 				6967E2291EDA98F100FF76E4 /* shuffle_2.png in Resources */,
+				6967E2351EDB6EE100FF76E4 /* wall3_80%.png in Resources */,
 				A672EE441ED3E12900BDB50F /* SongDetailsView.xib in Resources */,
 				6967E2331EDB68F100FF76E4 /* wall1_70%.png in Resources */,
 				94619C7E1ED402010080FB56 /* GoogleService-Info.plist in Resources */,
