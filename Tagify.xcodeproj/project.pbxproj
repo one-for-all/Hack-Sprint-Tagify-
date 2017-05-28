@@ -24,6 +24,7 @@
 		942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942363671ECAF330004398A0 /* SongTableViewCell.swift */; };
 		9423636B1ECAF4EA004398A0 /* music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9423636A1ECAF4EA004398A0 /* music.jpg */; };
 		9423636D1ECAFA39004398A0 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423636C1ECAFA39004398A0 /* SongViewController.swift */; };
+		9429EDCE1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */; };
 		944A701C1ED813280073EE0C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701B1ED813280073EE0C /* SettingsTableViewController.swift */; };
 		944A701E1ED819EB0073EE0C /* UnwindSegueToRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */; };
 		944A70201ED81D570073EE0C /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944A701F1ED81D570073EE0C /* UsernameViewController.swift */; };
@@ -64,6 +65,7 @@
 		942363671ECAF330004398A0 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9423636A1ECAF4EA004398A0 /* music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music.jpg; sourceTree = "<group>"; };
 		9423636C1ECAFA39004398A0 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewCell.swift; sourceTree = "<group>"; };
 		944A701B1ED813280073EE0C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegueToRight.swift; sourceTree = "<group>"; tabWidth = 4; };
 		944A701F1ED81D570073EE0C /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -213,6 +215,7 @@
 				94BFA2521ED01E2E005AE02F /* CollectionView.swift */,
 				9495E1121ED80FD5001A4F68 /* SegueFromRight.swift */,
 				944A701D1ED819EA0073EE0C /* UnwindSegueToRight.swift */,
+				9429EDCD1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 				940E0BCC1ED692A300B8C4E0 /* ScopeViewController.swift in Sources */,
 				944A701E1ED819EB0073EE0C /* UnwindSegueToRight.swift in Sources */,
+				9429EDCE1EDA6ADD00FEFF49 /* FollowingTableViewCell.swift in Sources */,
 				944A701C1ED813280073EE0C /* SettingsTableViewController.swift in Sources */,
 				942363681ECAF331004398A0 /* SongTableViewCell.swift in Sources */,
 				9495E1131ED80FD5001A4F68 /* SegueFromRight.swift in Sources */,

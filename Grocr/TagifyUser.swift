@@ -35,42 +35,53 @@ class TagifyUser {
     uid = authData.uid
     email = authData.email!
     self.username = self.email
-    self.setUpdates()
+    self.updateAll()
   }
   init(uid: String) {
     self.email = ""
     self.username = ""
     self.uid = uid
-    self.setUpdates()
+    self.updateAll()
   }
-  func setUpdates() {
+  func updateFollowing(followingSnapshot: DataSnapshot) {
     guard self.uid != "" else { return }
-    let ref = Database.database().reference().child("userProfiles/\(self.uid)")
-    let usernameRef = ref.child("username")
-    usernameRef.observe(.value, with: { snapshot in
-      if snapshot.exists() {
-        self.username = snapshot.value as! String
+    self.following = Set<String>()
+    if followingSnapshot.exists() {
+      for uid in followingSnapshot.value as! [String: Bool] {
+        print("following : \(uid.key)")
+        self.following.insert(uid.key)
       }
+    }
+  }
+  func updateFollowers(followerSnapshot: DataSnapshot) {
+    guard self.uid != "" else { return }
+    self.followedBy = Set<String>()
+    if followerSnapshot.exists() {
+      for uid in followerSnapshot.value as! [String: Bool] {
+        print("followed by : \(uid.key)")
+        self.followedBy.insert(uid.key)
+      }
+    }
+  }
+  func updateUsername(usernameSnapshot: DataSnapshot) {
+    guard self.uid != "" else { return }
+    if usernameSnapshot.exists() {
+      self.username = usernameSnapshot.value as! String
+    }
+  }
+  func updateAll() {
+    let ref = Database.database().reference().child("\(self.uid)")
+    let usernameRef = ref.child("username")
+    usernameRef.observeSingleEvent(of: .value, with: { snapshot in
+      self.updateUsername(usernameSnapshot: snapshot)
     })
     let followingRef = ref.child("following")
-    followingRef.observe(.value, with: { snapshot in
-      self.following = Set<String>()
-      if snapshot.exists() {
-        for uid in snapshot.value as! [String: Bool] {
-          print("following : \(uid.key)")
-          self.following.insert(uid.key)
-        }
-      }
+    followingRef.observeSingleEvent(of: .value, with: { snapshot in
+      self.updateFollowing(followingSnapshot: snapshot)
     })
-    let followedByRef = ref.child("followedBy")
-    followedByRef.observe( .value, with: { snapshot in
-      self.followedBy = Set<String>()
-      if snapshot.exists() {
-        for uid in snapshot.value as! [String: Bool] {
-          print("followed by : \(uid.key)")
-          self.followedBy.insert(uid.key)
-        }
-      }
+    let followersRef = ref.child("followedBy")
+    followersRef.observeSingleEvent(of: .value, with: { snapshot in
+      self.updateFollowers(followerSnapshot: snapshot)
     })
   }
   func follow(uid: String, ref: DatabaseReference) {

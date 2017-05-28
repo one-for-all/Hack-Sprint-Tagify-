@@ -25,6 +25,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var didCheckAndSuggestAppleMusicSignUp = false
     var didAskForMediaLibraryAccess = false
     
+    
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     let songCellIdentifier = "SongCell"

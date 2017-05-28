@@ -9,13 +9,25 @@
 import UIKit
 
 class FollowingViewController: UIViewController {
+    
+    var currentUser: TagifyUser = TagifyUser(uid: "")
+    var following = [String]()
+    
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.currentUser = appDelegate.currentUser
+        let userFollowingRef = Database.database().reference().child("\(self.currentUser.uid)/following")
+        userFollowingRef.observe(.value, with: { snapshot in
+            self.currentUser.updateFollowing(followingSnapshot: snapshot)
+            self.following = Array(self.currentUser.following)
+            self.tableView.reloadData()
+        })
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,11 +51,11 @@ extension FollowingViewController: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.following.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FollowingCell")
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FollowingCell") as! FollowingTableViewCell
+        return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
