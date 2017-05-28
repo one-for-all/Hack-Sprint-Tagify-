@@ -1070,7 +1070,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jKt-2W-4Z8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2424" y="1499"/>
+            <point key="canvasLocation" x="2424" y="1485"/>
         </scene>
         <!--Following View Controller-->
         <scene sceneID="1jo-xc-vPB">
@@ -1177,10 +1177,10 @@
             </objects>
             <point key="canvasLocation" x="2454" y="2397"/>
         </scene>
-        <!--Username View Controller-->
+        <!--Theme Color View Controller-->
         <scene sceneID="9wp-tq-57R">
             <objects>
-                <viewController id="dvp-ph-IGO" customClass="UsernameViewController" customModule="Tagify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dvp-ph-IGO" customClass="ThemeColorViewController" customModule="Tagify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N0u-bs-ulp"/>
                         <viewControllerLayoutGuide type="bottom" id="y2r-Rm-Uej"/>
@@ -1230,19 +1230,69 @@
                                     <constraint firstItem="oTm-fc-qeM" firstAttribute="centerY" secondItem="Iax-TF-70Q" secondAttribute="centerY" id="zCa-Gj-gJl"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yjm-d9-KcJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yjm-d9-KcJ">
                                 <rect key="frame" x="37.5" y="133.5" width="300" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cF7-Ax-vFm">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ColorCell" id="cF7-Ax-vFm">
                                         <rect key="frame" x="0.0" y="28" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cF7-Ax-vFm" id="wIY-y0-xjv">
-                                            <rect key="frame" x="0.0" y="0.0" width="301" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dLI-js-4Ve">
+                                        <rect key="frame" x="0.0" y="72" width="301" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dLI-js-4Ve" id="5fx-04-lFc">
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5W6-P3-uOW">
+                                        <rect key="frame" x="0.0" y="116" width="301" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5W6-P3-uOW" id="bEn-YH-Vlt">
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lsj-ty-HLP">
+                                        <rect key="frame" x="0.0" y="160" width="301" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lsj-ty-HLP" id="cte-cR-WSC">
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8Mc-sj-JIM">
+                                        <rect key="frame" x="0.0" y="204" width="301" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Mc-sj-JIM" id="wQx-fn-dcp">
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="HI3-Vp-ixZ">
+                                        <rect key="frame" x="0.0" y="248" width="301" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HI3-Vp-ixZ" id="OAl-kE-Cxp">
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="dvp-ph-IGO" id="zjh-LK-dGQ"/>
+                                    <outlet property="delegate" destination="dvp-ph-IGO" id="89P-86-Nb5"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
