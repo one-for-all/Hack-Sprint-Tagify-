@@ -63,6 +63,17 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         "Taylor Swift - Wildest Dreams",
         "Mark Ronson - Uptown Funk ft. Bruno Mars"
     ]
+    let allSongTrackIds: [String] = [
+        "1161504043",
+        "1193701392",
+        "881629103",
+        "1161504024",
+        "1163339802",
+        "1101917079",
+        "1017804205",
+        "907242710",
+        "1011384691"
+    ]
     var allSongList = [Song]()
     var searchedSongList = [Song]()
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
@@ -223,7 +234,12 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBAction func backwardButtonPressed(_ sender: Any) {
         playPrevious()
     }
-    
+    @IBAction func shuffleButtonPressed(_ sender: Any) {
+        shuffle()
+    }
+    @IBAction func loopButtonPressed(_ sender: Any) {
+        loop()
+    }
 }
 
 
@@ -427,7 +443,8 @@ extension SongViewController { // two methods for initializing song lists depend
     func initializeDefaultAllSongList() {
         allSongList = []
         for (index, song) in allSongNames.enumerated() {
-            let newSong = Song(name: song,  key:"\(index)")
+            let newSong = Song(name: song, key: "\(index)")
+            newSong.trackId = allSongTrackIds[index]
             newSong.tags = ["#Pop", "#Wedding", "#Shower", "#Mona Lisa"]
             if song.range(of: "Bruno Mars") != nil {
                 newSong.imageSource = "BrunoMars.jpg"
@@ -443,7 +460,8 @@ extension SongViewController { // two methods for initializing song lists depend
     }
     func initializeAllSongList(songs: [Song]) {
         allSongList = []
-        for song in songs {
+        for (index, song) in songs.enumerated() {
+            song.trackId = allSongTrackIds[index]
             let songName = song.name
             if songName.range(of: "Bruno Mars") != nil {
                 song.imageSource = "BrunoMars.jpg"
@@ -711,38 +729,37 @@ extension SongViewController { //Related to Music
         applicationMusicPlayer.skipToPreviousItem()
         print("Play previous song")
     }
+    func shuffle() {
+        let shuffleMode = applicationMusicPlayer.shuffleMode
+        switch shuffleMode {
+        case .off:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.songs
+        case .songs:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.off
+        case .albums:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.off
+        default:
+            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.songs
+        }
+    }
+    func loop() {
+        let repeatMode = applicationMusicPlayer.repeatMode
+        switch repeatMode {
+        case .none:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.all
+        case .all:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.one
+        case .one:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.none
+        default:
+            applicationMusicPlayer.repeatMode = MPMusicRepeatMode.all
+        }
+    }
     //Search iTunes and display results in table view
     func removeSpecialChars(str: String) -> String {
         let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
         return String(str.characters.filter{chars.contains($0)})
     }
-    /*
-    func searchItunes(searchTerm: String) {
-        Alamofire.request("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success:
-                    if let responseData = response.result.value as? NSDictionary {
-                        print(responseData)
-                        if let resultCount = responseData.value(forKey: "resultCount") as? Int {
-                            if resultCount == 0 {
-                                print("No result found.")
-                            } else if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
-                                print("https://itunes.apple.com/search?term=\(searchTerm)&entity=song&s=\(self.storefrontId)")
-                                let trackNum = songResults[0]["trackId"] as! NSNumber
-                                let track = "\(trackNum)"
-                                self.appleMusicPlayTrackId(trackId: track)
-                            }
-                        }
-                    }
-                case .failure(let error):
-                    //self.showAlert("Error", error: error.description)
-                    print("Failed to search itunes.")
-                }
-        }
-    }
-    */
     func searchItunes(searchTerm: String, callback: @escaping ([Song]) ->() ) {
         var songList = [Song]()
         let search = removeSpecialChars(str: searchTerm).replacingOccurrences(of: " ", with: "+")
@@ -768,8 +785,8 @@ extension SongViewController { //Related to Music
                                     let song = Song(name: "\(singer) - \(songName)", songWriter: singer, trackId: track, imageSource: imageUrl)
                                     songList.append(song)
                                 }
-                                callback(songList)
                             }
+                            callback(songList)
                         }
                     }
                 case .failure(let error):
@@ -780,6 +797,8 @@ extension SongViewController { //Related to Music
     }
     func searchBarSearchButtonClicked(song: Song) {
         appleMusicPlayTrackId(trackId: song.trackId)
+        print("Playing: \(song.name)")
+        print("TrackId: \(song.trackId)")
     }
     
     /*
