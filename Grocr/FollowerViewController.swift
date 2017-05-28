@@ -54,7 +54,7 @@ class FollowerViewController: UIViewController {
                 print("got image")
                 self.follower[index].userIcon = UIImage(data: data!)!
               }
-              self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+              self.tableView.reloadData()
             }
           }
         })

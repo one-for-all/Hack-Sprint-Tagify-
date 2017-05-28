@@ -550,13 +550,15 @@ extension SongViewController { // initialize current user info with data fram da
         })
     }
     func initializeCurrentUserSongList() {
-        self.currentUserRef.observe(.value, with: { (snapshot) in
+        self.currentUserRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if !snapshot.hasChild("email") {
                 self.currentUserRef.child("email").setValue(self.currentUser.email)
             }
+            print(snapshot)
             if snapshot.hasChild("songs") {
                 var newSongs = [Song]()
-                for song in snapshot.childSnapshot(forPath: "songs").children.allObjects as! [DataSnapshot] {
+                for song in snapshot.childSnapshot(forPath: "songs").children.allObjects {
+                    let song = song as! DataSnapshot
                     let newSong = Song(snapshot: song)
                     newSongs.append(newSong)
                 }
