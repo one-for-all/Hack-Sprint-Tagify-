@@ -27,6 +27,7 @@ class TagifyUser {
   let email: String
   var username: String = ""
   var iconImage = UIImage()
+  var listeningToSelf = true
   
   var following = [String: Bool]()
   var followedBy = Set<String>()
@@ -49,7 +50,15 @@ class TagifyUser {
   func fillUserEmail() {
     userProfilesRef.child("\(self.uid)/email").setValue(self.email)
     userSongsRef.child("\(self.uid)/email").setValue(self.email)
-    
+  }
+  func updateListeningToSelf(listeningToSelfSnapshot snapshot: DataSnapshot) {
+    guard self.uid != "" else { return }
+    if snapshot.exists() {
+      self.listeningToSelf = snapshot.value as! Bool
+    } else {
+      self.listeningToSelf = true
+      userProfilesRef.child("\(uid)/listeningToSelf").setValue(true)
+    }
   }
   func updateUsername(usernameSnapshot: DataSnapshot) {
     guard self.uid != "" else { return }
@@ -144,6 +153,11 @@ class TagifyUser {
     self.username = username
     print("going to update username to \(username)")
     userProfilesRef.child("\(self.uid)/username").setValue(username)
+  }
+  func setListeningToSelf(_ val:Bool) {
+    self.listeningToSelf = val
+    print("going to listen to self \(val)")
+    userProfilesRef.child("\(self.uid)/listeningToSelf").setValue(val)
   }
 }
 
