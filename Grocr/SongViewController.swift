@@ -30,7 +30,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var appleMusicCapable = false
     var applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     var itunesSongList = [Song]()
-    
+    var nowPlaying = -1
     
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -48,6 +48,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tagViewSlideDownConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playingSong: UILabel!
     
     var currentSelectedSong: Song = Song(trackId: "") {
         didSet {
@@ -90,6 +91,10 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var searchedSongList = [Song]()
     var userAllSongDict = [String: Song]()
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
+    
+    var searchString = ""
+    var searchLimit = 25
+    var isSearching = false
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,26 +165,32 @@ class SongViewController: UIViewController, UITextFieldDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
-        textField.resignFirstResponder()
-        return true
-    }
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
-        if let searchString = sender.text {
+        searchLimit = 25
+        if let search = sender.text {
+            self.searchString = search
             if searchString == "" {
+                isSearching = false
                 searchedSongList = userAllSongList
                 tableView.reloadData()
             } else if searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(userAllSongList), withHashTagString: searchString)
                 tableView.reloadData()
             } else {
-                searchItunes(searchTerm: searchString) { list in
+                tableView.setContentOffset(CGPoint.zero, animated: true)
+                isSearching = true
+                searchItunes(searchTerm: searchString, limit: searchLimit) { list in
                     self.searchedSongList = list
                     self.tableView.reloadData()
                 }
             }
+            print(self.searchedSongList)
         }
         print("End Editing! Start Searching")
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        textField.resignFirstResponder()
+        return true
     }
     
     @IBAction func closeButtonPressed(_ sender: Any) {
@@ -252,7 +263,9 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             if self.appleMusicCapable {
-                songClicked(song: cell.song)
+                songClicked(song: cell.song, index: indexPath.row)
+                nowPlaying = indexPath.row
+                self.playingSong.text = "\(cell.song.artist) - \(cell.song.name)"
             } else {
                 playSampleMusic(withURLString: cell.song.previewURL)
             }
@@ -265,6 +278,31 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+extension SongViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if isSearching {
+            let offset = scrollView.contentOffset
+            let bounds = scrollView.bounds
+            let size = scrollView.contentSize
+            let inset = scrollView.contentInset
+            let y = Float(offset.y + bounds.size.height - inset.bottom)
+            let h = Float(size.height)
+            let reload_distance: Float = 50;
+            if y > (h + reload_distance) {
+                DispatchQueue.main.async {
+                    self.loadMore()
+                    scrollView.isScrollEnabled = false
+                    UIView.animate(withDuration:0.5, animations: {
+                        scrollView.setContentOffset(offset, animated: true)
+                        scrollView.isScrollEnabled = true
+                    })
+                    //scrollViewDidEndDragging(scrollView, willDecelerate: true)
+                    print("loading \(self.searchLimit) items")
+                }
+            }
+        }
+    }
+}
 
 //Related to CollectionView
 extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -716,12 +754,42 @@ extension SongViewController { //Related to Music
         print("Music continued")
     }
     func playNext() {
-        if self.appleMusicCapable { applicationMusicPlayer.skipToNextItem() }
         print("Play next song")
+        if self.appleMusicCapable {
+            //applicationMusicPlayer.skipToNextItem()
+            if nowPlaying < searchedSongList.count-1 {
+                nowPlaying += 1
+            } else {
+                nowPlaying = 0
+            }
+            let nextSong = searchedSongList[nowPlaying]
+            let nextTrack = nextSong.trackId
+            applicationMusicPlayer.setQueueWithStoreIDs([nextTrack])
+            applicationMusicPlayer.prepareToPlay()
+            applicationMusicPlayer.play()
+            self.playingSong.text = "\(nextSong.artist) - \(nextSong.name)"
+            print("Playing: \(nextSong.name)")
+            print("TrackId: \(nextTrack)")
+        }
     }
     func playPrevious() {
-        if self.appleMusicCapable { applicationMusicPlayer.skipToPreviousItem() }
         print("Play previous song")
+        if self.appleMusicCapable {
+            //applicationMusicPlayer.skipToPreviousItem()
+            if nowPlaying > 1 {
+                nowPlaying -= 1
+            } else {
+                nowPlaying = searchedSongList.count-1
+            }
+            let prevSong = searchedSongList[nowPlaying]
+            let prevTrack = prevSong.trackId
+            applicationMusicPlayer.setQueueWithStoreIDs([prevTrack])
+            applicationMusicPlayer.prepareToPlay()
+            applicationMusicPlayer.play()
+            self.playingSong.text = "\(prevSong.artist) - \(prevSong.name)"
+            print("Playing: \(prevSong.name)")
+            print("TrackId: \(prevTrack)")
+        }
     }
     func shuffle() {
         print("shuffle")
@@ -759,10 +827,10 @@ extension SongViewController { //Related to Music
         allowedCharacters.remove(charactersIn: "+/=")
         return str.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
     }
-    func searchItunes(searchTerm: String, callback: @escaping ([Song]) ->() ) {
+    func searchItunes(searchTerm: String, limit: Int, callback: @escaping ([Song]) ->() ) {
         var songList = [Song]()
         let search = removeSpecialChars(str: searchTerm).replacingOccurrences(of: " ", with: "+")
-        Alamofire.request("https://itunes.apple.com/search?term=\(search)&entity=song&limit=25&s=\(self.storefrontId)")
+        Alamofire.request("https://itunes.apple.com/search?term=\(search)&entity=song&limit=\(limit)&s=\(self.storefrontId)")
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -772,8 +840,6 @@ extension SongViewController { //Related to Music
                             if resultCount == 0 {
                                 print("No result found.")
                             } else if let songResults = responseData.value(forKey: "results") as? [NSDictionary] {
-                                //print("https://itunes.apple.com/search?term=\(search)&entity=song&limit=15&s=143441")
-                                //print(songResults)
                                 for result in songResults {
                                     let singer = result["artistName"] as! String
                                     let songName = result["trackName"] as! String
@@ -781,7 +847,6 @@ extension SongViewController { //Related to Music
                                     let track = "\(trackNum)"
                                     let imageUrl = result["artworkUrl100"] as! String
                                     let previewURL = result["previewUrl"] as? String ?? ""
-                                    print(imageUrl)
                                     let song = Song(name: "\(songName)", artist: singer, trackId: track, imageSource: imageUrl, previewURL: previewURL)
                                     songList.append(song)
                                 }
@@ -795,7 +860,16 @@ extension SongViewController { //Related to Music
                 }
         }
     }
-    func songClicked(song: Song) {
+    func loadMore() {
+        self.searchLimit += 5
+        searchItunes(searchTerm: searchString, limit: searchLimit) { list in
+            if list.count > 0 {
+                self.searchedSongList = list
+                self.tableView.reloadData()
+            }
+        }
+    }
+    func songClicked(song: Song, index: Int) {
         appleMusicPlayTrackId(trackId: song.trackId)
         print("Playing: \(song.name)")
         print("TrackId: \(song.trackId)")
