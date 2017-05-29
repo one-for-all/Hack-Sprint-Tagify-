@@ -87,9 +87,12 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         "907242710",
         "1011384691"
     ]
+    var currentUserSongList = [Song]()
+    var followingSongList = [Song]() // including only ones currently checked
     var userAllSongList = [Song]()
     var searchedSongList = [Song]()
-    var userAllSongDict = [String: Song]()
+//    var userAllSongDict = [String: Song]()
+    var userFollowingSongDict = [String: Song]()
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
     
     var searchString = ""
@@ -110,8 +113,8 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        initializeDefaultAllSongList()
-        searchedSongList = userAllSongList
+        //initializeDefaultAllSongList()
+        //searchedSongList = currentUserSongList
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.delegate = self
@@ -124,11 +127,11 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             guard let user = user else { print("no user!"); return }
             print("welcome \(user.email!) for logging in")
             self.appDelegate.currentUser = TagifyUser(authData: user)
-            self.initializeCurrentUserSongList()
+            self.updateCurrentUserSongList()
 //            self.initializeFollowingForCurrentUser()
             let followingRef = self.userProfilesRef.child("\(self.appDelegate.currentUser.uid)/following")
             followingRef.observe(.value, with: { snapshot in
-                self.updateUserAllSongList(withFollowingSnapshot: snapshot)
+                self.updateFollowingSongList(withFollowingSnapshot: snapshot)
             })
         }
         appleMusicFetchStorefrontRegion()
@@ -167,24 +170,11 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
         searchLimit = 25
+        nowPlaying = -1
         if let search = sender.text {
             self.searchString = search
-            if searchString == "" {
-                isSearching = false
-                searchedSongList = userAllSongList
-                tableView.reloadData()
-            } else if searchString[searchString.startIndex] == "#" {
-                searchedSongList = searchedSongs(fromSongSet: Set(userAllSongList), withHashTagString: searchString)
-                tableView.reloadData()
-            } else {
-                tableView.setContentOffset(CGPoint.zero, animated: true)
-                isSearching = true
-                searchItunes(searchTerm: searchString, limit: searchLimit) { list in
-                    self.searchedSongList = list
-                    self.tableView.reloadData()
-                }
-            }
-            print(self.searchedSongList)
+            self.searchAndDisplay(withSearchString: search)
+
         }
         print("End Editing! Start Searching")
     }
@@ -224,6 +214,18 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             isPlaying = false
             playButton.setImage(UIImage(named: "playButton.png"), for: .normal)
         } else {
+            if nowPlaying == -1 {
+                let firstSong = searchedSongList[0]
+                if self.appleMusicCapable {
+                    appleMusicPlayTrackId(trackId: firstSong.trackId)
+                    print("Playing: \(firstSong.name)")
+                    print("TrackId: \(firstSong.trackId)")
+                    self.playingSong.text = "\(firstSong.artist) - \(firstSong.name)"
+                } else {
+                    playSampleMusic(withURLString: firstSong.previewURL)
+                }
+            }
+            nowPlaying = 0
             continuePlay()
             isPlaying = true
             playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
@@ -231,9 +233,13 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func forwardButtonPressed(_ sender: Any) {
         playNext()
+        isPlaying = true
+        playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     @IBAction func backwardButtonPressed(_ sender: Any) {
         playPrevious()
+        isPlaying = true
+        playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     @IBAction func shuffleButtonPressed(_ sender: Any) {
         shuffle()
@@ -425,7 +431,7 @@ extension SongViewController: UIGestureRecognizerDelegate { //Related to Tap Ges
 extension SongViewController { // related to search
     func searchedSongs(fromSongSet songSet: Set<Song>, withHashTagString hashTagString: String) -> [Song] {
         if hashTagString == "" {
-            return userAllSongList
+            return Array(songSet)
         }
         var result = [Song]()
         let union = hashTagString.components(separatedBy: "&")
@@ -442,39 +448,11 @@ extension SongViewController { // related to search
         }
         return result
     }
-//    func getSongs(forTag tag: String, forUser user: TagifyUser) { // fill in followingUserTagSongDict
-//        if self.followingUserTagSongDict[user.uid] == nil {
-//            self.followingUserTagSongDict[user.uid] = [String: Set<Song>]()
-//        }
-//        if self.followingUserTagSongDict[user.uid]![tag] == nil {
-//            self.followingUserTagSongDict[user.uid]![tag] = Set<Song>()
-//        }
-//        
-//        Database.database().reference(withPath: "userTags").child("\(user.uid)/\(tag)").observeSingleEvent(of: .value, with: {
-//            (snapshot) in
-//            for songObj in snapshot.value as! [String: String] {
-//                let songKey = songObj.key
-//                Database.database().reference(withPath: "userSongs").child("\(user.uid)/\(songKey)").observeSingleEvent(of: .value, with: { (snapshot) in
-//                    var song = Song(trackId: songKey)
-//                    if let name = snapshot.childSnapshot(forPath: "name").value as? String {
-//                        song.name = name
-//                    }
-//                    if let artist = snapshot.childSnapshot(forPath: "artist").value as? String {
-//                        song.artist = artist
-//                    }
-//                    if let imageSource = snapshot.childSnapshot(forPath: "imageSource").value as? String {
-//                        song.imageSource = imageSource
-//                    }
-//                    self.followingUserTagSongDict[user.uid]?[tag]?.insert(song)
-//                })
-//            }
-//        })
-//    }
 }
 
 extension SongViewController { // Initialize a default song list, to be replaced by top hits
     func initializeDefaultAllSongList() {
-        userAllSongList = []
+        currentUserSongList = []
         for (index, song) in allSongNames.enumerated() {
             let artist_songname = song.components(separatedBy: " - ")
             let songname = artist_songname[1]
@@ -491,75 +469,75 @@ extension SongViewController { // Initialize a default song list, to be replaced
             }
             let newSong = Song(name: songname, artist: artist, trackId: allSongTrackIds[index], imageSource: imageSource, previewURL: "")
             newSong.tags = ["Pop", "Wedding", "Shower", "Mona Lisa"]
-            userAllSongList.append(newSong)
+            currentUserSongList.append(newSong)
         }
     }
-    func updateUserAllSongList(withFollowingSnapshot snapshot: DataSnapshot) {
-        self.userAllSongDict = [:]
-        for song in appDelegate.currentUser.songs {
-            self.userAllSongDict[song.trackId] = song
-        }
+    func updateFollowingSongList(withFollowingSnapshot snapshot: DataSnapshot) {
+        userFollowingSongDict = [String: Song]()
         for childSnapshot in snapshot.children.allObjects {
             let childSnapshot = childSnapshot as! DataSnapshot
             let listenedTo = childSnapshot.value as? Bool ?? false
             guard listenedTo == true else { continue } // checking listening to
             let followingUserUID = childSnapshot.key
             let followingUserSongsRef = userSongsRef.child("\(followingUserUID)/songs")
-            followingUserSongsRef.observeSingleEvent(of: .value, with: { snapshot in
+            followingUserSongsRef.observe( .value, with: { snapshot in
                 for songSnap in snapshot.children.allObjects {
                     let songSnap = songSnap as! DataSnapshot
                     let song = Song(snapshot: songSnap)
-                    if let storedSong = self.userAllSongDict[song.trackId] {
+                    if let storedSong = self.userFollowingSongDict[song.trackId] {
                         storedSong.tags.formUnion(song.tags)
                     } else {
-                        self.userAllSongDict[song.trackId] = song
+                        self.userFollowingSongDict[song.trackId] = song
                     }
                 }
-                print(self.userAllSongDict.values)
-                self.userAllSongList = self.userAllSongDict.map { $1 }
-                self.searchedSongList = self.userAllSongList
-                // self.searchedSongs(fromSongSet: Set(self.userAllSongList), withHashTagString: self.searchSongTextField.text!)
-                self.tableView.reloadData()
+                self.updateSongList()
             })
         }
     }
-}
-
-extension SongViewController { // initialize current user info with data fram database & fill in missing data in database
-    func initializeCurrentUserSongList() { // Taking care of new user who has no initial 
+    func updateCurrentUserSongList() { // Taking care of new user who has no initial
         let currentUserSongsRef = self.userSongsRef.child("\(appDelegate.currentUser.uid)/songs")
-        currentUserSongsRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        currentUserSongsRef.observe(.value, with: { (snapshot) in
             if snapshot.exists() {
                 self.appDelegate.currentUser.updateSongs(songsSnapshot: snapshot)
-                self.userAllSongList = Array(self.appDelegate.currentUser.songs)
-                self.searchedSongList = self.userAllSongList
+                self.currentUserSongList = Array(self.appDelegate.currentUser.songs)
+                //self.searchedSongList = self.currentUserSongList
             } else {
-                for song in self.userAllSongList {
-                    currentUserSongsRef.child("\(song.trackId)").setValue(song.toAnyObject())
-                }
-                self.appDelegate.currentUser.songs = Set(self.userAllSongList) // To Do: Potential problem with copy by reference
+//                for song in self.currentUserSongList {
+//                    currentUserSongsRef.child("\(song.trackId)").setValue(song.toAnyObject())
+//                }
+//                self.appDelegate.currentUser.songs = Set(self.currentUserSongList) // To Do: Potential problem with copy by reference
             }
-            self.tableView.reloadData()
+            self.updateSongList()
         })
     }
-    // To Do: followingUserTagSongDict to be thought over
-    func initializeFollowingForCurrentUser() {
-        let currentUserFollowingRef = self.userProfilesRef.child("\(appDelegate.currentUser.uid)/following")
-        currentUserFollowingRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() {
-                for uid in snapshot.value as! [String: Bool] {
-                    if self.followingUserTagSongDict[uid.key] == nil {
-                        self.followingUserTagSongDict[uid.key] = [String: Set<Song>]()
-                    }
-                }
+    func updateSongList() {
+        for song in self.currentUserSongList {
+            if let storedSong = self.userFollowingSongDict[song.trackId] {
+                storedSong.tags.formUnion(song.tags)
+            } else {
+                self.userFollowingSongDict[song.trackId] = song
             }
-        })
+        }
+        self.userAllSongList = userFollowingSongDict.map { $1 }
+        searchAndDisplay(withSearchString: searchSongTextField.text!)
     }
-    
-    // To Do: To be implemented
-    func getTagsForUser(_ user: TagifyUser) ->[String: String] {
-        var tagToSong = [String: String]()
-        return tagToSong
+    func searchAndDisplay(withSearchString search: String) {
+        if searchString == "" {
+            isSearching = false
+            searchedSongList = userAllSongList
+            tableView.reloadData()
+        } else if searchString[searchString.startIndex] == "#" {
+            searchedSongList = searchedSongs(fromSongSet: Set(userAllSongList), withHashTagString: searchString)
+            tableView.reloadData()
+        } else {
+            tableView.setContentOffset(CGPoint.zero, animated: true)
+            isSearching = true
+            searchItunes(searchTerm: searchString, limit: searchLimit) { list in
+                self.searchedSongList = list
+                self.tableView.reloadData()
+            }
+        }
+        print(self.searchedSongList)
     }
 }
 
@@ -755,41 +733,43 @@ extension SongViewController { //Related to Music
     }
     func playNext() {
         print("Play next song")
+        //applicationMusicPlayer.skipToNextItem()
+        if nowPlaying < searchedSongList.count-1 {
+            nowPlaying += 1
+        } else {
+            nowPlaying = 0
+        }
+        let nextSong = searchedSongList[nowPlaying]
         if self.appleMusicCapable {
-            //applicationMusicPlayer.skipToNextItem()
-            if nowPlaying < searchedSongList.count-1 {
-                nowPlaying += 1
-            } else {
-                nowPlaying = 0
-            }
-            let nextSong = searchedSongList[nowPlaying]
             let nextTrack = nextSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([nextTrack])
             applicationMusicPlayer.prepareToPlay()
             applicationMusicPlayer.play()
-            self.playingSong.text = "\(nextSong.artist) - \(nextSong.name)"
-            print("Playing: \(nextSong.name)")
-            print("TrackId: \(nextTrack)")
+        } else {
+            playSampleMusic(withURLString: nextSong.previewURL)
         }
+        self.playingSong.text = "\(nextSong.artist) - \(nextSong.name)"
+        print("Playing: \(nextSong.name)")
     }
     func playPrevious() {
         print("Play previous song")
+        //applicationMusicPlayer.skipToPreviousItem()
+        if nowPlaying > 1 {
+            nowPlaying -= 1
+        } else {
+            nowPlaying = searchedSongList.count-1
+        }
+        let prevSong = searchedSongList[nowPlaying]
         if self.appleMusicCapable {
-            //applicationMusicPlayer.skipToPreviousItem()
-            if nowPlaying > 1 {
-                nowPlaying -= 1
-            } else {
-                nowPlaying = searchedSongList.count-1
-            }
-            let prevSong = searchedSongList[nowPlaying]
             let prevTrack = prevSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([prevTrack])
             applicationMusicPlayer.prepareToPlay()
             applicationMusicPlayer.play()
-            self.playingSong.text = "\(prevSong.artist) - \(prevSong.name)"
-            print("Playing: \(prevSong.name)")
-            print("TrackId: \(prevTrack)")
+        } else {
+            playSampleMusic(withURLString: prevSong.previewURL)
         }
+        self.playingSong.text = "\(prevSong.artist) - \(prevSong.name)"
+        print("Playing: \(prevSong.name)")
     }
     func shuffle() {
         print("shuffle")
