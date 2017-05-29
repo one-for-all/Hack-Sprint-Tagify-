@@ -92,16 +92,24 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var searchedSongList = [Song]()
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
     
+    var searchString = ""
+    var searchLimit = 25
+    var isSearching = false
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
-        if let searchString = sender.text {
+        searchLimit = 25
+        if let search = sender.text {
+            self.searchString = search
             if searchString == "" {
+                isSearching = false
                 searchedSongList = userAllSongList
                 tableView.reloadData()
             } else if searchString[searchString.startIndex] == "#" {
                 searchedSongList = searchedSongs(fromSongSet: Set(userAllSongList), withHashTagString: searchString)
                 tableView.reloadData()
             } else {
-                searchItunes(searchTerm: searchString) { list in
+                tableView.setContentOffset(CGPoint.zero, animated: true)
+                isSearching = true
+                searchItunes(searchTerm: searchString, limit: searchLimit) { list in
                     self.searchedSongList = list
                     self.tableView.reloadData()
                 }
@@ -301,6 +309,31 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+extension SongViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if isSearching {
+            let offset = scrollView.contentOffset
+            let bounds = scrollView.bounds
+            let size = scrollView.contentSize
+            let inset = scrollView.contentInset
+            let y = Float(offset.y + bounds.size.height - inset.bottom)
+            let h = Float(size.height)
+            let reload_distance: Float = 50;
+            if y > (h + reload_distance) {
+                DispatchQueue.main.async {
+                    self.loadMore()
+                    scrollView.isScrollEnabled = false
+                    UIView.animate(withDuration:0.5, animations: {
+                        scrollView.setContentOffset(offset, animated: true)
+                        scrollView.isScrollEnabled = true
+                    })
+                    //scrollViewDidEndDragging(scrollView, willDecelerate: true)
+                    print("loading \(self.searchLimit) items")
+                }
+            }
+        }
+    }
+}
 
 //Related to CollectionView
 extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -828,10 +861,10 @@ extension SongViewController { //Related to Music
         allowedCharacters.remove(charactersIn: "+/=")
         return str.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
     }
-    func searchItunes(searchTerm: String, callback: @escaping ([Song]) ->() ) {
+    func searchItunes(searchTerm: String, limit: Int, callback: @escaping ([Song]) ->() ) {
         var songList = [Song]()
         let search = removeSpecialChars(str: searchTerm).replacingOccurrences(of: " ", with: "+")
-        Alamofire.request("https://itunes.apple.com/search?term=\(search)&entity=song&limit=25&s=\(self.storefrontId)")
+        Alamofire.request("https://itunes.apple.com/search?term=\(search)&entity=song&limit=\(limit)&s=\(self.storefrontId)")
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -859,6 +892,15 @@ extension SongViewController { //Related to Music
                     //self.showAlert("Error", error: error.description)
                     print("Failed to search itunes.")
                 }
+        }
+    }
+    func loadMore() {
+        self.searchLimit += 5
+        searchItunes(searchTerm: searchString, limit: searchLimit) { list in
+            if list.count > 0 {
+                self.searchedSongList = list
+                self.tableView.reloadData()
+            }
         }
     }
     func songClicked(song: Song, index: Int) {
