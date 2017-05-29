@@ -82,6 +82,7 @@ extension ScopeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == personalTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PersonalCell")
+            cell?.accessoryType = self.appDelegate.currentUser.listeningToSelf ? .checkmark : .none
             return cell!
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ScopeCell")
@@ -100,8 +101,9 @@ extension ScopeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == personalTableView {
             let cell = tableView.cellForRow(at: indexPath)
-            let newVal = !(cell?.accessoryType == .checkmark)
+            let newVal = !(self.appDelegate.currentUser.listeningToSelf) //!(cell?.accessoryType == .checkmark)
             toggleCellCheckbox(cell!, listenedTo: newVal)
+            self.appDelegate.currentUser.setListeningToSelf(newVal)
             return
         }
         if indexPath.row < self.following.count {

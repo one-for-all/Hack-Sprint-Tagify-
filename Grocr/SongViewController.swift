@@ -511,16 +511,25 @@ extension SongViewController { // Initialize a default song list, to be replaced
             }
             self.updateSongList()
         })
+        let currentUserListeningToSelfRef = self.userProfilesRef.child("\(appDelegate.currentUser.uid)/listeningToSelf")
+        currentUserListeningToSelfRef.observe(.value, with: { snapshot in
+            self.appDelegate.currentUser.updateListeningToSelf(listeningToSelfSnapshot: snapshot)
+            print("I'm currently listening to self: \(self.appDelegate.currentUser.listeningToSelf)")
+            self.updateSongList()
+        })
     }
     func updateSongList() {
-        for song in self.currentUserSongList {
-            if let storedSong = self.userFollowingSongDict[song.trackId] {
-                storedSong.tags.formUnion(song.tags)
-            } else {
-                self.userFollowingSongDict[song.trackId] = song
+        var newAllSongDict = userFollowingSongDict
+        if appDelegate.currentUser.listeningToSelf {
+            for song in self.currentUserSongList {
+                if let storedSong = newAllSongDict[song.trackId] {
+                    storedSong.tags.formUnion(song.tags)
+                } else {
+                    newAllSongDict[song.trackId] = song
+                }
             }
         }
-        self.userAllSongList = userFollowingSongDict.map { $1 }
+        self.userAllSongList = newAllSongDict.map { $1 }
         searchAndDisplay(withSearchString: searchSongTextField.text!)
     }
     func searchAndDisplay(withSearchString search: String) {
