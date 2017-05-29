@@ -31,6 +31,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     var itunesSongList = [Song]()
     var nowPlaying = -1
+    var playlist = [Song]()
     
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -296,6 +297,7 @@ extension SongViewController: UIScrollViewDelegate {
             let reload_distance: Float = 50;
             if y > (h + reload_distance) {
                 DispatchQueue.main.async {
+                    scrollView.bounces = true
                     self.loadMore()
                     scrollView.isScrollEnabled = false
                     UIView.animate(withDuration:0.5, animations: {
@@ -801,8 +803,6 @@ extension SongViewController { //Related to Music
     }
     //Search iTunes and display results in table view
     func removeSpecialChars(str: String) -> String {
-//        let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
-//        return String(str.characters.filter{chars.contains($0)})
         var allowedCharacters = NSCharacterSet.urlQueryAllowed //.mutableCopy() as NSMutableCharacterSet
         allowedCharacters.remove(charactersIn: "+/=")
         return str.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
@@ -841,11 +841,15 @@ extension SongViewController { //Related to Music
         }
     }
     func loadMore() {
-        self.searchLimit += 5
         searchItunes(searchTerm: searchString, limit: searchLimit) { list in
             if list.count > 0 {
-                self.searchedSongList = list
-                self.tableView.reloadData()
+                if list.count > self.searchedSongList.count {
+                    self.searchLimit += 5
+                    self.searchedSongList = list
+                    self.tableView.reloadData()
+                } else {
+                    self.searchLimit = list.count
+                }
             }
         }
     }
@@ -853,6 +857,11 @@ extension SongViewController { //Related to Music
         appleMusicPlayTrackId(trackId: song.trackId)
         print("Playing: \(song.name)")
         print("TrackId: \(song.trackId)")
+    }
+//**********************************************************************//
+    //Update playlist
+    func updatePlaylist(index: Int) {
+        
     }
     
     /*
