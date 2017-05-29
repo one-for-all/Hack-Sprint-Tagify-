@@ -84,9 +84,12 @@ extension ScopeViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PersonalCell")
             return cell!
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ScopeCell") as! ScopeTableViewCell
-        cell.user = self.following[indexPath.row]
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ScopeCell")
+        if indexPath.row < self.following.count {
+            let cell = cell as! ScopeTableViewCell
+            cell.user = self.following[indexPath.row]
+        }
+        return cell!
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == personalTableView {
