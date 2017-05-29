@@ -170,6 +170,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
         searchLimit = 25
+        nowPlaying = -1
         if let search = sender.text {
             self.searchString = search
             self.searchAndDisplay(withSearchString: search)
@@ -213,6 +214,18 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             isPlaying = false
             playButton.setImage(UIImage(named: "playButton.png"), for: .normal)
         } else {
+            if nowPlaying == -1 {
+                let firstSong = searchedSongList[0]
+                if self.appleMusicCapable {
+                    appleMusicPlayTrackId(trackId: firstSong.trackId)
+                    print("Playing: \(firstSong.name)")
+                    print("TrackId: \(firstSong.trackId)")
+                    self.playingSong.text = "\(firstSong.artist) - \(firstSong.name)"
+                } else {
+                    playSampleMusic(withURLString: firstSong.previewURL)
+                }
+            }
+            nowPlaying = 0
             continuePlay()
             isPlaying = true
             playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
@@ -220,9 +233,13 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func forwardButtonPressed(_ sender: Any) {
         playNext()
+        isPlaying = true
+        playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     @IBAction func backwardButtonPressed(_ sender: Any) {
         playPrevious()
+        isPlaying = true
+        playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     @IBAction func shuffleButtonPressed(_ sender: Any) {
         shuffle()
@@ -716,41 +733,43 @@ extension SongViewController { //Related to Music
     }
     func playNext() {
         print("Play next song")
+        //applicationMusicPlayer.skipToNextItem()
+        if nowPlaying < searchedSongList.count-1 {
+            nowPlaying += 1
+        } else {
+            nowPlaying = 0
+        }
+        let nextSong = searchedSongList[nowPlaying]
         if self.appleMusicCapable {
-            //applicationMusicPlayer.skipToNextItem()
-            if nowPlaying < searchedSongList.count-1 {
-                nowPlaying += 1
-            } else {
-                nowPlaying = 0
-            }
-            let nextSong = searchedSongList[nowPlaying]
             let nextTrack = nextSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([nextTrack])
             applicationMusicPlayer.prepareToPlay()
             applicationMusicPlayer.play()
-            self.playingSong.text = "\(nextSong.artist) - \(nextSong.name)"
-            print("Playing: \(nextSong.name)")
-            print("TrackId: \(nextTrack)")
+        } else {
+            playSampleMusic(withURLString: nextSong.previewURL)
         }
+        self.playingSong.text = "\(nextSong.artist) - \(nextSong.name)"
+        print("Playing: \(nextSong.name)")
     }
     func playPrevious() {
         print("Play previous song")
+        //applicationMusicPlayer.skipToPreviousItem()
+        if nowPlaying > 1 {
+            nowPlaying -= 1
+        } else {
+            nowPlaying = searchedSongList.count-1
+        }
+        let prevSong = searchedSongList[nowPlaying]
         if self.appleMusicCapable {
-            //applicationMusicPlayer.skipToPreviousItem()
-            if nowPlaying > 1 {
-                nowPlaying -= 1
-            } else {
-                nowPlaying = searchedSongList.count-1
-            }
-            let prevSong = searchedSongList[nowPlaying]
             let prevTrack = prevSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([prevTrack])
             applicationMusicPlayer.prepareToPlay()
             applicationMusicPlayer.play()
-            self.playingSong.text = "\(prevSong.artist) - \(prevSong.name)"
-            print("Playing: \(prevSong.name)")
-            print("TrackId: \(prevTrack)")
+        } else {
+            playSampleMusic(withURLString: prevSong.previewURL)
         }
+        self.playingSong.text = "\(prevSong.artist) - \(prevSong.name)"
+        print("Playing: \(prevSong.name)")
     }
     func shuffle() {
         print("shuffle")
