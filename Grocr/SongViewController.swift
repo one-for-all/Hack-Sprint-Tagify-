@@ -175,7 +175,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         if let search = sender.text {
             self.searchString = search
             self.searchAndDisplay(withSearchString: search)
-
         }
         print("End Editing! Start Searching")
     }
@@ -221,10 +220,10 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                     appleMusicPlayTrackId(trackId: firstSong.trackId)
                     print("Playing: \(firstSong.name)")
                     print("TrackId: \(firstSong.trackId)")
-                    self.playingSong.text = "\(firstSong.artist) - \(firstSong.name)"
                 } else {
                     playSampleMusic(withURLString: firstSong.previewURL)
                 }
+                self.playingSong.text = "\(firstSong.artist) - \(firstSong.name)"
             }
             nowPlaying = 0
             continuePlay()
@@ -271,11 +270,11 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             if self.appleMusicCapable {
                 songClicked(song: cell.song, index: indexPath.row)
-                nowPlaying = indexPath.row
-                self.playingSong.text = "\(cell.song.artist) - \(cell.song.name)"
             } else {
                 playSampleMusic(withURLString: cell.song.previewURL)
             }
+            nowPlaying = indexPath.row
+            self.playingSong.text = "\(cell.song.artist) - \(cell.song.name)"
             isPlaying = true
             playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
         }
