@@ -22,7 +22,7 @@ class SongTableViewCell: UITableViewCell {
             var text: String = "";
             songArtistLabel.text = song.artist
             for tag in song.tags {
-                text += " \(tag)"
+                text += " #\(tag)"
             }
             songTagsLabel.text = text
 //            let firstFourLetters = song.imageSource.index(song.imageSource.startIndex, offsetBy:4)
@@ -33,6 +33,10 @@ class SongTableViewCell: UITableViewCell {
 //            } else {
 //                songImageView.image = UIImage(named: song.imageSource)
 //            }
+            guard song.imageSource.characters.count >= 4 else {
+                songImageView.image = UIImage(named: song.imageSource)
+                return
+            }
             let firstFourLetters = song.imageSource.index(song.imageSource.startIndex, offsetBy:4)
             if song.imageSource.substring(to: firstFourLetters) == "http" {
                 let url = URL(string: song.imageSource)

@@ -26,10 +26,15 @@ class TagifyUser {
   let uid: String
   let email: String
   var username: String
+  var iconImage = UIImage()
+  
   var following = Set<String>()
   var followedBy = Set<String>()
-//  var following = Set<TagifyUser>()
-//  var followedBy = Set<TagifyUser>()
+  var songs = Set<Song>()
+  
+  let userProfilesRef = Database.database().reference(withPath: "userProfiles")
+  let userSongsRef = Database.database().reference(withPath: "userSongs")
+  let storageRef: StorageReference! = Storage.storage().reference()
   
   init(authData: User) {
     uid = authData.uid
@@ -42,6 +47,29 @@ class TagifyUser {
     self.username = ""
     self.uid = uid
     //self.updateAll()
+  }
+  func fillUserEmail() {
+    userProfilesRef.child("\(self.uid)/email").setValue(self.email)
+    userSongsRef.child("\(self.uid)/email").setValue(self.email)
+    
+  }
+  func updateUsername(usernameSnapshot: DataSnapshot) {
+    guard self.uid != "" else { return }
+    if usernameSnapshot.exists() {
+      self.username = usernameSnapshot.value as! String
+    } else {
+      self.username = self.email
+      userProfilesRef.child("\(self.uid)/username").setValue(self.email)
+    }
+  }
+  func updateIcon(data: Data?, error: Error?) {
+    if let error = error {
+      print("error getting user icon: \(error.localizedDescription)")
+      iconImage = UIImage(named: "music.jpg")!
+    } else {
+      print("got icon for user \(uid)")
+      iconImage = UIImage(data: data!)!
+    }
   }
   func updateFollowing(followingSnapshot: DataSnapshot) {
     guard self.uid != "" else { return }
@@ -63,18 +91,29 @@ class TagifyUser {
       }
     }
   }
-  func updateUsername(usernameSnapshot: DataSnapshot) {
-    guard self.uid != "" else { return }
-    if usernameSnapshot.exists() {
-      self.username = usernameSnapshot.value as! String
+  func updateSongs(songsSnapshot: DataSnapshot) {
+    guard self.uid != "" else {return}
+    self.songs = Set<Song>()
+    if songsSnapshot.exists() {
+      for songSnap in songsSnapshot.children.allObjects {
+        let songSnap = songSnap as! DataSnapshot
+        let song = Song(snapshot: songSnap)
+        self.songs.insert(song)
+      }
     }
   }
   func updateAll() {
-    let ref = Database.database().reference().child("\(self.uid)")
+    self.fillUserEmail()
+    let ref = userProfilesRef.child(self.uid)
     let usernameRef = ref.child("username")
     usernameRef.observeSingleEvent(of: .value, with: { snapshot in
       self.updateUsername(usernameSnapshot: snapshot)
     })
+    let userIconPath = "\(self.uid)/userIcon.jpg"
+    let reference = storageRef.child(userIconPath)
+    reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+      self.updateIcon(data: data, error: error)
+    }
     let followingRef = ref.child("following")
     followingRef.observeSingleEvent(of: .value, with: { snapshot in
       self.updateFollowing(followingSnapshot: snapshot)
@@ -84,36 +123,59 @@ class TagifyUser {
       self.updateFollowers(followerSnapshot: snapshot)
     })
   }
+  func setUsername(username: String) {
+    self.username = username
+    print("going to update username to \(username)")
+    userProfilesRef.child("\(self.uid)/username").setValue(username)
+  }
+}
+
+extension TagifyUser { // related to following and unfollowing
   func follow(uid: String) {
     self.following.insert(uid)
-    let ref = Database.database().reference().child("userProfiles")
-    ref.child("\(self.uid)/following/\(uid)").setValue(true)
+    print("going to follow: \(uid)")
+    userProfilesRef.child("\(self.uid)/following/\(uid)").setValue(true)
   }
-  func unfollow(uid: String, ref: DatabaseReference) {
+  func unfollow(uid: String) {
     self.following.remove(uid)
-    print("unfollowing: \(uid)")
-    ref.child("\(self.uid)/following/\(uid)").setValue(NSNull())
+    print("going to unfollow: \(uid)")
+    userProfilesRef.child("\(self.uid)/following/\(uid)").setValue(NSNull())
   }
-  func setUsername(username: String, ref: DatabaseReference) {
-    self.username = username
-    ref.child("\(self.uid)/username").setValue(username)
-  }
-  func followedBy(uid: String, ref: DatabaseReference) {
+  func followedBy(uid: String) {
     self.followedBy.insert(uid)
-    ref.child("\(self.uid)/followedBy/\(uid)").setValue(true)
+    print("going to be followed by: \(uid)")
+    userProfilesRef.child("\(self.uid)/followedBy/\(uid)").setValue(true)
   }
-  func unfollowedBy(uid: String, ref: DatabaseReference) {
+  func unfollowedBy(uid: String) {
     self.followedBy.remove(uid)
-    ref.child("\(self.uid)/followedBy/\(uid)").setValue(NSNull())
+    print("going to be unfollowed by: \(uid)")
+    userProfilesRef.child("\(self.uid)/followedBy/\(uid)").setValue(NSNull())
   }
-  // To Do: Add song tags for user
+}
+
+extension TagifyUser { // related to adding and removing tags
   func add(tag: String, forSong song: Song) {
-    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.trackId)").setValue(song.name)
-    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.trackId)/\(tag)").setValue(song.name)
+    //Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.trackId)").setValue(song.name)
+    guard let index = self.songs.index(of: song) else {
+      print("cannot find song")
+      return
+    }
+    var updatedSong = self.songs[index]
+    updatedSong.tags.insert(tag)
+    self.songs.update(with: updatedSong)
+    userSongsRef.child("\(self.uid)/songs/\(song.trackId)/tags/\(tag)").setValue(true)
   }
   func remove(tag: String, forSong song: Song) {
-    Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.trackId)").setValue(NSNull())
-    Database.database().reference(withPath: "userSongs").child("\(self.uid)/\(song.trackId)/\(tag)").setValue(NSNull())
+    //Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.trackId)").setValue(NSNull())
+    guard let index = self.songs.index(of: song) else {
+      print("cannot find song")
+      return
+    }
+    var updatedSong = self.songs[index]
+    updatedSong.tags.remove(tag)
+    self.songs.update(with: updatedSong)
+    print("removing tag \(tag) for song \(updatedSong.name)")
+    userSongsRef.child("\(self.uid)/songs/\(song.trackId)/tags/\(tag)").setValue(NSNull())
   }
 }
 

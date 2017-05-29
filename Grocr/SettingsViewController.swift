@@ -41,7 +41,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
 //                self.iconImageView.image = UIImage(data: data!)
 //            }
 //        }
-        self.iconImageView.image = appDelegate.userIcon
+        self.iconImageView.image = appDelegate.currentUser.iconImage
         searchUserWith(username: "bibek@gmail.com", foundUser: { (searchedUser) in
             if let user = searchedUser {
                 print("searched user is : \(user.email)")
@@ -126,14 +126,14 @@ extension SettingsViewController { // search user and follow
     }
     func follow(user: TagifyUser) {
         self.currentUser.follow(uid: user.uid)
-        user.followedBy(uid: self.currentUser.uid, ref: userProfilesRef)
+        user.followedBy(uid: self.currentUser.uid)
     }
     func unfollow(user: TagifyUser) {
-        self.currentUser.unfollow(uid: user.uid, ref: userProfilesRef)
-        user.unfollowedBy(uid: self.currentUser.uid, ref: userProfilesRef)
+        self.currentUser.unfollow(uid: user.uid)
+        user.unfollowedBy(uid: self.currentUser.uid)
     }
     func setUsername(username: String) {
-        self.currentUser.setUsername(username: username, ref: userProfilesRef)
+        self.currentUser.setUsername(username: username)
     }
 }
 

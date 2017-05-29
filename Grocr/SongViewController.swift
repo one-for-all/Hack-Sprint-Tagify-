@@ -15,12 +15,13 @@ import Alamofire
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
-    var currentUserRef: DatabaseReference!
-    var currentUserTagRef: DatabaseReference!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     let userProfilesRef: DatabaseReference! = Database.database().reference(withPath: "userProfiles")
+    let userSongsRef: DatabaseReference! = Database.database().reference(withPath: "userSongs")
+    let userTagsRef: DatabaseReference! = Database.database().reference(withPath: "userTags")
     let storage = Storage.storage()
     let storageRef: StorageReference! = Storage.storage().reference()
-    var currentUser: TagifyUser!
     var player: AVPlayer!
     var didCheckAndSuggestAppleMusicSignUp = false
     var didAskForMediaLibraryAccess = false
@@ -38,8 +39,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tagViewSongImageView: UIImageView!
     @IBOutlet weak var tagViewSongLabel: UILabel!
     @IBOutlet weak var tagViewArtistLabel: UILabel!
-    
-    
     @IBOutlet weak var addTagTextField: UITextField!
     @IBOutlet weak var collectionView: CollectionView!
     let tagCellReuseIdentifier = "TagReuseCell"
@@ -90,31 +89,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var userAllSongList = [Song]()
     var searchedSongList = [Song]()
     var followingUserTagSongDict = [String: [String: Set<Song>]]()
-    
-    @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
-        if let searchString = sender.text {
-            if searchString == "" {
-                searchedSongList = userAllSongList
-                tableView.reloadData()
-            } else if searchString[searchString.startIndex] == "#" {
-                searchedSongList = searchedSongs(fromSongSet: Set(userAllSongList), withHashTagString: searchString)
-                tableView.reloadData()
-            } else {
-                searchItunes(searchTerm: searchString) { list in
-                    self.searchedSongList = list
-                    self.tableView.reloadData()
-                }
-            }
-            print(self.searchedSongList)
-        }
-        print("End Editing! Start Searching")
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
-        print("Pressed Return!")
-        textField.resignFirstResponder()
-        return true
-    }
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,9 +107,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         initializeDefaultAllSongList()
         searchedSongList = userAllSongList
         
-        //Hide tagView initially
-//        self.tagView.frame.origin.y = self.view.frame.height
-        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.delegate = self
         view.addGestureRecognizer(tap)  // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
@@ -145,23 +116,17 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         }
         Auth.auth().addStateDidChangeListener {auth, user in
             guard let user = user else { print("no user!"); return }
-            self.currentUser = TagifyUser(authData: user)
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.currentUser = self.currentUser
-            self.currentUserRef = Database.database().reference(withPath: "users/\(user.uid)")
-            self.currentUserTagRef = Database.database().reference(withPath: "tags")
-            self.initializeUserProfile(user: user)
+            print("welcome \(user.email!) for logging in")
+            self.appDelegate.currentUser = TagifyUser(authData: user)
             self.initializeCurrentUserSongList()
             self.initializeFollowingForCurrentUser()
-            self.initializeUserIcon()
         }
         appleMusicFetchStorefrontRegion()
         requestAppleMusicAuthorization()
         
-        //try playing music from preview url
         activateBackGroundPlay()
     }
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) { // suggest sign up and check capability
         if authorizationStatus == true && !self.didCheckAndSuggestAppleMusicSignUp {
             self.checkAndSuggestAppleMusicSignUp()
             self.didCheckAndSuggestAppleMusicSignUp = true
@@ -190,6 +155,27 @@ class SongViewController: UIViewController, UITextFieldDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        textField.resignFirstResponder()
+        return true
+    }
+    @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
+        if let searchString = sender.text {
+            if searchString == "" {
+                searchedSongList = userAllSongList
+                tableView.reloadData()
+            } else if searchString[searchString.startIndex] == "#" {
+                searchedSongList = searchedSongs(fromSongSet: Set(userAllSongList), withHashTagString: searchString)
+                tableView.reloadData()
+            } else {
+                searchItunes(searchTerm: searchString) { list in
+                    self.searchedSongList = list
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        print("End Editing! Start Searching")
+    }
     
     @IBAction func closeButtonPressed(_ sender: Any) {
         closeTagView()
@@ -221,19 +207,19 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addTagButtonPressed(_ sender: Any) {
+        addTagTextField.resignFirstResponder()
         if let text = addTagTextField.text {
             if text != "" {
                 let (valid, errorMessage) = isValid(tag: text)
                 if valid {
-                    currentSelectedSong.tags.insert("\(text)")
-                    let strippedHashTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
-                    self.currentUserRef.child("songs/\(currentSelectedSong.trackId)/tags").updateChildValues([strippedHashTag: currentSelectedSong.name])
-                    
-                    let songName = currentSelectedSong.name
-                    self.currentUserTagRef.child("\(strippedHashTag)").updateChildValues([songName: true])
+                    // To Do: Handle tags from multiple users
+                    let strippedTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
+                    currentSelectedSong.tags.insert(strippedTag)
+                    appDelegate.currentUser.add(tag: strippedTag, forSong: currentSelectedSong)
+                    // To Do: Handle hashtags from multiple users
+                    userAllSongList = Array(self.appDelegate.currentUser.songs)
                     updateCollectionView()
                 } else {
-                    print("invalid tag")
                     let alert = UIAlertController(title: "Invalid Tag", message: errorMessage, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true)
@@ -312,19 +298,19 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.layer.borderWidth = 2
         if let newCell = cell as? CollectionViewCell {
             let tags = currentSelectedSong.tags
-            newCell.tagLabel.text = tags[tags.index(tags.startIndex, offsetBy: indexPath.row)]
+            newCell.tagLabel.text = "#"+tags[tags.index(tags.startIndex, offsetBy: indexPath.row)]
         }
         return cell
     }
     func removeTag() {
         print("current cell: \(collectionView.currentSelectedCell.tagLabel.text)")
         if let tagToRemove = collectionView.currentSelectedCell.tagLabel.text {
-            self.currentSelectedSong.tags.remove(tagToRemove)
-            let strippedHashTag = tagToRemove.substring(from: tagToRemove.index(tagToRemove.startIndex, offsetBy: 1))
-            self.currentUserRef.child("songs/\(currentSelectedSong.trackId)/tags").updateChildValues([strippedHashTag: NSNull()])
-            
-            let songName = currentSelectedSong.name
-            self.currentUserTagRef.child("\(strippedHashTag)").updateChildValues([songName: NSNull()])
+            // To Do: Handle hashtags from multiple users
+            let strippedTag = tagToRemove.substring(from: tagToRemove.index(tagToRemove.startIndex, offsetBy: 1))
+            self.currentSelectedSong.tags.remove(strippedTag)
+            self.appDelegate.currentUser.remove(tag: strippedTag, forSong: self.currentSelectedSong)
+            // To Do: Handle hashtags from multiple users
+            userAllSongList = Array(self.appDelegate.currentUser.songs)
             updateCollectionView()
         }
     }
@@ -360,6 +346,7 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.view.backgroundColor = current_color.withAlphaComponent(1)
             self.navigationController?.navigationBar.alpha = 1
         }
+        self.tableView.reloadData()
     }
 }
 
@@ -428,7 +415,7 @@ extension SongViewController { // related to search
             var intersection = hashTagSubstring.components(separatedBy: "#")
             intersection.remove(at: 0)
             // append # in front and remove trailing spaces
-            intersection = intersection.map {"#\($0)".replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)}
+            intersection = intersection.map {"\($0)".replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)}
             for song in songSet {
                 if song.tags.union(intersection).count == song.tags.count {
                     result.append(song)
@@ -450,7 +437,7 @@ extension SongViewController { // related to search
             for songObj in snapshot.value as! [String: String] {
                 let songKey = songObj.key
                 Database.database().reference(withPath: "userSongs").child("\(user.uid)/\(songKey)").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let song = Song(trackId: songKey)
+                    var song = Song(trackId: songKey)
                     if let name = snapshot.childSnapshot(forPath: "name").value as? String {
                         song.name = name
                     }
@@ -467,11 +454,11 @@ extension SongViewController { // related to search
     }
 }
 
-extension SongViewController { // two methods for initializing song lists depending on whether new user
+extension SongViewController { // Initialize a default song list, to be replaced by top hits
     func initializeDefaultAllSongList() {
         userAllSongList = []
         for (index, song) in allSongNames.enumerated() {
-            let newSong = Song(trackId: allSongTrackIds[index])
+            var newSong = Song(trackId: allSongTrackIds[index])
             let artist_songname = song.components(separatedBy: " - ")
             newSong.name = artist_songname[1]
             newSong.artist = artist_songname[0]
@@ -491,8 +478,25 @@ extension SongViewController { // two methods for initializing song lists depend
 }
 
 extension SongViewController { // initialize current user info with data fram database & fill in missing data in database
+    func initializeCurrentUserSongList() { // Taking care of new user who has no initial 
+        let currentUserSongsRef = self.userSongsRef.child("\(appDelegate.currentUser.uid)/songs")
+        currentUserSongsRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                self.appDelegate.currentUser.updateSongs(songsSnapshot: snapshot)
+                self.userAllSongList = Array(self.appDelegate.currentUser.songs)
+                self.searchedSongList = self.userAllSongList
+            } else {
+                for song in self.userAllSongList {
+                    currentUserSongsRef.child("\(song.trackId)").setValue(song.toAnyObject())
+                }
+                self.appDelegate.currentUser.songs = Set(self.userAllSongList)
+            }
+            self.tableView.reloadData()
+        })
+    }
+    // To Do: followingUserTagSongDict to be thought over
     func initializeFollowingForCurrentUser() {
-        let currentUserFollowingRef = self.userProfilesRef.child("\(self.currentUser.uid)/following")
+        let currentUserFollowingRef = self.userProfilesRef.child("\(appDelegate.currentUser.uid)/following")
         currentUserFollowingRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.exists() {
                 for uid in snapshot.value as! [String: Bool] {
@@ -502,56 +506,6 @@ extension SongViewController { // initialize current user info with data fram da
                 }
             }
         })
-    }
-    func initializeUserProfile(user: User) {
-        let currentUserProfileRef = self.userProfilesRef.child("\(self.currentUser.uid)")
-        currentUserProfileRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if !snapshot.hasChild("email") {
-                currentUserProfileRef.child("email").setValue(user.email!)
-            }
-            if !snapshot.hasChild("username") {
-                currentUserProfileRef.child("username").setValue(user.email!)
-            } else {
-                self.currentUser.username = snapshot.childSnapshot(forPath: "username").value as! String
-            }
-        })
-    }
-    func initializeCurrentUserSongList() {
-        self.currentUserRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if !snapshot.hasChild("email") {
-                self.currentUserRef.child("email").setValue(self.currentUser.email)
-            }
-            print(snapshot)
-            if snapshot.hasChild("songs") {
-                var storedSongs = [Song]()
-                for song in snapshot.childSnapshot(forPath: "songs").children.allObjects {
-                    let song = song as! DataSnapshot
-                    let newSong = Song(snapshot: song)
-                    storedSongs.append(newSong)
-                }
-                self.userAllSongList = storedSongs
-                self.searchedSongList = self.userAllSongList
-            } else {
-                for song in self.userAllSongList {
-                    self.currentUserRef.child("songs/\(song.trackId)").setValue(song.toAnyObject())
-                }
-            }
-            self.tableView.reloadData()
-        })
-    }
-    func initializeUserIcon() {
-        let userIconPath = "\(Auth.auth().currentUser!.uid)/userIcon.jpg"
-        let reference = storageRef.child(userIconPath)
-        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            if let error = error {
-                print(error.localizedDescription)
-                appDelegate.userIcon = UIImage(named: "music.jpg")!
-            } else {
-                print("got image")
-                appDelegate.userIcon = UIImage(data: data!)!
-            }
-        }
     }
     
     // To Do: To be implemented

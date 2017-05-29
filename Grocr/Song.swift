@@ -22,7 +22,7 @@
 
 import Foundation
 
-class Song {
+struct Song {
   
   var name: String = ""
   var artist: String = ""
@@ -45,14 +45,14 @@ class Song {
   
   init(snapshot: DataSnapshot) {
     trackId = snapshot.key
-    let snapshotValue = snapshot.value as! [String: AnyObject]
+    let snapshotValue = snapshot.value as? [String: AnyObject] ?? [String: AnyObject]()
     name = snapshotValue["name"] as? String ?? ""
     artist = snapshotValue["artist"] as? String ?? ""
     imageSource = snapshotValue["imageSource"] as? String ?? ""
     previewURL = snapshotValue["previewURL"] as? String ?? ""
     let snapshotTags = snapshotValue["tags"] as? [String: Bool] ?? [String: Bool]()
     for key in snapshotTags.keys {
-      tags.insert("#"+key)
+      tags.insert(key)
     }
   }
   
@@ -64,7 +64,7 @@ class Song {
     songObj["previewURL"] = previewURL
     var tagDict = [String: Bool]()
     for tag in tags {
-      tagDict[tag.substring(from: tag.index(tag.startIndex, offsetBy: 1))] = true
+      tagDict[tag] = true
     }
     songObj["tags"] = tagDict
     return songObj
