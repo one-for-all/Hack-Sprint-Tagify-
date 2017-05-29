@@ -13,7 +13,13 @@ class NewContactTableViewCell: UITableViewCell {
     @IBOutlet weak var userIconImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var plusButton: UIButton!
-    var user: TagifyUserMinimal = TagifyUserMinimal(uid: "")
+    let storageRef = Storage.storage().reference()
+    var user: TagifyUserForDisplay = TagifyUserForDisplay(uid: "") {
+        didSet {
+            usernameLabel.text = user.username
+            userIconImageView.image = user.userIcon
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

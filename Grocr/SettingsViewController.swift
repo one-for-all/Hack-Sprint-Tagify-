@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     let userProfilesRef: DatabaseReference! = Database.database().reference(withPath: "userProfiles")
     let storage = Storage.storage()
     let storageRef: StorageReference! = Storage.storage().reference()
-    var currentUser: TagifyUser!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var settingsTableViewController: SettingsTableViewController!
     
     override func viewDidLoad() {
@@ -27,28 +27,21 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.iconImageTapped(_:)))
         iconImageView.addGestureRecognizer(tapRecognizer)
         
+        // initial value
+        self.settingsTableViewController.usernameLabel.text = self.appDelegate.currentUser.username
+        self.iconImageView.image = self.appDelegate.currentUser.iconImage
         // Download User Profile image
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.currentUser = appDelegate.currentUser
-        print("current user is \(self.currentUser.email)!")
-//        let userIconPath = "\(Auth.auth().currentUser!.uid)/userIcon.jpg"
-//        let reference = storageRef.child(userIconPath)
-//        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else {
-//                print("got image")
-//                self.iconImageView.image = UIImage(data: data!)
-//            }
-//        }
-        self.iconImageView.image = appDelegate.currentUser.iconImage
-        searchUserWith(username: "bibek@gmail.com", foundUser: { (searchedUser) in
-            if let user = searchedUser {
-                print("searched user is : \(user.email)")
-                self.follow(user: user)
-            }
+        let userIconPath = "\(appDelegate.currentUser.uid)/userIcon.jpg"
+        let reference = storageRef.child(userIconPath)
+        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            self.appDelegate.currentUser.updateIcon(data: data, error: error)
+            self.iconImageView.image = self.appDelegate.currentUser.iconImage
+        }
+        let usernameRef = userProfilesRef.child("\(appDelegate.currentUser.uid)/username")
+        usernameRef.observe(.value, with: { snapshot in
+            self.settingsTableViewController.usernameLabel.text = snapshot.value as? String ?? ""
+            self.appDelegate.currentUser.updateUsername(usernameSnapshot: snapshot)
         })
-        setUsername(username: currentUser.email)
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,20 +68,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             iconImageView.image = image
             self.dismiss(animated: true, completion: nil)
-            let data = UIImageJPEGRepresentation(image, 0.8)!
-            let userIconPath = "\(Auth.auth().currentUser!.uid)/userIcon.jpg"
-            let metaData = StorageMetadata()
-            metaData.contentType = "image/jpg"
-            self.storageRef.child(userIconPath).putData(data, metadata: metaData){(metaData,error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                } else{
-                    //store downloadURL
-                    let downloadURL = metaData!.downloadURL()!.absoluteString
-                    self.userProfilesRef.child(Auth.auth().currentUser!.uid).updateChildValues(["userIconURL": downloadURL])
-                }
-            }
+            self.appDelegate.currentUser.uploadIcon(image: image)
         }
     }
     
@@ -103,37 +83,4 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 }
 
-extension SettingsViewController { // search user and follow
-    func searchUserWith(username: String, foundUser: @escaping (_ : TagifyUser?) -> Void) {
-        self.userProfilesRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            var searchedUser: TagifyUser?
-            for user in snapshot.children.allObjects as! [DataSnapshot] {
-                print(user)
-                let userKey = user.key
-                print(userKey)
-                guard let userName = user.childSnapshot(forPath: "username").value as? String else { continue }
-                print("user name is \(userName)")
-                guard let userEmail = user.childSnapshot(forPath: "email").value as? String else { continue }
-                print("user email is \(userEmail)")
-                print("searching for \(username)")
-                if userName == username {
-                    print("got user")
-                    searchedUser = TagifyUser(uid: userKey)
-                }
-            }
-            foundUser(searchedUser)
-        })
-    }
-    func follow(user: TagifyUser) {
-        self.currentUser.follow(uid: user.uid)
-        user.followedBy(uid: self.currentUser.uid)
-    }
-    func unfollow(user: TagifyUser) {
-        self.currentUser.unfollow(uid: user.uid)
-        user.unfollowedBy(uid: self.currentUser.uid)
-    }
-    func setUsername(username: String) {
-        self.currentUser.setUsername(username: username)
-    }
-}
 

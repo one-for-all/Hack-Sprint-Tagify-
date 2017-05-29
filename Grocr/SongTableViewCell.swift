@@ -25,14 +25,6 @@ class SongTableViewCell: UITableViewCell {
                 text += " #\(tag)"
             }
             songTagsLabel.text = text
-//            let firstFourLetters = song.imageSource.index(song.imageSource.startIndex, offsetBy:4)
-//            if song.imageSource.substring(to: firstFourLetters) == "http" {
-//                let url = URL(string: song.imageSource)
-//                let data = try? Data(contentsOf: url!)
-//                songImageView.image = UIImage(data: data!)
-//            } else {
-//                songImageView.image = UIImage(named: song.imageSource)
-//            }
             guard song.imageSource.characters.count >= 4 else {
                 songImageView.image = UIImage(named: song.imageSource)
                 return
@@ -49,7 +41,6 @@ class SongTableViewCell: UITableViewCell {
             } else {
                 songImageView.image = UIImage(named: song.imageSource)
             }
-
         }
     }
     

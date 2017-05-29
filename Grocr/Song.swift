@@ -22,7 +22,7 @@
 
 import Foundation
 
-struct Song {
+class Song {
   
   var name: String = ""
   var artist: String = ""

@@ -8,57 +8,23 @@
 
 import UIKit
 
-class FollowingUser {
-    let uid: String
-    var username: String = ""
-    var userIcon: UIImage = UIImage()
-    init(uid: String) {
-        self.uid = uid
-    }
-}
-
 class FollowingViewController: UIViewController {
     
-    var currentUser: TagifyUser = TagifyUser(uid: "")
-    var following = [FollowingUser]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let storageRef: StorageReference! = Storage.storage().reference()
+    let userProfilesRef = Database.database().reference(withPath: "userProfiles")
+    var following = [TagifyUserForDisplay]()
     
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.currentUser = appDelegate.currentUser
-        let userFollowingRef = Database.database().reference().child("userProfiles/\(self.currentUser.uid)/following")
-        userFollowingRef.observe(.value, with: { snapshot in
-            self.currentUser.updateFollowing(followingSnapshot: snapshot)
-            for uid in self.currentUser.following {
-                let followingUserNameRef = Database.database().reference().child("userProfiles/\(uid)")
-                var followingUser = FollowingUser(uid: uid)
-                let index = self.following.count
-                self.following.append(followingUser)
-                followingUserNameRef.observeSingleEvent(of: .value, with: { snapshot in
-                    if snapshot.exists() {
-                        let username = snapshot.childSnapshot(forPath: "username").value as! String
-                        print("this user is \(username)")
-                        self.following[index].username = username
-                        let userIconPath = "\(uid)/userIcon.jpg"
-                        let reference = self.storageRef.child(userIconPath)
-                        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                            if let error = error {
-                                print(error.localizedDescription)
-                                self.following[index].userIcon = UIImage(named: "music.jpg")!
-                            } else {
-                                print("got image")
-                                self.following[index].userIcon = UIImage(data: data!)!
-                            }
-                            self.tableView.reloadData()
-                        }
-                    }
-                })
-            }
+        let currentUserFollowingRef = userProfilesRef.child("\(appDelegate.currentUser.uid)/following")
+        currentUserFollowingRef.observe(.value, with: { snapshot in
+            self.updateTableView(withFollowingSnapshot: snapshot)
+            self.appDelegate.currentUser.updateFollowing(followingSnapshot: snapshot)
         })
     }
     override func didReceiveMemoryWarning() {
@@ -77,6 +43,22 @@ class FollowingViewController: UIViewController {
     }
     */
 
+}
+extension FollowingViewController {
+    func updateTableView(withFollowingSnapshot snapshot: DataSnapshot) {
+        following = [TagifyUserForDisplay]()
+        for childSnapshot in snapshot.children.allObjects {
+            let childSnapshot = childSnapshot as! DataSnapshot
+            let followingUserUID = childSnapshot.key
+            let followingUserRef = userProfilesRef.child(followingUserUID)
+            followingUserRef.observeSingleEvent(of: .value, with: { snapshot in
+                let followingUser = TagifyUserForDisplay(userSnapshot: snapshot, completion: {
+                    self.tableView.reloadData()
+                })
+                self.following.append(followingUser)
+            })
+        }
+    }
 }
 
 extension FollowingViewController: UITableViewDataSource, UITableViewDelegate {
@@ -97,7 +79,13 @@ extension FollowingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
+            let userToUnfollow = self.following[indexPath.row]
+            self.following.remove(at: indexPath.row)
+            self.tableView.reloadData()
+            appDelegate.currentUser.unfollow(uid: userToUnfollow.uid)
         }
+    }
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Unfollow"
     }
 }

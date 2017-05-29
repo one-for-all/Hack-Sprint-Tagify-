@@ -11,9 +11,9 @@ import UIKit
 class SettingsTableViewController: UITableViewController {
     
     var parentController: SettingsViewController!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var usernameLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,19 +47,16 @@ class SettingsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToUsernameView" {
-            if let dest = segue.destination as? UsernameViewController {
-                dest.username = usernameLabel.text!
-            }
         }
     }
     
     @IBAction func backToSettings(segue: UIStoryboardSegue) {
     }
     @IBAction func saveUserNameBackToSettings(segue: UIStoryboardSegue) {
-        if let dest = segue.source as? UsernameViewController {
-            print("back from usename view controller")
-            usernameLabel.text = dest.usernameTextField.text
-        }
+//        if let dest = segue.source as? UsernameViewController {
+//            print("back from usename view controller")
+//            usernameLabel.text = dest.usernameTextField.text
+//        }
     }
     
     /*

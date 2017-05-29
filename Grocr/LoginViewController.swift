@@ -39,6 +39,7 @@ class LoginViewController: UIViewController {
                            password: textFieldLoginPassword.text!) { user, error in
                             if error == nil {
                               print("Welcome \(user!.email!)")
+                              self.clearTextField()
                             } else {
                               if let errCode = AuthErrorCode(rawValue: error!._code) {
                                 print("Sign In Error: \(errCode)")
@@ -69,6 +70,7 @@ class LoginViewController: UIViewController {
                   if error == nil {
                     // 3
                     if let user = user {
+                      self.clearTextField()
                       print("We have new user! \(user.email!)")
                       self.userProfilesRef.child("\(user.uid)/email").setValue(emailField.text!)
                       self.userProfilesRef.child("\(user.uid)/username").setValue(emailField.text!)
@@ -113,7 +115,6 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
-  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == textFieldLoginEmail {
       textFieldLoginPassword.becomeFirstResponder()
@@ -123,12 +124,15 @@ extension LoginViewController: UITextFieldDelegate {
     }
     return true
   }
+  func clearTextField() {
+    self.textFieldLoginEmail.text = ""
+    self.textFieldLoginPassword.text = ""
+  }
 }
 
 extension LoginViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     // 1
     Auth.auth().addStateDidChangeListener() { auth, user in
       // 2
@@ -137,8 +141,5 @@ extension LoginViewController {
         self.performSegue(withIdentifier: self.loginToSongView, sender: nil)
       }
     }
-    
   }
-  
-  
 }

@@ -25,10 +25,10 @@ import Foundation
 class TagifyUser {
   let uid: String
   let email: String
-  var username: String
+  var username: String = ""
   var iconImage = UIImage()
   
-  var following = Set<String>()
+  var following = [String: Bool]()
   var followedBy = Set<String>()
   var songs = Set<Song>()
   
@@ -42,11 +42,9 @@ class TagifyUser {
     self.username = self.email
     self.updateAll()
   }
-  init(uid: String) {
+  init() { // for initializing empty user
+    self.uid = ""
     self.email = ""
-    self.username = ""
-    self.uid = uid
-    //self.updateAll()
   }
   func fillUserEmail() {
     userProfilesRef.child("\(self.uid)/email").setValue(self.email)
@@ -71,13 +69,32 @@ class TagifyUser {
       iconImage = UIImage(data: data!)!
     }
   }
+  func uploadIcon(image: UIImage) {
+    print("uploading icon for user \(uid)")
+    let metaData = StorageMetadata()
+    metaData.contentType = "image/jpg"
+    let dataSmall = UIImageJPEGRepresentation(image, 0.1)!
+    let userIconSmallPath = "\(self.uid)/userIconSmall.jpg"
+    self.storageRef.child(userIconSmallPath).putData(dataSmall, metadata: metaData){(metaData,error) in
+      if let error = error {
+        print(error.localizedDescription)
+      }
+    }
+    let data = UIImageJPEGRepresentation(image, 0.8)!
+    let userIconPath = "\(self.uid)/userIcon.jpg"
+    self.storageRef.child(userIconPath).putData(data, metadata: metaData){(metaData,error) in
+      if let error = error {
+        print(error.localizedDescription)
+      }
+    }
+  }
   func updateFollowing(followingSnapshot: DataSnapshot) {
     guard self.uid != "" else { return }
-    self.following = Set<String>()
+    self.following = [String: Bool]()
     if followingSnapshot.exists() {
       for uid in followingSnapshot.value as! [String: Bool] {
         print("following : \(uid.key)")
-        self.following.insert(uid.key)
+        self.following[uid.key] = uid.value
       }
     }
   }
@@ -132,38 +149,43 @@ class TagifyUser {
 
 extension TagifyUser { // related to following and unfollowing
   func follow(uid: String) {
-    self.following.insert(uid)
+    self.following[uid] = true
     print("going to follow: \(uid)")
     userProfilesRef.child("\(self.uid)/following/\(uid)").setValue(true)
+    userProfilesRef.child("\(uid)/followedBy/\(self.uid)").setValue(true)
   }
   func unfollow(uid: String) {
-    self.following.remove(uid)
+    self.following[uid] = nil
     print("going to unfollow: \(uid)")
     userProfilesRef.child("\(self.uid)/following/\(uid)").setValue(NSNull())
+    userProfilesRef.child("\(uid)/followedBy/\(self.uid)").setValue(NSNull())
   }
-  func followedBy(uid: String) {
-    self.followedBy.insert(uid)
-    print("going to be followed by: \(uid)")
-    userProfilesRef.child("\(self.uid)/followedBy/\(uid)").setValue(true)
-  }
-  func unfollowedBy(uid: String) {
-    self.followedBy.remove(uid)
-    print("going to be unfollowed by: \(uid)")
-    userProfilesRef.child("\(self.uid)/followedBy/\(uid)").setValue(NSNull())
+  func listenTo(uid: String, _ yes: Bool) {
+    if self.following[uid] != nil {
+      print("going to listen to \(uid): \(yes)")
+      self.following[uid] = yes
+      userProfilesRef.child("\(self.uid)/following/\(uid)").setValue(yes)
+    }
   }
 }
 
 extension TagifyUser { // related to adding and removing tags
   func add(tag: String, forSong song: Song) {
     //Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.trackId)").setValue(song.name)
-    guard let index = self.songs.index(of: song) else {
-      print("cannot find song")
-      return
+    if let index = self.songs.index(of: song) {
+      let updatedSong = self.songs[index]
+      updatedSong.tags.insert(tag)
+      self.songs.update(with: updatedSong)
+      userSongsRef.child("\(self.uid)/songs/\(song.trackId)/tags/\(tag)").setValue(true)
+    } else {
+      print("adding tag to new song")
+      song.tags.insert(tag)
+      addSong(song: song)
     }
-    var updatedSong = self.songs[index]
-    updatedSong.tags.insert(tag)
-    self.songs.update(with: updatedSong)
-    userSongsRef.child("\(self.uid)/songs/\(song.trackId)/tags/\(tag)").setValue(true)
+  }
+  func addSong(song: Song) {
+    self.songs.insert(song)
+    userSongsRef.child("\(self.uid)/songs/\(song.trackId)").setValue(song.toAnyObject())
   }
   func remove(tag: String, forSong song: Song) {
     //Database.database().reference(withPath: "userTags").child("\(self.uid)/\(tag)/\(song.trackId)").setValue(NSNull())

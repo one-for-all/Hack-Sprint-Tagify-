@@ -12,6 +12,14 @@ class ScopeTableViewCell: UITableViewCell {
   
   @IBOutlet weak var iconImageView: UIImageView!
   @IBOutlet weak var usernameLabel: UILabel!
+  let storageRef = Storage.storage().reference()
+  var user = TagifyUserForDisplay(uid: "") {
+    didSet {
+      usernameLabel.text = user.username
+      iconImageView.image = user.userIcon
+      self.accessoryType = user.listenedTo == true ? .checkmark : .none
+    }
+  }
   
     override func awakeFromNib() {
         super.awakeFromNib()

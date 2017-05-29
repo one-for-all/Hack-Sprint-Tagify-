@@ -11,13 +11,13 @@ import UIKit
 class UsernameViewController: UIViewController, UITextFieldDelegate {
   
     @IBOutlet weak var usernameTextField: UITextField!
-    var username: String = "Camille"
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        usernameTextField.text = username
+        usernameTextField.text = appDelegate.currentUser.username
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +30,9 @@ class UsernameViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        self.appDelegate.currentUser.setUsername(username: usernameTextField.text!)
+    }
     /*
     // MARK: - Navigation
 

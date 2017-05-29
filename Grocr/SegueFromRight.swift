@@ -15,7 +15,7 @@ class SegueFromRight: UIStoryboardSegue {
         let dst = self.destination
         
         let transition = CATransition()
-        transition.duration = 0.3
+        transition.duration = 0.35
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromRight
         src.view.window!.layer.add(transition, forKey: kCATransition)

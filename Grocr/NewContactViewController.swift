@@ -8,30 +8,21 @@
 
 import UIKit
 
-class TagifyUserMinimal {
-    let uid: String
-    var username: String = ""
-    var userIcon: UIImage = UIImage()
-    init(uid: String) {
-        self.uid = uid
-    }
-}
-
 class NewContactViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    var searchedUser = [TagifyUserMinimal]()
-    var currentUser: TagifyUser!
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let storageRef: StorageReference! = Storage.storage().reference()
+    let userProfilesRef = Database.database().reference(withPath: "userProfiles")
+    var matchedUsers = [TagifyUserForDisplay]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         searchTextField.returnKeyType = .search
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.currentUser = appDelegate.currentUser
+        searchAndDisplay(withSearchString: "") // display all users
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,45 +37,13 @@ class NewContactViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func searchTextFieldEditingDidEnd(_ sender: UITextField) {
-        let searchedUsername = sender.text!
-        let ref = Database.database().reference().child("userProfiles")
-        ref.observeSingleEvent(of: .value, with: { snapshot in
-            self.searchedUser = [TagifyUserMinimal]()
-            for childSnapshot in snapshot.children {
-                let childSnapshot = childSnapshot as! DataSnapshot
-                let usernameSnapshot = childSnapshot.childSnapshot(forPath: "username")
-                if usernameSnapshot.exists() {
-                    let username = usernameSnapshot.value as! String
-                    let followedByCurrentUserSnap = childSnapshot.childSnapshot(forPath: "followedBy/\(self.currentUser.uid)")
-                    if username.contains(searchedUsername) && !followedByCurrentUserSnap.exists() {
-                        let userIconPath = "\(childSnapshot.key)/userIcon.jpg"
-                        let reference = self.storageRef.child(userIconPath)
-                        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                            let user = TagifyUserMinimal(uid: childSnapshot.key)
-                            user.username = username
-                            let index = self.searchedUser.count
-                            self.searchedUser.append(user)
-                            if let error = error {
-                                print(error.localizedDescription)
-                                self.searchedUser[index].userIcon = UIImage(named: "music.jpg")!
-                            } else {
-                                print("got image")
-                                self.searchedUser[index].userIcon = UIImage(data: data!)!
-                            }
-                            self.tableView.reloadData()
-                            //self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
-                        }
-                    }
-                }
-            }
-        })
+        let searchString = sender.text!
+        searchAndDisplay(withSearchString: searchString)
     }
     
     @IBAction func plusButtonTapped(_ sender: UIButton) {
-        print(sender.tag)
         let cell = tableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! NewContactTableViewCell
-        self.currentUser.follow(uid: cell.user.uid)
-        print("cell number \(sender.tag) pressed, username: \(cell.usernameLabel.text)")
+        appDelegate.currentUser.follow(uid: cell.user.uid)
         sender.isHidden = true
     }
     
@@ -99,20 +58,47 @@ class NewContactViewController: UIViewController, UITextFieldDelegate {
     }
     */
 }
+extension NewContactViewController {
+    func searchAndDisplay(withSearchString searchString: String) {
+        self.matchedUsers.removeAll()
+        userProfilesRef.observeSingleEvent(of: .value, with: { snapshot in
+            for childSnap in snapshot.children.allObjects {
+                let childSnap = childSnap as! DataSnapshot
+                guard childSnap.key != self.appDelegate.currentUser.uid else { continue }
+                guard self.isMatch(userSnap: childSnap, searchString: searchString) else { continue }
+                guard !self.alreadyFollowed(userSnap: childSnap, currentUserUID: self.appDelegate.currentUser.uid) else { continue }
+                let matchedUser = TagifyUserForDisplay(userSnapshot: childSnap, completion: {
+                    self.tableView.reloadData()
+                })
+                self.matchedUsers.append(matchedUser)
+            }
+        })
+    }
+    func isMatch(userSnap snapshot: DataSnapshot, searchString: String) -> Bool {
+        if searchString == "" { return true }
+        let username = snapshot.childSnapshot(forPath: "username").value as? String ?? ""
+        return username.lowercased().contains(searchString.lowercased())
+    }
+    func alreadyFollowed(userSnap snapshot: DataSnapshot, currentUserUID: String) -> Bool {
+        let followedBySnap = snapshot.childSnapshot(forPath: "followedBy")
+        guard followedBySnap.exists() else { return false }
+        let followedByDict = followedBySnap.value as? [String: Bool] ?? [String: Bool]()
+        return followedByDict[currentUserUID] != nil
+    }
+}
 
 extension NewContactViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.searchedUser.count
+        return self.matchedUsers.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewContactCell", for: indexPath) as! NewContactTableViewCell
-        cell.user = searchedUser[indexPath.row]
-        cell.usernameLabel.text = searchedUser[indexPath.row].username
-        cell.userIconImageView.image = searchedUser[indexPath.row].userIcon
+        cell.user = matchedUsers[indexPath.row]
         cell.plusButton.tag = indexPath.row
+        cell.plusButton.isHidden = false
         return cell
     }
 }

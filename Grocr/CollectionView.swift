@@ -26,7 +26,7 @@ class CollectionView: UICollectionView {
         addTapGesture()
         let popMenu = UIMenuController.shared
         let menuRemoveItem = UIMenuItem(title: "remove", action: #selector(SongViewController.removeTag))
-        let menuTagSearch = UIMenuItem(title: "search", action: #selector(SongViewController.searchSongs))
+        let menuTagSearch = UIMenuItem(title: "search", action: #selector(SongViewController.searchSongsWithSelectedTag))
         popMenu.menuItems = [menuTagSearch, menuRemoveItem]
 
     }

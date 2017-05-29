@@ -10,7 +10,7 @@ import UIKit
 
 class FollowerTableViewCell: UITableViewCell {
   
-  @IBOutlet weak var iconImageView: UIImageView!
+  @IBOutlet weak var userIconImageView: UIImageView!
   @IBOutlet weak var usernameLabel: UILabel!
   
 
