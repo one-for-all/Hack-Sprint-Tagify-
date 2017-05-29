@@ -30,7 +30,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var appleMusicCapable = false
     var applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     var itunesSongList = [Song]()
-    var nowPlaying = -1
+    var nowPlayingIndex = -1
     var playlist = [Song]()
     
     @IBOutlet weak var searchSongTextField: UITextField!
@@ -65,7 +65,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    var isPlaying = false
     let allSongNames: [String] = [
         "Bruno Mars - That's What I Like",
         "Ed Sheeran - Shape of You",
@@ -171,7 +170,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func searchSongEditDidEnd(_ sender: UITextField) {
         searchLimit = 25
-        nowPlaying = -1
+        nowPlayingIndex = -1
         if let search = sender.text {
             self.searchString = search
             self.searchAndDisplay(withSearchString: search)
@@ -210,12 +209,11 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
-        if isPlaying {
+        if applicationMusicPlayer.nowPlayingItem != nil {
             pausePlay()
-            isPlaying = false
             playButton.setImage(UIImage(named: "playButton.png"), for: .normal)
         } else {
-            if nowPlaying == -1 {
+            if nowPlayingIndex == -1 {
                 let firstSong = searchedSongList[0]
                 if self.appleMusicCapable {
                     appleMusicPlayTrackId(trackId: firstSong.trackId)
@@ -226,20 +224,17 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                     playSampleMusic(withURLString: firstSong.previewURL)
                 }
             }
-            nowPlaying = 0
+            nowPlayingIndex = 0
             continuePlay()
-            isPlaying = true
             playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
         }
     }
     @IBAction func forwardButtonPressed(_ sender: Any) {
         playNext()
-        isPlaying = true
         playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     @IBAction func backwardButtonPressed(_ sender: Any) {
         playPrevious()
-        isPlaying = true
         playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     @IBAction func shuffleButtonPressed(_ sender: Any) {
@@ -271,12 +266,11 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             if self.appleMusicCapable {
                 songClicked(song: cell.song, index: indexPath.row)
-                nowPlaying = indexPath.row
+                nowPlayingIndex = indexPath.row
                 self.playingSong.text = "\(cell.song.artist) - \(cell.song.name)"
             } else {
                 playSampleMusic(withURLString: cell.song.previewURL)
             }
-            isPlaying = true
             playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
         }
     }
@@ -689,7 +683,6 @@ extension SongViewController { //Related to Music
         applicationMusicPlayer.setQueueWithStoreIDs([trackId])
         applicationMusicPlayer.prepareToPlay()
         applicationMusicPlayer.play()
-        isPlaying = true
         playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     func activateBackGroundPlay() {
@@ -736,12 +729,12 @@ extension SongViewController { //Related to Music
     func playNext() {
         print("Play next song")
         //applicationMusicPlayer.skipToNextItem()
-        if nowPlaying < searchedSongList.count-1 {
-            nowPlaying += 1
+        if nowPlayingIndex < searchedSongList.count-1 {
+            nowPlayingIndex += 1
         } else {
-            nowPlaying = 0
+            nowPlayingIndex = 0
         }
-        let nextSong = searchedSongList[nowPlaying]
+        let nextSong = searchedSongList[nowPlayingIndex]
         if self.appleMusicCapable {
             let nextTrack = nextSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([nextTrack])
@@ -756,12 +749,12 @@ extension SongViewController { //Related to Music
     func playPrevious() {
         print("Play previous song")
         //applicationMusicPlayer.skipToPreviousItem()
-        if nowPlaying > 1 {
-            nowPlaying -= 1
+        if nowPlayingIndex > 1 {
+            nowPlayingIndex -= 1
         } else {
-            nowPlaying = searchedSongList.count-1
+            nowPlayingIndex = searchedSongList.count-1
         }
-        let prevSong = searchedSongList[nowPlaying]
+        let prevSong = searchedSongList[nowPlayingIndex]
         if self.appleMusicCapable {
             let prevTrack = prevSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([prevTrack])
