@@ -121,7 +121,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)  // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
         //set collectionViewCell to autoresize
         if let cvl = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            cvl.estimatedItemSize = CGSize(width: 78, height: 59)
+            cvl.estimatedItemSize = CGSize(width: 60, height: 30)
         }
         Auth.auth().addStateDidChangeListener {auth, user in
             guard let user = user else { print("no user!"); return }
@@ -320,7 +320,7 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tagCellReuseIdentifier, for: indexPath)
-        cell.layer.borderWidth = 2
+        //cell.layer.borderWidth = 2
         if let newCell = cell as? CollectionViewCell {
             let tags = currentSelectedSong.tags
             newCell.tagLabel.text = "#"+tags[tags.index(tags.startIndex, offsetBy: indexPath.row)]

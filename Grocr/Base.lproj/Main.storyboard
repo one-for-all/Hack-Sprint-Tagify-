@@ -268,7 +268,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VUH-iz-7tk">
                                 <rect key="frame" x="0.0" y="100" width="375" height="438"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.12939515709877014" green="0.12942373752593994" blue="0.12938910722732544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SongCell" rowHeight="100" id="x9P-W1-qHf" customClass="SongTableViewCell" customModule="Tagify" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
@@ -400,8 +400,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXF-SH-DJZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
-                                                            <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <rect key="frame" x="18" y="5" width="84" height="40"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -411,10 +410,10 @@
                                                 <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="NXF-SH-DJZ" secondAttribute="trailing" id="Bkh-EL-cWZ"/>
-                                                    <constraint firstAttribute="bottom" secondItem="NXF-SH-DJZ" secondAttribute="bottom" id="Gau-sq-A8U"/>
-                                                    <constraint firstItem="NXF-SH-DJZ" firstAttribute="top" secondItem="xfZ-RI-yQb" secondAttribute="top" id="XWy-Tv-RMy"/>
-                                                    <constraint firstItem="NXF-SH-DJZ" firstAttribute="leading" secondItem="xfZ-RI-yQb" secondAttribute="leading" id="wCk-X2-nf5"/>
+                                                    <constraint firstItem="NXF-SH-DJZ" firstAttribute="bottom" secondItem="xfZ-RI-yQb" secondAttribute="bottom" constant="-5" id="OiR-tU-kQb"/>
+                                                    <constraint firstItem="NXF-SH-DJZ" firstAttribute="leading" secondItem="xfZ-RI-yQb" secondAttribute="leadingMargin" constant="10" id="bNu-T6-Gpc"/>
+                                                    <constraint firstItem="NXF-SH-DJZ" firstAttribute="top" secondItem="xfZ-RI-yQb" secondAttribute="top" constant="5" id="gcr-nS-8mc"/>
+                                                    <constraint firstItem="NXF-SH-DJZ" firstAttribute="trailing" secondItem="xfZ-RI-yQb" secondAttribute="trailingMargin" constant="-10" id="p2a-IJ-QEf"/>
                                                 </constraints>
                                                 <size key="customSize" width="120" height="50"/>
                                                 <connections>
@@ -1305,7 +1304,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4li-tn-h6P" id="cJD-Pj-lPE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ddC-jf-v8F">
@@ -1363,7 +1362,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZgS-xI-k1m" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="MET-Wd-MW8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2884" y="2244"/>
+            <point key="canvasLocation" x="2676" y="2257"/>
         </scene>
         <!--Theme Color View Controller-->
         <scene sceneID="9wp-tq-57R">
@@ -1423,10 +1422,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ColorCell" id="cF7-Ax-vFm">
-                                        <rect key="frame" x="0.0" y="28" width="300" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cF7-Ax-vFm" id="wIY-y0-xjv">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1435,7 +1434,7 @@
                                         <rect key="frame" x="0.0" y="72" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dLI-js-4Ve" id="5fx-04-lFc">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1444,7 +1443,7 @@
                                         <rect key="frame" x="0.0" y="116" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5W6-P3-uOW" id="bEn-YH-Vlt">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1453,7 +1452,7 @@
                                         <rect key="frame" x="0.0" y="160" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lsj-ty-HLP" id="cte-cR-WSC">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1462,7 +1461,7 @@
                                         <rect key="frame" x="0.0" y="204" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Mc-sj-JIM" id="wQx-fn-dcp">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1471,7 +1470,7 @@
                                         <rect key="frame" x="0.0" y="248" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HI3-Vp-ixZ" id="OAl-kE-Cxp">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
