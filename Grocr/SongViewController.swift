@@ -12,6 +12,7 @@ import Foundation
 import StoreKit
 import MediaPlayer
 import Alamofire
+import GameplayKit
 
 class SongViewController: UIViewController, UITextFieldDelegate {
     
@@ -134,6 +135,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                 self.updateFollowingSongList(withFollowingSnapshot: snapshot)
             })
         }
+        
+        playlist = searchedSongList
+        
         appleMusicFetchStorefrontRegion()
         requestAppleMusicAuthorization()
         
@@ -261,6 +265,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        playlist = searchedSongList
         dismissKeyboard()
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
@@ -738,12 +743,12 @@ extension SongViewController { //Related to Music
     func playNext() {
         print("Play next song")
         //applicationMusicPlayer.skipToNextItem()
-        if nowPlayingIndex < searchedSongList.count-1 {
+        if nowPlayingIndex < playlist.count-1 {
             nowPlayingIndex += 1
         } else {
             nowPlayingIndex = 0
         }
-        let nextSong = searchedSongList[nowPlayingIndex]
+        let nextSong = playlist[nowPlayingIndex]
         if self.appleMusicCapable {
             let nextTrack = nextSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([nextTrack])
@@ -761,9 +766,9 @@ extension SongViewController { //Related to Music
         if nowPlayingIndex > 1 {
             nowPlayingIndex -= 1
         } else {
-            nowPlayingIndex = searchedSongList.count-1
+            nowPlayingIndex = playlist.count-1
         }
-        let prevSong = searchedSongList[nowPlayingIndex]
+        let prevSong = playlist[nowPlayingIndex]
         if self.appleMusicCapable {
             let prevTrack = prevSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([prevTrack])
@@ -777,20 +782,13 @@ extension SongViewController { //Related to Music
     }
     func shuffle() {
         print("shuffle")
-        let shuffleMode = applicationMusicPlayer.shuffleMode
-        switch shuffleMode {
-        case .off:
-            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.songs
-        case .songs:
-            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.off
-        case .albums:
-            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.off
-        default:
-            applicationMusicPlayer.shuffleMode = MPMusicShuffleMode.songs
-        }
+        let shuffledPlaylist = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: playlist)
+        playlist = shuffledPlaylist as! [Song]
     }
-    func loop() {
+    func loop() {  //Assume single cycle
         print("loop")
+        
+        /*
         let repeatMode = applicationMusicPlayer.repeatMode
         switch repeatMode {
         case .none:
@@ -802,6 +800,7 @@ extension SongViewController { //Related to Music
         default:
             applicationMusicPlayer.repeatMode = MPMusicRepeatMode.all
         }
+         */
     }
     //Search iTunes and display results in table view
     func removeSpecialChars(str: String) -> String {
@@ -860,32 +859,5 @@ extension SongViewController { //Related to Music
         print("Playing: \(song.name)")
         print("TrackId: \(song.trackId)")
     }
-//**********************************************************************//
-    //Update playlist
-    func updatePlaylist(index: Int) {
-        
-    }
-    
-    /*
-     //Add song to playback queue if user selects a cell
-     
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-     let indexPath = tableView.indexPathForSelectedRow
-     if let rowData: NSDictionary = self.tableData[indexPath!.row] as? NSDictionary, urlString = rowData["artworkUrl60"] as? String,
-     imgURL = NSURL(string: urlString),
-     imgData = NSData(contentsOfURL: imgURL) {
-     queue.append(SongData(artWork: UIImage(data: imgData), trackName: rowData["trackName"] as? String, artistName: rowData["artistName"] as? String, trackId: String (rowData["trackId"]!)))
-     //Show alert telling the user the song was added to the playback queue
-     let addedTrackAlert = UIAlertController(title: nil, message: "Added track!", preferredStyle: .Alert)
-     self.presentViewController(addedTrackAlert, animated: true, completion: nil)
-     let delay = 0.5 * Double(NSEC_PER_SEC)
-     let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-     dispatch_after(time, dispatch_get_main_queue(), {
-     addedTrackAlert.dismissViewControllerAnimated(true, completion: nil)
-     })
-     tableView.deselectRowAtIndexPath(indexPath!, animated: true)
-     }
-     }
-     */
 
 }
