@@ -49,6 +49,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tagViewSlideDownConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playingSong: UILabel!
     
     var currentSelectedSong: Song = Song(trackId: "") {
         didSet {
@@ -289,6 +290,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
             if self.appleMusicCapable {
                 songClicked(song: cell.song, index: indexPath.row)
                 nowPlaying = indexPath.row
+                self.playingSong.text = "\(cell.song.artist) - \(cell.song.name)"
             } else {
                 playSampleMusic(withURLString: cell.song.previewURL)
             }
@@ -766,6 +768,7 @@ extension SongViewController { //Related to Music
             applicationMusicPlayer.setQueueWithStoreIDs([nextTrack])
             applicationMusicPlayer.prepareToPlay()
             applicationMusicPlayer.play()
+            self.playingSong.text = "\(nextSong.artist) - \(nextSong.name)"
             print("Playing: \(nextSong.name)")
             print("TrackId: \(nextTrack)")
         }
@@ -784,6 +787,7 @@ extension SongViewController { //Related to Music
             applicationMusicPlayer.setQueueWithStoreIDs([prevTrack])
             applicationMusicPlayer.prepareToPlay()
             applicationMusicPlayer.play()
+            self.playingSong.text = "\(prevSong.artist) - \(prevSong.name)"
             print("Playing: \(prevSong.name)")
             print("TrackId: \(prevTrack)")
         }
