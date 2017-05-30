@@ -178,7 +178,6 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         if let search = sender.text {
             self.searchString = search
             self.searchAndDisplay(withSearchString: search)
-
         }
         print("End Editing! Start Searching")
     }
@@ -213,7 +212,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
-        if applicationMusicPlayer.nowPlayingItem != nil {
+        if applicationMusicPlayer.nowPlayingItem != nil || self.player.isPlaying {
             pausePlay()
             playButton.setImage(UIImage(named: "playButton.png"), for: .normal)
         } else {
@@ -223,10 +222,10 @@ class SongViewController: UIViewController, UITextFieldDelegate {
                     appleMusicPlayTrackId(trackId: firstSong.trackId)
                     print("Playing: \(firstSong.name)")
                     print("TrackId: \(firstSong.trackId)")
-                    self.playingSong.text = "\(firstSong.artist) - \(firstSong.name)"
                 } else {
                     playSampleMusic(withURLString: firstSong.previewURL)
                 }
+                self.playingSong.text = "\(firstSong.artist) - \(firstSong.name)"
             }
             nowPlayingIndex = 0
             continuePlay()
@@ -271,11 +270,11 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
             if self.appleMusicCapable {
                 songClicked(song: cell.song, index: indexPath.row)
-                nowPlayingIndex = indexPath.row
-                self.playingSong.text = "\(cell.song.artist) - \(cell.song.name)"
             } else {
                 playSampleMusic(withURLString: cell.song.previewURL)
             }
+            nowPlayingIndex = indexPath.row
+            self.playingSong.text = "\(cell.song.artist) - \(cell.song.name)"
             playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
         }
     }
@@ -860,4 +859,10 @@ extension SongViewController { //Related to Music
         print("TrackId: \(song.trackId)")
     }
 
+}
+
+extension AVPlayer {
+    var isPlaying: Bool {
+        return rate != 0 && error == nil
+    }
 }
