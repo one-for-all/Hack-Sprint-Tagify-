@@ -33,6 +33,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     var itunesSongList = [Song]()
     var nowPlayingIndex = -1
     var playlist = [Song]()
+    var isShuffled = false
     
     @IBOutlet weak var searchSongTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -782,8 +783,12 @@ extension SongViewController { //Related to Music
     }
     func shuffle() {
         print("shuffle")
-        let shuffledPlaylist = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: playlist)
-        playlist = shuffledPlaylist as! [Song]
+        if !isShuffled {
+            let shuffledPlaylist = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: playlist)
+            playlist = shuffledPlaylist as! [Song]
+        } else {
+            playlist = searchedSongList
+        }
     }
     func loop() {  //Assume single cycle
         print("loop")
