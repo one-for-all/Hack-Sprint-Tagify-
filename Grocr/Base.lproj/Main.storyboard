@@ -501,7 +501,7 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="HOME.png" id="KQw-Fy-KZo">
-                        <inset key="imageInsets" minX="3" minY="6" maxX="3" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="-4"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="Tagify" id="lK4-L8-MEW">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Thj-VH-Xts">
@@ -663,7 +663,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tags" image="TAGS.png" id="kP3-om-VI9">
-                        <inset key="imageInsets" minX="3" minY="6" maxX="3" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="-4"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="personalTableView" destination="csu-TP-tUj" id="avW-ho-4V8"/>
@@ -862,7 +862,7 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Setting" image="SETTINGS.png" id="Xb6-2p-fQO">
-                        <inset key="imageInsets" minX="3" minY="6" maxX="3" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="-4"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="iconImageView" destination="bTh-fJ-TW8" id="y3x-BJ-BmT"/>
@@ -1098,6 +1098,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.78039215689999997" green="0.35686274509999999" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.78039215689999997" green="0.35686274509999999" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="gpg-0c-vNo" kind="relationship" relationship="viewControllers" id="Bi2-Oy-rin"/>
@@ -1441,55 +1442,55 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ColorCell" id="cF7-Ax-vFm">
-                                        <rect key="frame" x="0.0" y="28" width="300" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cF7-Ax-vFm" id="wIY-y0-xjv">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dLI-js-4Ve">
-                                        <rect key="frame" x="0.0" y="72" width="300" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dLI-js-4Ve" id="5fx-04-lFc">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5W6-P3-uOW">
-                                        <rect key="frame" x="0.0" y="116" width="300" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5W6-P3-uOW" id="bEn-YH-Vlt">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lsj-ty-HLP">
-                                        <rect key="frame" x="0.0" y="160" width="300" height="44"/>
+                                        <rect key="frame" x="0.0" y="160" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lsj-ty-HLP" id="cte-cR-WSC">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8Mc-sj-JIM">
-                                        <rect key="frame" x="0.0" y="204" width="300" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Mc-sj-JIM" id="wQx-fn-dcp">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="HI3-Vp-ixZ">
-                                        <rect key="frame" x="0.0" y="248" width="300" height="44"/>
+                                        <rect key="frame" x="0.0" y="248" width="301" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HI3-Vp-ixZ" id="OAl-kE-Cxp">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1657,11 +1658,11 @@
     </scenes>
     <resources>
         <image name="Cross Buttomwith shadow.png" width="88" height="88"/>
-        <image name="HOME.png" width="40" height="40"/>
+        <image name="HOME.png" width="25" height="25"/>
         <image name="Next Button.png" width="15" height="16"/>
         <image name="Previous Button.png" width="15" height="16"/>
-        <image name="SETTINGS.png" width="35" height="35"/>
-        <image name="TAGS.png" width="40" height="40"/>
+        <image name="SETTINGS.png" width="23" height="23"/>
+        <image name="TAGS.png" width="24" height="24"/>
         <image name="add.png" width="21" height="21"/>
         <image name="backward 2.27.52 AM 2.27.53 AM.png" width="38" height="36"/>
         <image name="forward.png" width="38" height="36"/>
