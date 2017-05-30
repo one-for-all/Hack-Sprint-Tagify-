@@ -31,6 +31,15 @@ class ScopeViewController: UIViewController {
             self.updateTableView(withFollowingSnapshot: snapshot)
             self.appDelegate.currentUser.updateFollowing(followingSnapshot: snapshot)
         })
+//        let currentUsernameRef = userProfilesRef.child("\(appDelegate.currentUser.uid)/username")
+//        currentUsernameRef.observe(.value, with: { snapshot in
+//            self.appDelegate.currentUser.updateUsername(usernameSnapshot: snapshot)
+//            tableView.reloadData()
+//        })
+//        let reference = storageRef.child(userIconPath)
+//        reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//            self.appDelegate.currentUser.updateIcon(data: data, error: error)
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,7 +91,10 @@ extension ScopeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == personalTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PersonalCell")
+//            cell.usernameLabel.text = self.appDelegate.currentUser.username
+//            cell.usericonImageView.image = self.appDelegate.currentUser.iconImage
             cell?.accessoryType = self.appDelegate.currentUser.listeningToSelf ? .checkmark : .none
+            print("going to return cell")
             return cell!
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ScopeCell")
@@ -94,7 +106,7 @@ extension ScopeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == personalTableView {
-            return 70
+            return 50
         }
         return 50
     }
