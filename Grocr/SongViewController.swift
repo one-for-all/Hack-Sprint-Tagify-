@@ -264,6 +264,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         playlist = searchedSongList
         dismissKeyboard()
         tableView.deselectRow(at: indexPath, animated: true)
@@ -762,7 +763,7 @@ extension SongViewController { //Related to Music
     func playPrevious() {
         print("Play previous song")
         //applicationMusicPlayer.skipToPreviousItem()
-        if nowPlayingIndex > 1 {
+        if nowPlayingIndex > 0 {
             nowPlayingIndex -= 1
         } else {
             nowPlayingIndex = playlist.count-1
