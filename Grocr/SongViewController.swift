@@ -221,7 +221,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         } else {
             if nowPlayingIndex == -1 {
                 let firstSong = searchedSongList[0]
-                if self.appleMusicCapable {
+                if self.appleMusicCapable && self.authorizationStatus {
                     appleMusicPlayTrackId(trackId: firstSong.trackId)
                     print("Playing: \(firstSong.name)")
                     print("TrackId: \(firstSong.trackId)")
@@ -273,7 +273,7 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         dismissKeyboard()
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? SongTableViewCell {
-            if self.appleMusicCapable {
+            if self.appleMusicCapable && self.authorizationStatus {
                 songClicked(song: cell.song, index: indexPath.row)
             } else {
                 playSampleMusic(withURLString: cell.song.previewURL)
@@ -728,7 +728,7 @@ extension SongViewController { //Related to Music
     }
     //Control playback
     func pausePlay() {
-        if self.appleMusicCapable {
+        if self.appleMusicCapable && self.authorizationStatus {
             applicationMusicPlayer.pause()
         } else if (self.player != nil) {
             self.player.pause()
@@ -736,7 +736,7 @@ extension SongViewController { //Related to Music
         print("Music paused")
     }
     func continuePlay() {
-        if self.appleMusicCapable {
+        if self.appleMusicCapable && self.authorizationStatus {
             applicationMusicPlayer.play()
         } else if (self.player != nil) {
             self.player.play()
@@ -757,7 +757,7 @@ extension SongViewController { //Related to Music
         }
         print("going to access item at index: \(nowPlayingIndex)")
         let nextSong = playlist[nowPlayingIndex]
-        if self.appleMusicCapable {
+        if self.appleMusicCapable && self.authorizationStatus {
             let nextTrack = nextSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([nextTrack])
             applicationMusicPlayer.prepareToPlay()
@@ -778,7 +778,7 @@ extension SongViewController { //Related to Music
             nowPlayingIndex = playlist.count-1
         }
         let prevSong = playlist[nowPlayingIndex]
-        if self.appleMusicCapable {
+        if self.appleMusicCapable && self.authorizationStatus {
             let prevTrack = prevSong.trackId
             applicationMusicPlayer.setQueueWithStoreIDs([prevTrack])
             applicationMusicPlayer.prepareToPlay()
