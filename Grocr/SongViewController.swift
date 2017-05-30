@@ -60,7 +60,9 @@ class SongViewController: UIViewController, UITextFieldDelegate {
             if currentSelectedSong.imageSource.substring(to: firstFourLetters) == "http" {
                 let url = URL(string: currentSelectedSong.imageSource)
                 let data = try? Data(contentsOf: url!)
-                tagViewSongImageView.image = UIImage(data: data!)
+                if let data = data {
+                    tagViewSongImageView.image = UIImage(data: data)
+                }
             } else {
                 tagViewSongImageView.image = UIImage(named: currentSelectedSong.imageSource)
             }

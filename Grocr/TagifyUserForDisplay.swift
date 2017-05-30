@@ -32,7 +32,9 @@ class TagifyUserForDisplay {
                 self.userIcon = UIImage(named: "music.jpg")!
             } else {
                 print("got image")
-                self.userIcon = UIImage(data: data!)!
+                if let data = data {
+                    self.userIcon = UIImage(data: data) ?? UIImage()
+                }
             }
             completion()
         }

@@ -75,7 +75,9 @@ class TagifyUser {
       iconImage = UIImage(named: "music.jpg")!
     } else {
       print("got icon for user \(uid)")
-      iconImage = UIImage(data: data!)!
+      if let data = data {
+        iconImage = UIImage(data: data) ?? UIImage()
+      }
     }
   }
   func uploadIcon(image: UIImage) {

@@ -35,7 +35,9 @@ class SongTableViewCell: UITableViewCell {
                 DispatchQueue.global().async {
                     let data = try? Data(contentsOf: url!)
                     DispatchQueue.main.async {
-                        self.songImageView.image = UIImage(data: data!)
+                        if let data = data {
+                            self.songImageView.image = UIImage(data: data)
+                        }
                     }
                 }
             } else {
