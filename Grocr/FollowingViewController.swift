@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FollowingViewController: UIViewController {
+class FollowingViewController: UIViewController, UITextFieldDelegate {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let storageRef: StorageReference! = Storage.storage().reference()
@@ -32,6 +32,37 @@ class FollowingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        print("Pressed Return!")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBAction func searchTextFieldEditingDidEnd(_ sender: UITextField) {
+        let searchString = sender.text!.lowercased()
+        //print(searchString)
+        following = [TagifyUserForDisplay]()
+        let currentUserFollowingRef = userProfilesRef.child("\(appDelegate.currentUser.uid)/following")
+        currentUserFollowingRef.observeSingleEvent(of: .value, with: { snapshot in
+            for childSnapshot in snapshot.children.allObjects {
+                let childSnapshot = childSnapshot as! DataSnapshot
+                let followingUID = childSnapshot.key
+                let followingRef = self.userProfilesRef.child(followingUID)
+                followingRef.observeSingleEvent(of: .value, with: { snapshot in
+                    let userName = snapshot.childSnapshot(forPath: "username").value as? String ?? "".lowercased()
+                    if (userName.lowercased().contains(searchString) || searchString == "") {
+                        //print ("searched!!!")
+                        let followingUser = TagifyUserForDisplay(userSnapshot: snapshot, completion: {
+                            self.tableView.reloadData()
+                        })
+                        self.following.append(followingUser)
+                    }
+                })
+            }
+            self.tableView.reloadData()
+        })
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -42,7 +73,6 @@ class FollowingViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 extension FollowingViewController {
     func updateTableView(withFollowingSnapshot snapshot: DataSnapshot) {
