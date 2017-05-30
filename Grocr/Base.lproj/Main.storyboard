@@ -556,6 +556,10 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="searchTextFieldEditingDidEnd:" destination="4iD-uF-Qnd" eventType="editingDidEnd" id="LrC-RI-SzR"/>
+                                            <outlet property="delegate" destination="4iD-uF-Qnd" id="aIj-IE-3eF"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1021,6 +1025,10 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchTextFieldEditingDidEnd:" destination="Z9R-hh-hD6" eventType="editingDidEnd" id="zTL-DR-AZe"/>
+                                    <outlet property="delegate" destination="Z9R-hh-hD6" id="Qhp-BO-oDc"/>
+                                </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="piN-hj-YIZ">
                                 <rect key="frame" x="0.0" y="103.5" width="375" height="563.5"/>
@@ -1336,6 +1344,10 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchTextFieldEditingDidEnd:" destination="h30-1G-VRJ" eventType="editingDidEnd" id="vfe-Jt-i9O"/>
+                                    <outlet property="delegate" destination="h30-1G-VRJ" id="ht7-0T-2dz"/>
+                                </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="afj-MC-RjK">
                                 <rect key="frame" x="0.0" y="103.5" width="375" height="563.5"/>

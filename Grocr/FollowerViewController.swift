@@ -17,7 +17,7 @@ class FollowedUser {
     }
 }
 
-class FollowerViewController: UIViewController {
+class FollowerViewController: UIViewController, UITextFieldDelegate {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let storageRef: StorageReference! = Storage.storage().reference()
@@ -41,6 +41,37 @@ class FollowerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        print("Pressed Return!")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBAction func searchTextFieldEditingDidEnd(_ sender: UITextField) {
+        let searchString = sender.text!.lowercased()
+        //print(searchString)
+        follower = [TagifyUserForDisplay]()
+        let currentUserFollowerRef = userProfilesRef.child("\(appDelegate.currentUser.uid)/followedBy")
+        currentUserFollowerRef.observeSingleEvent(of: .value, with: { snapshot in
+            for childSnapshot in snapshot.children.allObjects {
+                let childSnapshot = childSnapshot as! DataSnapshot
+                let followerUID = childSnapshot.key
+                let followerRef = self.userProfilesRef.child(followerUID)
+                followerRef.observeSingleEvent(of: .value, with: { snapshot in
+                    var userName = snapshot.childSnapshot(forPath: "username").value as? String ?? ""
+                    userName = userName.lowercased()
+                    if (userName.contains(searchString) || searchString == "") {
+                        //print ("searched!!!")
+                        let followerUser = TagifyUserForDisplay(userSnapshot: snapshot, completion: {
+                            self.tableView.reloadData()
+                        })
+                        self.follower.append(followerUser)
+                    }
+                })
+            }
+            self.tableView.reloadData()
+        })
+    }
     
     /*
      // MARK: - Navigation
