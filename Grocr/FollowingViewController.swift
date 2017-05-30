@@ -49,8 +49,9 @@ class FollowingViewController: UIViewController, UITextFieldDelegate {
                 let followingUID = childSnapshot.key
                 let followingRef = self.userProfilesRef.child(followingUID)
                 followingRef.observeSingleEvent(of: .value, with: { snapshot in
-                    let userName = snapshot.childSnapshot(forPath: "username").value as? String ?? "".lowercased()
-                    if (userName.lowercased().contains(searchString) || searchString == "") {
+                    var userName = snapshot.childSnapshot(forPath: "username").value as? String ?? ""
+                    userName = userName.lowercased()
+                    if (userName.contains(searchString) || searchString == "") {
                         //print ("searched!!!")
                         let followingUser = TagifyUserForDisplay(userSnapshot: snapshot, completion: {
                             self.tableView.reloadData()

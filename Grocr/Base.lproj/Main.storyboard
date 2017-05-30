@@ -500,7 +500,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Songs" id="KQw-Fy-KZo"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="HOME.png" id="KQw-Fy-KZo">
+                        <inset key="imageInsets" minX="3" minY="6" maxX="3" maxY="0.0"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" title="Tagify" id="lK4-L8-MEW">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Thj-VH-Xts">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="og0-pr-9iJ">
@@ -534,7 +536,7 @@
             </objects>
             <point key="canvasLocation" x="1941.5999999999999" y="469.1154422788606"/>
         </scene>
-        <!--Listen To-->
+        <!--Tags-->
         <scene sceneID="b2w-fG-e15">
             <objects>
                 <viewController id="4iD-uF-Qnd" customClass="ScopeViewController" customModule="Tagify" customModuleProvider="target" sceneMemberID="viewController">
@@ -554,6 +556,10 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="searchTextFieldEditingDidEnd:" destination="4iD-uF-Qnd" eventType="editingDidEnd" id="LrC-RI-SzR"/>
+                                            <outlet property="delegate" destination="4iD-uF-Qnd" id="aIj-IE-3eF"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -656,7 +662,9 @@
                             <constraint firstItem="S8a-eX-0Oi" firstAttribute="top" secondItem="csu-TP-tUj" secondAttribute="bottom" constant="16" id="fzu-7U-rAk"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Listen To" id="kP3-om-VI9"/>
+                    <tabBarItem key="tabBarItem" title="Tags" image="TAGS.png" id="kP3-om-VI9">
+                        <inset key="imageInsets" minX="3" minY="6" maxX="3" maxY="0.0"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="personalTableView" destination="csu-TP-tUj" id="avW-ho-4V8"/>
                         <outlet property="tableView" destination="S8a-eX-0Oi" id="aD0-un-hcB"/>
@@ -853,7 +861,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Setting" id="Xb6-2p-fQO"/>
+                    <tabBarItem key="tabBarItem" title="Setting" image="SETTINGS.png" id="Xb6-2p-fQO">
+                        <inset key="imageInsets" minX="3" minY="6" maxX="3" maxY="0.0"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="iconImageView" destination="bTh-fJ-TW8" id="y3x-BJ-BmT"/>
                     </connections>
@@ -987,7 +997,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="8Oy-nC-ql4" firstAttribute="centerX" secondItem="Hje-5f-8sm" secondAttribute="centerX" id="CNQ-U4-btQ"/>
                                     <constraint firstItem="jGg-tV-VYh" firstAttribute="bottom" secondItem="Hje-5f-8sm" secondAttribute="bottom" id="EMv-l8-znN"/>
@@ -1054,7 +1064,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="CtP-dy-V5D" firstAttribute="width" secondItem="2HC-Sy-UMh" secondAttribute="width" multiplier="0.95" id="8a8-Z0-hnS"/>
                             <constraint firstItem="bJR-Bd-wmj" firstAttribute="top" secondItem="piN-hj-YIZ" secondAttribute="bottom" id="98U-O1-dIs"/>
@@ -1076,7 +1086,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMM-Tr-ih0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zsT-yG-kYM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1942" y="2257"/>
+            <point key="canvasLocation" x="1942" y="2278"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EYx-gA-03h">
@@ -1086,7 +1096,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Gqn-Xg-wGg">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.78039215689999997" green="0.35686274509999999" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="gpg-0c-vNo" kind="relationship" relationship="viewControllers" id="Bi2-Oy-rin"/>
@@ -1254,7 +1265,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jKt-2W-4Z8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2518" y="1557"/>
+            <point key="canvasLocation" x="2506" y="1527"/>
         </scene>
         <!--Follower View Controller-->
         <scene sceneID="1jo-xc-vPB">
@@ -1348,7 +1359,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="QMb-VJ-O76" firstAttribute="top" secondItem="qRV-dw-hdD" secondAttribute="bottom" constant="10" id="5eg-oA-Nyx"/>
                             <constraint firstAttribute="trailing" secondItem="qRV-dw-hdD" secondAttribute="trailing" id="7Qt-sp-gxt"/>
@@ -1618,7 +1629,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Pwe-gM-j0d" secondAttribute="trailing" id="0CY-Aj-Vza"/>
                             <constraint firstItem="Pwe-gM-j0d" firstAttribute="top" secondItem="COe-Rq-fV9" secondAttribute="bottom" constant="10" id="5gT-RZ-gHn"/>
@@ -1646,8 +1657,11 @@
     </scenes>
     <resources>
         <image name="Cross Buttomwith shadow.png" width="88" height="88"/>
+        <image name="HOME.png" width="40" height="40"/>
         <image name="Next Button.png" width="15" height="16"/>
         <image name="Previous Button.png" width="15" height="16"/>
+        <image name="SETTINGS.png" width="35" height="35"/>
+        <image name="TAGS.png" width="40" height="40"/>
         <image name="add.png" width="21" height="21"/>
         <image name="backward 2.27.52 AM 2.27.53 AM.png" width="38" height="36"/>
         <image name="forward.png" width="38" height="36"/>

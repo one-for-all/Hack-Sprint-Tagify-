@@ -31,7 +31,16 @@
 		6967E2351EDB6EE100FF76E4 /* wall3_80%.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2341EDB6EE100FF76E4 /* wall3_80%.png */; };
 		6967E2371EDCB95000FF76E4 /* logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2361EDCB94F00FF76E4 /* logo1.png */; };
 		6967E2391EDCC0E400FF76E4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2381EDCC0E300FF76E4 /* Launch Screen.storyboard */; };
-		6967E23D1EDCC54D00FF76E4 /* launchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E23C1EDCC54D00FF76E4 /* launchScreen.png */; };
+		6967E23F1EDCD68500FF76E4 /* launchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E23E1EDCD68500FF76E4 /* launchScreen.png */; };
+		6967E2411EDCDA5600FF76E4 /* backward_greyed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2401EDCDA5600FF76E4 /* backward_greyed.png */; };
+		6967E2431EDCDA5A00FF76E4 /* forward_greyed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2421EDCDA5A00FF76E4 /* forward_greyed.png */; };
+		6967E2451EDCDA5E00FF76E4 /* inorderPlay_greyed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2441EDCDA5E00FF76E4 /* inorderPlay_greyed.png */; };
+		6967E2471EDCDA6900FF76E4 /* playButton_greyed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2461EDCDA6900FF76E4 /* playButton_greyed.png */; };
+		6967E2491EDCDA6E00FF76E4 /* shuffle_greyed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2481EDCDA6E00FF76E4 /* shuffle_greyed.png */; };
+		6967E24B1EDCDA7600FF76E4 /* Stop Buttom_greyed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E24A1EDCDA7600FF76E4 /* Stop Buttom_greyed.png */; };
+		6967E24D1EDCE67A00FF76E4 /* HOME.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E24C1EDCE67A00FF76E4 /* HOME.png */; };
+		6967E24F1EDCE68400FF76E4 /* SETTINGS.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E24E1EDCE68400FF76E4 /* SETTINGS.png */; };
+		6967E2511EDCE68A00FF76E4 /* TAGS.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2501EDCE68A00FF76E4 /* TAGS.png */; };
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
@@ -91,7 +100,16 @@
 		6967E2341EDB6EE100FF76E4 /* wall3_80%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wall3_80%.png"; sourceTree = "<group>"; };
 		6967E2361EDCB94F00FF76E4 /* logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo1.png; sourceTree = "<group>"; };
 		6967E2381EDCC0E300FF76E4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		6967E23C1EDCC54D00FF76E4 /* launchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchScreen.png; sourceTree = "<group>"; };
+		6967E23E1EDCD68500FF76E4 /* launchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchScreen.png; sourceTree = "<group>"; };
+		6967E2401EDCDA5600FF76E4 /* backward_greyed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward_greyed.png; sourceTree = "<group>"; };
+		6967E2421EDCDA5A00FF76E4 /* forward_greyed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_greyed.png; sourceTree = "<group>"; };
+		6967E2441EDCDA5E00FF76E4 /* inorderPlay_greyed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inorderPlay_greyed.png; sourceTree = "<group>"; };
+		6967E2461EDCDA6900FF76E4 /* playButton_greyed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton_greyed.png; sourceTree = "<group>"; };
+		6967E2481EDCDA6E00FF76E4 /* shuffle_greyed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffle_greyed.png; sourceTree = "<group>"; };
+		6967E24A1EDCDA7600FF76E4 /* Stop Buttom_greyed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stop Buttom_greyed.png"; sourceTree = "<group>"; };
+		6967E24C1EDCE67A00FF76E4 /* HOME.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HOME.png; sourceTree = "<group>"; };
+		6967E24E1EDCE68400FF76E4 /* SETTINGS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETTINGS.png; sourceTree = "<group>"; };
+		6967E2501EDCE68A00FF76E4 /* TAGS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TAGS.png; sourceTree = "<group>"; };
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -169,10 +187,19 @@
 				940E0B851ED6207700B8C4E0 /* playButton.png */,
 				6967E20F1ED58B5200FF76E4 /* Cross Buttomwith shadow.png */,
 				6967E2241EDA928400FF76E4 /* new_forward.png */,
+				6967E24C1EDCE67A00FF76E4 /* HOME.png */,
+				6967E2401EDCDA5600FF76E4 /* backward_greyed.png */,
 				6967E2281EDA98F100FF76E4 /* shuffle_2.png */,
-				6967E23C1EDCC54D00FF76E4 /* launchScreen.png */,
+				6967E2481EDCDA6E00FF76E4 /* shuffle_greyed.png */,
+				6967E2461EDCDA6900FF76E4 /* playButton_greyed.png */,
 				6967E20D1ED58A5900FF76E4 /* forward.png */,
+				6967E24A1EDCDA7600FF76E4 /* Stop Buttom_greyed.png */,
+				6967E2501EDCE68A00FF76E4 /* TAGS.png */,
+				6967E24E1EDCE68400FF76E4 /* SETTINGS.png */,
+				6967E23E1EDCD68500FF76E4 /* launchScreen.png */,
 				6967E2201EDA80F900FF76E4 /* Orange_add.png */,
+				6967E2441EDCDA5E00FF76E4 /* inorderPlay_greyed.png */,
+				6967E2421EDCDA5A00FF76E4 /* forward_greyed.png */,
 				6967E2111ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png */,
 				6967E1E51ED260AD00FF76E4 /* setting1.png */,
 				6967E2221EDA810400FF76E4 /* Line 3Orange_remove.png */,
@@ -331,6 +358,7 @@
 				TargetAttributes = {
 					BB23855B1B3DD5AB0079CD01 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = JWPRHBMN69;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -370,15 +398,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6967E2511EDCE68A00FF76E4 /* TAGS.png in Resources */,
 				6967E2231EDA810400FF76E4 /* Line 3Orange_remove.png in Resources */,
 				940E0BCE1ED696E200B8C4E0 /* userDefaultIcon.png in Resources */,
 				6967E2101ED58B5200FF76E4 /* Cross Buttomwith shadow.png in Resources */,
 				6967E22D1EDB655D00FF76E4 /* wall1.jpg in Resources */,
 				6967E2121ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png in Resources */,
+				6967E2451EDCDA5E00FF76E4 /* inorderPlay_greyed.png in Resources */,
 				6967E21D1EDA338F00FF76E4 /* add.png in Resources */,
+				6967E2411EDCDA5600FF76E4 /* backward_greyed.png in Resources */,
+				6967E2471EDCDA6900FF76E4 /* playButton_greyed.png in Resources */,
 				6967E2211EDA80F900FF76E4 /* Orange_add.png in Resources */,
 				9423636B1ECAF4EA004398A0 /* music.jpg in Resources */,
 				6967E2161ED7D2CB00FF76E4 /* Previous Button.png in Resources */,
+				6967E24D1EDCE67A00FF76E4 /* HOME.png in Resources */,
 				940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */,
 				6967E2391EDCC0E400FF76E4 /* Launch Screen.storyboard in Resources */,
 				940E0B861ED6207700B8C4E0 /* playButton.png in Resources */,
@@ -387,13 +420,15 @@
 				6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */,
 				6967E20E1ED58A5900FF76E4 /* forward.png in Resources */,
 				6967E22F1EDB680000FF76E4 /* wall1_90%.png in Resources */,
+				6967E24F1EDCE68400FF76E4 /* SETTINGS.png in Resources */,
 				6967E2291EDA98F100FF76E4 /* shuffle_2.png in Resources */,
 				6967E2351EDB6EE100FF76E4 /* wall3_80%.png in Resources */,
 				A672EE441ED3E12900BDB50F /* SongDetailsView.xib in Resources */,
 				6967E2331EDB68F100FF76E4 /* wall1_70%.png in Resources */,
+				6967E24B1EDCDA7600FF76E4 /* Stop Buttom_greyed.png in Resources */,
 				94619C7E1ED402010080FB56 /* GoogleService-Info.plist in Resources */,
 				94BFA25B1ED02BA3005AE02F /* TaylorSwift.jpg in Resources */,
-				6967E23D1EDCC54D00FF76E4 /* launchScreen.png in Resources */,
+				6967E23F1EDCD68500FF76E4 /* launchScreen.png in Resources */,
 				BB23856C1B3DD5AB0079CD01 /* LaunchScreen.xib in Resources */,
 				6967E2311EDB688100FF76E4 /* wall1_80%.png in Resources */,
 				6967E2141ED7A4D900FF76E4 /* Next Button.png in Resources */,
@@ -402,7 +437,9 @@
 				94BFA25A1ED02BA3005AE02F /* Maroon5.jpg in Resources */,
 				94BFA2581ED02BA3005AE02F /* BrunoMars.jpg in Resources */,
 				6967E2371EDCB95000FF76E4 /* logo1.png in Resources */,
+				6967E2431EDCDA5A00FF76E4 /* forward_greyed.png in Resources */,
 				94BFA2591ED02BA3005AE02F /* Magic!.png in Resources */,
+				6967E2491EDCDA6E00FF76E4 /* shuffle_greyed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +637,7 @@
 				CODE_SIGN_ENTITLEMENTS = Grocr/Grocr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JWPRHBMN69;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Grocr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -625,7 +662,7 @@
 				CODE_SIGN_ENTITLEMENTS = Grocr/Grocr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JWPRHBMN69;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Grocr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

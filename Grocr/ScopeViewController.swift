@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ScopeViewController: UIViewController {
+class ScopeViewController: UIViewController, UITextFieldDelegate {
     
     let userProfilesRef: DatabaseReference! = Database.database().reference(withPath: "userProfiles")
     let storage = Storage.storage()
     let storageRef: StorageReference! = Storage.storage().reference()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var settingsTableViewController: SettingsTableViewController!
+    var searchString = ""
     
     var following = [TagifyUserForDisplay]()
     
@@ -38,8 +39,23 @@ class ScopeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        print("Pressed Return!")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBAction func searchTextFieldEditingDidEnd(_ sender: UITextField) {
+        self.searchString = sender.text!.lowercased()
+        let currentUserFollowingRef = userProfilesRef.child("\(appDelegate.currentUser.uid)/following")
+        currentUserFollowingRef.queryOrderedByValue().observeSingleEvent(of: .value, with: { snapshot in
+            self.updateTableView(withFollowingSnapshot: snapshot)
+            self.appDelegate.currentUser.updateFollowing(followingSnapshot: snapshot)
+        })
+    }
+    
     /*
-     // MARK: - Navigation
+     // MARK: - Navigation2
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -59,11 +75,15 @@ extension ScopeViewController {
             print(childSnapshot)
             print("value of listened to is \(listenedTo)")
             followingUserRef.observeSingleEvent(of: .value, with: { snapshot in
-                let followingUser = TagifyUserForDisplay(userSnapshot: snapshot, completion: {
-                    self.tableView.reloadData()
-                })
-                followingUser.listenedTo = listenedTo
-                self.following.insert(followingUser, at: 0)
+                var userName = snapshot.childSnapshot(forPath: "username").value as? String ?? ""
+                userName = userName.lowercased()
+                if (userName.contains(self.searchString) || self.searchString == "") {
+                    let followingUser = TagifyUserForDisplay(userSnapshot: snapshot, completion: {
+                        self.tableView.reloadData()
+                    })
+                    followingUser.listenedTo = listenedTo
+                    self.following.insert(followingUser, at: 0)
+                }
             })
         }
     }
@@ -79,9 +99,12 @@ extension ScopeViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return self.following.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if tableView == personalTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PersonalCell")
+            cell?.accessoryType = self.appDelegate.currentUser.listeningToSelf ? .checkmark : .none
             return cell!
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ScopeCell")
@@ -89,6 +112,7 @@ extension ScopeViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = cell as! ScopeTableViewCell
             cell.user = self.following[indexPath.row]
         }
+        
         return cell!
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -100,8 +124,9 @@ extension ScopeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == personalTableView {
             let cell = tableView.cellForRow(at: indexPath)
-            let newVal = !(cell?.accessoryType == .checkmark)
+            let newVal = !(self.appDelegate.currentUser.listeningToSelf) //!(cell?.accessoryType == .checkmark)
             toggleCellCheckbox(cell!, listenedTo: newVal)
+            self.appDelegate.currentUser.setListeningToSelf(newVal)
             return
         }
         if indexPath.row < self.following.count {
