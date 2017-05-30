@@ -190,6 +190,7 @@
                                             <constraint firstAttribute="height" constant="20" id="pir-mK-4fY"/>
                                         </constraints>
                                         <state key="normal" image="backward 2.27.52 AM 2.27.53 AM.png"/>
+                                        <state key="highlighted" image="backward_greyed.png"/>
                                         <connections>
                                             <action selector="backwardButtonPressed:" destination="gpg-0c-vNo" eventType="touchUpInside" id="5wp-Tm-ghe"/>
                                         </connections>
@@ -201,6 +202,7 @@
                                             <constraint firstAttribute="width" constant="20" id="vDl-Tp-qRV"/>
                                         </constraints>
                                         <state key="normal" image="forward.png"/>
+                                        <state key="highlighted" image="forward_greyed.png"/>
                                         <connections>
                                             <action selector="forwardButtonPressed:" destination="gpg-0c-vNo" eventType="touchUpInside" id="TLF-lj-eGq"/>
                                         </connections>
@@ -212,6 +214,7 @@
                                             <constraint firstAttribute="width" constant="45" id="zQg-1V-Tfo"/>
                                         </constraints>
                                         <state key="normal" image="playButton.png"/>
+                                        <state key="highlighted" image="playButton_greyed.png"/>
                                         <connections>
                                             <action selector="playButtonPressed:" destination="gpg-0c-vNo" eventType="touchUpInside" id="G2E-y1-ZC6"/>
                                         </connections>
@@ -229,6 +232,7 @@
                                             <constraint firstAttribute="width" constant="20" id="f8F-fF-TT0"/>
                                         </constraints>
                                         <state key="normal" image="shuffle_2.png"/>
+                                        <state key="highlighted" image="shuffle_greyed.png"/>
                                         <connections>
                                             <action selector="shuffleButtonPressed:" destination="gpg-0c-vNo" eventType="touchUpInside" id="eMU-Ac-bfO"/>
                                         </connections>
@@ -240,6 +244,7 @@
                                             <constraint firstAttribute="height" constant="18" id="t1Q-H1-Q1K"/>
                                         </constraints>
                                         <state key="normal" image="order play.png"/>
+                                        <state key="highlighted" image="inorderPlay_greyed.png"/>
                                         <connections>
                                             <action selector="loopButtonPressed:" destination="gpg-0c-vNo" eventType="touchUpInside" id="FdV-mC-jqI"/>
                                         </connections>
@@ -1623,7 +1628,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yDO-2J-Pum" id="qMo-Kq-Xbq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="mZG-VE-jwz">
@@ -1713,12 +1718,17 @@
         <image name="TAGS.png" width="24" height="24"/>
         <image name="add.png" width="21" height="21"/>
         <image name="backward 2.27.52 AM 2.27.53 AM.png" width="38" height="36"/>
+        <image name="backward_greyed.png" width="38" height="36"/>
         <image name="forward.png" width="38" height="36"/>
+        <image name="forward_greyed.png" width="38" height="36"/>
+        <image name="inorderPlay_greyed.png" width="30" height="30"/>
         <image name="music.jpg" width="510" height="330"/>
         <image name="order play.png" width="30" height="30"/>
         <image name="playButton.png" width="52" height="52"/>
+        <image name="playButton_greyed.png" width="52" height="52"/>
         <image name="setting1.png" width="200" height="200"/>
         <image name="shuffle_2.png" width="30" height="30"/>
+        <image name="shuffle_greyed.png" width="30" height="30"/>
         <image name="wall3_80%.png" width="395" height="613"/>
     </resources>
 </document>
