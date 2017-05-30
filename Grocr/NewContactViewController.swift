@@ -72,6 +72,7 @@ extension NewContactViewController {
                 })
                 self.matchedUsers.append(matchedUser)
             }
+            self.tableView.reloadData()
         })
     }
     func isMatch(userSnap snapshot: DataSnapshot, searchString: String) -> Bool {
@@ -96,9 +97,11 @@ extension NewContactViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewContactCell", for: indexPath) as! NewContactTableViewCell
-        cell.user = matchedUsers[indexPath.row]
-        cell.plusButton.tag = indexPath.row
-        cell.plusButton.isHidden = false
+        if indexPath.row < self.matchedUsers.count {
+            cell.user = matchedUsers[indexPath.row]
+            cell.plusButton.tag = indexPath.row
+            cell.plusButton.isHidden = false
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

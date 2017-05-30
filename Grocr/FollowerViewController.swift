@@ -111,8 +111,10 @@ extension FollowerViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FollowerCell") as! FollowerTableViewCell
-        cell.usernameLabel.text = self.follower[indexPath.row].username
-        cell.userIconImageView.image = self.follower[indexPath.row].userIcon
+        if indexPath.row < self.follower.count {
+            cell.usernameLabel.text = self.follower[indexPath.row].username
+            cell.userIconImageView.image = self.follower[indexPath.row].userIcon
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

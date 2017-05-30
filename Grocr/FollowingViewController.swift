@@ -101,8 +101,10 @@ extension FollowingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FollowingCell") as! FollowingTableViewCell
-        cell.usernameLabel.text = self.following[indexPath.row].username
-        cell.userIconImageView.image = self.following[indexPath.row].userIcon
+        if indexPath.row < self.following.count {
+            cell.usernameLabel.text = self.following[indexPath.row].username
+            cell.userIconImageView.image = self.following[indexPath.row].userIcon
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -110,10 +112,12 @@ extension FollowingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let userToUnfollow = self.following[indexPath.row]
-            self.following.remove(at: indexPath.row)
-            self.tableView.reloadData()
-            appDelegate.currentUser.unfollow(uid: userToUnfollow.uid)
+            if indexPath.row < self.following.count {
+                let userToUnfollow = self.following[indexPath.row]
+                self.following.remove(at: indexPath.row)
+                self.tableView.reloadData()
+                appDelegate.currentUser.unfollow(uid: userToUnfollow.uid)
+            }
         }
     }
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {

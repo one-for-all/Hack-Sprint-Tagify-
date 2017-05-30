@@ -549,7 +549,6 @@ extension SongViewController { // Initialize a default song list, to be replaced
                 self.tableView.reloadData()
             }
         }
-        print(self.searchedSongList)
     }
 }
 
