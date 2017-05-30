@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -576,10 +576,10 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="1" rowHeight="46" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="csu-TP-tUj" userLabel="personal">
-                                <rect key="frame" x="0.0" y="74" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="hLM-GZ-eAN"/>
+                                    <constraint firstAttribute="height" constant="45" id="hLM-GZ-eAN"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PersonalCell" rowHeight="46" id="J6c-Mh-sdf">
@@ -613,7 +613,7 @@
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S8a-eX-0Oi">
-                                <rect key="frame" x="0.0" y="140" width="375" height="478"/>
+                                <rect key="frame" x="0.0" y="135" width="375" height="483"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
@@ -621,7 +621,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uPS-OG-GUb" id="oOf-Yn-f3I">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="eER-rR-wTe">
@@ -658,6 +658,19 @@
                                     <outlet property="delegate" destination="4iD-uF-Qnd" id="Vah-Ev-JRV"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOm-Iu-cgi">
+                                <rect key="frame" x="9.5" y="119" width="356" height="16"/>
+                                <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktD-zL-t3A">
+                                <rect key="frame" x="0.0" y="119" width="9.5" height="16"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiH-px-jzr">
+                                <rect key="frame" x="365.5" y="119" width="9.5" height="16"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -665,13 +678,25 @@
                             <constraint firstItem="6Gj-ZC-3Qq" firstAttribute="top" secondItem="LtU-cG-rjV" secondAttribute="bottom" id="5eL-OH-G5b"/>
                             <constraint firstItem="csu-TP-tUj" firstAttribute="leading" secondItem="sS7-cx-25m" secondAttribute="leading" id="69d-8o-Yy2"/>
                             <constraint firstItem="S8a-eX-0Oi" firstAttribute="leading" secondItem="sS7-cx-25m" secondAttribute="leading" id="8oJ-Eu-FPh"/>
+                            <constraint firstItem="PiH-px-jzr" firstAttribute="top" secondItem="csu-TP-tUj" secondAttribute="bottom" id="9DG-B0-vcl"/>
                             <constraint firstAttribute="trailing" secondItem="S8a-eX-0Oi" secondAttribute="trailing" id="9gg-yc-50m"/>
+                            <constraint firstItem="S8a-eX-0Oi" firstAttribute="top" secondItem="ktD-zL-t3A" secondAttribute="bottom" id="CuV-wl-XYW"/>
                             <constraint firstAttribute="trailing" secondItem="6Gj-ZC-3Qq" secondAttribute="trailing" id="E8l-s1-9qK"/>
+                            <constraint firstItem="S8a-eX-0Oi" firstAttribute="top" secondItem="EOm-Iu-cgi" secondAttribute="bottom" id="Ecz-pQ-bQP"/>
+                            <constraint firstItem="EOm-Iu-cgi" firstAttribute="centerX" secondItem="sS7-cx-25m" secondAttribute="centerX" id="GIU-Ar-UDN"/>
+                            <constraint firstItem="EOm-Iu-cgi" firstAttribute="leading" secondItem="ktD-zL-t3A" secondAttribute="trailing" id="H0a-fK-33m"/>
                             <constraint firstItem="6Gj-ZC-3Qq" firstAttribute="height" secondItem="sS7-cx-25m" secondAttribute="height" multiplier="0.08" id="Ldj-Lh-Jq8"/>
+                            <constraint firstItem="EOm-Iu-cgi" firstAttribute="top" secondItem="csu-TP-tUj" secondAttribute="bottom" id="MDB-ym-4T2"/>
                             <constraint firstItem="csu-TP-tUj" firstAttribute="top" secondItem="6Gj-ZC-3Qq" secondAttribute="bottom" id="OLZ-5L-i1b"/>
+                            <constraint firstItem="EOm-Iu-cgi" firstAttribute="width" secondItem="sS7-cx-25m" secondAttribute="width" multiplier="0.95" id="PHG-dx-ACl"/>
                             <constraint firstItem="6Gj-ZC-3Qq" firstAttribute="leading" secondItem="sS7-cx-25m" secondAttribute="leading" id="aHX-ws-v8u"/>
+                            <constraint firstAttribute="trailing" secondItem="PiH-px-jzr" secondAttribute="trailing" id="esu-OJ-zxc"/>
                             <constraint firstItem="S8a-eX-0Oi" firstAttribute="bottom" secondItem="d90-mM-WmX" secondAttribute="top" id="fCw-DR-d3a"/>
                             <constraint firstItem="S8a-eX-0Oi" firstAttribute="top" secondItem="csu-TP-tUj" secondAttribute="bottom" constant="16" id="fzu-7U-rAk"/>
+                            <constraint firstItem="ktD-zL-t3A" firstAttribute="top" secondItem="csu-TP-tUj" secondAttribute="bottom" id="lj9-Nk-mSc"/>
+                            <constraint firstItem="S8a-eX-0Oi" firstAttribute="top" secondItem="PiH-px-jzr" secondAttribute="bottom" id="mIx-lX-TEv"/>
+                            <constraint firstItem="ktD-zL-t3A" firstAttribute="leading" secondItem="sS7-cx-25m" secondAttribute="leading" id="pq2-JD-Cjj"/>
+                            <constraint firstItem="PiH-px-jzr" firstAttribute="leading" secondItem="EOm-Iu-cgi" secondAttribute="trailing" id="x7l-ID-mQC"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tags" image="TAGS.png" id="kP3-om-VI9">
