@@ -1010,7 +1010,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="53.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Oy-nC-ql4">
-                                        <rect key="frame" x="151" y="16" width="73" height="20.5"/>
+                                        <rect key="frame" x="151" y="17" width="73" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1026,7 +1026,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGg-tV-VYh">
-                                        <rect key="frame" x="311.5" y="0.0" width="53.5" height="53.5"/>
+                                        <rect key="frame" x="309.5" y="0.0" width="55.5" height="55.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="jGg-tV-VYh" secondAttribute="height" multiplier="1:1" id="0Mu-7y-86e"/>
                                         </constraints>
@@ -1040,13 +1040,12 @@
                                 <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="8Oy-nC-ql4" firstAttribute="centerX" secondItem="Hje-5f-8sm" secondAttribute="centerX" id="CNQ-U4-btQ"/>
-                                    <constraint firstItem="jGg-tV-VYh" firstAttribute="bottom" secondItem="Hje-5f-8sm" secondAttribute="bottom" id="EMv-l8-znN"/>
+                                    <constraint firstItem="jGg-tV-VYh" firstAttribute="bottom" secondItem="Hje-5f-8sm" secondAttribute="bottom" constant="2" id="EMv-l8-znN"/>
                                     <constraint firstAttribute="trailing" secondItem="jGg-tV-VYh" secondAttribute="trailing" constant="10" id="Ebh-0u-kqW"/>
                                     <constraint firstItem="qTX-cP-Vh2" firstAttribute="height" secondItem="Hje-5f-8sm" secondAttribute="height" id="GyN-z6-azp"/>
                                     <constraint firstItem="8Oy-nC-ql4" firstAttribute="centerY" secondItem="Hje-5f-8sm" secondAttribute="centerY" id="RPW-aH-UEx"/>
                                     <constraint firstItem="qTX-cP-Vh2" firstAttribute="leading" secondItem="Hje-5f-8sm" secondAttribute="leading" constant="20" id="Urp-Gh-nc7"/>
                                     <constraint firstItem="jGg-tV-VYh" firstAttribute="centerY" secondItem="8Oy-nC-ql4" secondAttribute="centerY" id="W0R-SS-hfO"/>
-                                    <constraint firstItem="jGg-tV-VYh" firstAttribute="top" secondItem="Hje-5f-8sm" secondAttribute="top" id="k7R-AT-qk0"/>
                                     <constraint firstItem="qTX-cP-Vh2" firstAttribute="centerY" secondItem="Hje-5f-8sm" secondAttribute="centerY" id="zqv-Xv-xfr"/>
                                 </constraints>
                             </view>
@@ -1741,7 +1740,7 @@
         <image name="Previous Button.png" width="15" height="16"/>
         <image name="SETTINGS.png" width="23" height="23"/>
         <image name="TAGS.png" width="24" height="24"/>
-        <image name="add.png" width="21" height="21"/>
+        <image name="add.png" width="18" height="18"/>
         <image name="backward 2.27.52 AM 2.27.53 AM.png" width="38" height="36"/>
         <image name="backward_greyed.png" width="38" height="36"/>
         <image name="forward.png" width="38" height="36"/>

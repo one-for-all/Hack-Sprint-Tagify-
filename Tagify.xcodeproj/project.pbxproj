@@ -17,7 +17,6 @@
 		6967E2141ED7A4D900FF76E4 /* Next Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2131ED7A4D900FF76E4 /* Next Button.png */; };
 		6967E2161ED7D2CB00FF76E4 /* Previous Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2151ED7D2CB00FF76E4 /* Previous Button.png */; };
 		6967E21B1ED8D8C000FF76E4 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */; };
-		6967E21D1EDA338F00FF76E4 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E21C1EDA338F00FF76E4 /* add.png */; };
 		6967E21F1EDA3F4600FF76E4 /* ThemeColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */; };
 		6967E2211EDA80F900FF76E4 /* Orange_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2201EDA80F900FF76E4 /* Orange_add.png */; };
 		6967E2231EDA810400FF76E4 /* Line 3Orange_remove.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2221EDA810400FF76E4 /* Line 3Orange_remove.png */; };
@@ -41,6 +40,7 @@
 		6967E2531EDD0F0000FF76E4 /* HOME.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E2521EDD0F0000FF76E4 /* HOME.png */; };
 		6967E25B1EDD121200FF76E4 /* SETTINGS.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E25A1EDD121200FF76E4 /* SETTINGS.png */; };
 		6967E25D1EDD12B500FF76E4 /* TAGS.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E25C1EDD12B500FF76E4 /* TAGS.png */; };
+		6967E25F1EDD90B400FF76E4 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 6967E25E1EDD90B400FF76E4 /* add.png */; };
 		940E0B861ED6207700B8C4E0 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B851ED6207700B8C4E0 /* playButton.png */; };
 		940E0B8A1ED6235600B8C4E0 /* stopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E0B891ED6235600B8C4E0 /* stopButton.png */; };
 		940E0B8C1ED6436600B8C4E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */; };
@@ -86,7 +86,6 @@
 		6967E2131ED7A4D900FF76E4 /* Next Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Next Button.png"; sourceTree = "<group>"; };
 		6967E2151ED7D2CB00FF76E4 /* Previous Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Previous Button.png"; sourceTree = "<group>"; };
 		6967E21A1ED8D8C000FF76E4 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
-		6967E21C1EDA338F00FF76E4 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		6967E21E1EDA3F4600FF76E4 /* ThemeColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ThemeColorViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6967E2201EDA80F900FF76E4 /* Orange_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Orange_add.png; sourceTree = "<group>"; };
 		6967E2221EDA810400FF76E4 /* Line 3Orange_remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Line 3Orange_remove.png"; sourceTree = "<group>"; };
@@ -110,6 +109,7 @@
 		6967E2521EDD0F0000FF76E4 /* HOME.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HOME.png; sourceTree = "<group>"; };
 		6967E25A1EDD121200FF76E4 /* SETTINGS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SETTINGS.png; sourceTree = "<group>"; };
 		6967E25C1EDD12B500FF76E4 /* TAGS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TAGS.png; sourceTree = "<group>"; };
+		6967E25E1EDD90B400FF76E4 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		940E0B851ED6207700B8C4E0 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		940E0B891ED6235600B8C4E0 /* stopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopButton.png; sourceTree = "<group>"; };
 		940E0B8B1ED6436600B8C4E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -197,6 +197,7 @@
 				6967E2521EDD0F0000FF76E4 /* HOME.png */,
 				6967E23E1EDCD68500FF76E4 /* launchScreen.png */,
 				6967E2201EDA80F900FF76E4 /* Orange_add.png */,
+				6967E25E1EDD90B400FF76E4 /* add.png */,
 				6967E25C1EDD12B500FF76E4 /* TAGS.png */,
 				6967E2441EDCDA5E00FF76E4 /* inorderPlay_greyed.png */,
 				6967E2421EDCDA5A00FF76E4 /* forward_greyed.png */,
@@ -213,7 +214,6 @@
 				94BFA2551ED02BA3005AE02F /* Magic!.png */,
 				6967E2151ED7D2CB00FF76E4 /* Previous Button.png */,
 				6967E2341EDB6EE100FF76E4 /* wall3_80%.png */,
-				6967E21C1EDA338F00FF76E4 /* add.png */,
 				6967E2131ED7A4D900FF76E4 /* Next Button.png */,
 				94BFA2561ED02BA3005AE02F /* Maroon5.jpg */,
 				94BFA2571ED02BA3005AE02F /* TaylorSwift.jpg */,
@@ -406,7 +406,6 @@
 				6967E22D1EDB655D00FF76E4 /* wall1.jpg in Resources */,
 				6967E2121ED58BDE00FF76E4 /* backward 2.27.52 AM 2.27.53 AM.png in Resources */,
 				6967E2451EDCDA5E00FF76E4 /* inorderPlay_greyed.png in Resources */,
-				6967E21D1EDA338F00FF76E4 /* add.png in Resources */,
 				6967E2411EDCDA5600FF76E4 /* backward_greyed.png in Resources */,
 				6967E2471EDCDA6900FF76E4 /* playButton_greyed.png in Resources */,
 				6967E2211EDA80F900FF76E4 /* Orange_add.png in Resources */,
@@ -420,6 +419,7 @@
 				BB2385671B3DD5AB0079CD01 /* Main.storyboard in Resources */,
 				6967E1E61ED260AD00FF76E4 /* setting1.png in Resources */,
 				6967E20E1ED58A5900FF76E4 /* forward.png in Resources */,
+				6967E25F1EDD90B400FF76E4 /* add.png in Resources */,
 				6967E22F1EDB680000FF76E4 /* wall1_90%.png in Resources */,
 				6967E2291EDA98F100FF76E4 /* shuffle_2.png in Resources */,
 				6967E2351EDB6EE100FF76E4 /* wall3_80%.png in Resources */,
