@@ -625,13 +625,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="eER-rR-wTe">
-                                                    <rect key="frame" x="20" y="2.5" width="44.5" height="44.5"/>
+                                                    <rect key="frame" x="20" y="5" width="39" height="39.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="eER-rR-wTe" secondAttribute="height" multiplier="1:1" id="dtz-sx-zll"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99F-iU-tTE">
-                                                    <rect key="frame" x="79.5" y="14.5" width="245.5" height="21"/>
+                                                    <rect key="frame" x="74" y="14.5" width="251" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -643,7 +643,7 @@
                                                 <constraint firstItem="99F-iU-tTE" firstAttribute="leading" secondItem="eER-rR-wTe" secondAttribute="trailing" constant="15" id="RDp-4M-bzx"/>
                                                 <constraint firstItem="eER-rR-wTe" firstAttribute="centerY" secondItem="oOf-Yn-f3I" secondAttribute="centerY" id="SLN-EX-ThO"/>
                                                 <constraint firstItem="99F-iU-tTE" firstAttribute="trailing" secondItem="oOf-Yn-f3I" secondAttribute="trailing" constant="-50" id="hsv-Ge-2nD"/>
-                                                <constraint firstItem="eER-rR-wTe" firstAttribute="height" secondItem="oOf-Yn-f3I" secondAttribute="height" multiplier="0.9" id="qxq-VU-Gqg"/>
+                                                <constraint firstItem="eER-rR-wTe" firstAttribute="height" secondItem="oOf-Yn-f3I" secondAttribute="height" multiplier="0.8" id="qxq-VU-Gqg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -671,6 +671,13 @@
                                 <rect key="frame" x="365.5" y="119" width="9.5" height="16"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJk-ru-Sd7">
+                                <rect key="frame" x="0.0" y="129" width="375" height="6"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="6" id="jZT-BP-5MQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -696,7 +703,10 @@
                             <constraint firstItem="ktD-zL-t3A" firstAttribute="top" secondItem="csu-TP-tUj" secondAttribute="bottom" id="lj9-Nk-mSc"/>
                             <constraint firstItem="S8a-eX-0Oi" firstAttribute="top" secondItem="PiH-px-jzr" secondAttribute="bottom" id="mIx-lX-TEv"/>
                             <constraint firstItem="ktD-zL-t3A" firstAttribute="leading" secondItem="sS7-cx-25m" secondAttribute="leading" id="pq2-JD-Cjj"/>
+                            <constraint firstItem="CJk-ru-Sd7" firstAttribute="leading" secondItem="sS7-cx-25m" secondAttribute="leading" id="ujz-ev-vED"/>
+                            <constraint firstItem="CJk-ru-Sd7" firstAttribute="bottom" secondItem="EOm-Iu-cgi" secondAttribute="bottom" id="vhv-Kj-qV4"/>
                             <constraint firstItem="PiH-px-jzr" firstAttribute="leading" secondItem="EOm-Iu-cgi" secondAttribute="trailing" id="x7l-ID-mQC"/>
+                            <constraint firstAttribute="trailing" secondItem="CJk-ru-Sd7" secondAttribute="trailing" id="yET-Kj-Cn8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tags" image="TAGS.png" id="kP3-om-VI9">
@@ -1072,13 +1082,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hH5-cc-nsR">
-                                                    <rect key="frame" x="20" y="2.5" width="44.5" height="44.5"/>
+                                                    <rect key="frame" x="20" y="5" width="39.5" height="39.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="hH5-cc-nsR" secondAttribute="height" multiplier="1:1" id="oo0-9v-tv8"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFh-nB-Pcg">
-                                                    <rect key="frame" x="79.5" y="14.5" width="245.5" height="21"/>
+                                                    <rect key="frame" x="74.5" y="14.5" width="250.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1089,7 +1099,7 @@
                                                 <constraint firstItem="EFh-nB-Pcg" firstAttribute="trailing" secondItem="qkY-6N-MPL" secondAttribute="trailing" constant="-50" id="L6e-Co-6hH"/>
                                                 <constraint firstItem="hH5-cc-nsR" firstAttribute="leading" secondItem="qkY-6N-MPL" secondAttribute="leading" constant="20" id="TEy-V4-RMA"/>
                                                 <constraint firstItem="EFh-nB-Pcg" firstAttribute="leading" secondItem="hH5-cc-nsR" secondAttribute="trailing" constant="15" id="VZb-sT-fqP"/>
-                                                <constraint firstItem="hH5-cc-nsR" firstAttribute="height" secondItem="qkY-6N-MPL" secondAttribute="height" multiplier="0.9" id="aBv-zN-xyg"/>
+                                                <constraint firstItem="hH5-cc-nsR" firstAttribute="height" secondItem="qkY-6N-MPL" secondAttribute="height" multiplier="0.8" id="aBv-zN-xyg"/>
                                                 <constraint firstItem="EFh-nB-Pcg" firstAttribute="centerY" secondItem="qkY-6N-MPL" secondAttribute="centerYWithinMargins" id="oUm-mQ-K4n"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1391,13 +1401,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ddC-jf-v8F">
-                                                    <rect key="frame" x="20" y="2.5" width="44" height="44.5"/>
+                                                    <rect key="frame" x="20" y="5" width="39" height="39.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ddC-jf-v8F" secondAttribute="height" multiplier="1:1" id="BAl-mJ-Ytr"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHI-f3-rqS">
-                                                    <rect key="frame" x="79" y="14.5" width="246" height="21"/>
+                                                    <rect key="frame" x="74" y="14.5" width="251" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1407,7 +1417,7 @@
                                                 <constraint firstItem="bHI-f3-rqS" firstAttribute="leading" secondItem="ddC-jf-v8F" secondAttribute="trailing" constant="15" id="1oH-Ua-5re"/>
                                                 <constraint firstItem="bHI-f3-rqS" firstAttribute="centerY" secondItem="cJD-Pj-lPE" secondAttribute="centerYWithinMargins" id="4mC-9z-ZYw"/>
                                                 <constraint firstItem="ddC-jf-v8F" firstAttribute="centerY" secondItem="cJD-Pj-lPE" secondAttribute="centerY" id="Jj1-ac-4Eh"/>
-                                                <constraint firstItem="ddC-jf-v8F" firstAttribute="height" secondItem="cJD-Pj-lPE" secondAttribute="height" multiplier="0.9" id="gqH-F6-PDU"/>
+                                                <constraint firstItem="ddC-jf-v8F" firstAttribute="height" secondItem="cJD-Pj-lPE" secondAttribute="height" multiplier="0.8" id="gqH-F6-PDU"/>
                                                 <constraint firstItem="ddC-jf-v8F" firstAttribute="leading" secondItem="cJD-Pj-lPE" secondAttribute="leading" constant="20" id="izw-H7-fQK"/>
                                                 <constraint firstItem="bHI-f3-rqS" firstAttribute="trailing" secondItem="cJD-Pj-lPE" secondAttribute="trailing" constant="-50" id="kpi-x5-zbu"/>
                                             </constraints>
@@ -1656,13 +1666,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="mZG-VE-jwz">
-                                                    <rect key="frame" x="20" y="2.5" width="44" height="44.5"/>
+                                                    <rect key="frame" x="20" y="5" width="39" height="39.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="mZG-VE-jwz" secondAttribute="height" multiplier="1:1" id="1hg-t3-jNU"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGF-P5-mCz">
-                                                    <rect key="frame" x="79" y="14.5" width="246.5" height="21"/>
+                                                    <rect key="frame" x="74" y="14.5" width="251.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1688,7 +1698,7 @@
                                                 <constraint firstItem="4dc-br-HGl" firstAttribute="centerY" secondItem="qMo-Kq-Xbq" secondAttribute="centerY" id="NMm-6G-mPa"/>
                                                 <constraint firstItem="mZG-VE-jwz" firstAttribute="centerY" secondItem="qMo-Kq-Xbq" secondAttribute="centerY" id="To8-4m-Ukw"/>
                                                 <constraint firstItem="gGF-P5-mCz" firstAttribute="leading" secondItem="mZG-VE-jwz" secondAttribute="trailing" constant="15" id="TxU-Tm-tgw"/>
-                                                <constraint firstItem="mZG-VE-jwz" firstAttribute="height" secondItem="qMo-Kq-Xbq" secondAttribute="height" multiplier="0.9" id="UWV-Yb-IqX"/>
+                                                <constraint firstItem="mZG-VE-jwz" firstAttribute="height" secondItem="qMo-Kq-Xbq" secondAttribute="height" multiplier="0.8" id="UWV-Yb-IqX"/>
                                                 <constraint firstItem="gGF-P5-mCz" firstAttribute="centerY" secondItem="qMo-Kq-Xbq" secondAttribute="centerYWithinMargins" id="YqN-LV-Bkt"/>
                                                 <constraint firstItem="4dc-br-HGl" firstAttribute="height" secondItem="qMo-Kq-Xbq" secondAttribute="height" id="aMh-rn-c7c"/>
                                                 <constraint firstItem="mZG-VE-jwz" firstAttribute="leading" secondItem="qMo-Kq-Xbq" secondAttribute="leading" constant="20" id="oYj-CY-14y"/>
