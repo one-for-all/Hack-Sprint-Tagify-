@@ -101,4 +101,7 @@ extension NewContactViewController: UITableViewDataSource, UITableViewDelegate {
         cell.plusButton.isHidden = false
         return cell
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
 }
