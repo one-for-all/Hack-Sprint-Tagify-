@@ -23,7 +23,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     let userTagsRef: DatabaseReference! = Database.database().reference(withPath: "userTags")
     let storage = Storage.storage()
     let storageRef: StorageReference! = Storage.storage().reference()
-    var player: AVPlayer!
+    var player: AVPlayer! = AVPlayer()
     var didCheckAndSuggestAppleMusicSignUp = false
     var didAskForMediaLibraryAccess = false
     var storefrontId = "143441"  // Default region is USA
