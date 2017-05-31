@@ -498,6 +498,7 @@ extension SongViewController { // Initialize a default song list, to be replaced
                 self.updateSongList()
             })
         }
+        self.updateSongList()
     }
     func updateCurrentUserSongList() { // Taking care of new user who has no initial
         let currentUserSongsRef = self.userSongsRef.child("\(appDelegate.currentUser.uid)/songs")
