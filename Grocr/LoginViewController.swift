@@ -114,6 +114,22 @@ class LoginViewController: UIViewController {
   
 }
 
+extension LoginViewController {
+  func addHideKeyboardOnTap()
+  {
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+      target: self,
+      action: #selector(LoginViewController.dismissKeyboard))
+    
+    view.addGestureRecognizer(tap)
+  }
+  
+  func dismissKeyboard()
+  {
+    view.endEditing(true)
+  }
+}
+
 extension LoginViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == textFieldLoginEmail {
@@ -141,5 +157,6 @@ extension LoginViewController {
         self.performSegue(withIdentifier: self.loginToSongView, sender: nil)
       }
     }
+    self.addHideKeyboardOnTap()
   }
 }
