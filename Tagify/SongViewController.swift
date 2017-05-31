@@ -222,6 +222,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         } else {
             if nowPlayingIndex == -1 {
                 let firstSong = searchedSongList[0]
+                playlist = searchedSongList
                 if self.appleMusicCapable && self.authorizationStatus {
                     appleMusicPlayTrackId(trackId: firstSong.trackId)
                     print("Playing: \(firstSong.name)")
@@ -271,7 +272,6 @@ extension SongViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         playlist = searchedSongList
         dismissKeyboard()
         tableView.deselectRow(at: indexPath, animated: true)
@@ -341,10 +341,15 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if valid {
                 // To Do: Handle tags from multiple users
                 let strippedTag = text.substring(from: text.index(text.startIndex, offsetBy: 1))
+                print("before adding tags: \(currentSelectedSong.tags)")
+                print(searchedSongList[0].tags)
                 currentSelectedSong.tags.insert(strippedTag)
                 appDelegate.currentUser.add(tag: strippedTag, forSong: currentSelectedSong)
                 // To Do: Handle hashtags from multiple users
                 updateCollectionView()
+                print("after adding tags: \(currentSelectedSong.tags)")
+                print(searchedSongList[0].tags)
+                self.tableView.reloadData()
             } else {
                 let alert = UIAlertController(title: "Invalid Tag", message: errorMessage, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -360,6 +365,7 @@ extension SongViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.appDelegate.currentUser.remove(tag: strippedTag, forSong: self.currentSelectedSong)
             // To Do: Handle hashtags from multiple users
             updateCollectionView()
+            self.tableView.reloadData()
         }
     }
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
@@ -798,7 +804,14 @@ extension SongViewController { //Related to Music
     }
     func loop() {  //Assume single cycle
         print("loop")
+        // get new nowPlayingIndex, as playlist will be put back in order
+        let currentSong = playlist[nowPlayingIndex]
         playlist = searchedSongList
+        for (index, song) in playlist.enumerated() {
+            if song.trackId == currentSong.trackId {
+                nowPlayingIndex = index
+            }
+        }
         /*
         let repeatMode = applicationMusicPlayer.repeatMode
         switch repeatMode {
@@ -840,6 +853,11 @@ extension SongViewController { //Related to Music
                                     let imageUrl = result["artworkUrl100"] as! String
                                     let previewURL = result["previewUrl"] as? String ?? ""
                                     let song = Song(name: "\(songName)", artist: singer, trackId: track, imageSource: imageUrl, previewURL: previewURL)
+                                    for userSong in self.userAllSongList {
+                                        if song.trackId == userSong.trackId {
+                                            song.tags = userSong.tags
+                                        }
+                                    }
                                     songList.append(song)
                                 }
                             }
