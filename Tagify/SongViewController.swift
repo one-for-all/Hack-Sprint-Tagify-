@@ -144,6 +144,15 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         requestAppleMusicAuthorization()
         
         activateBackGroundPlay()
+        /*
+        addObserver(self,
+                    forKeyPath: #keyPath(applicationMusicPlayer.nowPlayingItem),
+                    options: [nil, MPMediaItem],
+                    context: {
+            playButton.setImage(UIImage(named: "playButton.png"), for: .normal)
+            playButton.setImage(UIImage(named: "playButton_greyed.png"), for: .highlighted)
+        })
+        */
     }
     override func viewWillAppear(_ animated: Bool) { // suggest sign up and check capability
         if authorizationStatus == true && !self.didCheckAndSuggestAppleMusicSignUp {
@@ -213,6 +222,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         addTagTextField.text = ""
     }
     
+    /******************Player control****************/
     @IBAction func playButtonPressed(_ sender: Any) {
         guard self.searchedSongList.count > 0 else  { return }
         if applicationMusicPlayer.nowPlayingItem != nil || self.player.isPlaying {
@@ -302,6 +312,7 @@ extension SongViewController: UIScrollViewDelegate {
             let h = Float(size.height)
             let reload_distance: Float = 50;
             if y > (h + reload_distance) {
+                /*
                 DispatchQueue.main.async {
                     scrollView.bounces = true
                     self.loadMore()
@@ -313,6 +324,15 @@ extension SongViewController: UIScrollViewDelegate {
                     //scrollViewDidEndDragging(scrollView, willDecelerate: true)
                     print("loading \(self.searchLimit) items")
                 }
+                */
+                
+                let bottomOffset = CGPoint(x:0, y:(size.height - bounds.size.height));
+                scrollView.setContentOffset(bottomOffset, animated: true);
+                DispatchQueue.main.async {
+                    self.loadMore()
+                }
+                print("loading \(self.searchLimit) items")
+                
             }
         }
     }

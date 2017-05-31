@@ -256,7 +256,6 @@
 				BB7DA5121B42CA790018B530 /* Other */,
 				BB23855F1B3DD5AB0079CD01 /* Supporting Files */,
 			);
-			name = Tagify;
 			path = Tagify;
 			sourceTree = "<group>";
 		};
