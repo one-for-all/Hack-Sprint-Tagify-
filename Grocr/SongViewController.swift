@@ -214,6 +214,7 @@ class SongViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
+        guard self.searchedSongList.count > 0 else  { return }
         if applicationMusicPlayer.nowPlayingItem != nil || self.player.isPlaying {
             pausePlay()
             playButton.setImage(UIImage(named: "playButton.png"), for: .normal)
@@ -237,10 +238,12 @@ class SongViewController: UIViewController, UITextFieldDelegate {
         }
     }
     @IBAction func forwardButtonPressed(_ sender: Any) {
+        guard playlist.count > 0 else { return }
         playNext()
         playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
     @IBAction func backwardButtonPressed(_ sender: Any) {
+        guard playlist.count > 0 else { return }
         playPrevious()
         playButton.setImage(UIImage(named: "stopButton.png"), for: .normal)
     }
@@ -747,7 +750,6 @@ extension SongViewController { //Related to Music
     func playNext() {
         print("Play next song")
         //applicationMusicPlayer.skipToNextItem()
-        guard playlist.count != 0 else { return }
         if nowPlayingIndex < playlist.count-1 {
             nowPlayingIndex += 1
         } else {
@@ -771,7 +773,6 @@ extension SongViewController { //Related to Music
     }
     func playPrevious() {
         print("Play previous song")
-        guard playlist.count != 0 else { return }
         //applicationMusicPlayer.skipToPreviousItem()
         if nowPlayingIndex > 0 {
             nowPlayingIndex -= 1
