@@ -209,7 +209,7 @@ extension TagifyUser { // related to adding and removing tags
       print("cannot find song")
       return
     }
-    var updatedSong = self.songs[index]
+    let updatedSong = self.songs[index]
     updatedSong.tags.remove(tag)
     self.songs.update(with: updatedSong)
     print("removing tag \(tag) for song \(updatedSong.name)")

@@ -884,7 +884,7 @@ extension SongViewController { //Related to Music
                             callback(songList)
                         }
                     }
-                case .failure(let error):
+                case .failure(_):
                     //self.showAlert("Error", error: error.description)
                     print("Failed to search itunes.")
                 }
