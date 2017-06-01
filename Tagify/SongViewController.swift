@@ -891,10 +891,11 @@ extension SongViewController { //Related to Music
         }
     }
     func loadMore() {
-        searchItunes(searchTerm: searchString, limit: searchLimit) { list in
+        searchItunes(searchTerm: searchString, limit: searchLimit+10) { list in
             if list.count > 0 {
+                print("getting \(list.count) items")
                 if list.count > self.searchedSongList.count {
-                    self.searchLimit += 5
+                    self.searchLimit += 10
                     self.searchedSongList = list
                     self.tableView.reloadData()
                 } else {
